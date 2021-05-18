@@ -5,7 +5,7 @@
     <constant name="CrystalEndcap_rmax"  value="EcalEndcapN_rmin"/>
     <constant name="CrystalBox_x_length" value="20.0*mm"/>
     <constant name="CrystalBox_y_length" value="20.0*mm"/>
-    <constant name="CrystalBox_z_length" value="180.0*mm"/>
+    <constant name="CrystalBox_z_length" value="200.0*mm"/>
     <constant name="CrystalBox_offset"   value="0.000001*mm"/>
     <constant name="CrystalEndcap_x_pos" value="0.0*m"/>
     <constant name="CrystalEndcap_y_pos" value="0.0*m"/>
