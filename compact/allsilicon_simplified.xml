@@ -77,7 +77,7 @@
         <rphi_layout phi_tilt="0.0" nphi="1" phi0="0.0" rc="VtxRadius1" dr="0.0*mm" />
         <z_layout dr="0.0*mm" z0="0" nz="1" />
       </layer>
-      <layer module="Module2" id="AllSiliconVtx_ID" vis="AnlGreen">
+      <layer module="Module2" id="2" vis="AnlGreen">
         <barrel_envelope inner_r="VtxRadius2" outer_r="VtxRadius2 + VtxThickness" z_length="VtxLength" />
         <rphi_layout phi_tilt="0.0" nphi="1" phi0="0.0" rc="VtxRadius2" dr="0.0*mm" />
         <z_layout dr="0.0*mm" z0="0" nz="1" />
