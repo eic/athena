@@ -7,18 +7,18 @@
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Printout.h"
 
-
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
 
-static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens) {
+static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens)
+{
   typedef vector<PlacedVolume> Placements;
-  xml_det_t x_det = e;
-  Material air = description.air();
+  xml_det_t                    x_det = e;
+  Material                     air   = description.air();
 
-  int det_id = x_det.id();
-  string det_name = x_det.nameStr();
+  int        det_id   = x_det.id();
+  string     det_name = x_det.nameStr();
   DetElement sdet(det_name, det_id);
 
   Acts::ActsExtension* barrelExtension = new Acts::ActsExtension();
@@ -38,15 +38,15 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     xml_comp_t m_env = x_mod.child(_U(module_envelope));
     string     m_nam = x_mod.nameStr();
 
-    Assembly                module_assembly(_toString(n_modules, "mod_assembly_%d"));
-    auto module_rmin      = m_env.rmin();
-    auto module_thickness = m_env.thickness();
-    auto module_length    = m_env.length();
-    auto module_phi       = getAttrOrDefault(m_env, _Unicode(phi), 90.0);
+    Assembly module_assembly(_toString(n_modules, "mod_assembly_%d"));
+    auto     module_rmin      = m_env.rmin();
+    auto     module_thickness = m_env.thickness();
+    auto     module_length    = m_env.length();
+    auto     module_phi       = getAttrOrDefault(m_env, _Unicode(phi), 90.0);
 
-    Volume     m_vol(m_nam, Tube(module_rmin , module_rmin + module_thickness, module_length/ 2 ), air);
-    int        ncomponents = 0, sensor_number = 1;
-    module_assembly.placeVolume(m_vol,Position(-module_rmin,0,0));
+    Volume m_vol(m_nam, Tube(module_rmin, module_rmin + module_thickness, module_length / 2), air);
+    int    ncomponents = 0, sensor_number = 1;
+    module_assembly.placeVolume(m_vol, Position(-module_rmin, 0, 0));
     mod_volumes[m_nam] = module_assembly;
     m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
 
@@ -63,8 +63,9 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
       auto comp_phi0      = getAttrOrDefault(x_comp, _Unicode(phi0), 0.0);
       auto comp_length    = getAttrOrDefault(x_comp, _Unicode(length), module_length);
 
-      Tube       c_tube(comp_rmin, comp_rmin + comp_thickness, comp_length / 2 , -comp_phi/2.0+comp_phi0,comp_phi/2.0+comp_phi0);
-      Volume     c_vol(c_nam, c_tube, description.material(x_comp.materialStr()));
+      Tube         c_tube(comp_rmin, comp_rmin + comp_thickness, comp_length / 2, -comp_phi / 2.0 + comp_phi0,
+                  comp_phi / 2.0 + comp_phi0);
+      Volume       c_vol(c_nam, c_tube, description.material(x_comp.materialStr()));
       PlacedVolume c_pv;
 
       if (x_pos && x_rot) {
@@ -100,22 +101,22 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     Tube       lay_tub(x_barrel.inner_r(), x_barrel.outer_r(), x_barrel.z_length() / 2);
     Volume     lay_vol(lay_nam, lay_tub, air); // Create the layer envelope volume.
     lay_vol.setVisAttributes(description.visAttributes(x_layer.visStr()));
-    double      phi0     = x_layout.phi0();     // Starting phi of first module.
-    double      phi_tilt = x_layout.phi_tilt(); // Phi tilt of a module.
-    double      rc       = x_layout.rc();       // Radius of the module center.
-    int         nphi     = x_layout.nphi();     // Number of modules in phi.
-    double      rphi_dr  = x_layout.dr();       // The delta radius of every other module.
-    double      phi_incr = (M_PI * 2) / nphi;   // Phi increment for one module.
-    double      phic     = phi0;                // Phi of the module center.
-    double      z0       = z_layout.z0();       // Z position of first module in phi.
-    double      nz       = z_layout.nz();       // Number of modules to place in z.
-    double      z_dr     = z_layout.dr();       // Radial displacement parameter, of every other module.
-    Volume      m_env    = mod_volumes[m_nam];
-    DetElement  lay_elt(sdet, _toString(x_layer.id(), "layer%d"), lay_id);
+    double     phi0     = x_layout.phi0();     // Starting phi of first module.
+    double     phi_tilt = x_layout.phi_tilt(); // Phi tilt of a module.
+    double     rc       = x_layout.rc();       // Radius of the module center.
+    int        nphi     = x_layout.nphi();     // Number of modules in phi.
+    double     rphi_dr  = x_layout.dr();       // The delta radius of every other module.
+    double     phi_incr = (M_PI * 2) / nphi;   // Phi increment for one module.
+    double     phic     = phi0;                // Phi of the module center.
+    double     z0       = z_layout.z0();       // Z position of first module in phi.
+    double     nz       = z_layout.nz();       // Number of modules to place in z.
+    double     z_dr     = z_layout.dr();       // Radial displacement parameter, of every other module.
+    Volume     m_env    = mod_volumes[m_nam];
+    DetElement lay_elt(sdet, _toString(x_layer.id(), "layer%d"), lay_id);
 
     Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
     layerExtension->addType("sensitive cylinder", "layer");
-    //layerExtension->addValue(10. * Acts::UnitConstants::mm, "r", "envelope");
+    // layerExtension->addValue(10. * Acts::UnitConstants::mm, "r", "envelope");
     lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
 
     Placements& sensVols = sensitives[m_nam];
@@ -144,7 +145,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         //         tr(RotationZYX(0,-((M_PI/2)-phic-phi_tilt),M_PI/2),Position(x,y,module_z));
         // NOTE (Nikiforos, 26/08 Rotations needed to be fixed so that component1 (silicon) is on the
         // outside
-        Transform3D tr(RotationZYX(phic - phi_tilt,0, 0), Position(x, y, module_z));
+        Transform3D tr(RotationZYX(phic - phi_tilt, 0, 0), Position(x, y, module_z));
 
         pv = lay_vol.placeVolume(m_env, tr);
         pv.addPhysVolID("module", module);
@@ -180,7 +181,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     lay_elt.setPlacement(pv);
   }
   sdet.setAttributes(description, assembly, x_det.regionStr(), x_det.limitsStr(), x_det.visStr());
-  assembly.setVisAttributes(description.invisible());
+  // assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
   pv.addPhysVolID("system", det_id); // Set the subdetector system ID.
   pv.addPhysVolID("barrel", 1);      // Flag this as a barrel subdetector.
