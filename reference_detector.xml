@@ -14,9 +14,6 @@
   <define>
     <include ref="ip6/ip6_defs.xml" /> <comment> IP definitions should be first</comment>
     <include ref="compact/definitions.xml" />
-    <!--
-    <include ref="eic/eic_defs.xml" />
-    -->
   </define>
 
   <properties>
@@ -111,7 +108,7 @@
   </display>
 
   <comment> Include the IP components first </comment>
-  <include ref="eic/forward_ion_beamline.xml"/>
+  <include ref="ip6/forward_ion_beamline.xml"/>
   <include ref="ip6/beampipe.xml"/>
 
   <include ref="compact/allsilicon_simplified.xml"/>
