@@ -588,27 +588,6 @@
     <constant name="HcalEndcapN_zmin"          value="EcalEndcapN_zmin + EcalEndcapN_length "/>
     <constant name="HcalBarrelLength"          value="HcalEndcapP_zmin + HcalEndcapN_zmin "/>
 
-    <comment> Material Thickness </comment>
-    <constant name="HcalSteelThickness"       value="1.89 * cm"/>
-    <constant name="HcalPyrexThickness"       value="1.10 * mm"/>
-    <constant name="HcalRPCGasThickness"      value="1.20 * mm"/>
-    <constant name="HcalG10Thickness"         value="3.00 * mm"/>
-    <constant name="HcalAirThickness"         value="1.60 * mm"/>
-
-    <comment> Single Layer Thickness (for both barrel and endcap)</comment>
-    <constant name="HcalSingleLayerThickness"
-      value="HcalSteelThickness + (2 * HcalPyrexThickness) + HcalRPCGasThickness + HcalG10Thickness + HcalAirThickness"/>
-
-    <comment> Hcal Barrel Layers and computed Thickness </comment>
-    <constant name="HcalBarrelLayer_NRepeat" value="floor(HcalBarrelAvailThickness / HcalSingleLayerThickness)"/>
-    <constant name="HcalBarrelThickness" value="HcalBarrelLayer_NRepeat * HcalSingleLayerThickness"/>
-
-    <comment> Hcal Endcap Layers and computed Thickness </comment>
-    <constant name="HcalEndcapPLayer_NRepeat" value="floor(HcalEndcapP_length / HcalSingleLayerThickness)"/>
-    <constant name="HcalEndcapNLayer_NRepeat" value="floor(HcalEndcapN_length / HcalSingleLayerThickness)"/>
-    <constant name="HcalEndcapP_thickness" value="HcalEndcapPLayer_NRepeat * HcalSingleLayerThickness"/>
-    <constant name="HcalEndcapN_thickness" value="HcalEndcapNLayer_NRepeat * HcalSingleLayerThickness"/>
-
     <comment>
       ----------------------
       DIRC parameters
