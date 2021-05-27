@@ -1,0 +1,194 @@
+<lccdd>
+
+  <define>
+    <constant name="HcalBarrel_offset"              value="(HcalEndcapP_zmin-HcalEndcapN_zmin)/2.0" />
+    <comment>
+      Scintillator light detection in the strip
+      Figure 10.20 (b), Belle II Technical Design Report,
+      https://docs.belle2.org/record/329/files/BELLE2-REPORT-2016-001.pdf
+      4 cm wide scintillator strips are read out along WLS fibers
+      strips are oriented z-phi in barrel, x-y in endcaps
+    </comment>
+    <constant name="HcalScintillatorNbLayers"       value="2" />
+    <constant name="HcalPSTiO2Thickness"            value="300*um" />
+    <constant name="HcalScintillatorWidth"          value="40*mm" />
+    <constant name="HcalScintillatorThickness"      value="10*mm" />
+    <comment>
+      Exploded cross-section of an RPC superlayer
+      Figure 10.2, Belle II Technical Design Report, 
+      https://docs.belle2.org/record/329/files/BELLE2-REPORT-2016-001.pdf
+      RPC layers are read out on 5 cm wide strips
+      strips are oriented along z-phi in barrel, r-phi in endcaps
+    </comment>
+    <constant name="HcalRPCMylarThickness"          value="0.25*mm" />
+    <constant name="HcalRPCCopperThickness"         value="0.035*mm" />
+    <constant name="HcalRPCPSFoamThickness"         value="7.0*mm" />
+    <constant name="HcalRPCGlassThickness"          value="3.0*mm" />
+    <constant name="HcalRPCGasThickness"            value="2.0*mm" />
+  </define>
+
+  <limits>
+  </limits>
+
+  <regions>
+  </regions>
+
+  <display>
+  </display>
+
+  <!-- Define detector -->
+  <detectors>
+
+    <detector 
+      id="HCalBarrel_ID" 
+      name="HcalBarrel"
+      type="athena_EcalBarrel"
+      readout="HcalBarrelHits"
+      calorimeterType="HAD_BARREL"
+      offset="HcalBarrel_offset"
+      gap="0.*cm"
+      material="Steel235">
+      <dimensions 
+        numsides="CaloSides" 
+        rmin="HcalBarrel_rmin" 
+        z="HcalBarrelLength"/>
+      <staves vis="HcalBarrelVis"/>
+      <layer repeat="HcalScintillatorNbLayers">
+        <slice material="Steel235"     thickness="HcalSteelThickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+      </layer>
+      <layer repeat="HcalBarrelLayer_NRepeat - HcalScintillatorNbLayers">
+        <slice material="Steel235"        thickness="HcalSteelThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+      </layer>
+    </detector>
+
+    <detector 
+      id="HCalEndcapP_ID" 
+      name="HcalEndcapP" 
+      type="refdet_PolyhedraEndcapCalorimeter2" 
+      readout="HcalEndcapHits" 
+      vis="HcalEndcapVis" 
+      calorimeterType="HAD_ENDCAP"
+      reflect="false">
+      <position x="0" y="0" z="0"/>
+      <dimensions 
+        numsides="CaloSides" 
+        zmin="HcalEndcapP_zmin" 
+        rmin="HcalEndcapP_rmin"
+        rmax="HcalBarrel_rmax"/>
+      <layer repeat="HcalScintillatorNbLayers" vis="HcalEndcapVis">
+        <slice material="Steel235"     thickness="HcalSteelThickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+      </layer>
+      <layer repeat="HcalEndcapPLayer_NRepeat - HcalScintillatorNbLayers" vis="HcalEndcapVis">
+        <slice material="Steel235"        thickness="HcalSteelThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+      </layer>
+    </detector>
+
+    <detector 
+      id="HCalEndcapN_ID" 
+      name="HcalEndcapN" 
+      type="refdet_PolyhedraEndcapCalorimeter2" 
+      readout="HcalEndcapHits" 
+      vis="HcalEndcapVis" 
+      calorimeterType="HAD_ENDCAP" reflect="true">
+      <position x="0" y="0" z="0"/>
+      <dimensions 
+        numsides="CaloSides" 
+        zmin="HcalEndcapN_zmin" 
+        rmin="HcalEndcapN_rmin" 
+        rmax="HcalBarrel_rmax"/>
+      <layer repeat="HcalScintillatorNbLayers" vis="HcalEndcapVis">
+        <slice material="Steel235"     thickness="HcalSteelThickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+      </layer>
+      <layer repeat="HcalEndcapNLayer_NRepeat - HcalScintillatorNbLayers" vis="HcalEndcapVis">
+        <slice material="Steel235"        thickness="HcalSteelThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
+        <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
+      </layer>
+    </detector>
+
+  </detectors>
+  <!--  Definition of the readout segmentation/definition  -->
+  <readouts>
+    <readout name="HcalBarrelHits">
+      <segmentation type="CartesianGridXY" grid_size_x="5 * cm" grid_size_y="5 * cm"/>
+      <id>system:6,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>
+    </readout>
+    <readout name="HcalEndcapHits">
+      <segmentation type="CartesianGridXY" grid_size_x="5 * cm" grid_size_y="5 * cm"/>
+      <id>system:6,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
+  <plugins>
+  </plugins>
+
+  <fields>
+  </fields>
+</lccdd>
