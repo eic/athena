@@ -428,6 +428,7 @@
     </comment>
     <constant name="BarrelTracking_length"       value="TrackerBarrelOuter_length"/>
     <constant name="BarrelTracking_rmax"         value="TrackerBarrel_rmax"/>
+    <constant name="BarrelTracking_zmax"         value="BarrelTracking_length/2.0"/>
 
     <constant name="BarrelTrackingAndPID_length" value="BarrelTracking_length "/>
     <constant name="BarrelTrackingAndPID_rmax"   value="BarrelTracking_rmax   + BarrelExtraPIDThickness"/>

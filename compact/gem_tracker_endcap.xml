@@ -3,9 +3,15 @@
   <comment> Endcap Tracker  </comment>        
 
   <define>
-    <constant name="GEMTrackerEndcap_zmin"            value="BarrelTracking_length/2.0"/>
+    <constant name="GEMTrackerEndcap_zmin"            value="BarrelTracking_zmax"/>
     <constant name="GEMTrackerEndcap_NLayers"         value="1"/>
     <constant name="GEMTrackerEndcapFoilOpeningAngle" value="30.1*degree"/>
+    <comment>
+      ____X2____ 
+      \        /
+       \      /    Y (=z for the trd)
+        \_X1_/ 
+    </comment>
     <constant name="GEMTrackerEndcapFoilX1"           value="43.0 * mm"/>
 
     <constant name="GEMTrackerEndcapLayer_thickness"  value="ForwardTrackingGEMLength/GEMTrackerEndcap_NLayers"/>
@@ -17,10 +23,9 @@
 
       // Frame parameters accoring to Kondo's sbsCrossSection.pdf file),
     <constant name="GEMTrackerEndcapFrame_thickness"     value="18.0 * mm"/>
-    <constant name="GEMTrackerEndcapFrameBotEdge_width"  value="30.0 * mm"/>
-    <constant name="GEMTrackerEndcapFrameTopEdge_width"  value="30.0 * mm"/>
+    <constant name="GEMTrackerEndcapFrameBotEdge_width"  value="10.0 * mm"/>
+    <constant name="GEMTrackerEndcapFrameTopEdge_width"  value="10.0 * mm"/>
     <constant name="GEMTrackerEndcapFrameSideEdge_width" value=" 8.0 * mm"/>
-
     <comment>
       From https://github.com/eic/EicToyModel/blob/master/source/eicroot/GemGeoParData.cxx
 
@@ -74,6 +79,16 @@
       reflect="false">
       <module name="GEMModule1" vis="AnlProcess_Blue">
         <trd x1="GEMTrackerEndcapFoilX1/2.0" x2="GEMTrackerEndcapFoilX2/2.0" z="GEMTrackerEndcapFoilY/2"/>
+        <frame material="G10" thickness="GEMTrackerEndcapFrame_thickness" vis="TrackerSupportVis">
+          <position x="0"  y="0" z="0" />
+          <trd x1="GEMTrackerEndcapFoilX1/2.0 - GEMTrackerEndcapFrameSideEdge_width/cos(GEMTrackerEndcapFoilOpeningAngle) 
+                                              + GEMTrackerEndcapFrameBotEdge_width*tan(GEMTrackerEndcapFoilOpeningAngle)"
+               x2="GEMTrackerEndcapFoilX2/2.0 - GEMTrackerEndcapFrameSideEdge_width/cos(GEMTrackerEndcapFoilOpeningAngle)
+                                              - GEMTrackerEndcapFrameTopEdge_width*tan(GEMTrackerEndcapFoilOpeningAngle)"
+            z="GEMTrackerEndcapFoilY/2    - (GEMTrackerEndcapFrameBotEdge_width +GEMTrackerEndcapFrameTopEdge_width)/2.0 ">
+            <position x="0" y="0" z="0" />
+          </trd>
+        </frame>
         <comment> Going from HV side to readout side</comment>
         <module_component thickness="0.127 * mm" material="Mylar"/>
         <module_component thickness="50.0*um" material="Kapton" name="entrance_window"/>
@@ -96,22 +111,37 @@
         <module_component thickness="200.0*um" material="Epoxy" sensitive="true" vis="AnlProcess_Blue"/>
       </module>
       <module name="GEMSupportModule1" vis="AnlProcess_Blue">
-        <trd x1="GEMTrackerEndcapFoilX2/2.0" x2="GEMTrackerEndcapFoilX1/2.0" z="GEMTrackerEndcapFrameBotEdge_width"/>
-        <module_component thickness="GEMTrackerEndcapFrame_thickness" material="Mylar"/>
+        <trd x1="GEMTrackerEndcapFoilX1/2.0" x2="GEMTrackerEndcapFoilX2/2.0" z="GEMTrackerEndcapFoilY/2"/>
+        <frame material="G10" thickness="GEMTrackerEndcapFrame_thickness" vis="TrackerSupportVis">
+          <position x="0"  y="0" z="0" />
+          <trd x1="GEMTrackerEndcapFoilX1/2.0 - GEMTrackerEndcapFrameSideEdge_width/cos(GEMTrackerEndcapFoilOpeningAngle) 
+                                              + GEMTrackerEndcapFrameBotEdge_width*tan(GEMTrackerEndcapFoilOpeningAngle)"
+               x2="GEMTrackerEndcapFoilX2/2.0 - GEMTrackerEndcapFrameSideEdge_width/cos(GEMTrackerEndcapFoilOpeningAngle)
+                                              - GEMTrackerEndcapFrameTopEdge_width*tan(GEMTrackerEndcapFoilOpeningAngle)"
+            z="GEMTrackerEndcapFoilY/2    - (GEMTrackerEndcapFrameBotEdge_width +GEMTrackerEndcapFrameTopEdge_width)/2.0 ">
+            <position x="0" y="0" z="0" />
+          </trd>
+        </frame>
       </module>
       <module name="GEMSupportModule2" vis="AnlProcess_Blue">
         <trd x1="GEMTrackerEndcapFrameSideEdge_width" x2="GEMTrackerEndcapFrameSideEdge_width" z="GEMTrackerEndcapFoilY/2"/>
         <module_component thickness="4.0*mm" material="Mylar"/>
       </module>
       <layer id="1" >
-        <ring vis="AnlRed"
+        <ring vis="AnlRed" module="GEMModule1"
           r="GEMTrackerEndcapFoil_rmin+GEMTrackerEndcapFoilY/2.0"
           zstart="GEMTrackerEndcap_zmin + 0.5*GEMTrackerEndcapLayer_thickness"
-          nmodules="12" dz="10 * mm" module="GEMModule1" />
-        <ring vis="AnlBlue" phi0="15.0*degree"
+          nmodules="12" dz="10 * mm" />
+        <!--
+        <ring vis="AnlRed" module="GEMSupportModule1" 
           r="GEMTrackerEndcapFoil_rmin+GEMTrackerEndcapFoilY/2.0"
           zstart="GEMTrackerEndcap_zmin + 0.5*GEMTrackerEndcapLayer_thickness"
-          nmodules="12" dz="0 * mm" module="GEMSupportModule2" />
+          nmodules="12" dz="10 * mm"/>
+        -->
+        <ring vis="AnlBlue" phi0="15.0*degree"  module="GEMSupportModule2"
+          r="GEMTrackerEndcapFoil_rmin+GEMTrackerEndcapFoilY/2.0"
+          zstart="GEMTrackerEndcap_zmin + 0.5*GEMTrackerEndcapLayer_thickness"
+          nmodules="12" dz="0 * mm" />
       </layer>
     </detector>
 
