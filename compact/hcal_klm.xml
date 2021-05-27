@@ -82,7 +82,7 @@
         z="HcalBarrelLength"/>
       <staves vis="HcalBarrelVis"/>
       <layer repeat="HcalScintillatorNbLayers">
-        <slice material="Steel235"     thickness="HcalSteelThickness"/>
+        <slice material="Steel235"     thickness="HcalSteelThickness" vis="AnlGray"/>
         <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
         <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
@@ -91,11 +91,11 @@
         <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
       </layer>
       <layer repeat="HcalBarrelLayerRPC_NRepeat - HcalScintillatorNbLayers">
-        <slice material="Steel235"        thickness="HcalSteelThickness"/>
+        <slice material="Steel235"        thickness="HcalSteelThickness" vis="AnlGray"/>
         <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
-        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" vis="AnlGreen"/>
         <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
-        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits" vis="AnlGreen"/>
         <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
         <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
         <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
@@ -105,9 +105,9 @@
         <slice material="RPCGasDefault"   thickness="HcalRPCGasThickness"/>
         <slice material="PyrexGlass"      thickness="HcalRPCGlassThickness"/>
         <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
-        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" sensitive="yes" limits="cal_limits" vis="AnlGreen"/>
         <slice material="PolystyreneFoam" thickness="HcalRPCPSFoamThickness"/>
-        <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
+        <slice material="Copper"          thickness="HcalRPCCopperThickness" vis="AnlGreen"/>
         <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
       </layer>
     </detector>
