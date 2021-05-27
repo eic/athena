@@ -12,7 +12,7 @@
 //==========================================================================
 //
 // Specialized generic detector constructor
-// 
+//
 //==========================================================================
 #include "DD4hep/DetFactoryHelper.h"
 #include "XML/Layering.h"
@@ -50,14 +50,14 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
   DetElement    stave_det("stave0",det_id);
   double dx = 0.0; //mod_z / std::sin(dphi); // dx per layer
-    
+
   // Compute the top and bottom face measurements.
   double trd_x2 = (2 * std::tan(hphi) * outer_r - dx)/2 - tolerance;
   double trd_x1 = (2 * std::tan(hphi) * inner_r + dx)/2 - tolerance;
   double trd_y1 = x_dim.z()/2 - tolerance;
   double trd_y2 = trd_y1;
   double trd_z  = mod_z/2 - tolerance;
-		
+
   // Create the trapezoid for the stave.
   Trapezoid trd(trd_x1, // Outer side, i.e. the "short" X side.
                 trd_x2, // Inner side, i.e. the "long"  X side.
@@ -112,10 +112,10 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
           slice.setPlacement(slice_phv);
           // Increment Z position of slice.
           s_pos_z += s_thick;
-                                        
+
           // Increment slice number.
           ++s_num;
-        }        
+        }
 
         // Set region, limitset, and vis of layer.
         layer.setAttributes(description,l_vol,x_layer.regionStr(),x_layer.limitsStr(),x_layer.visStr());
@@ -126,7 +126,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         // Increment to next layer Z position.
         double xcut = l_thickness * tan_hphi;
         l_dim_x += xcut;
-        l_pos_z += l_thickness;          
+        l_pos_z += l_thickness;
         ++l_num;
       }
     }

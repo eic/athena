@@ -40,6 +40,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   map<string, Placements> sensitives;
   PlacedVolume            pv;
 
+
   Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
   detWorldExt->addType("endcap", "detector");
   sdet.addExtension<Acts::ActsExtension>(detWorldExt);
@@ -51,6 +52,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     xml_comp_t x_mod = mi;
     string     m_nam = x_mod.nameStr();
     xml_comp_t trd   = x_mod.trd();
+
     double     posY;
     double     x1 = trd.x1();
     double     x2 = trd.x2();
@@ -61,8 +63,40 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
       total_thickness += xml_comp_t(ci).thickness();
 
     y1 = y2 = total_thickness / 2;
-    Volume m_volume(m_nam, Trapezoid(x1, x2, y1, y2, z), vacuum);
+    Trapezoid m_solid(x1, x2, y1, y2, z);
+    Volume m_volume(m_nam, m_solid, vacuum);
     m_volume.setVisAttributes(description.visAttributes(x_mod.visStr()));
+
+    Solid  frame_s;
+    if(x_mod.hasChild("frame")){
+      // build frame from trd (assumed to be smaller)
+      xml_comp_t m_frame         = x_mod.child(_U(frame));
+      xml_comp_t f_pos           = m_frame.child(_U(position));
+      xml_comp_t frame_trd       = m_frame.trd();
+      double     frame_thickness = getAttrOrDefault(m_frame, _U(thickness), total_thickness);
+      double     frame_x1        = frame_trd.x1();
+      double     frame_x2        = frame_trd.x2();
+      double     frame_z         = frame_trd.z();
+      std::cout <<  "      x1  = " <<       x1 << "\n";
+      std::cout <<  "      x2  = " <<       x2 << "\n";
+      std::cout <<  "      z   = " <<       z << "\n";
+      std::cout <<  "frame_x1  = " << frame_x1 << "\n";
+      std::cout <<  "frame_x2  = " << frame_x2 << "\n";
+      std::cout <<  "frame_z   = " << frame_z << "\n";
+      // make the frame match the total thickness if thickness attribute is not given
+      Trapezoid        f_solid1(x1, x2,frame_thickness / 2.0, frame_thickness / 2.0, z);
+      Trapezoid        f_solid(frame_x1, frame_x2, frame_thickness / 2.0, frame_thickness / 2.0, frame_z) ;
+      SubtractionSolid frame_shape(f_solid1, f_solid);
+      frame_s = frame_shape;
+
+      Material f_mat  = description.material(m_frame.materialStr());
+      Volume f_vol(m_nam + "_frame", frame_shape, f_mat);
+      f_vol.setVisAttributes(description.visAttributes(m_frame.visStr()));
+
+      // figure out how to best place
+      pv = m_volume.placeVolume(f_vol, Position(f_pos.x(), f_pos.y(),  f_pos.z()));
+      std::cout << "Frame thickness : " << frame_thickness << "\n";
+    }
 
     for (ci.reset(), n_sensor = 1, c_id = 0, posY = -y1; ci; ++ci, ++c_id) {
       xml_comp_t c           = ci;
@@ -73,7 +107,13 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
       Material c_mat  = description.material(c.materialStr());
       string   c_name = _toString(c_id, "component%d");
-      Volume   c_vol(c_name, Trapezoid(comp_x1, comp_x2, c_thick / 2e0, c_thick / 2e0, comp_height), c_mat);
+
+      Trapezoid comp_s1(comp_x1, comp_x2, c_thick / 2e0, c_thick / 2e0, comp_height);
+      Solid  comp_shape = comp_s1;
+      if(frame_s.isValid()) {
+        comp_shape = SubtractionSolid( comp_s1, frame_s); 
+      }
+      Volume   c_vol(c_name, comp_shape, c_mat);
 
       c_vol.setVisAttributes(description.visAttributes(c.visStr()));
       pv = m_volume.placeVolume(c_vol, Position(0, posY + c_thick / 2, 0));

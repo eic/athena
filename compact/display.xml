@@ -26,6 +26,8 @@
     <vis name="SiVertexVis" alpha="0.9" r="1" g="0" b="1" showDaughters="true" />
     <vis name="SiTrackerBarrelVis" alpha="0.5" r="0.0" g="0.0" b="1.0" showDaughters="true" visible="true"/>
     <vis name="SiTrackerVis" alpha="0.9" r="1.0" g="0.0" b="0.0" showDaughters="true" lineStyle="solid"  drawingStyle="solid" />
+
+    <vis name="TrackerSupportVis" alpha="1.0" r="1.0" g="0.0" b="0.0" visible="true"  showDaughters="false" />
     <vis name="TrackerLayerVis" alpha="0.9" r="0.0" g="1.0" b="0.0" visible="true"  showDaughters="true" />
 
     <vis name="SiTrackerBarrelVis1" alpha="0.8" r="0.0" g="0.9" b="0.9" showDaughters="true" />
