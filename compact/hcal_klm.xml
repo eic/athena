@@ -2,6 +2,9 @@
 
   <define>
     <constant name="HcalBarrel_offset"              value="(HcalEndcapP_zmin-HcalEndcapN_zmin)/2.0" />
+
+    <constant name="HcalSteelThickness"             value="1.89 * cm" />
+
     <comment>
       Scintillator light detection in the strip
       Figure 10.20 (b), Belle II Technical Design Report,
@@ -10,9 +13,17 @@
       strips are oriented z-phi in barrel, x-y in endcaps
     </comment>
     <constant name="HcalScintillatorNbLayers"       value="2" />
-    <constant name="HcalPSTiO2Thickness"            value="300*um" />
+    <constant name="HcalScintillatorPSThickness"    value="300*um" />
     <constant name="HcalScintillatorWidth"          value="40*mm" />
     <constant name="HcalScintillatorThickness"      value="10*mm" />
+
+    <comment> Single Layer Thickness (for both barrel and endcap)</comment>
+    <constant name="HcalScintillatorSingleLayerThickness"
+      value="HcalSteelThickness + 2 * (HcalScintillatorThickness + 2 * HcalScintillatorPSThickness)"/>
+
+    <comment> All Scintillator Layers Thickness (for both barrel and endcap)</comment>
+    <constant name="HcalScintillatorAllLayerThickness" value="HcalScintillatorNbLayers * HcalScintillatorSingleLayerThickness"/>
+
     <comment>
       Exploded cross-section of an RPC superlayer
       Figure 10.2, Belle II Technical Design Report, 
@@ -25,6 +36,23 @@
     <constant name="HcalRPCPSFoamThickness"         value="7.0*mm" />
     <constant name="HcalRPCGlassThickness"          value="3.0*mm" />
     <constant name="HcalRPCGasThickness"            value="2.0*mm" />
+
+    <comment> Single Layer Thickness (for both barrel and endcap)</comment>
+    <constant name="HcalRPCSingleLayerThickness"
+      value="HcalSteelThickness + 2 * (2 * (HcalRPCMylarThickness + HcalRPCCopperThickness) + HcalRPCPSFoamThickness + 2 * HcalRPCGlassThickness + HcalRPCGasThickness) + HcalRPCMylarThickness"/>
+
+    <comment> Hcal Barrel Layers and computed Thickness </comment>
+    <constant name="HcalBarrelAvailThicknessForRPC" value="HcalBarrelAvailThickness - HcalScintillatorAllLayerThickness"/>
+    <constant name="HcalBarrelLayerRPC_NRepeat" value="floor(HcalBarrelAvailThicknessForRPC / HcalRPCSingleLayerThickness)"/>
+    <constant name="HcalBarrelThickness" value="HcalScintillatorAllLayerThickness + HcalBarrelLayerRPC_NRepeat * HcalRPCSingleLayerThickness"/>
+
+    <comment> Hcal Endcap Layers and computed Thickness </comment>
+    <constant name="HcalEndcapP_AvailLengthRPC" value="HcalEndcapP_length - HcalScintillatorAllLayerThickness"/>
+    <constant name="HcalEndcapN_AvailLengthRPC" value="HcalEndcapN_length - HcalScintillatorAllLayerThickness"/>
+    <constant name="HcalEndcapPLayer_NRepeat" value="floor(HcalEndcapP_AvailLengthRPC / HcalRPCSingleLayerThickness)"/>
+    <constant name="HcalEndcapNLayer_NRepeat" value="floor(HcalEndcapN_AvailLengthRPC / HcalRPCSingleLayerThickness)"/>
+    <constant name="HcalEndcapP_thickness" value="HcalEndcapPLayer_NRepeat * HcalRPCSingleLayerThickness"/>
+    <constant name="HcalEndcapN_thickness" value="HcalEndcapNLayer_NRepeat * HcalRPCSingleLayerThickness"/>
   </define>
 
   <limits>
@@ -55,14 +83,14 @@
       <staves vis="HcalBarrelVis"/>
       <layer repeat="HcalScintillatorNbLayers">
         <slice material="Steel235"     thickness="HcalSteelThickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
       </layer>
-      <layer repeat="HcalBarrelLayer_NRepeat - HcalScintillatorNbLayers">
+      <layer repeat="HcalBarrelLayerRPC_NRepeat - HcalScintillatorNbLayers">
         <slice material="Steel235"        thickness="HcalSteelThickness"/>
         <slice material="Mylar"           thickness="HcalRPCMylarThickness"/>
         <slice material="Copper"          thickness="HcalRPCCopperThickness"/>
@@ -100,12 +128,12 @@
         rmax="HcalBarrel_rmax"/>
       <layer repeat="HcalScintillatorNbLayers" vis="HcalEndcapVis">
         <slice material="Steel235"     thickness="HcalSteelThickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
       </layer>
       <layer repeat="HcalEndcapPLayer_NRepeat - HcalScintillatorNbLayers" vis="HcalEndcapVis">
         <slice material="Steel235"        thickness="HcalSteelThickness"/>
@@ -144,12 +172,12 @@
         rmax="HcalBarrel_rmax"/>
       <layer repeat="HcalScintillatorNbLayers" vis="HcalEndcapVis">
         <slice material="Steel235"     thickness="HcalSteelThickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
         <slice material="PlasticScint" thickness="HcalScintillatorThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Polystyrene"  thickness="HcalPSTiO2Thickness"/>
+        <slice material="Polystyrene"  thickness="HcalScintillatorPSThickness"/>
       </layer>
       <layer repeat="HcalEndcapNLayer_NRepeat - HcalScintillatorNbLayers" vis="HcalEndcapVis">
         <slice material="Steel235"        thickness="HcalSteelThickness"/>
