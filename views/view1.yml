@@ -13,7 +13,7 @@ dawn_view_01:ev002:
   rules:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
-    - ./bin/make_dawn_views -t view01_ev001 -d scripts/view1 -s 2
+    - ./bin/make_dawn_views -t view01_ev002 -d scripts/view1 -s 2
 
 view_01:
   stage: test
