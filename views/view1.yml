@@ -50,6 +50,14 @@ view_01:
       optional: true
     - job: dawn_view_01:ev002
       optional: true
+    - job: dawn_view_01:ev003
+      optional: true
+    - job: dawn_view_01:ev004
+      optional: true
+    - job: dawn_view_01:ev005
+      optional: true
+    - job: dawn_view_01:ev006
+      optional: true
   script:
     - ls -lrth *
     - ls -lrth images/*
