@@ -67,6 +67,7 @@ common:detector:
     - mkdir -p results
     - mkdir -p config
     - mkdir -p doc
+    - mkdir -p geo
     - print_env.sh
 
 compile:
@@ -142,6 +143,13 @@ overlap_check:
     - checkOverlaps -c ${DETECTOR_PATH}/athena.xml  | tee doc/overlap_check.out 
     - echo "$(cat doc/overlap_check.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+
+tracking_geometry_debug:
+  stage: test
+  needs: 
+    - ["common:detector"]
+  script:
+    - root -b -q "scripts/test_ACTS.cxx+(\"${DETECTOR_PATH}/athena.xml\")" || true | tee geo/tracking_geometry_debug.out 
 
 detector:config_testing:
   stage: test
