@@ -14,6 +14,30 @@ dawn_view_01:ev002:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
     - ./bin/make_dawn_views -t view01_ev002 -d scripts/view1 -s 2
+dawn_view_01:ev003:
+  extends: .views
+  rules:
+    - if: '$DETECTOR_EVENT_VIEWS == "ON"'
+  script:
+    - ./bin/make_dawn_views -t view01_ev003 -d scripts/view1 -s 3
+dawn_view_01:ev004:
+  extends: .views
+  rules:
+    - if: '$DETECTOR_EVENT_VIEWS == "ON"'
+  script:
+    - ./bin/make_dawn_views -t view01_ev004 -d scripts/view1 -s 4
+dawn_view_01:ev005:
+  extends: .views
+  rules:
+    - if: '$DETECTOR_EVENT_VIEWS == "ON"'
+  script:
+    - ./bin/make_dawn_views -t view01_ev005 -d scripts/view1 -s 5
+dawn_view_01:ev006:
+  extends: .views
+  rules:
+    - if: '$DETECTOR_EVENT_VIEWS == "ON"'
+  script:
+    - ./bin/make_dawn_views -t view01_ev006 -d scripts/view1 -s 6
 
 view_01:
   stage: test
