@@ -1,4 +1,4 @@
-image: eicweb.phy.anl.gov:4567/containers/jug_xl:nightly
+image: eicweb.phy.anl.gov:4567/containers/jug_xl:3.1-unstable
 
 workflow:
   rules:
