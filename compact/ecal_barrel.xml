@@ -65,10 +65,10 @@
         rmin="EcalBarrel_rmin" 
         z="EcalBarrel_length"/>
       <staves vis="EcalBarrelStave_vis">
-        <!--support inside="true"  material="Aluminum" vis="AnlOrange"
+        <support inside="true"  material="Aluminum" vis="AnlOrange"
           thickness="EcalBarrel_Support_thickness"
           n_beams="3" grid_size="25.0*cm" >
-        </support-->
+        </support>
       </staves>
       <layer repeat="EcalBarrel_ReadoutLayerNumber" vis="AnlBlue">
         <slice material="Silicon" thickness="EcalBarrel_SiliconThickness" sensitive="yes" limits="cal_limits" vis="AnlGray"/>
