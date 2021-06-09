@@ -509,10 +509,10 @@
 
     <comment> These need to be set in sync with the forward and backward  detectors </comment>
     <constant name="EcalEndcapP_rmin"                      value="300.0*mm"/>
-    <constant name="EcalEndcapN_rmin"                      value="220.0*mm"/>
+    <constant name="EcalEndcapN_rmin"                      value="150.0*mm"/>
 
     <constant name="HcalEndcapP_rmin"                      value="300.0*mm"/>
-    <constant name="HcalEndcapN_rmin"                      value="150.0*mm"/>
+    <constant name="HcalEndcapN_rmin"                      value="220.0*mm"/>
 
     <comment>
       -------------------------
