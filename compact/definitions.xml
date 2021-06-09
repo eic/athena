@@ -508,11 +508,11 @@
 
 
     <comment> These need to be set in sync with the forward and backward  detectors </comment>
-    <constant name="EcalEndcapP_rmin"                      value="200.0*mm"/>
-    <constant name="EcalEndcapN_rmin"                      value="300.0*mm"/>
+    <constant name="EcalEndcapP_rmin"                      value="300.0*mm"/>
+    <constant name="EcalEndcapN_rmin"                      value="220.0*mm"/>
 
-    <constant name="HcalEndcapP_rmin"                      value="EcalEndcapP_rmin"/>
-    <constant name="HcalEndcapN_rmin"                      value="EcalEndcapN_rmin"/>
+    <constant name="HcalEndcapP_rmin"                      value="300.0*mm"/>
+    <constant name="HcalEndcapN_rmin"                      value="150.0*mm"/>
 
     <comment>
       -------------------------
@@ -585,8 +585,8 @@
       -------------------------------
     </comment>
 
-    <constant name="HcalEndcapP_length" value="100.0*cm"/>
-    <constant name="HcalEndcapN_length" value="75.0*cm"/>
+    <constant name="HcalEndcapP_length" value="120.0*cm"/>
+    <constant name="HcalEndcapN_length" value="105.0*cm"/>
     <constant name="HcalBarrel_thickness" value="100.0*cm "/>
 
     <constant name="HcalBarrel_rmin"          value="Solenoid_rmax"/>
