@@ -6,8 +6,8 @@
     <constant name="BarrelTOFSpaceFrame_width"   value="40.0*mm"/>
     <constant name="BarrelTOFSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
     <constant name="BarrelTOFSensor_thickness"   value="0.03*mm"/>
-    <constant name="BarrelTOF_thickness"         value="0.55/100*9.37*cm"/>
-    <constant name="BarrelTOFService_thickness"  value="BarrelTOF_thickness-BarrelTOFSensor_thickness"/>
+    <constant name="BarrelTOFModule_thickness"   value="0.55/100*9.37*cm"/>
+    <constant name="BarrelTOFService_thickness"  value="BarrelTOFModule_thickness-BarrelTOFSensor_thickness"/>
 
     <comment>
       Layer_rOffset is used to add inside space so the _rmin value is the nominal sensor radius.
@@ -57,9 +57,8 @@
           length="BarrelTOF_length1-0.1*mm"
           thickness="0.05*mm" material="Silicon" sensitive="true">
         </module_component>
-        <!--
         <module_component name="peek2" material="PEEK" sensitive="false"
-          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />-->
+          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
       </module>
       <!--
       <module name="BarrelTOF_Module2" vis="PurpleVis">
