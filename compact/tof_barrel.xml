@@ -34,7 +34,7 @@
     <detector
       id="BarrelTOF_ID"
       name="BarrelTOF"
-      type="athena_BarrelTOF"
+      type="athena_TrackerBarrel"
       readout="BarrelTOFHits"
       insideTrackingVolume="true">
       <dimensions
