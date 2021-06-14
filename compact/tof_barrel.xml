@@ -60,23 +60,6 @@
         <module_component name="peek2" material="PEEK" sensitive="false"
           width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
       </module>
-      <!--
-      <module name="BarrelTOF_Module2" vis="PurpleVis">
-        <frame  material="CarbonFiber_25percent" vis="BlueGreenVis"
-          width="BarrelTOFSpaceFrame_width"
-          height="BarrelTOFSpaceFrame_height"
-          length="BarrelTOF_length2"
-          thickness="0.1*mm" />
-        <module_component name="peek1" material="PEEK" sensitive="false"
-          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length2-0.1*mm" thickness="2.0*mm" />
-        <module_component name="silicon" 
-          width="BarrelTOFSpaceFrame_width"
-          length="BarrelTOF_length1-0.1*mm"
-          thickness="0.05*mm" material="Silicon" sensitive="true">
-        </module_component>
-        <module_component name="peek2" material="PEEK" sensitive="false"
-          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
-      </module> -->
       <layer module="BarrelTOF_Module1" id="1" vis="VertexVis">
         <barrel_envelope
           inner_r="BarrelTOF_rmin1-BarrelTOFLayer_rOffset"
@@ -85,15 +68,6 @@
         <rphi_layout phi_tilt="10.0*degree" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin1" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-      <!--
-      <layer module="BarrelTOF_Module2" id="2" vis="VertexVis">
-        <barrel_envelope
-          inner_r="BarrelTOF_rmin2-BarrelTOFLayer_rOffset"
-          outer_r="BarrelTOF_rmin2-BarrelTOFLayer_rOffset + BarrelTOF_thickness"
-          z_length="BarrelTOF_length"/>
-        <rphi_layout phi_tilt="10.0*degree" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin2" dr="0.0 * mm"/>
-        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
-      </layer>-->
     </detector>
 
   </detectors>
