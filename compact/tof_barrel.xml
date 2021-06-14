@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd>
+
+  <define>
+
+    <constant name="BarrelTOFSpaceFrame_width"   value="40.0*mm"/>
+    <constant name="BarrelTOFSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
+    <constant name="BarrelTOFSensor_thickness"   value="0.03*mm"/>
+    <constant name="BarrelTOF_thickness"         value="0.55/100*9.37*cm"/>
+    <constant name="BarrelTOFService_thickness"  value="BarrelTOF_thickness-BarrelTOFSensor_thickness"/>
+
+    <comment>
+      Layer_rOffset is used to add inside space so the _rmin value is the nominal sensor radius.
+    </comment>
+    <constant name="BarrelTOFLayer_rOffset"     value="0.5*cm"/>
+
+    <constant name="BarrelTOF_rmin1"       value="50.0*cm"/>
+    <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
+    <constant name="BarrelTOF_length1"     value="105.0*cm"/>
+    <constant name="BarrelTOF_length2"     value="114.0*cm"/>
+
+    <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
+    <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
+
+    <comment> TODO: These should be computed </comment>
+    <constant name="BarrelTOF_NModules" value="56"/>
+
+  </define>
+
+  <display>
+  </display>
+
+  <detectors>
+    <detector
+      id="BarrelTOF_ID"
+      name="BarrelTOF"
+      type="athena_BarrelTOF"
+      readout="BarrelTOFHits"
+      insideTrackingVolume="true">
+      <dimensions
+        rmin="BarrelTOF_rmin1-BarrelTOFLayer_rOffset"
+        rmax="BarrelTOF_rmin2-BarrelTOFLayer_rOffset + BarrelTOF_thickness"
+        length="BarrelTOF_length"/>
+      <comment>
+        Tracker Barrel Modules
+      </comment>
+      <module name="BarrelTOF_Module1" vis="PurpleVis">
+        <frame  material="CarbonFiber_25percent" vis="BlueGreenVis"
+          width="BarrelTOFSpaceFrame_width"
+          height="BarrelTOFSpaceFrame_height"
+          length="BarrelTOF_length1"
+          thickness="0.1*mm" />
+        <module_component name="peek1" material="PEEK" sensitive="false"
+          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
+        <module_component name="silicon" 
+          width="BarrelTOFSpaceFrame_width"
+          length="BarrelTOF_length1-0.1*mm"
+          thickness="0.05*mm" material="Silicon" sensitive="true">
+        </module_component>
+        <module_component name="peek2" material="PEEK" sensitive="false"
+          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
+      </module>
+      <module name="BarrelTOF_Module2" vis="PurpleVis">
+        <frame  material="CarbonFiber_25percent" vis="BlueGreenVis"
+          width="BarrelTOFSpaceFrame_width"
+          height="BarrelTOFSpaceFrame_height"
+          length="BarrelTOF_length2"
+          thickness="0.1*mm" />
+        <module_component name="peek1" material="PEEK" sensitive="false"
+          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length2-0.1*mm" thickness="2.0*mm" />
+        <module_component name="silicon" 
+          width="BarrelTOFSpaceFrame_width"
+          length="BarrelTOF_length1-0.1*mm"
+          thickness="0.05*mm" material="Silicon" sensitive="true">
+        </module_component>
+        <module_component name="peek2" material="PEEK" sensitive="false"
+          width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
+      </module>
+      <comment>
+        Tracker Barrel Inner Layers
+      </comment>
+      <layer module="BarrelTOF_Module1" id="1" vis="VertexVis">
+        <barrel_envelope
+          inner_r="BarrelTOF_rmin1-BarrelTOFLayer_rOffset"
+          _r="BarrelTOF_rmin1-BarrelTOFLayer_rOffset + BarrelTOF_thickness-1.0*mm"
+          z_length="BarrelTOF_length"/>
+        <rphi_layout phi_tilt="10.0*degree" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin1" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+      <layer module="BarrelTOF_Module2" id="2" vis="VertexVis">
+        <barrel_envelope
+          inner_r="BarrelTOF_rmin2-BarrelTOFLayer_rOffset"
+          _r="BarrelTOF_rmin2-BarrelTOFLayer_rOffset + BarrelTOF_thickness"
+          z_length="BarrelTOF_length"/>
+        <rphi_layout phi_tilt="10.0*degree" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin2" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+    </detector>
+
+  </detectors>
+
+  <readouts>
+    <readout name="BarrelTOFHits">
+      <segmentation type="CartesianGridXY" grid_size_x="0.150*mm" grid_size_y="0.150*mm" />
+      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
+
+</lccdd>
