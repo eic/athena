@@ -52,12 +52,12 @@
           thickness="0.1*mm" />
         <module_component name="peek1" material="PEEK" sensitive="false"
           width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
-          <!--
-        <module_component name="silicon" 
+        <module_component name="silicon"
           width="BarrelTOFSpaceFrame_width"
           length="BarrelTOF_length1-0.1*mm"
           thickness="0.05*mm" material="Silicon" sensitive="true">
         </module_component>
+        <!--
         <module_component name="peek2" material="PEEK" sensitive="false"
           width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />-->
       </module>
