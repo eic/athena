@@ -177,7 +177,7 @@
 
   <include ref="compact/central_tracker.xml"/>
   
-  <include ref="compact/tof_barrel.xml"/>
+  <!--<include ref="compact/tof_barrel.xml"/>-->
 
   <!--include ref="compact/rwell_tracker_barrel.xml"/-->
   <include ref="compact/cb_DIRC.xml"/>
