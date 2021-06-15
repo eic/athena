@@ -32,7 +32,7 @@
     <constant name="TrackerBarrelInner_length1"     value="54.0*cm"/>
     <constant name="TrackerBarrelInner_length2"     value="60.0*cm"/>
 
-    <constant name="TrackerBarrelOuter_rmin1"       value="45.3*cm"/>
+    <constant name="TrackerBarrelOuter_rmin1"       value="50.0*cm"/>
     <constant name="TrackerBarrelOuter_rmin2"       value="TrackerBarrelOuter_rmin1 + TrackerBarrelSpaceFrame_width"/>
     <constant name="TrackerBarrelOuter_length1"     value="105.0*cm"/>
     <constant name="TrackerBarrelOuter_length2"     value="114.0*cm"/>
