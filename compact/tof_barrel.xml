@@ -14,7 +14,7 @@
     </comment>
     <constant name="BarrelTOFLayer_rOffset"     value="0.5*cm"/>
 
-    <constant name="BarrelTOF_rmin1"       value="52.0*cm"/>
+    <constant name="BarrelTOF_rmin1"       value="50.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
     <constant name="BarrelTOF_length1"     value="105.0*cm"/>
     <constant name="BarrelTOF_length2"     value="114.0*cm"/>
