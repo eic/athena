@@ -333,6 +333,7 @@
       Outer Tracker Subassembly (group 2)
       -----------------------------------
     </comment>
+    <!--
     <detector
       id="TrackerBarrel_Outer_ID"
       name="TrackerBarrel_Outer"
@@ -397,7 +398,7 @@
         <rphi_layout phi_tilt="10.0*degree" nphi="TrackerBarrelOuter_NModules" phi0="0.0" rc="TrackerBarrelOuter_rmin2" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-    </detector>
+    </detector>-->
 <!--
     <detector
       id="TrackerEndcapP_Outer_ID"
