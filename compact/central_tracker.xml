@@ -68,8 +68,8 @@
     <constant name="TrackerEndcapOuter_rmin2" value="3.18*cm + 1.2*cm * 1"/>
     <constant name="TrackerEndcapOuter_rmin3" value="3.18*cm + 1.2*cm * 2"/>
 
-    <constant name="TrackerEndcapInner_rmax1" value="39.3*cm-5.0*mm"/>
-    <constant name="TrackerEndcapInner_rmax2" value="39.3*cm-5.0*mm"/>
+    <constant name="TrackerEndcapInner_rmax1" value="TrackerBarrelOuter_rmin1-5.0*mm"/>
+    <constant name="TrackerEndcapInner_rmax2" value="TrackerBarrelOuter_rmin1-5.0*mm"/>
 
     <constant name="TrackerEndcapOuter_rmax1"  value="43.23*cm"/>
     <constant name="TrackerEndcapOuter_rmax2"  value="43.23*cm"/>
@@ -398,7 +398,7 @@
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
-<!--
+
     <detector
       id="TrackerEndcapP_Outer_ID"
       name="TrackerEndcapP_Outer"
@@ -511,7 +511,7 @@
           zstart="0.0*mm"
           nmodules="12" dz="2.5 * mm" module="Module3" />
       </layer>
-    </detector>-->
+    </detector>
     <!--
     <detector id="TrackerEndcapP_Outer_ID" 
       name="TrackerEndcapP_Outer" 
