@@ -398,7 +398,7 @@
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
-
+<!--
     <detector
       id="TrackerEndcapP_Outer_ID"
       name="TrackerEndcapP_Outer"
@@ -511,7 +511,7 @@
           zstart="0.0*mm"
           nmodules="12" dz="2.5 * mm" module="Module3" />
       </layer>
-    </detector>
+    </detector>-->
     <!--
     <detector id="TrackerEndcapP_Outer_ID" 
       name="TrackerEndcapP_Outer" 
