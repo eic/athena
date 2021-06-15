@@ -180,7 +180,7 @@
   <!--<include ref="compact/tof_barrel.xml"/>-->
 
   <!--include ref="compact/rwell_tracker_barrel.xml"/-->
-  <include ref="compact/cb_DIRC.xml"/>
+  <!--<include ref="compact/cb_DIRC.xml"/>-->
 
 
   <include ref="compact/solenoid.xml"/>
