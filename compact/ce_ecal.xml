@@ -1,7 +1,15 @@
 <lccdd>
 
   <define>
-    <constant name="EcalEndcapP_rmax" value="Solenoid_rmax "/>
+    <constant name="CrystalEndcap_rmin"  value="VertexTrackerBarrel_rmin"/>
+    <constant name="CrystalEndcap_rmax"  value="EcalEndcapN_rmin"/>
+    <constant name="CrystalBox_x_length" value="20.0*mm"/>
+    <constant name="CrystalBox_y_length" value="20.0*mm"/>
+    <constant name="CrystalBox_z_length" value="200.0*mm"/>
+    <constant name="CrystalBox_offset"   value="0.000001*mm"/>
+    <constant name="CrystalEndcap_x_pos" value="0.0*m"/>
+    <constant name="CrystalEndcap_y_pos" value="0.0*m"/>
+    <constant name="CrystalEndcap_z_pos" value="-EcalEndcapN_zmin"/>
   </define>
 
 
@@ -16,37 +24,33 @@
   <display>
   </display>
 
-  <include ref="ecal_barrel.xml"/>
-  <!--<include ref="ce_ecal.xml"/>-->
-  <include ref="ce_ecal_outer_glass.xml"/>
   <detectors>
-
     <comment>
-      ------------------------------------------
-      Forward (Positive Z) Endcap EM Calorimeter
-      ------------------------------------------
+      -------------------------------
+      Backwards Endcap EM Calorimeter
+      -------------------------------
       A layered EM calorimeter with tungsten and silicon (or scintillator) strips
     </comment>
-    <detector id="ECalEndcapP_ID" 
-      name="EcalEndcapP" 
-      reflect="false" 
+    <detector id="ECalEndcapN_ID" 
+      name="EcalEndcapN" 
       type="refdet_PolyhedraEndcapCalorimeter2" 
-      readout="EcalEndcapPHits" 
+      reflect="true" 
+      readout="EcalEndcapHits" 
       vis="EcalEndcapVis" 
-      calorimeterType="EM_ENDCAP" >
-      <position x="0" y="0" z="-0"/>
+      calorimeterType="EM_ENDCAP">
+      <position x="0" y="0" z="0"/>
       <dimensions 
         numsides="CaloSides" 
-        zmin="EcalEndcapP_zmin" 
-        rmin="EcalEndcapP_rmin" 
-        rmax="EcalEndcapP_rmax " />
-      <layer repeat="EcalEndcapPLayer1_NRepeat">
+        zmin="EcalEndcapN_zmin" 
+        rmin="EcalEndcapN_rmin" 
+        rmax="EcalBarrel_rmin " />
+      <layer repeat="EcalEndcapNLayer1_NRepeat">
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
         <slice material="Copper" thickness="EcalCopperThickness"/>
         <slice material="Kapton" thickness="EcalKaptonThickness"/>
         <slice material="Air" thickness="EcalAir1Thickness"/>
       </layer>
-      <layer repeat="EcalEndcapPLayer2_NRepeat">
+      <layer repeat="EcalEndcapNLayer2_NRepeat">
         <slice material="TungstenDens24" thickness="EcalThinTungstenThickness"/>
         <slice material="Air" thickness="EcalAir2Thickness"/>
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
@@ -54,7 +58,7 @@
         <slice material="Kapton" thickness="EcalKaptonThickness"/>
         <slice material="Air" thickness="EcalAir1Thickness"/>
       </layer>
-      <layer repeat="EcalEndcapPLayer3_NRepeat">
+      <layer repeat="EcalEndcapNLayer3_NRepeat">
         <slice material="TungstenDens24" thickness="EcalThickTungstenThickness"/>
         <slice material="Air" thickness="EcalAir2Thickness"/>
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
@@ -62,6 +66,22 @@
         <slice material="Kapton" thickness="EcalKaptonThickness"/>
         <slice material="Air" thickness="EcalAir1Thickness"/>
       </layer>
+    </detector>
+
+    <comment>
+      -------------------
+      Crystal Calorimeter
+      -------------------
+      Backward (negative pseudorapidity) angle electron detector
+    </comment>
+    <detector 
+      id="CrystalEndcap_ID" 
+      name="ElectronECAL" 
+      type="CrystalCalorimeterEndcap" 
+      readout="CrystalEcalHits" 
+      vis="GreenVis">
+      <position x="CrystalEndcap_x_pos" y="CrystalEndcap_y_pos" z="CrystalEndcap_z_pos" />
+      <dimensions rmin="CrystalEndcap_rmin" rmax="CrystalEndcap_rmax" x="CrystalBox_x_length" y="CrystalBox_y_length" z="CrystalBox_z_length" delta="CrystalBox_offset"/>
     </detector>
   </detectors>
 
@@ -73,7 +93,11 @@
       <id>system:5,module:4,x:32:-16,y:-16</id>
     </readout>
     -->
-    <readout name="EcalEndcapPHits">
+    <readout name="CrystalEcalHits">
+      <segmentation type="CartesianGridXY" grid_size_x="CrystalBox_x_length" grid_size_y="CrystalBox_y_length" />
+      <id>system:8,sector:4,module:20,x:48:-8,y:-8</id>
+    </readout>
+    <readout name="EcalEndcapHits">
       <segmentation type="CartesianGridXY" grid_size_x="3.5 * mm" grid_size_y="3.5 * mm"/>
       <id>system:8,barrel:3,module:4,layer:6,slice:5,x:32:-16,y:-16</id>
     </readout>

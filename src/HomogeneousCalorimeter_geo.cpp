@@ -73,10 +73,10 @@ using namespace dd4hep::detail;
  *       <blocks sector="1"/>
  *         <module sizex="2.05*cm" sizey="2.05*cm" sizez="20*cm" vis="GreenVis" material="PbWO4"/>
  *         <wrapper thickness="0.015*cm" material="Epoxy" vis="WhiteVis"/>
- *         <placement x="1*cm" y="1*cm" z="0"/>
- *         <placement x="-1*cm" y="1*cm" z="0"/>
- *         <placement x="1*cm" y="-1*cm" z="0"/>
- *         <placement x="-1*cm" y="-1*cm" z="0"/>
+ *         <placement x="1*cm" y="1*cm" z="0" id="1"/>
+ *         <placement x="-1*cm" y="1*cm" z="0" id="2"/>
+ *         <placement x="1*cm" y="-1*cm" z="0" id="3"/>
+ *         <placement x="-1*cm" y="-1*cm" z="0" id="4"/>
  *       </blocks>
  *     </placements>
  *   </detector>
@@ -260,21 +260,21 @@ static void add_array(Detector& desc, Volume &env, xml::Collection_t &plm, Sensi
     }
 }
 
-// place modules
+// place modules, id must be provided
 static void add_blocks(Detector& desc, Volume &env, xml::Collection_t &plm, SensitiveDetector &sens, int sid)
 {
     Position modSize;
     auto modVol = build_module(desc, plm, sens, modSize);
     int sector_id = dd4hep::getAttrOrDefault<int>(plm, _Unicode(sector), sid);
 
-    int mid = 1;
-    for (xml::Collection_t pl(plm, _Unicode(placement)); pl; ++pl, ++mid) {
+    for (xml::Collection_t pl(plm, _Unicode(placement)); pl; ++pl) {
         Position pos(dd4hep::getAttrOrDefault<double>(pl, _Unicode(x), 0.),
                      dd4hep::getAttrOrDefault<double>(pl, _Unicode(y), 0.),
                      dd4hep::getAttrOrDefault<double>(pl, _Unicode(z), 0.));
         Position rot(dd4hep::getAttrOrDefault<double>(pl, _Unicode(rotx), 0.),
                      dd4hep::getAttrOrDefault<double>(pl, _Unicode(roty), 0.),
                      dd4hep::getAttrOrDefault<double>(pl, _Unicode(rotz), 0.));
+        auto mid = pl.attr<int>(_Unicode(id));
         Transform3D tr = Translation3D(pos.x(), pos.y(), pos.z())
                        * RotationZYX(rot.z(), rot.y(), rot.x());
         auto modPV = env.placeVolume(modVol, tr);

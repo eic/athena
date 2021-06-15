@@ -1,0 +1,33 @@
+<lccdd>
+  <define>
+  </define>
+
+  <detectors>
+    <detector id="ECalEndcapN_ID"
+      name="EcalEndcapN"
+      type="HomogeneousCalorimeter"
+      readout="EcalEndcapNHits"
+      vis="InvisibleWithDaughters">
+      <dimensions shape="disk" rmax="EcalBarrel_rmin" rmin="VertexTrackerBarrel_rmin" length="40*cm + 1*mm"/>
+      <position x="0" y="0" z="-EcalEndcapN_zmin"/>
+      <rotation x="0" y="0" z="0"/>
+      <placements>
+        <disk rmax="EcalEndcapN_rmin" rmin="VertexTrackerBarrel_rmin" sector="1">
+          <position z="0"/>
+          <module sizex="2.05*cm" sizey="2.05*cm" sizez="20*cm" material="PbWO4" vis="AnlTeal"/>
+        </disk>
+        <disk rmax="EcalBarrel_rmin" rmin="EcalEndcapN_rmin" sector="2">
+          <position z="0"/>
+          <module sizex="4*cm" sizey="4*cm" sizez="40*cm" material="PbGlass" vis="AnlBlue"/>
+        </disk>
+      </placements>
+    </detector>
+  </detectors>
+
+  <readouts>
+    <readout name="EcalEndcapNHits">
+      <id>system:8, sector:4, module:20</id>
+    </readout>
+  </readouts>
+</lccdd>
+
