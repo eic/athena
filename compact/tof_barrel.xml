@@ -60,7 +60,7 @@
         <module_component name="peek2" material="PEEK" sensitive="false"
           width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="2.0*mm" />
       </module>
-      <layer module="BarrelTOF_Module1" id="1" vis="VertexVis">
+      <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope
           inner_r="BarrelTOF_rmin1-BarrelTOFLayer_rOffset"
           outer_r="BarrelTOF_rmin1-BarrelTOFLayer_rOffset + BarrelTOF_thickness-1.0*mm"
