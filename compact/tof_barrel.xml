@@ -23,7 +23,7 @@
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
 
     <comment> TODO: These should be computed </comment>
-    <constant name="BarrelTOF_NModules" value="64"/>
+    <constant name="BarrelTOF_NModules" value="72"/>
 
   </define>
 
