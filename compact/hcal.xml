@@ -45,7 +45,7 @@
       id="HCalEndcapP_ID" 
       name="HcalEndcapP" 
       type="refdet_PolyhedraEndcapCalorimeter2" 
-      readout="HcalEndcapHits" 
+      readout="HcalHadronEndcapHits" 
       vis="HcalEndcapVis" 
       calorimeterType="HAD_ENDCAP"
       reflect="false">
@@ -65,7 +65,7 @@
       id="HCalEndcapN_ID" 
       name="HcalEndcapN" 
       type="refdet_PolyhedraEndcapCalorimeter2" 
-      readout="HcalEndcapHits" 
+      readout="HcalElectronEndcapHits" 
       vis="HcalEndcapVis" 
       calorimeterType="HAD_ENDCAP" reflect="true">
       <position x="0" y="0" z="0"/>
@@ -87,10 +87,13 @@
       <segmentation type="CartesianGridXY" grid_size_x="100* mm" grid_size_y="100 * mm"/>
       <id>system:8,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>
     </readout>
-    <readout name="HcalEndcapHits">
+    <readout name="HcalHadronEndcapHits">
       <segmentation type="CartesianGridXY" grid_size_x="100 * mm" grid_size_y="100 * mm"/>
       <id>system:8,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>
     </readout>
+    <readout name="HcalElectronEndcapHits">
+      <segmentation type="CartesianGridXY" grid_size_x="100 * mm" grid_size_x ="100 * mm"/>
+      <id>system:8,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>
   </readouts>
 
   <plugins>
