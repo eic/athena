@@ -17,13 +17,13 @@
     <constant name="BarrelTOF_rmin1"       value="50.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
     <constant name="BarrelTOF_length1"     value="105.0*cm"/>
-    <constant name="BarrelTOF_length2"     value="114.0*cm"/>
+    <constant name="BarrelTOF_length2"     value="140.0*cm"/>
 
     <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
 
     <comment> TODO: These should be computed </comment>
-    <constant name="BarrelTOF_NModules" value="72"/>
+    <constant name="BarrelTOF_NModules" value="80"/>
 
   </define>
 
