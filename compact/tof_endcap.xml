@@ -7,6 +7,7 @@
       --------------------------
     </comment>
     
+    <constant name="TOFSensor_thickness"         value="0.03*mm"/>
     <constant name="TOFEndcap_thickness"        value="0.25/100*9.37*cm"/>
     <constant name="TOFEndcapService_thickness" value="TOFEndcap_thickness-TOFSensor_thickness"/>
 
