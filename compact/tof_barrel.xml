@@ -44,7 +44,7 @@
       <comment>
         Tracker Barrel Modules
       </comment>
-      <module name="BarrelTOF_Module1" vis="OrangeVis">
+      <module name="BarrelTOF_Module1" vis="PurpleVis">
         <frame  material="CarbonFiber_25percent" vis="BlueGreenVis"
           width="BarrelTOFSpaceFrame_width"
           height="BarrelTOFSpaceFrame_height"
