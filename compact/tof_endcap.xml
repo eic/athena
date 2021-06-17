@@ -45,7 +45,7 @@
       <detector
         id="ForwardTOF_ID"
         name="ForwardTOF"
-        type="ref_DiskTracker"
+        type="refdet_TrapEndcapTracker"
         insideTrackingVolume="true"
         vis="AnlRed"
         reflect="false">
@@ -86,7 +86,7 @@
       <detector
         id="BackwardTOF_ID"
         name="BackwardTOF"
-        type="ref_DiskTracker"
+        type="refdet_TrapEndcapTracker"
         insideTrackingVolume="true"
         vis="AnlRed"
         reflect="true">
