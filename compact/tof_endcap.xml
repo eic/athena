@@ -13,24 +13,24 @@
 
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
-    <constant name="TOFEndcapOuter_zmin"        value="0*cm"/>
-    <constant name="TOFEndcapOuter_zmax"        value="TOFEndcapOuter_zmin + 10*cm"/>
-    <constant name="TOFEndcapOuter_length"        value="TOFEndcapOuter_zmax- TOFEndcapOuter_zmin"/>
-    <constant name="TOFEndcapOuterLayer_dz"        value="TOFEndcapOuter_length/TOFEndcapOuter_nLayers"/>
+    <constant name="TOFEndcap_zmin"        value="0*cm"/>
+    <constant name="TOFEndcap_zmax"        value="TOFEndcap_zmin + 10*cm"/>
+    <constant name="TOFEndcap_length"        value="TOFEndcap_zmax- TOFEndcap_zmin"/>
+    <constant name="TOFEndcapLayer_dz"        value="TOFEndcap_length/TOFEndcap_nLayers"/>
 
-    <constant name="TOFEndcapOuter_rmin1" value="3.18*cm + 1.2*cm * 0"/>
-    <constant name="TOFEndcapOuter_rmin2" value="3.18*cm + 1.2*cm * 1"/>
+    <constant name="TOFEndcap_rmin1" value="3.18*cm + 1.2*cm * 0"/>
+    <constant name="TOFEndcap_rmin2" value="3.18*cm + 1.2*cm * 1"/>
 
-    <constant name="TOFEndcapOuter_rmax1"  value="43.23*cm"/>
-    <constant name="TOFEndcapOuter_rmax2"  value="43.23*cm"/>
+    <constant name="TOFEndcap_rmax1"  value="43.23*cm"/>
+    <constant name="TOFEndcap_rmax2"  value="43.23*cm"/>
     
-    <constant name="TOFEndcapOuterModOpeningAngle" value="30.0*degree"/>
-    <constant name="TOFEndcapOuterMod1_x1"            value="2.0*TOFEndcapOuter_rmin1*sin(TOFEndcapOuterModOpeningAngle/2.0)"/>
-    <constant name="TOFEndcapOuterMod1_x2"            value="2.0*TOFEndcapOuter_rmax1*sin(TOFEndcapOuterModOpeningAngle/2.0)"/>
-    <constant name="TOFEndcapOuterMod1_y"             value="TOFEndcapOuter_rmax1*cos(TOFEndcapOuterModOpeningAngle/2.0) - TOFEndcapOuter_rmin1"/>
-    <constant name="TOFEndcapOuterMod2_x1"            value="2.0*TOFEndcapOuter_rmin2*sin(TOFEndcapOuterModOpeningAngle/2.0)"/>
-    <constant name="TOFEndcapOuterMod2_x2"            value="2.0*TOFEndcapOuter_rmax2*sin(TOFEndcapOuterModOpeningAngle/2.0)"/>
-    <constant name="TOFEndcapOuterMod2_y"             value="TOFEndcapOuter_rmax2*cos(TOFEndcapOuterModOpeningAngle/2.0) - TOFEndcapOuter_rmin2"/>
+    <constant name="TOFEndcapModOpeningAngle" value="30.0*degree"/>
+    <constant name="TOFEndcapMod1_x1"            value="2.0*TOFEndcap_rmin1*sin(TOFEndcapModOpeningAngle/2.0)"/>
+    <constant name="TOFEndcapMod1_x2"            value="2.0*TOFEndcap_rmax1*sin(TOFEndcapModOpeningAngle/2.0)"/>
+    <constant name="TOFEndcapMod1_y"             value="TOFEndcap_rmax1*cos(TOFEndcapModOpeningAngle/2.0) - TOFEndcap_rmin1"/>
+    <constant name="TOFEndcapMod2_x1"            value="2.0*TOFEndcap_rmin2*sin(TOFEndcapModOpeningAngle/2.0)"/>
+    <constant name="TOFEndcapMod2_x2"            value="2.0*TOFEndcap_rmax2*sin(TOFEndcapModOpeningAngle/2.0)"/>
+    <constant name="TOFEndcapMod2_y"             value="TOFEndcap_rmax2*cos(TOFEndcapModOpeningAngle/2.0) - TOFEndcap_rmin2"/>
     
     <constant name="ForwardTOF_zmin" value="BarrelTracking_length/2.0 + ForwardTracking_length + ForwardRICH_length + ForwardTRD_length"/>
     <constant name="ForwardTOF_rmin" value="ForwardPID_rmin1"/>
@@ -50,34 +50,34 @@
         vis="AnlRed"
         reflect="false">
         <module name="Module1" vis="AnlProcess_Blue">
-          <trd x1="TOFEndcapOuterMod1_x1/2.0" x2="TOFEndcapOuterMod1_x2/2.0" z="TOFEndcapOuterMod1_y/2"/>
+          <trd x1="TOFEndcapMod1_x1/2.0" x2="TOFEndcapMod1_x2/2.0" z="TOFEndcapMod1_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
         </module>
         <module name="Module2" vis="AnlProcess_Blue">
-          <trd x1="TOFEndcapOuterMod2_x1/2.0" x2="TOFEndcapOuterMod2_x2/2.0" z="TOFEndcapOuterMod2_y/2"/>
+          <trd x1="TOFEndcapMod2_x1/2.0" x2="TOFEndcapMod2_x2/2.0" z="TOFEndcapMod2_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
         </module>
         <layer id="1">
           <envelope  vis="AnlRed"
-            rmin="TOFEndcapOuter_rmin1"
-            rmax="TOFEndcapOuter_rmax1"
-            length="TOFEndcapOuterLayer_dz"
+            rmin="TOFEndcap_rmin1"
+            rmax="TOFEndcap_rmax1"
+            length="TOFEndcapLayer_dz"
             zstart="ForwardTOF_zmin" />
           <ring vis="AnlRed"
-            r="TOFEndcapOuter_rmin1+TOFEndcapOuterMod1_y/2.0"
+            r="TOFEndcap_rmin1+TOFEndcapMod1_y/2.0"
             zstart="0.0*mm"
             nmodules="12" dz="2.5 * mm" module="Module1" />
         </layer>
         <layer id="2">
           <envelope  vis="AnlRed"
-            rmin="TOFEndcapOuter_rmin2"
-            rmax="TOFEndcapOuter_rmax2"
-            length="TOFEndcapOuterLayer_dz"
-            zstart="ForwardTOF_zmin + TOFEndcapOuterLayer_dz" />
+            rmin="TOFEndcap_rmin2"
+            rmax="TOFEndcap_rmax2"
+            length="TOFEndcapLayer_dz"
+            zstart="ForwardTOF_zmin + TOFEndcapLayer_dz" />
           <ring vis="AnlRed"
-            r="TOFEndcapOuter_rmin2+TOFEndcapOuterMod2_y/2.0"
+            r="TOFEndcap_rmin2+TOFEndcapMod2_y/2.0"
             zstart="0.0*mm"
             nmodules="12" dz="2.5 * mm" module="Module2" />
         </layer>
@@ -91,34 +91,34 @@
         vis="AnlRed"
         reflect="true">
         <module name="Module1" vis="AnlProcess_Blue">
-          <trd x1="TOFEndcapOuterMod1_x1/2.0" x2="TOFEndcapOuterMod1_x2/2.0" z="TOFEndcapOuterMod1_y/2"/>
+          <trd x1="TOFEndcapMod1_x1/2.0" x2="TOFEndcapMod1_x2/2.0" z="TOFEndcapMod1_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
         </module>
         <module name="Module2" vis="AnlProcess_Blue">
-          <trd x1="TOFEndcapOuterMod2_x1/2.0" x2="TOFEndcapOuterMod2_x2/2.0" z="TOFEndcapOuterMod2_y/2"/>
+          <trd x1="TOFEndcapMod2_x1/2.0" x2="TOFEndcapMod2_x2/2.0" z="TOFEndcapMod2_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
         </module>
         <layer id="1">
           <envelope  vis="AnlRed"
-            rmin="TOFEndcapOuter_rmin1 + 0 * 1.2*cm"
-            rmax="TOFEndcapOuter_rmax1"
-            length="TOFEndcapOuterLayer_dz"
+            rmin="TOFEndcap_rmin1 + 0 * 1.2*cm"
+            rmax="TOFEndcap_rmax1"
+            length="TOFEndcapLayer_dz"
             zstart="BackwardTOF_zmin" />
           <ring vis="AnlRed"
-            r="TOFEndcapOuter_rmin1+TOFEndcapOuterMod1_y/2.0"
+            r="TOFEndcap_rmin1+TOFEndcapMod1_y/2.0"
             zstart="0.0*mm"
             nmodules="12" dz="2.5 * mm" module="Module1" />
         </layer>
         <layer id="2">
           <envelope  vis="AnlRed"
-            rmin="TOFEndcapOuter_rmin2"
-            rmax="TOFEndcapOuter_rmax2"
-            length="TOFEndcapOuterLayer_dz"
-            zstart="BackwardTOF_zmin + TOFEndcapOuterLayer_dz" />
+            rmin="TOFEndcap_rmin2"
+            rmax="TOFEndcap_rmax2"
+            length="TOFEndcapLayer_dz"
+            zstart="BackwardTOF_zmin + TOFEndcapLayer_dz" />
           <ring vis="AnlRed"
-            r="TOFEndcapOuter_rmin2+TOFEndcapOuterMod2_y/2.0"
+            r="TOFEndcap_rmin2+TOFEndcapMod2_y/2.0"
             zstart="0.0*mm"
             nmodules="12" dz="2.5 * mm" module="Module2" />
         </layer>
@@ -137,7 +137,7 @@
         vis="AnlOrange"
         inner_z="ForwardTOF_zmin" 
         inner_r="ForwardTOF_rmin" 
-        outer_r="ForwardTOF_rmax">
+        _r="ForwardTOF_rmax">
         <slice material="Air" thickness="ForwardTOF_length/2.0" vis="AnlOrange" />
       </layer>
     </detector>
@@ -154,7 +154,7 @@
         vis="AnlOrange"
         inner_z="BackwardTOF_zmin" 
         inner_r="BackwardTOF_rmin" 
-        outer_r="BackwardTOF_rmax">
+        _r="BackwardTOF_rmax">
         <slice material="Air" thickness="BackwardTOF_length/2.0" vis="AnlOrange" />
       </layer>
     </detector>-->
