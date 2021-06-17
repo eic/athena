@@ -13,7 +13,7 @@
 
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
-    <constant name="TOFEndcapOuter_zmin"        value="TOFBarrelOuter_length/2.0"/>
+    <constant name="TOFEndcapOuter_zmin"        value="0*cm"/>
     <constant name="TOFEndcapOuter_zmax"        value="TOFEndcapOuter_zmin + 10*cm"/>
     <constant name="TOFEndcapOuter_length"        value="TOFEndcapOuter_zmax- TOFEndcapOuter_zmin"/>
     <constant name="TOFEndcapOuterLayer_dz"        value="TOFEndcapOuter_length/TOFEndcapOuter_nLayers"/>
