@@ -189,7 +189,7 @@
   <!--include ref="compact/ce_GEM.xml"/-->
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
   <include ref="compact/ce_mrich.xml"/>
-  <include ref="compact/tof_endcap2.xml"/>
+  <include ref="compact/tof_endcap.xml"/>
   <include ref="compact/forward_trd.xml"/>
   <include ref="compact/forward_rich.xml"/>
 
