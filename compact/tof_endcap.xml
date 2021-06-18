@@ -63,7 +63,7 @@
           <envelope  vis="AnlRed"
             rmin="ForwardTOF_rmin1"
             rmax="ForwardTOF_rmax1"
-            length="ForwardTOFLayer_dz"
+            length="ForwardTOF_dz"
             zstart="ForwardTOF_zmin" />
           <ring vis="AnlRed"
             r="ForwardTOF_rmin1+ForwardTOFMod1_y/2.0"
@@ -74,8 +74,8 @@
           <envelope  vis="AnlRed"
             rmin="ForwardTOF_rmin2"
             rmax="ForwardTOF_rmax2"
-            length="ForwardTOFLayer_dz"
-            zstart="ForwardTOF_zmin + ForwardTOFLayer_dz" />
+            length="ForwardTOF_dz"
+            zstart="ForwardTOF_zmin + ForwardTOF_dz" />
           <ring vis="AnlRed"
             r="ForwardTOF_rmin2+ForwardTOFMod2_y/2.0"
             zstart="0.0*mm"
@@ -116,7 +116,7 @@
             rmin="BackwardTOF_rmin2"
             rmax="BackwardTOF_rmax2"
             length="BackwardTOF_dz"
-            zstart="BackwardTOF_zmin + BackwardTOFLayer_dz" />
+            zstart="BackwardTOF_zmin + BackwardTOF_dz" />
           <ring vis="AnlRed"
             r="BackwardTOF_rmin2+BackwardTOFMod2_y/2.0"
             zstart="0.0*mm"
