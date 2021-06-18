@@ -47,14 +47,14 @@
         name="ForwardTOF"
         type="refdet_TrapEndcapTracker"
         readout="TOFEndcapHits"
-        vis="AnlRed"
+        vis="TOFVis"
         reflect="false">
-        <module name="Module1" vis="PurpleVis">
+        <module name="Module1" vis="OrgangeVis">
           <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
-        <module name="Module2" vis="PurpleVis">
+        <module name="Module2" vis="OrgangeVis">
           <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
@@ -88,14 +88,14 @@
         name="BackwardTOF"
         type="refdet_TrapEndcapTracker"
         readout="TOFEndcapHits"
-        vis="AnlRed"
+        vis="TOFVis"
         reflect="true">
-        <module name="Module1" vis="PurpleVis">
+        <module name="Module1" vis="OrgangeVis">
           <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
-        <module name="Module2" vis="PurpleVis">
+        <module name="Module2" vis="OrgangeVis">
           <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
