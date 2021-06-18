@@ -46,6 +46,7 @@
         id="ForwardTOF_ID"
         name="ForwardTOF"
         type="refdet_TrapEndcapTracker"
+        readout="TOFEndcapHits"
         vis="AnlRed"
         reflect="false">
         <module name="Module1" vis="AnlProcess_Blue">
@@ -86,6 +87,7 @@
         id="BackwardTOF_ID"
         name="BackwardTOF"
         type="refdet_TrapEndcapTracker"
+        readout="TOFEndcapHits"
         vis="AnlRed"
         reflect="true">
         <module name="Module1" vis="AnlProcess_Blue">
@@ -158,5 +160,13 @@
     </detector>-->
 
   </detectors>
+  
+  <readouts>
+    <readout name="TOFEndcapHits">
+      <segmentation type="CartesianGridXY" grid_size_x="0.20*mm" grid_size_y="0.20*mm" />
+      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
 
 </lccdd>
