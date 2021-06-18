@@ -14,7 +14,7 @@
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
     <constant name="TOFEndcap_zmin"        value="0*cm"/>
-    <constant name="TOFEndcap_zmax"        value="TOFEndcap_zmin + 10*cm"/>
+    <constant name="TOFEndcap_zmax"        value="TOFEndcap_zmin + ForwardTOF_length"/>
     <constant name="TOFEndcap_length"        value="TOFEndcap_zmax- TOFEndcap_zmin"/>
     <constant name="TOFEndcapLayer_dz"        value="TOFEndcap_length/TOFEndcap_nLayers"/>
 
