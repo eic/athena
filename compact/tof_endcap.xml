@@ -13,7 +13,7 @@
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
     <constant name="ForwardTOF_zmin"            value="BarrelTracking_length/2.0 + ForwardTracking_length + ForwardRICH_length + ForwardTRD_length"/>
-    <constant name="ForwardTOF_dz"              value="TOFEndcap_length/TOFEndcap_nLayers"/>
+    <constant name="ForwardTOF_dz"              value="ForwardTOF_length/TOFEndcap_nLayers"/>
     <constant name="ForwardTOF_rmin1"           value="3.18*cm + 1.2*cm * 0"/>
     <constant name="ForwardTOF_rmin2"           value="3.18*cm + 1.2*cm * 1"/>
     <constant name="ForwardTOF_rmax1"           value="43.23*cm"/>
@@ -27,7 +27,7 @@
     <constant name="ForwardTOFMod2_y"           value="ForwardTOF_rmax2*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin2"/>
 
     <constant name="BackwardTOF_zmin"           value="BarrelTracking_length/2.0 + BackwardTracking_length + BackwardCherenkov_length "/>
-    <constant name="BackwardTOF_dz"             value="TOFEndcap_length/TOFEndcap_nLayers"/>
+    <constant name="BackwardTOF_dz"             value="BackwardTOF_length/TOFEndcap_nLayers"/>
     <constant name="BackwardTOF_rmin1"          value="3.18*cm + 1.2*cm * 0"/>
     <constant name="BackwardTOF_rmin2"          value="3.18*cm + 1.2*cm * 1"/>
     <constant name="BackwardTOF_rmax1"          value="43.23*cm"/>
