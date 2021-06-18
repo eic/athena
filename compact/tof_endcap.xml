@@ -13,11 +13,11 @@
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
     <constant name="ForwardTOF_zmin"            value="BarrelTracking_length/2.0 + ForwardTracking_length + ForwardRICH_length + ForwardTRD_length"/>
-    <constant name="ForwardTOF_dz"              value="ForwardTOF_length/TOFEndcap_nLayers"/>
-    <constant name="ForwardTOF_rmin1"           value="3.18*cm + 1.2*cm * 0"/>
-    <constant name="ForwardTOF_rmin2"           value="3.18*cm + 1.2*cm * 1"/>
-    <constant name="ForwardTOF_rmax1"           value="43.23*cm"/>
-    <constant name="ForwardTOF_rmax2"           value="43.23*cm"/>
+    <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
+    <constant name="ForwardTOF_rmin1"           value="ForwardPID_rmin1"/>
+    <constant name="ForwardTOF_rmin2"           value="ForwardPID_rmin1"/>
+    <constant name="ForwardTOF_rmax1"           value="Solenoid_rmin"/>
+    <constant name="ForwardTOF_rmax2"           value="Solenoid_rmin"/>
     <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
     <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
     <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
@@ -27,11 +27,11 @@
     <constant name="ForwardTOFMod2_y"           value="ForwardTOF_rmax2*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin2"/>
 
     <constant name="BackwardTOF_zmin"           value="BarrelTracking_length/2.0 + BackwardTracking_length + BackwardCherenkov_length "/>
-    <constant name="BackwardTOF_dz"             value="BackwardTOF_length/TOFEndcap_nLayers"/>
-    <constant name="BackwardTOF_rmin1"          value="3.18*cm + 1.2*cm * 0"/>
-    <constant name="BackwardTOF_rmin2"          value="3.18*cm + 1.2*cm * 1"/>
-    <constant name="BackwardTOF_rmax1"          value="43.23*cm"/>
-    <constant name="BackwardTOF_rmax2"          value="43.23*cm"/>
+    <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
+    <constant name="BackwardTOF_rmin1"          value="ForwardPID_rmin1"/>
+    <constant name="BackwardTOF_rmin2"          value="ForwardPID_rmin1"/>
+    <constant name="BackwardTOF_rmax1"          value="BarrelTracking_rmax"/>
+    <constant name="BackwardTOF_rmax2"          value="BarrelTracking_rmax"/>
     <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
     <constant name="BackwardTOFMod1_x1"         value="2.0*BackwardTOF_rmin1*sin(BackwardTOFModOpeningAngle/2.0)"/>
     <constant name="BackwardTOFMod1_x2"         value="2.0*BackwardTOF_rmax1*sin(BackwardTOFModOpeningAngle/2.0)"/>
@@ -49,18 +49,18 @@
         readout="TOFEndcapHits"
         vis="AnlRed"
         reflect="false">
-        <module name="Module1" vis="AnlProcess_Blue">
+        <module name="Module1" vis="PurpleVis">
           <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
           <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
-        <module name="Module2" vis="AnlProcess_Blue">
+        <module name="Module2" vis="PurpleVis">
           <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
         <layer id="1">
-          <envelope  vis="AnlRed"
+          <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin1"
             rmax="ForwardTOF_rmax1"
             length="ForwardTOF_dz"
@@ -71,7 +71,7 @@
             nmodules="12" dz="2.5 * mm" module="Module1" />
         </layer>
         <layer id="2">
-          <envelope  vis="AnlRed"
+          <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin2"
             rmax="ForwardTOF_rmax2"
             length="ForwardTOF_dz"
@@ -90,18 +90,18 @@
         readout="TOFEndcapHits"
         vis="AnlRed"
         reflect="true">
-        <module name="Module1" vis="AnlProcess_Blue">
+        <module name="Module1" vis="PurpleVis">
           <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
-        <module name="Module2" vis="AnlProcess_Blue">
+        <module name="Module2" vis="PurpleVis">
           <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
           <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
         </module>
         <layer id="1">
-          <envelope  vis="AnlRed"
+          <envelope  vis="TOFVis"
             rmin="BackwardTOF_rmin1 + 0 * 1.2*cm"
             rmax="BackwardTOF_rmax1"
             length="ForwardTOF_dz"
@@ -112,7 +112,7 @@
             nmodules="12" dz="2.5 * mm" module="Module1" />
         </layer>
         <layer id="2">
-          <envelope  vis="AnlRed"
+          <envelope  vis="TOFVis"
             rmin="BackwardTOF_rmin2"
             rmax="BackwardTOF_rmax2"
             length="BackwardTOF_dz"
