@@ -46,7 +46,6 @@
         id="ForwardTOF_ID"
         name="ForwardTOF"
         type="refdet_TrapEndcapTracker"
-        insideTrackingVolume="true"
         vis="AnlRed"
         reflect="false">
         <module name="Module1" vis="AnlProcess_Blue">
@@ -87,7 +86,6 @@
         id="BackwardTOF_ID"
         name="BackwardTOF"
         type="refdet_TrapEndcapTracker"
-        insideTrackingVolume="true"
         vis="AnlRed"
         reflect="true">
         <module name="Module1" vis="AnlProcess_Blue">
