@@ -16,8 +16,8 @@
 
     <constant name="BarrelTOF_rmin1"       value="50.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
-    <constant name="BarrelTOF_length1"     value="128.0*cm"/>
-    <constant name="BarrelTOF_length2"     value="136.0*cm"/>
+    <constant name="BarrelTOF_length1"     value="192.0*cm"/>
+    <constant name="BarrelTOF_length2"     value="200.0*cm"/>
 
     <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
