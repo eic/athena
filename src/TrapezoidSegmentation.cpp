@@ -10,38 +10,40 @@
 using namespace dd4hep::DDSegmentation;
 
 namespace athena::seg {
-  class TrapezoidGrid: public Segmentation {
+  class TrapezoidGridYZ: public Segmentation {
     public:
       // Default constructor used by derived classes passing the encoding string
-      TrapezoidGrid(const std::string& cellEncoding = "")
+      TrapezoidGridYZ(const std::string& cellEncoding = "")
         : Segmentation(cellEncoding)
       {
         // define type and description
-        _type = "TrapezoidGrid";
+        _type = "TrapezoidGridYZ";
         _description = "Trapezoid segmentation in the local YZ-plane";
         registerParameters();
       }
 
       // Default constructor used by derived classes passing an existing decoder
-      TrapezoidGrid(const BitFieldCoder* decoder)
+      TrapezoidGridYZ(const BitFieldCoder* decoder)
         : Segmentation(decoder)
       {
         // define type and description
-        _type = "TrapezoidGrid";
+        _type = "TrapezoidGridYZ";
         _description = "Trapezoid segmentation in the local YZ-plane";
         registerParameters();
       }
 
       // Destructor
-      virtual ~TrapezoidGrid() {}
+      virtual ~TrapezoidGridYZ() {}
 
       void registerParameters()
       {
         // @TODO: register all necessary parameters
         // mandatory
         registerParameter("grid_size_y", "Cell size in Y", _gridSizeY, 1., SegmentationParameter::LengthUnit);
+        registerParameter("grid_size_z", "Cell size in H", _gridSizeZ, 1., SegmentationParameter::LengthUnit);
         // optional
         registerIdentifier("identifier_y", "Cell ID identifier for Y", _yId, "y");
+        registerIdentifier("identifier_z", "Cell ID identifier for Z", _zId, "z");
       }
 
       // override
@@ -89,19 +91,25 @@ namespace athena::seg {
 
       // public methods to get member value
       double gridSizeY() const { return _gridSizeY; }
+      double gridSizeZ() const { return _gridSizeZ; }
       const std::string& fieldNameY() const { return _yId; }
+      const std::string& fieldNameZ() const { return _zId; }
       // public methods to set member value
       void setGridSizeY(double cellSize) { _gridSizeY = cellSize; }
+      void setGridSizeZ(double cellSize) { _gridSizeZ = cellSize; }
       void setFieldNameY(const std::string& fieldName) { _yId = fieldName; }
+      void setFieldNameZ(const std::string& fieldName) { _zId = fieldName; }
 
     protected:
       // @TODO: add parameters accordingly
       double _gridSizeY;
+      double _gridSizeZ;
       std::string _yId;
+      std::string _zId;
 
+  }; // class TrapezoidGridYZ
 
-  }; // class TrapezoidGrid
 } // namespace athena::seg
 
-DECLARE_SEGMENTATION(TrapezoidGrid, new dd4hep::SegmentationWrapper<athena::seg::TrapezoidGrid>)
+DECLARE_SEGMENTATION(TrapezoidGridYZ, new dd4hep::SegmentationWrapper<athena::seg::TrapezoidGridYZ>)
 
