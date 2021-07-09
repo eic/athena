@@ -5,10 +5,7 @@
   <include ref="ecal_barrel_hybrid.xml"/>
 
   <comment>electron endcap ecal</comment>
-  <!--<include ref="ce_ecal.xml"/>-->
-  <!--
-  <include ref="ce_ecal_crystal_glass.xml"/>
-  -->
+  <include ref="ecal_endcapn_crystal_glass.xml"/>
 
   <comment>hadron endcap ecal</comment>
   <include ref="ci_ecal.xml"/>
