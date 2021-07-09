@@ -1,7 +1,7 @@
 <lccdd>
 
     <display>
-      <vis name="EcalBarrelEnvelope_vis" alpha="0.9" r="0.99" g="0.5" b="0" showDaughters="true" visible="false" />
+      <vis name="EcalBarrelEnvelope_vis" alpha="0.9" r="0.99" g="0.5" b="0" showDaughters="false" visible="true" />
       <vis name="EcalBarrelStave_vis"    alpha="0.9" r="0.99" g="0.5" b="0" showDaughters="false" visible="true" />
       <vis name="EcalBarrelFiberLayerVis" alpha="1.0" r="102/256" g="102/256" b="102/256" showDaughters="false" visible="false" />
       <vis name="EcalBarrelFiberVis" alpha="1.0" r="0/256" g="130/256" b="202/256" showDaughters="false" visible="false" />
