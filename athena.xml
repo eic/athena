@@ -196,9 +196,7 @@
   <include ref="compact/solenoid.xml"/>
 
   <include ref="compact/ecal.xml"/>
-  <!--
   <include ref="compact/hcal.xml"/>
-  -->
   <!--include ref="compact/ce_GEM.xml"/-->
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
   <include ref="compact/ce_mrich.xml"/>
