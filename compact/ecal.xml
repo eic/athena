@@ -2,7 +2,9 @@
 
   <comment>barrel ecal</comment>
   <!-- <include ref="ecal_barrel.xml"/> -->
+  <!--
   <include ref="ecal_barrel_hybrid.xml"/>
+  -->
 
   <comment>electron endcap ecal</comment>
   <include ref="ecal_endcapn_crystal_glass.xml"/>
