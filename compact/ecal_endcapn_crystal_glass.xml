@@ -23,7 +23,7 @@
       <rotation x="0" y="0" z="0"/>
       <placements>
         <lines sector="1" mirrorx="true" mirrory="true">
-          <module sizex="CrystalModule_sx" sizey="CrystalModule_sy" sizez="CrystalModule_sz" material="PbWO4" vis="AnlTeal"/>
+          <module sizex="CrystalModule_sx" sizey="CrystalModule_sy" sizez="CrystalModule_sz" material="PbWO4" vis="InvisibleNoDaughters"/>
           <wrapper thickness="CrystalModule_wrap" material="Epoxy" vis="WhiteVis"/>
           <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*1/2." z="CrystalModule_z0" begin="7" nmods="17"/>
           <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*3/2." z="CrystalModule_z0" begin="7" nmods="17"/>
@@ -51,7 +51,7 @@
           <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*47/2." z="CrystalModule_z0" begin="0" nmods="6"/>
         </lines>
         <lines sector="2" mirrorx="true" mirrory="true">
-          <module sizex="GlassModule_sx" sizey="GlassModule_sy" sizez="GlassModule_sz" material="PbGlass" vis="AnlBlue"/>
+          <module sizex="GlassModule_sx" sizey="GlassModule_sy" sizez="GlassModule_sz" material="PbGlass" vis="InvisibleNoDaughters"/>
           <wrapper thickness="GlassModule_wrap" material="Epoxy" vis="WhiteVis"/>
           <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*1/2." z="GlassModule_z0" begin="12" nmods="11"/>
           <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*3/2." z="GlassModule_z0" begin="12" nmods="11"/>

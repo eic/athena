@@ -16,6 +16,7 @@
     <vis name="AnlDelta_Blue"   alpha="1" r="11/256" g="31/256" b="143/256"/>
 
     <vis name="AnlRed_1"        alpha="0.5" r="205/256" g="32/256" b="44/256"/>
+    <vis name="AnlTeal_1"         alpha="1" r="0/256" g="161/256" b="156/256" showDaughters="false"/>
 
     <comment>Tracker_Layer_Vis is AnlGold</comment>
     <vis name="Tracker_Layer_Vis"  alpha="0.5" r="248/256" g="178/256" b="0/256" showDaughters="true" />
