@@ -108,7 +108,7 @@
   </display>
 
   <comment> Include the IP components first </comment>
-  <include ref="ip6/forward_ion_beamline.xml"/>
+  <!--<include ref="ip6/forward_ion_beamline.xml"/>-->
   <include ref="ip6/beampipe.xml"/>
 
   <detectors>
@@ -187,34 +187,34 @@
 
   <include ref="compact/central_tracker.xml"/>
 
-  <include ref="compact/tof_barrel.xml"/>
+  <!--<include ref="compact/tof_barrel.xml"/>-->
 
   <!--include ref="compact/rwell_tracker_barrel.xml"/-->
-  <include ref="compact/cb_DIRC.xml"/>
+  <!--<include ref="compact/cb_DIRC.xml"/>-->
 
   <!-- When changing magnet, also select dimensions in definitions.xml. -->
   <include ref="compact/solenoid.xml"/>
 
-  <include ref="compact/ci_ecal.xml"/>
+  <!--<include ref="compact/ci_ecal.xml"/>-->
   <!--<include ref="compact/ci_ecal_shashlik.xml"/>-->
   <!--<include ref="compact/ce_ecal.xml"/>-->
-  <include ref="compact/ce_ecal_crystal_glass.xml"/>
+  <!--<include ref="compact/ce_ecal_crystal_glass.xml"/>-->
   <!-- <include ref="compact/ecal_barrel.xml"/> -->
   <!-- <include ref="compact/ecal_barrel_hybrid.xml"/> -->
-  <include ref="compact/ecal_barrel_interlayers.xml"/>
+  <!--<include ref="compact/ecal_barrel_interlayers.xml"/>-->
 
-  <include ref="compact/hcal.xml"/>
+  <!--<include ref="compact/hcal.xml"/>-->
   <!--include ref="compact/ce_GEM.xml"/-->
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
-  <include ref="compact/ce_mrich.xml"/>
-  <include ref="compact/tof_endcap.xml"/>
-  <include ref="compact/forward_trd.xml"/>
-  <include ref="compact/gaseous_rich.xml"/>
+  <!--<include ref="compact/ce_mrich.xml"/>-->
+  <!--<include ref="compact/tof_endcap.xml"/>-->
+  <!--<include ref="compact/forward_trd.xml"/>-->
+  <!--<include ref="compact/gaseous_rich.xml"/>-->
 
-  <include ref="ip6/B0_tracker.xml"/>
-  <include ref="ip6/far_forward_offM_tracker.xml"/>
-  <include ref="ip6/far_forward_romanpots.xml"/>
-  <include ref="ip6/far_forward_detectors.xml"/>
+  <!--<include ref="ip6/B0_tracker.xml"/>-->
+  <!--<include ref="ip6/far_forward_offM_tracker.xml"/>-->
+  <!--<include ref="ip6/far_forward_romanpots.xml"/>-->
+  <!--<include ref="ip6/far_forward_detectors.xml"/>-->
 
   <!--
   <include ref="compact/mm_tracker_barrel.xml"/>
