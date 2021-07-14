@@ -17,6 +17,8 @@
 
   <define>
 
+    <constant name="TrackerBarrel_SimplifyGeometry"  value="0"/>
+
     <constant name="TrackerBarrelSpaceFrame_width"   value="40.0*mm"/>
     <constant name="TrackerBarrelSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
     <constant name="TrackerSensor_thickness"         value="0.03*mm"/>
@@ -45,6 +47,8 @@
     <comment>
       Here we are assuming the two endcaps (P and N) are symmetric.
     </comment>
+    <constant name="TrackerEndcap_SimplifyGeometry" value="0"/>
+
     <constant name="TrackerEndcap_thickness"        value="0.25/100*9.37*cm"/>
     <constant name="TrackerEndcapService_thickness" value="TrackerEndcap_thickness-TrackerSensor_thickness"/>
 
@@ -165,7 +169,8 @@
       name="TrackerBarrel_Inner"
       type="athena_TrackerBarrel"
       readout="TrackerBarrelHits"
-      insideTrackingVolume="true">
+      insideTrackingVolume="true"
+      simplified="TrackerBarrel_SimplifyGeometry">
       <dimensions
         rmin="TrackerBarrelInner_rmin1-TrackerBarrelLayer_rOffset"
         rmax="TrackerBarrelInner_rmin2-TrackerBarrelLayer_rOffset + TrackerBarrelInner_thickness"

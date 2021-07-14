@@ -37,9 +37,13 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   //Assembly                     assembly(det_name);
   map<string, Volume>          volumes;
   map<string, Placements>      sensitives;
-  map<string, xml_h>      xmleles;
+  map<string, xml_h>           xmleles;
   PlacedVolume                 pv;
   dd4hep::xml::Dimension dimensions(x_det.dimensions());
+
+  // Simplified model ignores staves and modules
+  bool simplified = dd4hep::getAttrOrDefault(x_det, _Unicode(simplified), false);
+  printout(WARNING, "BarrelTrackerWithFrame", "Using simplified tracker geometry.");
 
   Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
   detWorldExt->addType("barrel", "detector");
@@ -71,7 +75,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 //Carbon fleece            40
 //Carbon paper             30
 //Polyimide                64
-//Water                    
+//Water
 //Carbon fibre             120
 //Eccobond-45              100
 
@@ -80,7 +84,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   sens.setType("tracker");
 
   // loop over the modules
-  for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
+  for (xml_coll_t mi(x_det, _U(module)); mi && ! simplified; ++mi) {
     xml_comp_t x_mod = mi;
     xml_comp_t m_env = x_mod.child(_U(frame));
     string     m_nam = x_mod.nameStr();
@@ -191,6 +195,10 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     //layerExtension->addValue(0, "z_max", "envelope");
     //layerExtension->addType("axes", "definitions", "XzY");
     lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
+
+    if (simplified) {
+      continue;
+    }
 
     // Z increment for module placement along Z axis.
     // Adjust for z0 at center of module rather than
