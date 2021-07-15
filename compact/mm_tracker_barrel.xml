@@ -4,18 +4,108 @@
 
   <define>
 
-    <constant name="MMTrackerBarrel_thickness" value="TrackerBarrel_rmax - TrackerBarrel_rmax"/>
+    <constant name="MMTrackerBarrel_thickness" value="TrackerBarrel_rmax - TrackerBarrel_rmin"/>
     <constant name="MMTrackerBarrel_NLayers" value="5"/>
-    <constant name="MMTrackerBarrel_delta" value="MMTrackerBarrel_thickness/MMTrackerBarrel_NLayers"/>
+    
+    
 
-    <constant name="MMTrackerBarrelLayer1_rmin"          value="800.0 * mm"/>
-    <constant name="MMTrackerBarrelLayer1_length"        value="100.0 * mm"/>
+    <comment> global constants </comment>
+    <constant name="MMTrackerBarrel_maxLength"        value="700.0 * mm"/>
+    <constant name="MMTrackerBarrel_maxWidth"         value="500.0 * mm"/>
+    <constant name="MMTrackerBarrel_spacer"           value="20.0 * mm"/>
+    <constant name="MMTrackerBarrel_gasGap"           value="3.0 * mm"/>
+    <constant name="MMTrackerBarrel_support"          value="20.0 * mm"/>
+    
+    <comment> constants per layers </comment>
+    <constant name="MMTrackerBarrelLayer1_rmin"          value="465.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer1_dz"            value="0"/>
+    <constant name="MMTrackerBarrelLayer1_phi0"          value="0"/>
     <constant name="MMTrackerBarrelLayer1_thickness"     value="10.0 * mm"/>
-    <constant name="MMTrackerBarrel_NZModules"           value="floor(BarrelTracking_length/MMTrackerBarrelLayer1_length)"/>
+    <constant name="MMTrackerBarrelLayer1_NTiles"        value="ceil(MMTrackerBarrelLayer1_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer1_TileWidth"        value="(MMTrackerBarrelLayer1_rmin * 2*pi - MMTrackerBarrelLayer1_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer1_NTiles" />
+    <constant name="MMTrackerBarrelLayer1_length"        value="MMTrackerBarrel_maxLength"/>
+
+    <constant name="MMTrackerBarrelLayer2_rmin"          value="495.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer2_dz"            value="MMTrackerBarrel_support"/>
+    <constant name="MMTrackerBarrelLayer2_phi0"          value="15*degree"/>
+    <constant name="MMTrackerBarrelLayer2_thickness"     value="10.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer2_NTiles"        value="ceil(MMTrackerBarrelLayer2_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer2_TileWidth"        value="(MMTrackerBarrelLayer2_rmin * 2*pi - MMTrackerBarrelLayer2_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer2_NTiles" />
+    <constant name="MMTrackerBarrelLayer2_length"        value="MMTrackerBarrel_maxLength"/>
+    
+    <constant name="MMTrackerBarrelLayer3_rmin"          value="690.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer3_dz"            value="MMTrackerBarrel_support"/>
+    <constant name="MMTrackerBarrelLayer3_phi0"          value="30*degree"/>
+    <constant name="MMTrackerBarrelLayer3_thickness"     value="10.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer3_NTiles"        value="ceil(MMTrackerBarrelLayer3_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer3_TileWidth"        value="(MMTrackerBarrelLayer3_rmin * 2*pi - MMTrackerBarrelLayer3_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer3_NTiles" />
+    <constant name="MMTrackerBarrelLayer3_length"        value="MMTrackerBarrel_maxLength"/>
+  
+        
+    <constant name="MMTrackerBarrelLayer4_rmin"          value="720.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer4_dz"            value="0"/>
+    <constant name="MMTrackerBarrelLayer4_phi0"          value="45*degree"/>
+    <constant name="MMTrackerBarrelLayer4_thickness"     value="10.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer4_NTiles"        value="ceil(MMTrackerBarrelLayer4_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer4_TileWidth"        value="(MMTrackerBarrelLayer4_rmin * 2*pi - MMTrackerBarrelLayer4_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer4_NTiles" />
+    <constant name="MMTrackerBarrelLayer4_length"        value="MMTrackerBarrel_maxLength"/>
+    
+        
+    <constant name="MMTrackerBarrelLayer5_rmin"          value="750.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer5_dz"            value="MMTrackerBarrel_support"/>
+    <constant name="MMTrackerBarrelLayer5_phi0"          value="60*degree"/>
+    <constant name="MMTrackerBarrelLayer5_thickness"     value="10.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer5_NTiles"        value="ceil(MMTrackerBarrelLayer5_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer5_TileWidth"        value="(MMTrackerBarrelLayer5_rmin * 2*pi - MMTrackerBarrelLayer5_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer5_NTiles" />
+    <constant name="MMTrackerBarrelLayer5_length"        value="MMTrackerBarrel_maxLength"/>
+
+
+    <constant name="MMTrackerBarrelLayer6_rmin"          value="780.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer6_dz"            value="0"/>
+    <constant name="MMTrackerBarrelLayer6_phi0"          value="75*degree"/>
+    <constant name="MMTrackerBarrelLayer6_thickness"     value="10.0 * mm"/>
+    <constant name="MMTrackerBarrelLayer6_NTiles"        value="ceil(MMTrackerBarrelLayer6_rmin * 2*pi / (MMTrackerBarrel_maxWidth + MMTrackerBarrel_spacer))"/>
+    <constant name="MMTrackerBarrelLayer6_TileWidth"        value="(MMTrackerBarrelLayer6_rmin * 2*pi - MMTrackerBarrelLayer6_NTiles * MMTrackerBarrel_spacer) /  MMTrackerBarrelLayer6_NTiles" />
+    <constant name="MMTrackerBarrelLayer6_length"        value="MMTrackerBarrel_maxLength"/>
+  
+
+
+
+    
+    <constant name="MMTrackerBarrel_NZModules"           value="floor(BarrelTracking_length/MMTrackerBarrel_maxLength)"/>
     <constant name="MMTrackerBarrelModulesTotal_length"  value="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length"/>
 
   </define>
-
+  
+  <materials>
+    <material name="CopperForStrips" state="solid">
+        <D type="density" unit="g/cm3" value="5.248414"/>
+        <composite n="1" ref="Cu"/>
+    </material>
+    
+    <material name="ResistivePaste" state="solid">
+        <D type="density" unit="g/cm3" value="0.77906"/>
+        <composite n="1" ref="C"/>
+    </material>
+    
+    <material name="InoxForMesh" state="solid">
+        <D type="density" unit="g/cm3" value="2.8548"/>
+        <fraction n="0.19" ref="Cr"/>
+        <fraction n="0.68" ref="Fe"/>
+        <fraction n="0.02" ref="Mn"/>
+        <fraction n="0.10" ref="Ni"/>
+        <fraction n="0.01" ref="Si"/>
+    </material>
+    
+    <material name="Ar90IsoButane" state="gas">
+        <D type="density" unit="g/cm3" value="0.00170335"/>
+        <fraction n="0.90" ref="Ar"/>
+        <fraction n="0.0826586" ref="C"/>
+        <fraction n="0.0173414" ref="H"/>
+    </material>
+    
+  </materials>
+  
   <limits>
   </limits>
 
@@ -26,26 +116,81 @@
   </display>
 
   <detectors>
-    <detector id="MMTrackerBarrel_ID" name="MMTrackerBarrel" type="refdet_MMTrackerBarrel" readout="MMTrackerBarrelHits">
-      <module name="Module1" vis="AnlGold">
+    <detector id="MMTrackerBarrel_ID" 
+              name="MMTrackerBarrel" 
+              type="refdet_MMTrackerBarrel" 
+              readout="MMTrackerBarrelHits"
+              vis="AnlRed"
+              >
+      <module name="MM_Module1" vis="AnlGold">
         <module_envelope
-          rmin="TrackerBarrel_rmax"
+          rmin="MMTrackerBarrelLayer1_rmin"
           length="MMTrackerBarrelLayer1_length"
-          thickness="MMTrackerBarrel_delta" phi="90*degree" />
-        <module_component thickness="1.0*mm" material="PEEK" sensitive="false">
-          <position x="0" />
-        </module_component>
-        <module_component thickness="1.0*mm" material="PEEK" sensitive="false"
-          length="MMTrackerBarrelLayer1_length-10.0*mm"
-          phi="89.0*degree" >
-          <position x="0" />
-        </module_component>
+          thickness="10*mm" 
+          phi="MMTrackerBarrelLayer1_TileWidth/(MMTrackerBarrelLayer1_rmin) * radian" />
+        <comment> going from the readout side to the drift cathode </comment>
+        <module_component name="coverlay"         thickness="0.0050000 * cm"  material="Kapton"/>
+        <module_component name="CuGround"         thickness="0.0001580 * cm"  material="Copper"/>
+        <module_component name="PCB"              thickness="0.0100000 * cm"  material="Fr4"/>
+        <module_component name="CuStrips"         thickness="0.0012000 * cm"  material="Copper"/>
+        <module_component name="KaptonStrips"     thickness="0.0075000 * cm"  material="Kapton"/>
+        <module_component name="ResistiveStrips"  thickness="0.0128000 * cm"  material="ResistivePaste"/>
+        <module_component name="Gas1"             thickness="0.0020000 * cm"  material="Ar90IsoButane"/>
+        <module_component name="Mesh"             thickness="0.0018000 * cm"  material="InoxForMesh"/>
+        <module_component name="Gas2"             
+                          thickness="MMTrackerBarrel_gasGap"
+                          material="Ar90IsoButane" 
+                          sensitive="true" 
+                          length="MMTrackerBarrelLayer1_length - 2 * MMTrackerBarrel_gasGap"
+                          phi="(MMTrackerBarrelLayer1_TileWidth - 2*MMTrackerBarrel_gasGap)/(MMTrackerBarrelLayer1_rmin) * radian"/>
+        <module_component name="DriftCuElectrode" thickness="0.0005000 * cm"  material="Copper"/>
+        <module_component name="DriftKapton"      thickness="0.0250000 * cm"  material="Kapton"/>
+        <module_component name="DriftCuGround"    thickness="0.0000410 * cm"  material="Copper"/>
+        
+        <frame material="CarbonFiber_50D" thickness="MMTrackerBarrel_gasGap" vis="AnlRed"
+               rmin="
+               0.0050000 +
+               0.0001580 +
+               0.0100000 +
+               0.0012000 +
+               0.0075000 +
+               0.0128000 +
+               0.0020000 +
+               0.0018000"
+          >
+        </frame>
       </module>
-      <layer module="Module1" id="1" vis="GreenVis">
+      
+      
+      <comment> small PCB on the side of each tile </comment>
+      <module name="MM_Module1_Meca" >
+        <module_envelope
+          rmin="MMTrackerBarrelLayer1_rmin"
+          length="MMTrackerBarrelLayer1_length"
+          thickness="1*mm" 
+          phi="MMTrackerBarrel_spacer/(MMTrackerBarrelLayer1_rmin) * radian" />
+         <module_component name="CuMeca"               thickness="60 * um"   material="Copper"/>
+         <module_component name="PCBMeca"              thickness="200 * um"  material="Fr4"/>
+      </module>
+      
+      <module name="MM_Module1_Support" >
+        <module_envelope
+          rmin="MMTrackerBarrelLayer1_rmin"
+          length="MMTrackerBarrel_support"
+          thickness="MMTrackerBarrel_support" 
+          phi="360 * degree" />
+         <module_component name="Support"              
+                           thickness="MMTrackerBarrel_support"  
+                           material="CarbonFiber_50D"/>
+      </module>
+
+      
+      <comment> ===================== LAYER 1 ============================== </comment>
+      <layer module="MM_Module1" id="1" vis="GreenVis">
         <barrel_envelope
-          inner_r="MMTrackerBarrelLayer1_rmin-20.0*mm"
-          outer_r="MMTrackerBarrelLayer1_rmin + 20.0*mm"
-          z_length="MMTrackerBarrelModulesTotal_length" />
+          inner_r="MMTrackerBarrelLayer1_rmin "
+          outer_r="MMTrackerBarrelLayer1_rmin + 5.0*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support" />
         <comment>
           phi0     : Starting phi of first module.
           phi_tilt : Phi tilt of a module.
@@ -56,12 +201,202 @@
           nz       : Number of modules to place in z.
           dr       : Radial displacement parameter, of every other module.
         </comment>
-        <rphi_layout phi_tilt="0.0" nphi="4" phi0="0." rc="MMTrackerBarrelLayer1_rmin" dr="0.0 * mm"/>
-        <z_layout dr="0.0 * mm" z0="-MMTrackerBarrelModulesTotal_length/2.0 + MMTrackerBarrelLayer1_length/2.0"
-          nz="MMTrackerBarrel_NZModules"/>
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer1_NTiles" phi0="MMTrackerBarrelLayer1_phi0" rc="MMTrackerBarrelLayer1_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer1_length/2.0" 
+          nz="3"  dz="MMTrackerBarrelLayer1_dz"/>
       </layer>
-    </detector>
 
+
+      <layer module="MM_Module1_Meca" id="10" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer1_rmin"
+          outer_r="MMTrackerBarrelLayer1_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support" />
+
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer1_NTiles" phi0="(MMTrackerBarrelLayer1_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer1_rmin * radian + MMTrackerBarrelLayer1_phi0" rc="MMTrackerBarrelLayer1_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer1_length/2.0" 
+          nz="3"  dz="MMTrackerBarrelLayer1_dz"/>
+      </layer>
+      
+
+      <layer module="MM_Module1_Support" id="11" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer1_rmin"
+          outer_r="MMTrackerBarrelLayer1_rmin + MMTrackerBarrel_support + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer1_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer1_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer1_dz"/>
+      </layer>
+      
+      
+      <comment> ===================== LAYER 2 ============================== </comment>
+      <layer module="MM_Module1" id="2" vis="GreenVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer2_rmin "
+          outer_r="MMTrackerBarrelLayer2_rmin + 5.0*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer2_dz" />
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer2_NTiles" phi0="MMTrackerBarrelLayer2_phi0" rc="MMTrackerBarrelLayer2_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer2_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer2_dz"/>
+      </layer>
+
+      <layer module="MM_Module1_Meca" id="20" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer2_rmin"
+          outer_r="MMTrackerBarrelLayer2_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer2_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer2_NTiles" phi0="(MMTrackerBarrelLayer2_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer2_rmin * radian + MMTrackerBarrelLayer2_phi0" rc="MMTrackerBarrelLayer2_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer2_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer2_dz"/>
+      </layer>
+  
+      <layer module="MM_Module1_Support" id="21" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer2_rmin"
+          outer_r="MMTrackerBarrelLayer2_rmin + MMTrackerBarrel_support + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support+ 2*MMTrackerBarrelLayer2_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer2_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer2_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer2_dz"/>
+      </layer>
+      
+           
+      
+      <comment> ===================== LAYER 3 ============================== </comment>
+      <layer module="MM_Module1" id="3" vis="GreenVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer3_rmin "
+          outer_r="MMTrackerBarrelLayer3_rmin + MMTrackerBarrel_support"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer3_dz" />
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer3_NTiles" phi0="MMTrackerBarrelLayer3_phi0" rc="MMTrackerBarrelLayer3_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer3_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer3_dz"/>
+      </layer>
+
+      <layer module="MM_Module1_Meca" id="30" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer3_rmin"
+          outer_r="MMTrackerBarrelLayer3_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer3_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer3_NTiles" phi0="(MMTrackerBarrelLayer3_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer3_rmin * radian + MMTrackerBarrelLayer3_phi0" rc="MMTrackerBarrelLayer3_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer3_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer3_dz"/>
+      </layer>
+  
+      <layer module="MM_Module1_Support" id="31" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer3_rmin"
+          outer_r="MMTrackerBarrelLayer3_rmin + MMTrackerBarrel_support + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer3_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer3_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer3_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer3_dz"/>
+      </layer>
+           
+           
+      
+      <comment> ===================== LAYER 4 ============================== </comment>
+      <layer module="MM_Module1" id="4" vis="GreenVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer4_rmin "
+          outer_r="MMTrackerBarrelLayer4_rmin + 5.0*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer4_dz" />
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer4_NTiles" phi0="MMTrackerBarrelLayer4_phi0" rc="MMTrackerBarrelLayer4_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer4_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer4_dz"/>
+      </layer>
+
+      <layer module="MM_Module1_Meca" id="40" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer4_rmin"
+          outer_r="MMTrackerBarrelLayer4_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer4_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer4_NTiles" phi0="(MMTrackerBarrelLayer4_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer4_rmin * radian + MMTrackerBarrelLayer4_phi0" rc="MMTrackerBarrelLayer4_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer4_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer4_dz"/>
+      </layer>
+  
+      <layer module="MM_Module1_Support" id="41" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer4_rmin"
+          outer_r="MMTrackerBarrelLayer4_rmin + MMTrackerBarrel_support"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support+ 2*MMTrackerBarrelLayer4_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer4_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer4_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer4_dz"/>
+      </layer>
+      
+                
+      
+      <comment> ===================== LAYER 5 ============================== </comment>
+      <layer module="MM_Module1" id="5" vis="GreenVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer5_rmin "
+          outer_r="MMTrackerBarrelLayer5_rmin + MMTrackerBarrel_support + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer5_dz" />
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer5_NTiles" phi0="MMTrackerBarrelLayer5_phi0" rc="MMTrackerBarrelLayer5_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer5_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer5_dz"/>
+      </layer>
+
+      <layer module="MM_Module1_Meca" id="50" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer5_rmin"
+          outer_r="MMTrackerBarrelLayer5_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer5_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer5_NTiles" phi0="(MMTrackerBarrelLayer5_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer5_rmin * radian + MMTrackerBarrelLayer5_phi0" rc="MMTrackerBarrelLayer5_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer5_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer5_dz"/>
+      </layer>
+  
+      <layer module="MM_Module1_Support" id="51" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer5_rmin"
+          outer_r="MMTrackerBarrelLayer5_rmin + MMTrackerBarrel_support"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer5_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer5_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer5_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer5_dz"/>
+      </layer>
+      
+         
+                
+      
+      <comment> ===================== LAYER 6 ============================== </comment>
+      <layer module="MM_Module1" id="6" vis="GreenVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer6_rmin "
+          outer_r="MMTrackerBarrelLayer6_rmin + MMTrackerBarrel_support + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length+(MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer6_dz" />
+         <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer6_NTiles" phi0="MMTrackerBarrelLayer6_phi0" rc="MMTrackerBarrelLayer6_rmin" dr="0.0 * mm"/> 
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer6_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer6_dz"/>
+      </layer>
+
+      <layer module="MM_Module1_Meca" id="60" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer6_rmin"
+          outer_r="MMTrackerBarrelLayer6_rmin + 1*mm"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length+(MMTrackerBarrel_NZModules)*MMTrackerBarrel_support + 2*MMTrackerBarrelLayer6_dz" />
+        <rphi_layout phi_tilt="0.0" nphi="MMTrackerBarrelLayer6_NTiles" phi0="(MMTrackerBarrelLayer6_TileWidth+MMTrackerBarrel_spacer)/2/MMTrackerBarrelLayer6_rmin * radian + MMTrackerBarrelLayer6_phi0" rc="MMTrackerBarrelLayer6_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0 + MMTrackerBarrelLayer6_length/2.0" 
+          nz="3" dz="MMTrackerBarrelLayer6_dz"/>
+      </layer>
+  
+      <layer module="MM_Module1_Support" id="61" vis="RedVis">
+        <barrel_envelope
+          inner_r="MMTrackerBarrelLayer6_rmin"
+          outer_r="MMTrackerBarrelLayer6_rmin + MMTrackerBarrel_support"
+          z_length="MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length+(MMTrackerBarrel_NZModules+1)*MMTrackerBarrel_support" />
+        <rphi_layout phi_tilt="0.0" nphi="1" phi0="0" dr="0.0 * mm" rc="MMTrackerBarrelLayer6_rmin"/>
+        <z_layout dr="0.0 * mm" z0="-(MMTrackerBarrel_NZModules*MMTrackerBarrelLayer6_length + (MMTrackerBarrel_NZModules-1)*MMTrackerBarrel_support )/2.0   - MMTrackerBarrel_support/2" 
+          nz="4" dz="MMTrackerBarrelLayer6_dz"/>
+      </layer>
+      
+      
+      
+    </detector>
   </detectors>
 
   <readouts>

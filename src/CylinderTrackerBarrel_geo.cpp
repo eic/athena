@@ -11,6 +11,9 @@ using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
 
+
+Assembly getModule( string m_nam, int n, xml_det_t x_det, double module_rmin, Detector& description, SensitiveDetector sens, map<string, vector<PlacedVolume>> &sensitives);
+
 /** A barrel tracker with a module that is curved (not flat).
  *
  *
@@ -32,68 +35,19 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   Assembly                assembly(det_name);
   map<string, Volume>     mod_volumes;
   map<string, Placements> sensitives;
+  map<string, xml_comp_t> modules;
   PlacedVolume            pv;
 
   sens.setType("tracker");
-  int n_modules = 0;
-  for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
-    n_modules++;
-    xml_comp_t x_mod = mi;
-    xml_comp_t m_env = x_mod.child(_U(module_envelope));
-    string     m_nam = x_mod.nameStr();
 
-    Assembly module_assembly(_toString(n_modules, "mod_assembly_%d"));
-    auto     module_rmin      = m_env.rmin();
-    auto     module_thickness = m_env.thickness();
-    auto     module_length    = m_env.length();
-    auto     module_phi       = getAttrOrDefault(m_env, _Unicode(phi), 90.0);
 
-    Volume m_vol(m_nam, Tube(module_rmin, module_rmin + module_thickness, module_length / 2), air);
-    int    ncomponents = 0, sensor_number = 1;
-    module_assembly.placeVolume(m_vol, Position(-module_rmin, 0, 0));
-    mod_volumes[m_nam] = module_assembly;
-    m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
+  
+  
+  
+  // layers
+  // ===================
 
-    auto comp_rmin = module_rmin;
-    for (xml_coll_t ci(x_mod, _U(module_component)); ci; ++ci, ++ncomponents) {
-      xml_comp_t x_comp = ci;
-      xml_comp_t x_pos  = x_comp.position(false);
-      xml_comp_t x_rot  = x_comp.rotation(false);
-      string     c_nam  = _toString(ncomponents, "component%d");
 
-      auto comp_thickness = x_comp.thickness();
-      comp_rmin           = getAttrOrDefault(x_comp, _Unicode(rmin), comp_rmin);
-      auto comp_phi       = getAttrOrDefault(x_comp, _Unicode(phi), module_phi);
-      auto comp_phi0      = getAttrOrDefault(x_comp, _Unicode(phi0), 0.0);
-      auto comp_length    = getAttrOrDefault(x_comp, _Unicode(length), module_length);
-
-      Tube         c_tube(comp_rmin, comp_rmin + comp_thickness, comp_length / 2, -comp_phi / 2.0 + comp_phi0,
-                  comp_phi / 2.0 + comp_phi0);
-      Volume       c_vol(c_nam, c_tube, description.material(x_comp.materialStr()));
-      PlacedVolume c_pv;
-
-      if (x_pos && x_rot) {
-        Position    c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0));
-        RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
-        c_pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
-      } else if (x_rot) {
-        c_pv = m_vol.placeVolume(c_vol, RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)));
-      } else if (x_pos) {
-        c_pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0)));
-      } else {
-        c_pv = m_vol.placeVolume(c_vol);
-      }
-      c_vol.setRegion(description, x_comp.regionStr());
-      c_vol.setLimitSet(description, x_comp.limitsStr());
-      c_vol.setVisAttributes(description, x_comp.visStr());
-      if (x_comp.isSensitive()) {
-        c_pv.addPhysVolID(_U(sensor), sensor_number++);
-        c_vol.setSensitiveDetector(sens);
-        sensitives[m_nam].push_back(c_pv);
-      }
-      comp_rmin = comp_rmin + comp_thickness;
-    }
-  }
   for (xml_coll_t li(x_det, _U(layer)); li; ++li) {
     xml_comp_t x_layer  = li;
     xml_comp_t x_barrel = x_layer.child(_U(barrel_envelope));
@@ -115,7 +69,11 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     double     z0       = z_layout.z0();       // Z position of first module in phi.
     double     nz       = z_layout.nz();       // Number of modules to place in z.
     double     z_dr     = z_layout.dr();       // Radial displacement parameter, of every other module.
-    Volume     m_env    = mod_volumes[m_nam];
+    auto      dz       = getAttrOrDefault(z_layout, _Unicode(dz), 0.);       // z offset
+    
+    // get the module for this layer from the xml
+    Volume     m_env    = getModule( m_nam, lay_id, x_det, x_barrel.inner_r(), description, sens, sensitives ) ;
+    
     DetElement lay_elt(sdet, _toString(x_layer.id(), "layer%d"), lay_id);
 
     //Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
@@ -135,6 +93,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
     // Loop over the number of modules in phi.
     for (int ii = 0; ii < nphi; ii++) {
+
       double dx = z_dr * std::cos(phic + phi_tilt); // Delta x of module position.
       double dy = z_dr * std::sin(phic + phi_tilt); // Delta y of module position.
       double x  = rc * std::cos(phic);              // Basic x module position.
@@ -142,6 +101,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
       // Loop over the number of modules in z.
       for (int j = 0; j < nz; j++) {
+
         string     module_name = _toString(module, "module%d");
         DetElement mod_elt(lay_elt, module_name, module);
         // Module PhysicalVolume.
@@ -149,15 +109,17 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         //         tr(RotationZYX(0,-((M_PI/2)-phic-phi_tilt),M_PI/2),Position(x,y,module_z));
         // NOTE (Nikiforos, 26/08 Rotations needed to be fixed so that component1 (silicon) is on the
         // outside
-        Transform3D tr(RotationZYX(phic - phi_tilt, 0, 0), Position(x, y, module_z));
+        Transform3D tr(RotationZYX(phic - phi_tilt, 0, 0), Position(x, y, module_z + dz));
 
         pv = lay_vol.placeVolume(m_env, tr);
         pv.addPhysVolID("module", module);
         mod_elt.setPlacement(pv);
+
         for (size_t ic = 0; ic < sensVols.size(); ++ic) {
           PlacedVolume sens_pv = sensVols[ic];
           DetElement   comp_elt(mod_elt, sens_pv.volume().name(), module);
           comp_elt.setPlacement(sens_pv);
+          
           //Acts::ActsExtension* moduleExtension = new Acts::ActsExtension("YZX");
           //comp_elt.addExtension<Acts::ActsExtension>(moduleExtension);
         }
@@ -180,6 +142,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     }
     // Create the PhysicalVolume for the layer.
     pv = assembly.placeVolume(lay_vol); // Place layer in mother
+
     pv.addPhysVolID("layer", lay_id);   // Set the layer ID.
     lay_elt.setAttributes(description, lay_vol, x_layer.regionStr(), x_layer.limitsStr(), x_layer.visStr());
     lay_elt.setPlacement(pv);
@@ -197,3 +160,119 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 DECLARE_DETELEMENT(refdet_CylinderTrackerBarrel, create_detector)
 DECLARE_DETELEMENT(refdet_MMTrackerBarrel, create_detector)
 DECLARE_DETELEMENT(refdet_RWellTrackerBarrel, create_detector)
+
+
+
+
+Assembly getModule( string m_nam, int n, xml_det_t x_det, double module_rmin, Detector& description, SensitiveDetector sens, map<string, vector<PlacedVolume>> &sensitives){
+  
+    Material                     air   = description.air();
+    Assembly module_assembly( _toString(n,"mod_assembly_%d"));
+    
+    int n_modules = 0;
+    for (xml_coll_t mi(x_det, _U(module)); mi; ++mi) {
+      n_modules++;
+      xml_comp_t x_mod = mi;
+      if( x_mod.nameStr() == m_nam ) {
+  
+        xml_comp_t m_env = x_mod.child(_U(module_envelope));
+        string     m_nam = x_mod.nameStr();
+
+    //     auto     module_rmin      = m_env.rmin();
+        auto     module_length    = m_env.length();
+        auto     module_phi       = getAttrOrDefault(m_env, _Unicode(phi), 90.0);
+
+        // compute thickness as the sum of all components
+        double total_thickness = 0.;
+        xml_coll_t ci(x_mod, _U(module_component));
+        for (ci.reset(), total_thickness = 0.0; ci; ++ci)
+          total_thickness += xml_comp_t(ci).thickness();
+        
+        Volume m_vol(m_nam, Tube(module_rmin, module_rmin + total_thickness, module_length / 2), air);
+        
+        int    ncomponents = 0, sensor_number = 1;
+        module_assembly.placeVolume(m_vol, Position(-module_rmin, 0, 0));
+    //     mod_volumes[m_nam] = module_assembly;
+        m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
+
+        // loop over detector components
+        auto comp_rmin = module_rmin;
+        for (ci.reset(); ci; ++ci, ++ncomponents) {
+          xml_comp_t x_comp = ci;
+          xml_comp_t x_pos  = x_comp.position(false);
+          xml_comp_t x_rot  = x_comp.rotation(false);
+          string     c_nam  = _toString(ncomponents, "component%d_") + _toString(n);
+
+          auto comp_thickness = x_comp.thickness();
+          auto comp_phi       = getAttrOrDefault(x_comp, _Unicode(phi), module_phi);
+          auto comp_phi0      = getAttrOrDefault(x_comp, _Unicode(phi0), 0.0);
+          auto comp_length    = getAttrOrDefault(x_comp, _Unicode(length), module_length);
+
+          Tube         c_tube(comp_rmin, comp_rmin + comp_thickness, comp_length / 2, -comp_phi / 2.0 + comp_phi0,
+                      comp_phi / 2.0 + comp_phi0);
+          Volume       c_vol(c_nam, c_tube, description.material(x_comp.materialStr()));
+
+          PlacedVolume c_pv;
+
+          if (x_pos && x_rot) {
+            Position    c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0));
+            RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
+            c_pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
+          } else if (x_rot) {
+            c_pv = m_vol.placeVolume(c_vol, RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)));
+          } else if (x_pos) {
+            c_pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0)));
+          } else {
+            c_pv = m_vol.placeVolume(c_vol);
+          }
+          c_vol.setRegion(description, x_comp.regionStr());
+          c_vol.setLimitSet(description, x_comp.limitsStr());
+          c_vol.setVisAttributes(description, x_comp.visStr());
+          if (x_comp.isSensitive()) {
+            c_pv.addPhysVolID(_U(sensor), sensor_number++);
+            c_vol.setSensitiveDetector(sens);
+            sensitives[m_nam].push_back(c_pv);
+          }
+          comp_rmin = comp_rmin + comp_thickness;
+        }
+        
+
+        if( x_mod.hasChild("frame")){
+          // build the carbon fiber frame around the gas volume
+          // two bars along z and two arches at the two ends
+          // TODO make the frame hollow
+          xml_comp_t m_frame         = x_mod.child(_U(frame));
+          auto thickness       = m_frame.thickness();
+          
+          // get sensitive component rmin
+          auto m_rmin = module_rmin + m_frame.rmin();
+          
+      
+          // bars
+          Tube    c_tubeL(m_rmin, m_rmin + thickness, module_length / 2, -module_phi / 2.0,
+                      -module_phi / 2.0 + thickness/m_rmin);
+          Volume  c_volL( m_nam + "_barL", c_tubeL, description.material(m_frame.materialStr()));
+          Tube    c_tubeR(m_rmin, m_rmin + thickness, module_length / 2, module_phi / 2.0 -  thickness/m_rmin,
+                    module_phi / 2.0 );
+          Volume  c_volR(m_nam + "_barR", c_tubeR, description.material(m_frame.materialStr()));
+
+          //arches
+          Tube    c_tubeN(m_rmin, m_rmin + thickness, thickness / 2, - module_phi / 2.0 +  thickness/m_rmin,
+                    module_phi / 2.0 - thickness/m_rmin );
+          Volume  c_volN(m_nam + "_archN", c_tubeN, description.material(m_frame.materialStr()));
+          c_volN.setVisAttributes( description, m_frame.visStr() );
+          
+          PlacedVolume c_pv;
+          c_pv = m_vol.placeVolume(c_volL);
+          c_pv = m_vol.placeVolume(c_volR);
+          
+          c_pv = m_vol.placeVolume(c_volN, Position(0,0, -module_length / 2 + thickness/2) );
+          c_pv = m_vol.placeVolume(c_volN, Position(0,0,  module_length / 2 - thickness/2) );
+          
+        }
+        
+    }
+  }
+  return module_assembly;
+}
+
