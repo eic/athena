@@ -156,14 +156,14 @@ overlap_check_tgeo:
     - echo "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
-overlap_check_geant4:
-  stage: test
-  needs: 
-    - ["common:detector"]
-  script:
-    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
-    - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
-    - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+# overlap_check_geant4:
+#   stage: test
+#   needs: 
+#     - ["common:detector"]
+#   script:
+#     - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
+#     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
+#     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
 convert_to_gdml:
   stage: test
@@ -173,13 +173,13 @@ convert_to_gdml:
     - mkdir -p geo
     - python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
 
-tracking_geometry_debug:
-  stage: test
-  allow_failure: true
-  needs: 
-    - ["common:detector"]
-  script:
-    - root -b -q "scripts/test_ACTS.cxx+(\"${DETECTOR_PATH}/athena.xml\")" | tee geo/tracking_geometry_debug.out 
+# tracking_geometry_debug:
+#   stage: test
+#   allow_failure: true
+#   needs: 
+#     - ["common:detector"]
+#   script:
+#     - root -b -q "scripts/test_ACTS.cxx+(\"${DETECTOR_PATH}/athena.xml\")" | tee geo/tracking_geometry_debug.out 
 
 detector:config_testing:
   stage: test

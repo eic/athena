@@ -51,7 +51,7 @@
 
   <limits>
     <limitset name="cal_img_limits">
-      <limit name="step_length_max" particles="*" value="0.1" unit="mm"/>
+      <limit name="step_length_max" particles="*" value="5.0" unit="mm"/>
     </limitset>
   </limits>
 
