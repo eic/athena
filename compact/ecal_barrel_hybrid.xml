@@ -140,7 +140,7 @@
     <readout name="EcalBarrelHits">
       <segmentation type="MultiSegmentation" key="fiber">
         <segmentation name="LongiSeg" key_value="0x0" type="CartesianGridXY" grid_size_x="0.5*mm" grid_size_y="0.5*mm"/>
-        <segmentation name="RadialSeg" key_min="0x1" key_max="0xffffffff" type="NoSegmentation"/>
+        -<segmentation name="RadialSeg" key_min="0x1" key_max="0xffffffff" type="NoSegmentation"/>
       </segmentation>
       <hits_collections>
         <hits_collection name="EcalBarrelHits" key="fiber" key_value="0x0"/>
