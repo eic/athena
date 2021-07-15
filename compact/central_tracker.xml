@@ -61,7 +61,7 @@
     <constant name="TrackerEndcapInnerLayer_dz"        value="TrackerEndcapInner_length/TrackerEndcapInner_nLayers"/>
 
     <constant name="TrackerEndcapOuter_zmin"        value="TrackerBarrelOuter_length/2.0"/>
-    <constant name="TrackerEndcapOuter_zmax"        value="TrackerEndcapOuter_zmin + 72"/>
+    <constant name="TrackerEndcapOuter_zmax"        value="TrackerEndcapOuter_zmin + 70"/>
     <constant name="TrackerEndcapOuter_length"        value="TrackerEndcapOuter_zmax- TrackerEndcapOuter_zmin"/>
     <constant name="TrackerEndcapOuterLayer_dz"        value="TrackerEndcapOuter_length/TrackerEndcapOuter_nLayers"/>
 

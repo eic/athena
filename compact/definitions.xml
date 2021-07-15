@@ -5,8 +5,8 @@
     <constant name="world_z" value="100*m"/>
 
     <constant name="Pi" value="3.14159265359"/>
-
     <constant name="mil" value="0.0254*mm"/>
+    <constant name="inch" value="2.54*cm"/>
 
     <comment>
       ------------
@@ -232,7 +232,7 @@
       Unused IDs: 132-139
 
     </comment>
-    <constant name="ce_MRICH_ID"        value="130"/>
+    <constant name="MRICH_ID"        value="130"/>
     <constant name="ce_GEM_ID"          value="131"/>
 
     <comment> 
@@ -340,7 +340,7 @@
     <constant name="ForwardTRD_length"        value="10.0*cm"/>
     <constant name="ForwardTOF_length"        value="3.0*cm"/>
     
-    <constant name="BackwardCherenkov_length"   value="15.0*cm"/>
+    <constant name="BackwardCherenkov_length"   value="20.0*cm"/>
     <constant name="BackwardTOF_length"         value="3.0*cm"/>
 
     <comment> Total length of PID detectors above</comment>

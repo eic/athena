@@ -6,9 +6,11 @@
     <vis name="AnlOrange"       alpha="1" r="255/256" g="121/256" b="0"/>
     <vis name="AnlRed"          alpha="1" r="205/256" g="32/256" b="44/256"/>
     <vis name="AnlGold"         alpha="1" r="248/256" g="178/256" b="0/256"/>
+    <vis name="AnlGold_1"       alpha="1" r="248/256" g="178/256" b="0/256"  visible="true"  drawingStyle="wireframe"/>
     <vis name="AnlBlue"         alpha="1" r="0/256" g="96/256" b="156/256"/>
     <vis name="AnlTeal"         alpha="1" r="0/256" g="161/256" b="156/256"/>
     <vis name="AnlGray"         alpha="1" r="102/256" g="102/256" b="102/256"/>
+    <vis name="AnlGray_1"       alpha="1" r="102/256" g="102/256" b="102/256" visible="true"  drawingStyle="wireframe"/>
     <vis name="AnlLight_Gray"   alpha="1" r="209/256" g="209/256" b="209/256"/>
     <vis name="AnlOff_White"    alpha="1" r="242/256" g="242/256" b="242/256"/>
     <vis name="AnlDelta_Red"    alpha="1" r="161/256" g="43/256" b="47/256"/>

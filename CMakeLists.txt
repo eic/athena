@@ -28,3 +28,10 @@ install(DIRECTORY compact/
     DESTINATION share/${PROJECT_NAME}/${a_lib_name}
     FILES_MATCHING PATTERN "*.xml"
     )
+install(DIRECTORY compact/
+    DESTINATION share/${PROJECT_NAME}/compact
+    FILES_MATCHING PATTERN "*.xml"
+    )
+install(FILES athena.xml
+    DESTINATION share/${PROJECT_NAME}/
+    )

@@ -5,9 +5,18 @@
 // some utility functions that can be shared
 namespace athena::geo {
 
-typedef ROOT::Math::XYPoint Point;
+using Point =  ROOT::Math::XYPoint;
 
-// fill rectangles in a ring
+/** Fill rectangles in a ring (disk).
+ *
+ * @param ref  2D reference point.
+ * @param sx   x side length
+ * @param sy   y side length
+ * @param rmin inner radius of disk
+ * @param rmax  outer radius of disk to fill
+ * @param phmin  phi min
+ * @param phmax phi max
+ */
 std::vector<Point> fillRectangles(Point ref, double sx, double sy, double rmin, double rmax,
                                   double phmin = -M_PI, double phmax = M_PI);
 // fill squares in a ring

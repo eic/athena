@@ -4,11 +4,14 @@
 
   <!-- Some information about detector  -->
   <info name="Athena Detector" title="Athena Detector"
-        author="Jihee Kim, Whitney Armstrong"
+        author="Athena Collaboration"
 	url="https://eicweb.phy.anl.gov/EIC/detectors/athena.git"
 	status="development"
 	version="v1 2021-03-16">
-    <comment>Athena Detector</comment>
+    <comment>Athena Detector
+    - https://eicweb.phy.anl.gov/EIC/detectors/athena.git
+    - https://eicweb.phy.anl.gov/EIC/detectors/ip6.git
+    </comment>
   </info>
 
   <define>
@@ -39,11 +42,31 @@
       4.0*eV 1.5
       5.1*eV 1.5
       "/>
+    <matrix name="ABSLENGTH__Pyrex" coldim="2" values="
+      1.0*eV 10.0*cm
+      4.0*eV 10.0*cm
+      5.1*eV 10.0*cm
+      "/>
     <matrix name= "REFLECTIVITY_mirror" coldim="2" values="
       1.0*eV  0.9
       4.0*eV  0.9
       5.1*eV  0.9
-    "/>
+      "/>
+    <matrix name="RINDEX__Aerogel" coldim="2" values="
+      1.0*eV 1.030
+      4.0*eV 1.030
+      5.1*eV 1.030
+      "/>
+    <matrix name="ABSLENGTH__Aerogel" coldim="2" values="
+      1.0*eV 4.0*cm
+      4.0*eV 4.0*cm
+      5.1*eV 4.0*cm
+      "/>
+    <matrix name="RINDEX__Acrylic" coldim="2" values="
+      1240*eV/1100  1.49
+      1240*eV/600   1.49
+      1240*eV/400   1.49
+      "/>
   </properties>
 
   <includes>
@@ -57,37 +80,87 @@
       <fraction n="0.754" ref="N"/>
       <fraction n="0.234" ref="O"/>
       <fraction n="0.012" ref="Ar"/>
-      <property name="RINDEX" ref="RINDEX__Vacuum"/>
+      <property name="RINDEX" ref="RINDEX__Air"/>
+      <property name="ABSLENGTH"               coldim="2" values="1*eV  200*m  5*eV  200*m"/>
     </material>
     <material name="N2cherenkov">
       <D type="density" value="0.00125" unit="g/cm3"/>
       <composite n="1" ref="N"/>
       <property name="RINDEX"  ref="RINDEX__N2"/>
     </material>
-    <material name="PyrexGlass">
+    <material name="PyrexGlassOptical">
       <D type="density" value="2.23" unit="g/cm3"/>
       <fraction n="0.806" ref="SiliconOxide"/>
       <fraction n="0.130" ref="BoronOxide"/>
       <fraction n="0.040" ref="SodiumOxide"/>
       <fraction n="0.023" ref="AluminumOxide"/>
       <property name="RINDEX" ref="RINDEX__Pyrex"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH__Pyrex"/>
+    </material>
+    <material name="AerogelOptical">
+      <D value="0.2" unit="g / cm3"/>
+      <fraction n="0.625" ref="SiliconOxide"/>
+      <fraction n="0.374" ref="SiliconOxide"/>
+      <fraction n="0.1"   ref="C"/>
+      <property name="RINDEX" ref="RINDEX__Aerogel"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel"/>
+    </material>
+    <material name="AcrylicOptical">
+      <D type="density" value="1.18" unit="g/cm3"/>
+      <composite n="5" ref="C"/>
+      <composite n="2" ref="O"/>
+      <composite n="8" ref="H"/>
+      <property name="RINDEX" ref="RINDEX__Acrylic"/>
     </material>
   </materials>
 
   <surfaces>
     <comment> For the values of "finish", model and type, see TGeoOpticalSurface.h !
     </comment>
+
     <opticalsurface finish="polished" model="glisur" name="MirrorOpticalSurface" type="dielectric_metal" value="0">
       <property name="REFLECTIVITY" ref="REFLECTIVITY_mirror"/>
       <property name="RINDEX"       coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
       <!--<property name="EFFICIENCY"   ref="EFFICIENCY0x8b77240"/>-->
     </opticalsurface>
+
+    <!--
     <opticalsurface name="mirror2" finish="polished" model="glisur" type="dielectric_dielectric">
       <property name="REFLECTIVITY"            coldim="2" values="1.034*eV  0.8   4.136*eV  0.9"/>
       <property name="EFFICIENCY"              coldim="2" values="2.034*eV  0.8   4.136*eV  1.0"/>
       <property name="RINDEX"                  coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
     </opticalsurface>
-  <!-- Define the dimensions of the world volume -->
+    -->
+
+    <opticalsurface finish="polished" model="unified" name="MRICH_MirrorOpticalSurface" type="dielectric_metal" value="0">
+    </opticalsurface>
+    <opticalsurface finish="polished" model="unified" name="MRICH_LensOpticalSurface" type="dielectric_dielectric" value="0">
+      <property name="REFLECTIVITY"            coldim="2" values="1240*eV/1100  0.08   1240*eV/400  0.08"/>
+      <!--
+      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.56  4.136*eV  1.56"/>
+      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
+      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+        -->
+    </opticalsurface>
+
+    <opticalsurface finish="polished" model="unified" name="MRICH_PhotoSensorOpticalSurface" type="dielectric_dielectric" value="0">
+      <!--
+      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.35  4.136*eV  1.40"/>
+      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
+      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      -->
+    </opticalsurface>
+
+    <opticalsurface finish="polished" model="unified" name="MRICH_AerogelOpticalSurface" type="dielectric_dielectric" value="0">
+      <!--
+      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.010  4.136*eV  1.010"/>
+      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
+      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      -->
+    </opticalsurface>
 
   </surfaces>
   <limits>
@@ -188,8 +261,10 @@
 
   <include ref="compact/tof_barrel.xml"/>
 
-  <!--include ref="compact/rwell_tracker_barrel.xml"/-->
-  <!--<include ref="compact/cb_DIRC.xml"/>-->
+  <!--
+    <include ref="compact/rwell_tracker_barrel.xml"/>
+    <include ref="compact/cb_DIRC.xml"/>
+  -->
 
   <!-- When changing magnet, also select dimensions in definitions.xml. -->
   <include ref="compact/solenoid.xml"/>
@@ -205,7 +280,7 @@
   <!--<include ref="compact/hcal.xml"/>-->
   <!--include ref="compact/ce_GEM.xml"/-->
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
-  <!--<include ref="compact/ce_mrich.xml"/>-->
+  <!--<include ref="compact/mrich.xml"/>-->
   <!--<include ref="compact/tof_endcap.xml"/>-->
   <!--<include ref="compact/forward_trd.xml"/>-->
   <!--<include ref="compact/gaseous_rich.xml"/>-->
@@ -215,11 +290,11 @@
   <!--<include ref="ip6/far_forward_romanpots.xml"/>-->
   <!--<include ref="ip6/far_forward_detectors.xml"/>-->
 
+
   <!--
   <include ref="compact/mm_tracker_barrel.xml"/>
   <include ref="compact/cb_VTX_Barrel.xml"/>
   -->
-
 
   <readouts>
   </readouts>
