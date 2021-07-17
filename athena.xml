@@ -214,10 +214,15 @@
     </detector>
 
     <detector id="TrackerBarrelSubAssembly_Outer_ID"
-      name="TrackerSubAssembly_Outer"
+      name="TrackerBarrelSubAssembly_Outer"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
       <composite name="TrackerBarrel_Outer"/>
+    </detector>
+    <detector id="TrackerEndcapSubAssembly_Outer_ID"
+      name="TrackerEndcapSubAssembly_Outer"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TrackerSubAssemblyVis">
       <composite name="TrackerEndcapP_Outer"/>
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
