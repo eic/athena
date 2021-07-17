@@ -232,39 +232,15 @@
       type="DD4hep_SubdetectorAssembly"
       vis="TOFSubAssemblyVis">
       <composite name="BarrelTOF"/>
+    </detector>
+    <detector id="TOFEndcapSubAssembly_ID"
+      name="TOFEndcapSubAssembly"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TOFSubAssemblyVis">
       <composite name="ForwardTOF"/>
       <composite name="BackwardTOF"/>
     </detector>
 
-    <!--
-    <detector id="TrackerBarrelSubAssembly_Inner_ID"
-      name="TrackerBarrelSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Inner"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Inner_ID"
-      name="TrackerEndcapSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapN_Inner"/>
-      <composite name="TrackerBarrel_Inner"/>
-      <composite name="TrackerEndcapP_Inner"/>
-    </detector>
-    <detector id="TrackerBarrelSubAssembly_Outer_ID"
-      name="TrackerBarrelSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Outer"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Outer_ID"
-      name="TrackerEndcapSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapP_Outer"/>
-      <composite name="TrackerEndcapN_Outer"/>
-    </detector>
-    -->
   </detectors>
 
   <include ref="compact/vertex_tracker.xml"/>
