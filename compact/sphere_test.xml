@@ -1,0 +1,65 @@
+<lccdd>
+  <comment> test application of sphere cuts </comment>        
+
+  <define>
+  </define>
+
+  <limits>
+  </limits>
+
+  <regions>
+  </regions>
+
+  <display>
+  </display>
+
+  <detectors>
+    <detector
+      id="1000"
+      name="sphere_test"
+      type="athena_sphere_test" 
+      readout="sphere_test_hits"
+      projective="false"
+      vis="RedVis"
+      material="AirOptical"
+      >
+      <dimensions
+        halflengthx="3*m"
+        halflengthy="3*m"
+        halflengthz="3*m"
+        />
+      <sphere
+        centerx="0*cm"
+        centery="0*cm"
+        centerz="0*cm"
+        radius="1*m"
+        thickness="10*cm"
+        thetamin="0*deg"
+        thetamax="120*deg"
+        phimin="-45*deg"
+        phimax="45*deg"
+        yrot="110*deg"
+        material="AcrylicOptical"
+        vis="GreenVis"
+        />
+      <sensor
+        centerx="0*cm"
+        centery="0*cm"
+        centerz="0*cm"
+        halflengthx="1.5*m"
+        halflengthy="1.5*m"
+        halflengthz="0.1*m"
+        material="AcrylicOptical"
+        vis="BlueVis"
+        />
+    </detector>
+  </detectors>
+
+  <readouts>
+    <readout name="sphere_test_hits">
+      <segmentation type="CartesianGridXY" grid_size_x="3*cm" grid_size_y="3*cm" />
+      <id>system:16,sensor:16,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
+</lccdd>

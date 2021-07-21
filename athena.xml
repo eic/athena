@@ -15,8 +15,13 @@
   </info>
 
   <define>
-    <include ref="ip6/ip6_defs.xml" /> <comment> IP definitions should be first</comment>
-    <include ref="compact/definitions.xml" />
+    <constant name="world_side" value="30*m"/>
+    <constant name="world_x" value="world_side"/>
+    <constant name="world_y" value="world_side"/>
+    <constant name="world_z" value="100*m"/>
+    <constant name="Pi" value="3.14159265359"/>
+    <constant name="mil" value="0.0254*mm"/>
+    <constant name="inch" value="2.54*cm"/>
   </define>
 
   <properties>
@@ -31,36 +36,6 @@
     <matrix name="RINDEX__Quartz" coldim="2" values="
       1.0*eV 1.46
       5.1*eV 1.46
-      "/>
-    <matrix name="RINDEX__N2" coldim="2" values="
-      1.0*eV 1.00033
-      4.0*eV 1.00033
-      5.1*eV 1.00033
-      "/>
-    <matrix name="RINDEX__Pyrex" coldim="2" values="
-      1.0*eV 1.5
-      4.0*eV 1.5
-      5.1*eV 1.5
-      "/>
-    <matrix name="ABSLENGTH__Pyrex" coldim="2" values="
-      1.0*eV 10.0*cm
-      4.0*eV 10.0*cm
-      5.1*eV 10.0*cm
-      "/>
-    <matrix name= "REFLECTIVITY_mirror" coldim="2" values="
-      1.0*eV  0.9
-      4.0*eV  0.9
-      5.1*eV  0.9
-      "/>
-    <matrix name="RINDEX__Aerogel" coldim="2" values="
-      1.0*eV 1.030
-      4.0*eV 1.030
-      5.1*eV 1.030
-      "/>
-    <matrix name="ABSLENGTH__Aerogel" coldim="2" values="
-      1.0*eV 4.0*cm
-      4.0*eV 4.0*cm
-      5.1*eV 4.0*cm
       "/>
     <matrix name="RINDEX__Acrylic" coldim="2" values="
       1240*eV/1100  1.49
@@ -83,28 +58,6 @@
       <property name="RINDEX" ref="RINDEX__Air"/>
       <property name="ABSLENGTH"               coldim="2" values="1*eV  200*m  5*eV  200*m"/>
     </material>
-    <material name="N2cherenkov">
-      <D type="density" value="0.00125" unit="g/cm3"/>
-      <composite n="1" ref="N"/>
-      <property name="RINDEX"  ref="RINDEX__N2"/>
-    </material>
-    <material name="PyrexGlassOptical">
-      <D type="density" value="2.23" unit="g/cm3"/>
-      <fraction n="0.806" ref="SiliconOxide"/>
-      <fraction n="0.130" ref="BoronOxide"/>
-      <fraction n="0.040" ref="SodiumOxide"/>
-      <fraction n="0.023" ref="AluminumOxide"/>
-      <property name="RINDEX" ref="RINDEX__Pyrex"/>
-      <property name="ABSLENGTH" ref="ABSLENGTH__Pyrex"/>
-    </material>
-    <material name="AerogelOptical">
-      <D value="0.2" unit="g / cm3"/>
-      <fraction n="0.625" ref="SiliconOxide"/>
-      <fraction n="0.374" ref="SiliconOxide"/>
-      <fraction n="0.1"   ref="C"/>
-      <property name="RINDEX" ref="RINDEX__Aerogel"/>
-      <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel"/>
-    </material>
     <material name="AcrylicOptical">
       <D type="density" value="1.18" unit="g/cm3"/>
       <composite n="5" ref="C"/>
@@ -115,53 +68,6 @@
   </materials>
 
   <surfaces>
-    <comment> For the values of "finish", model and type, see TGeoOpticalSurface.h !
-    </comment>
-
-    <opticalsurface finish="polished" model="glisur" name="MirrorOpticalSurface" type="dielectric_metal" value="0">
-      <property name="REFLECTIVITY" ref="REFLECTIVITY_mirror"/>
-      <property name="RINDEX"       coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
-      <!--<property name="EFFICIENCY"   ref="EFFICIENCY0x8b77240"/>-->
-    </opticalsurface>
-
-    <!--
-    <opticalsurface name="mirror2" finish="polished" model="glisur" type="dielectric_dielectric">
-      <property name="REFLECTIVITY"            coldim="2" values="1.034*eV  0.8   4.136*eV  0.9"/>
-      <property name="EFFICIENCY"              coldim="2" values="2.034*eV  0.8   4.136*eV  1.0"/>
-      <property name="RINDEX"                  coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
-    </opticalsurface>
-    -->
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_MirrorOpticalSurface" type="dielectric_metal" value="0">
-    </opticalsurface>
-    <opticalsurface finish="polished" model="unified" name="MRICH_LensOpticalSurface" type="dielectric_dielectric" value="0">
-      <property name="REFLECTIVITY"            coldim="2" values="1240*eV/1100  0.08   1240*eV/400  0.08"/>
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.56  4.136*eV  1.56"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-        -->
-    </opticalsurface>
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_PhotoSensorOpticalSurface" type="dielectric_dielectric" value="0">
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.35  4.136*eV  1.40"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      -->
-    </opticalsurface>
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_AerogelOpticalSurface" type="dielectric_dielectric" value="0">
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.010  4.136*eV  1.010"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      -->
-    </opticalsurface>
-
   </surfaces>
   <limits>
     <limitset name="EICBeamlineLimits">
@@ -180,128 +86,8 @@
   <include ref="compact/display.xml" />
   </display>
 
-  <comment> Include the IP components first </comment>
-  <include ref="ip6/forward_ion_beamline.xml"/>
-  <include ref="ip6/beampipe.xml"/>
+  <include ref="compact/sphere_test.xml"/>
 
-  <detectors>
-    <detector id="VertexBarrelSubAssembly_ID"
-      name="VertexBarrelSubAssembly"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="VertexBarrel" />
-    </detector>
-    <detector id="VertexEndcapSubAssembly_ID"
-      name="VertexEndcapSubAssembly"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="VertexEndcapN" />
-      <composite name="VertexEndcapP" />
-    </detector>
-
-    <detector id="TrackerBarrelSubAssembly_Inner_ID"
-      name="TrackerBarrelSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Inner"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Inner_ID"
-      name="TrackerEndcapSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapN_Inner"/>
-      <composite name="TrackerEndcapP_Inner"/>
-    </detector>
-
-    <detector id="TrackerBarrelSubAssembly_Outer_ID"
-      name="TrackerSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Outer"/>
-      <composite name="TrackerEndcapP_Outer"/>
-      <composite name="TrackerEndcapN_Outer"/>
-    </detector>
-
-    <detector id="TOFSubAssembly_ID"
-      name="TOFSubAssembly"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TOFSubAssemblyVis">
-      <composite name="BarrelTOF"/>
-      <composite name="ForwardTOF"/>
-      <composite name="BackwardTOF"/>
-    </detector>
-
-    <!--
-    <detector id="TrackerBarrelSubAssembly_Inner_ID"
-      name="TrackerBarrelSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Inner"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Inner_ID"
-      name="TrackerEndcapSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapN_Inner"/>
-      <composite name="TrackerBarrel_Inner"/>
-      <composite name="TrackerEndcapP_Inner"/>
-    </detector>
-    <detector id="TrackerBarrelSubAssembly_Outer_ID"
-      name="TrackerBarrelSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Outer"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Outer_ID"
-      name="TrackerEndcapSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapP_Outer"/>
-      <composite name="TrackerEndcapN_Outer"/>
-    </detector>
-    -->
-  </detectors>
-
-  <include ref="compact/vertex_tracker.xml"/>
-
-  <include ref="compact/central_tracker.xml"/>
-
-  <include ref="compact/tof_barrel.xml"/>
-
-  <!--include ref="compact/rwell_tracker_barrel.xml"-->
-  <include ref="compact/cb_DIRC.xml"/>
-  
-
-  <!-- When changing magnet, also select dimensions in definitions.xml. -->
-  <include ref="compact/solenoid.xml"/>
-
-  <include ref="compact/ci_ecal.xml"/>
-  <!--<include ref="compact/ci_ecal_shashlik.xml"/>-->
-  <!--<include ref="compact/ce_ecal.xml"/>-->
-  <include ref="compact/ce_ecal_crystal_glass.xml"/>
-  <!-- <include ref="compact/ecal_barrel.xml"/> -->
-  <!-- <include ref="compact/ecal_barrel_hybrid.xml"/> -->
-  <include ref="compact/ecal_barrel_interlayers.xml"/>
-
-  <include ref="compact/hcal.xml"/>
-
-  <!--include ref="compact/ce_GEM.xml"/-->
-  <!--include ref="compact/gem_tracker_endcap.xml"/-->
-  <!--include ref="compact/mrich.xml"/-->
-  <include ref="compact/tof_endcap.xml"/>
-  <include ref="compact/forward_trd.xml"/>
-  <include ref="compact/gaseous_rich.xml"/>
-
-  <include ref="ip6/B0_tracker.xml"/>
-  <include ref="ip6/far_forward_offM_tracker.xml"/>
-  <include ref="ip6/far_forward_romanpots.xml"/>
-  <include ref="ip6/far_forward_detectors.xml"/>
-
-
-  <!--
-  <include ref="compact/mm_tracker_barrel.xml"/>
-  <include ref="compact/cb_VTX_Barrel.xml"/>
-  -->
 
   <readouts>
   </readouts>
