@@ -69,7 +69,7 @@
     <comment>
       Deprecated colors.
     </comment>
-    <vis name="GreenVis"       alpha="1.0"  r= "0.0" g="1.0" b="0.0" showDaughters="true" visible="true"/>
+    <vis name="GreenVis"       alpha="1.0"  r= "0.0" g="1.0" b="0.0" showDaughters="false" visible="true"/>
     <vis name="RedVis"         alpha="0.2"  r= "1.0" g="0.0" b="0.0" showDaughters="true" visible="true"/>
     <vis name="RPVis"          alpha="0.99"  r= "1.0" g="0.0" b="0.0" showDaughters="true" visible="true"/>
     <vis name="RPLayerVis"     alpha="0.99"  r= "0.0" g="0.7" b="0.3" showDaughters="true" visible="true" lineStyle="solid" drawingStyle="solid" />

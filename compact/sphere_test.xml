@@ -15,7 +15,7 @@
 
   <detectors>
     <detector
-      id="1000"
+      id="2"
       name="sphere_test"
       type="athena_sphere_test" 
       readout="sphere_test_hits"
@@ -38,8 +38,8 @@
         thetamax="120*deg"
         phimin="-45*deg"
         phimax="45*deg"
-        yrot="110*deg"
-        material="AcrylicOptical"
+        yrot="0*deg"
+        material="PyrexGlass"
         vis="GreenVis"
         />
       <sensor
@@ -49,7 +49,7 @@
         halflengthx="1.5*m"
         halflengthy="1.5*m"
         halflengthz="0.1*m"
-        material="AcrylicOptical"
+        material="PyrexGlass"
         vis="BlueVis"
         />
     </detector>

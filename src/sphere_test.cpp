@@ -58,26 +58,17 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
   double ly = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthy));
   double lz = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthz));
 
-  Sphere mirror_solid( radius-thickness, radius, thetamin, thetamax, phimin, phimax );
+  Sphere mirror_solid( radius-thickness, radius);//, thetamin, thetamax, phimin, phimax );
   IntersectionSolid mirror_solid2(mirror_solid, Box(lx,ly,lz), Position(0,0,radius-thickness));
-
-  // volume
   Volume sphereVol("mirror_v",mirror_solid2,sphereMat);
-
-  // placement
+  sphereVol.setVisAttributes(sphereV);
   auto spherePV = envVol.placeVolume(sphereVol, Transform3D(RotationY(yrot)));
   DetElement sphereDE(det, "mirror_de", 0);
   sphereDE.setPlacement(spherePV);
 
-
-
   Box sensor_solid(lx,ly,lz);
-  // volume
   Volume boxVol("sensor_v",sensor_solid,boxMat);
   boxVol.setVisAttributes(boxVis);
-  boxVol.setSensitiveDetector(sens);
-
-  // placement
   auto boxPV = envVol.placeVolume(boxVol);
   boxPV.addPhysVolID("sensor", 0);
   DetElement boxDE(det, "sensor_de", 0);
