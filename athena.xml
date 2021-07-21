@@ -22,6 +22,8 @@
     <constant name="Pi" value="3.14159265359"/>
     <constant name="mil" value="0.0254*mm"/>
     <constant name="inch" value="2.54*cm"/>
+    <constant name="tracker_region_rmax"   value="1000/2.0"/>
+    <constant name="tracker_region_zmax"   value="1000/2.0"/>
   </define>
 
   <properties>

@@ -47,4 +47,4 @@
 /gps/ang/mintheta  10 degree
 /gps/ang/maxtheta  20 degree
 
-/run/beamOn 1
+#/run/beamOn 1
