@@ -47,19 +47,16 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
   double phimax = detElem.child(_Unicode(sphere)).attr<double>(_Unicode(phimax));
   double yrot = detElem.child(_Unicode(sphere)).attr<double>(_Unicode(yrot));
 
+  Sphere mirror_volume( radius-thickness, radius, thetamin, thetamax, phimin, phimax );
+
   // volume
-  Volume sphereVol("mirror_v");
-  sphereVol.setMaterial(sphereMat);
-  sphereVol.setVisAttributes(sphereVis);
-  sphereVol.setSolid(Sphere( radius-thickness, radius, thetamin, thetamax, phimin, phimax ));
+  Volume sphereVol("mirror_v",mirror_volume,sphereMat);
 
   // placement
-  auto spherePV = envVol.placeVolume(sphereVol,
-    Translation3D(0,0,0) * RotationY(yrot)
-  );
+  auto spherePV = envVol.placeVolume(sphereVol, Transform3D(RotationY(yrot)));
   DetElement sphereDE(det, "mirror_de", 0);
   sphereDE.setPlacement(spherePV);
-  
+
 
   // build box --------------------------
   // attributes
@@ -72,17 +69,14 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
   double ly = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthy));
   double lz = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthz));
 
+  Box sensor_solid(lx,ly,lz);
   // volume
-  Volume boxVol("sensor_v");
-  boxVol.setMaterial(boxMat);
+  Volume boxVol("sensor_v",sensor_solid,boxMat);
   boxVol.setVisAttributes(boxVis);
   boxVol.setSensitiveDetector(sens);
-  boxVol.setSolid(Box(lx,ly,lz));
 
   // placement
-  auto boxPV = envVol.placeVolume(boxVol,
-    Translation3D(0,0,0) * RotationX(0)
-  );
+  auto boxPV = envVol.placeVolume(boxVol);
   boxPV.addPhysVolID("sensor", 0);
   DetElement boxDE(det, "sensor_de", 0);
   boxDE.setPlacement(boxPV);
