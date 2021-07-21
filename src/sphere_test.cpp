@@ -47,17 +47,6 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
   double phimax = detElem.child(_Unicode(sphere)).attr<double>(_Unicode(phimax));
   double yrot = detElem.child(_Unicode(sphere)).attr<double>(_Unicode(yrot));
 
-  Sphere mirror_volume( radius-thickness, radius, thetamin, thetamax, phimin, phimax );
-
-  // volume
-  Volume sphereVol("mirror_v",mirror_volume,sphereMat);
-
-  // placement
-  auto spherePV = envVol.placeVolume(sphereVol, Transform3D(RotationY(yrot)));
-  DetElement sphereDE(det, "mirror_de", 0);
-  sphereDE.setPlacement(spherePV);
-
-
   // build box --------------------------
   // attributes
   auto boxMat = desc.material(detElem.child(_Unicode(sensor)).attr<std::string>(_Unicode(material)));
@@ -68,6 +57,19 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
   double lx = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthx));
   double ly = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthy));
   double lz = detElem.child(_Unicode(sensor)).attr<double>(_Unicode(halflengthz));
+
+  Sphere mirror_solid( radius-thickness, radius, thetamin, thetamax, phimin, phimax );
+  IntersectionSolid mirror_solid2(mirror_solid, Box(lx,ly,lz), Position(0,0,radius-thickness));
+
+  // volume
+  Volume sphereVol("mirror_v",mirror_solid2,sphereMat);
+
+  // placement
+  auto spherePV = envVol.placeVolume(sphereVol, Transform3D(RotationY(yrot)));
+  DetElement sphereDE(det, "mirror_de", 0);
+  sphereDE.setPlacement(spherePV);
+
+
 
   Box sensor_solid(lx,ly,lz);
   // volume
