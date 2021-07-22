@@ -1,19 +1,3 @@
-//==========================================================================
-//  AIDA Detector description implementation
-//--------------------------------------------------------------------------
-// Copyright (C) Organisation europeenne pour la Recherche nucleaire (CERN)
-// All rights reserved.
-//
-// For the licensing terms see $DD4hepINSTALL/LICENSE.
-// For the list of contributors see $DD4hepINSTALL/doc/CREDITS.
-//
-// Author     : M.Frank
-//
-//==========================================================================
-//
-// Specialized generic detector constructor
-//
-//==========================================================================
 #include <map>
 #include "DD4hep/DetFactoryHelper.h"
 #include "Acts/Plugins/DD4hep/ActsExtension.hpp"
@@ -23,6 +7,11 @@ using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
 
+/*! Endcap Trapezoidal Tracker.
+ *
+ * @author Whitney Armstrong
+ *
+ */
 static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens)
 {
   typedef vector<PlacedVolume> Placements;
@@ -114,8 +103,10 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
       c_vol.setVisAttributes(description.visAttributes(c.visStr()));
       pv = m_volume.placeVolume(c_vol, Position(0, posY + c_thick / 2, 0));
       if (c.isSensitive()) {
+        //std::cout << " adding sensitive volume" << c_name << "\n";
         sdet.check(n_sensor > 2, "SiTrackerEndcap2::fromCompact: " + c_name + " Max of 2 modules allowed!");
         pv.addPhysVolID("sensor", n_sensor);
+        sens.setType("tracker");
         c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
         ++n_sensor;
@@ -164,6 +155,8 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
     layerExtension->addType("layer", "layer");
     //layerExtension->addType("axes", "definitions", "XZY");
+    //layerExtension->addType("sensitive disk", "layer");
+    //layerExtension->addType("axes", "definitions", "XZY");
     layer_element.addExtension<Acts::ActsExtension>(layerExtension);
 
     for (xml_coll_t ri(x_layer, _U(ring)); ri; ++ri) {
@@ -185,7 +178,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         double     y      = -r * std::sin(phi);
 
         if (!reflect) {
-          DetElement module(sdet, m_base + "_pos", det_id);
+          DetElement module(layer_element, m_base + "_pos", det_id);
           pv = layer_vol.placeVolume(
               m_vol, Transform3D(RotationZYX(0, -M_PI / 2 - phi, -M_PI / 2), Position(x, y, zstart + dz)));
           pv.addPhysVolID("barrel", 1).addPhysVolID("layer", l_id).addPhysVolID("module", mod_num);
@@ -194,20 +187,22 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
             PlacedVolume sens_pv = sensVols[ic];
             DetElement   comp_elt(module, sens_pv.volume().name(), mod_num);
             comp_elt.setPlacement(sens_pv);
-            Acts::ActsExtension* moduleExtension = new Acts::ActsExtension();
+        //std::cout << " adding ACTS extension" << "\n";
+            Acts::ActsExtension* moduleExtension = new Acts::ActsExtension("XZY");
             comp_elt.addExtension<Acts::ActsExtension>(moduleExtension);
           }
         } else {
           pv = layer_vol.placeVolume(
               m_vol, Transform3D(RotationZYX(0, -M_PI / 2 - phi, -M_PI / 2), Position(x, y, -zstart - dz)));
           pv.addPhysVolID("barrel", 2).addPhysVolID("layer", l_id).addPhysVolID("module", mod_num);
-          DetElement r_module(sdet, m_base + "_neg", det_id);
+          DetElement r_module(layer_element, m_base + "_neg", det_id);
           r_module.setPlacement(pv);
           for (size_t ic = 0; ic < sensVols.size(); ++ic) {
             PlacedVolume sens_pv = sensVols[ic];
             DetElement   comp_elt(r_module, sens_pv.volume().name(), mod_num);
             comp_elt.setPlacement(sens_pv);
-            Acts::ActsExtension* moduleExtension = new Acts::ActsExtension();
+        //std::cout << " adding ACTS extension" << "\n";
+            Acts::ActsExtension* moduleExtension = new Acts::ActsExtension("XZY");
             comp_elt.addExtension<Acts::ActsExtension>(moduleExtension);
           }
         }

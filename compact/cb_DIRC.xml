@@ -23,8 +23,20 @@
 
   <detectors>
     <detector id="BarrelDIRC_ID" name="cb_DIRC" type="cb_DIRC" readout="DIRCHits" vis="AnlTeal">
-      <dimensions rmin="cb_DIRC_rmin" rmax="cb_DIRC_rmax" length="cb_DIRC_length"/>
+      <dimensions rmin="cb_DIRC_rmin" rmax="cb_DIRC_rmax" length="cb_DIRC_length" radius="DIRCRadius" dx="DIRCBars_DX" dy="DIRCBars_DY" number="DIRCNum" deltaphi="DIRCDPhi"/>
       <position x="0" y="0" z="DIRCOffset"/>
+      <module name="Module0"  R="DIRCRadius" phi="0*DIRCDPhi"  />
+      <module name="Module1"  R="DIRCRadius" phi="1*DIRCDPhi"  />
+      <module name="Module2"  R="DIRCRadius" phi="2*DIRCDPhi"  />
+      <module name="Module3"  R="DIRCRadius" phi="3*DIRCDPhi"  />
+      <module name="Module4"  R="DIRCRadius" phi="4*DIRCDPhi"  />
+      <module name="Module5"  R="DIRCRadius" phi="5*DIRCDPhi"  />
+      <module name="Module6"  R="DIRCRadius" phi="6*DIRCDPhi"  />
+      <module name="Module7"  R="DIRCRadius" phi="7*DIRCDPhi"  />
+      <module name="Module8"  R="DIRCRadius" phi="8*DIRCDPhi"  />
+      <module name="Module9"  R="DIRCRadius" phi="9*DIRCDPhi"  />
+      <module name="Module10" R="DIRCRadius" phi="10*DIRCDPhi" />
+      <module name="Module11" R="DIRCRadius" phi="11*DIRCDPhi" />
     </detector>
   </detectors>
 

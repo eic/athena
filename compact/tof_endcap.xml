@@ -28,6 +28,9 @@
 
     <constant name="BackwardTOF_zmin"           value="BarrelTracking_length/2.0 + BackwardTracking_length + BackwardCherenkov_length "/>
     <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
+    <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
+    <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
+      This is a limitation of ACTS geometry which will likely go away in the future.</comment>
     <constant name="BackwardTOF_rmin1"          value="ForwardPID_rmin1"/>
     <constant name="BackwardTOF_rmin2"          value="ForwardPID_rmin1"/>
     <constant name="BackwardTOF_rmax1"          value="BarrelTracking_rmax"/>
@@ -63,7 +66,7 @@
           <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin1"
             rmax="ForwardTOF_rmax1"
-            length="ForwardTOF_dz"
+            length="BackwardTOF_thickness"
             zstart="ForwardTOF_zmin" />
           <ring vis="AnlRed"
             r="ForwardTOF_rmin1+ForwardTOFMod1_y/2.0"
@@ -74,7 +77,7 @@
           <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin2"
             rmax="ForwardTOF_rmax2"
-            length="ForwardTOF_dz"
+            length="BackwardTOF_thickness"
             zstart="ForwardTOF_zmin + ForwardTOF_dz" />
           <ring vis="AnlRed"
             r="ForwardTOF_rmin2+ForwardTOFMod2_y/2.0"
@@ -104,7 +107,7 @@
           <envelope  vis="TOFVis"
             rmin="BackwardTOF_rmin1 + 0 * 1.2*cm"
             rmax="BackwardTOF_rmax1"
-            length="ForwardTOF_dz"
+            length="BackwardTOF_thickness"
             zstart="BackwardTOF_zmin" />
           <ring vis="AnlRed"
             r="BackwardTOF_rmin1+BackwardTOFMod1_y/2.0"
@@ -115,7 +118,7 @@
           <envelope  vis="TOFVis"
             rmin="BackwardTOF_rmin2"
             rmax="BackwardTOF_rmax2"
-            length="BackwardTOF_dz"
+            length="BackwardTOF_thickness"
             zstart="BackwardTOF_zmin + BackwardTOF_dz" />
           <ring vis="AnlRed"
             r="BackwardTOF_rmin2+BackwardTOFMod2_y/2.0"

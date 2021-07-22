@@ -175,11 +175,11 @@ convert_to_gdml:
 
 tracking_geometry_debug:
   stage: test
-  allow_failure: true
   needs: 
     - ["common:detector"]
   script:
     - root -b -q "scripts/test_ACTS.cxx+(\"${DETECTOR_PATH}/athena.xml\")" | tee geo/tracking_geometry_debug.out 
+    - ./bin/acts_geo_check geo/tracking_geometry_debug.out
 
 detector:config_testing:
   stage: test

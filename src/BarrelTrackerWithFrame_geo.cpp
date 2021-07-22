@@ -37,9 +37,12 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   //Assembly                     assembly(det_name);
   map<string, Volume>          volumes;
   map<string, Placements>      sensitives;
+  map<string, std::vector<VolPlane>>        volplane_surfaces;
   map<string, xml_h>      xmleles;
   PlacedVolume                 pv;
   dd4hep::xml::Dimension dimensions(x_det.dimensions());
+
+  map<string, std::array<double, 2>> module_thicknesses;
 
   Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
   detWorldExt->addType("barrel", "detector");
@@ -120,6 +123,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     volumes[m_nam] = m_vol;
     m_vol.setVisAttributes(description.visAttributes(x_mod.visStr()));
 
+    double thickness_so_far = 0.0;
     double thickness_sum = -total_thickness/2.0;
     for (xml_coll_t ci(x_mod, _U(module_component)); ci; ++ci, ++ncomponents) {
       xml_comp_t x_comp = ci;
@@ -148,8 +152,34 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         pv.addPhysVolID("sensor", sensor_number++);
         c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
+        module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness()/2.0, total_thickness-thickness_so_far - x_comp.thickness()/2.0};
+
+
+          // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
+          Vector3D u( 0. , 1. , 0. ) ;
+          Vector3D v( 0. , 0. , 1. ) ;
+          Vector3D n( 1. , 0. , 0. ) ;
+          //    Vector3D o( 0. , 0. , 0. ) ;
+
+          // compute the inner and outer thicknesses that need to be assigned to the tracking surface
+          // depending on wether the support is above or below the sensor
+          double inner_thickness = module_thicknesses[m_nam][0];
+          double outer_thickness = module_thicknesses[m_nam][1];
+
+          SurfaceType type( SurfaceType::Sensitive ) ;
+
+          //if( isStripDetector )
+          //  type.setProperty( SurfaceType::Measurement1D , true ) ;
+
+          VolPlane surf( c_vol , type , inner_thickness , outer_thickness , u,v,n ) ; //,o ) ;
+          volplane_surfaces[m_nam].push_back(surf);
+
+    //--------------------------------------------
+
+
       }
       thickness_sum += x_comp.thickness();
+      thickness_so_far += x_comp.thickness();
     }
   }
 
@@ -227,6 +257,11 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
           comp_de.addExtension<Acts::ActsExtension>(sensorExtension);
           //comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
           //                      xml_det_t(xmleles[m_nam]).visStr());
+          //
+
+      volSurfaceList( comp_de )->push_back( volplane_surfaces[m_nam][ic] ) ;
+
+
         }
 
         /// Increase counters etc.

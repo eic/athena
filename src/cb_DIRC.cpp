@@ -4,6 +4,7 @@
 #include "DDRec/DetectorData.h"
 #include "DDRec/Surface.h"
 #include <XML/Helper.h>
+#include "XML/Layering.h"
 //////////////////////////////////
 // Central Barrel DIRC
 //////////////////////////////////
@@ -24,6 +25,7 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   double    SizeZ = dim.length();
 
   Material Vacuum = desc.material("Vacuum");
+  Material mat = desc.material("Quartz");
   Tube     cb_DIRC_Barrel_GVol_Solid(RIn, ROut, SizeZ / 2.0, 0., 360.0 * deg);
   Volume   detVol("cb_DIRC_GVol_Solid_Logic", cb_DIRC_Barrel_GVol_Solid, Vacuum);
   detVol.setVisAttributes(desc.invisible());
@@ -40,15 +42,12 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   // DIRC Bars
   //////////////////
 
-  double dR = 83.65 * cm;
-
-  double cb_DIRC_bars_DZ = SizeZ;
-  double cb_DIRC_bars_DY = 42. * cm;
-  double cb_DIRC_bars_DX = 1.7 * cm;
-  double myL             = 2 * M_PI * dR;
-  int    NUM             = myL / cb_DIRC_bars_DY;
-
-  double cb_DIRC_bars_deltaphi = 2 * 3.1415926 / NUM;
+  double dR                = dim.radius();
+  double cb_DIRC_bars_DZ   = SizeZ; 
+  double cb_DIRC_bars_DY   = dim.dy();
+  double cb_DIRC_bars_DX   = dim.dx();
+  int    NUM               = dim.number();
+  double cb_DIRC_bars_DPhi = dim.deltaphi();
 
   Material cb_DIRC_bars_Material = desc.material("Quartz");
 
@@ -58,15 +57,14 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   sens.setType("photoncounter");
   cb_DIRC_bars_Logic.setSensitiveDetector(sens);
 
-  for (int ia = 0; ia < NUM; ia++) {
-    double phi = (ia * (cb_DIRC_bars_deltaphi));
-    double x   = -dR * cos(phi);
-    double y   = -dR * sin(phi);
-
-    Transform3D  tr(RotationZ(cb_DIRC_bars_deltaphi * ia), Position(x, y, 0));
+  int count = 0;
+  for (xml_coll_t mod(x_det, _U(module)); mod; ++mod) {
+    xml_comp_t x_mod = mod;
+    Transform3D  tr(RotationZ(x_mod.phi()), Position(-x_mod.R() * cos(x_mod.phi()), -x_mod.R() * sin(x_mod.phi()), 0));
     PlacedVolume barPV = detVol.placeVolume(cb_DIRC_bars_Logic, tr);
-    barPV.addPhysVolID("module", ia);
+    barPV.addPhysVolID("module", count++);
   }
+  
   return det;
 }
 

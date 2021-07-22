@@ -261,14 +261,22 @@
       Zero Degree Cal. Ecal ID: 160
       Zero Degree Cal. Hcal ID: 161
 
+      TODO: A lot of the  repeated ID's below should be pushed into a single detector
     </comment>
-    <constant name="B0Tracker_ID"          value="150"/>
+    <constant name="B0Tracker_Station_1_ID"          value="150"/>
+    <constant name="B0Tracker_Station_2_ID"          value="151"/>
+    <constant name="B0Tracker_Station_3_ID"          value="152"/>
+    <constant name="B0Tracker_Station_4_ID"          value="153"/>
     <constant name="ForwardRomanPot_Station_1_ID"   value="155"/>
     <constant name="ForwardRomanPot_Station_2_ID"   value="156"/>
-    <constant name="ForwardRomanPotC_ID"   value="157"/>
-    <constant name="ForwardOffMTracker_ID" value="159"/>
-    <constant name="ffi_ZDC_ECAL_ID"       value="160"/>
-    <constant name="ffi_ZDC_HCAL_ID"       value="161"/>
+    <constant name="ForwardRomanPotB_ID"   value="157"/>
+    <constant name="ForwardRomanPotC_ID"   value="158"/>
+    <constant name="ForwardOffMTracker_station_1_ID" value="159"/>
+    <constant name="ForwardOffMTracker_station_2_ID" value="160"/>
+    <constant name="ForwardOffMTracker_station_3_ID" value="161"/>
+    <constant name="ForwardOffMTracker_station_4_ID" value="162"/>
+    <constant name="ffi_ZDC_ECAL_ID"       value="163"/>
+    <constant name="ffi_ZDC_HCAL_ID"       value="164"/>
 
     <comment> 
       =====================================
@@ -510,9 +518,10 @@
     <constant name="EndcapP_CalDivide"          value="0.8"/> <comment> 0.5 means Ecal and Hcal have the same thickness </comment>
     <constant name="EndcapN_CalDivide"          value="1.0"/> <comment> 0.5 means Ecal and Hcal have the same thickness </comment>
 
-    <constant name="EcalEndcapP_length" value="EndcapPTotalCal_length * EndcapP_CalDivide"/>
+    <!--constant name="EcalEndcapP_length" value="EndcapPTotalCal_length * EndcapP_CalDivide"/-->
+    <constant name="EcalEndcapP_length" value="40*cm"/>
     <!--constant name="EcalEndcapN_length" value="EndcapNTotalCal_length * EndcapN_CalDivide"/-->
-    <constant name="EcalEndcapN_length" value="41*cm"/>
+    <constant name="EcalEndcapN_length" value="60*cm"/>
 
 
     <comment> These need to be set in sync with the forward and backward  detectors </comment>
@@ -593,8 +602,8 @@
       -------------------------------
     </comment>
 
-    <constant name="HcalEndcapP_length" value="100.0*cm"/>
-    <constant name="HcalEndcapN_length" value="75.0*cm"/>
+    <constant name="HcalEndcapP_length"   value="120.0*cm"/>
+    <constant name="HcalEndcapN_length"   value="105.0*cm"/>
     <constant name="HcalBarrel_thickness" value="100.0*cm "/>
 
     <constant name="HcalBarrel_rmin"          value="Solenoid_rmax"/>
@@ -634,6 +643,54 @@
     </comment>
     <constant name="DIRCLength"           value="CentralTracking_length + BackwardPIDLength"/>
     <constant name="DIRCOffset"           value="(CentralTracking_length - DIRCLength)/2.0"/>
+    <constant name="DIRCRadius"           value="83.65*cm"/>
+    <constant name="DIRCBars_DX"          value="1.7*cm"/>
+    <constant name="DIRCBars_DY"          value="42.*cm"/>
+    <constant name="DIRCNum"              value="2*Pi*DIRCRadius/DIRCBars_DY"/>
+    <constant name="DIRCDPhi"             value="DIRCBars_DY/DIRCRadius"/>
+
+
+    <comment>
+      ----------------------
+      Zero Degree Parameters
+      ----------------------
+    </comment>
+    <comment> BeamLines: IP6 </comment>
+    <constant name="ffi_ZDC_z_pos"         value="3800.0 * cm"/>
+    <constant name="ffi_ZDC_x_pos"         value="ffi_ZDC_z_pos * ionCrossingAngle"/> <comment> original value="90.0 * cm" </comment>
+    <constant name="ffi_ZDC_y_pos"         value="0.0 * cm"/>
+    <constant name="ffi_ZDC_rotateX_angle" value="0.0 * rad"/>
+    <constant name="ffi_ZDC_rotateY_angle" value="-0.0125 * rad"/>
+    <constant name="ffi_ZDC_rotateZ_angle" value="0.0 * rad"/>
+
+    <comment> BeamLines: IP8 </comment>
+    <!--
+    <constant name="ffi_ZDC_x_pos"     value="127.0 * cm"/>
+    <constant name="ffi_ZDC_y_pos"         value="0.0 * cm"/>
+    <constant name="ffi_ZDC_z_pos"         value="3600.0 * cm"/>
+    <constant name="ffi_ZDC_rotateX_angle" value="0.0 * rad"/>
+    <constant name="ffi_ZDC_rotateY_angle" value="-0.025 * rad"/>
+    <constant name="ffi_ZDC_rotateZ_angle" value="0.0 * rad"/>
+    -->
+
+    <comment> Global parameters </comment>
+    <constant name="ffi_ZDC_width"             value="60.0 * cm"/>
+    <constant name="ffi_ZDC_thickness"         value="200.0 * cm"/>
+    <comment> Original Global parameters </comment>     
+    <!--
+    <constant name="ffi_ZDC_thickness"         value="250.0 * cm"/>
+    -->     
+    <constant name="ffi_ZDC_ECAL_thickness"    value="30.0 * cm"/>
+    <constant name="ffi_ZDC_ECAL_inner_radius" value="0.0 * cm"/>
+    <constant name="ffi_ZDC_ECAL_outer_radius" value="60.0 * cm"/>
+    <constant name="ffi_ZDC_ECAL_width"        value="5.0 * cm"/>
+    <constant name="ffi_ZDC_ECAL_gap"          value="5.0 * mm"/>
+    <constant name="ffi_ZDC_ECAL_ntower"       value="10"/>
+    <comment> Original number of towers parameter  </comment> 
+    <!--
+    <constant name="ffi_ZDC_ECAL_ntower"       value="20"/>
+    -->
+>>>>>>> 8c0ea6ff318b7d28c2c1554f70fe003a2949c34b
 
     <comment>
       -----------------------
