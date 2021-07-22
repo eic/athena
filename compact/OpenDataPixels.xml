@@ -89,23 +89,23 @@
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="37.*mm" rmax="39.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm" nsides="1" vis="CarbonFiber"/-->
         </layer>
-        <layer id="1" name="PixelLayer1" rmin="55.*mm" r="57.*mm" rmax="59.*mm" outer_z="15.*mm"  nphi="22" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="1" name="PixelLayer1" rmin="54.*mm" r="57.*mm" rmax="60.*mm" outer_z="15.*mm"  nphi="22" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="75.*mm" rmax="77.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm" nsides="1" vis="CarbonFiber" /-->
         </layer>
-        <layer id="2" name="PixelLayer2" rmin="208.*mm" r="210.*mm" rmax="212.*mm" outer_z="27.*mm" nphi="92" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="2" name="PixelLayer2" rmin="206.*mm" r="210.*mm" rmax="214.*mm" outer_z="27.*mm" nphi="92" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="120.*mm" rmax="122.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm"  nsides="1" vis="CarbonFiber" /-->
         </layer>
-        <layer id="3" name="PixelLayer3" rmin="224.8*mm" r="226.8*mm" rmax="228.8*mm" outer_z="20.*mm" nphi="92" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="3" name="PixelLayer3" rmin="221.8*mm" r="226.8*mm" rmax="231.8*mm" outer_z="20.*mm" nphi="92" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="176.*mm" rmax="178.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm"  nsides="1" vis="CarbonFiber"/-->
         </layer>
-        <layer id="4" name="PixelLayer4" rmin="391.*mm" r="393.*mm" rmax="395.*mm" outer_z="20.*mm" nphi="164" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="4" name="PixelLayer4" rmin="387.*mm" r="393.*mm" rmax="399.*mm" outer_z="20.*mm" nphi="164" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="176.*mm" rmax="178.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm"  nsides="1" vis="CarbonFiber"/-->
         </layer>
-        <layer id="5" name="PixelLayer5" rmin="430.3*mm" r="432.3*mm" rmax="434.3*mm" outer_z="20.*mm" nphi="164" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="5" name="PixelLayer5" rmin="425.3*mm" r="432.3*mm" rmax="439.3*mm" outer_z="20.*mm" nphi="164" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="176.*mm" rmax="178.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm"  nsides="1" vis="CarbonFiber"/-->
         </layer>
