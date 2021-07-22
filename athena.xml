@@ -256,8 +256,11 @@
     -->
   </detectors>
 
+  <!--
   <include ref="compact/vertex_tracker.xml"/>
   <include ref="compact/central_tracker.xml"/>
+  -->
+  <include ref="compact/OpenDataDetector.xml"/>
 
   <include ref="compact/tof_barrel.xml"/>
 
