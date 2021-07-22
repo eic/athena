@@ -17,23 +17,28 @@
         <constant name="world_z" value="world_size"/>
         -->
         <!--Dimensions of the beam pipe -->
+        <!--
         <constant name="bp_rmin" value="23.6*mm"/>
         <constant name="bp_rmax" value="24.4*mm"/>
         <constant name="bp_length" value="4.0*m"/>
+        -->
         <!--Dimensions of the Pixel volume & sub volumes -->
         <constant name="pix_env_rmin" value="25.*mm"/>
-        <constant name="pix_env_rmax" value="200.*mm"/>
-        <constant name="pix_env_dz" value="2.4*m"/>  
-        <constant name="pix_b_z"  value="0.*m"/>                
-        <constant name="pix_b_dz" value="0.580*m"/> 
-        <constant name="pix_e_nz" value="-1.480*m"/>                
-        <constant name="pix_e_pz" value="1.480*m"/>                
-        <constant name="pix_e_dz" value="0.9*m"/> 
+        <constant name="pix_env_rmax" value="450.*mm"/>
+        <constant name="pix_env_dz" value="1.2*m"/>
+        <constant name="pix_b_z"  value="0.*m"/>
+        <constant name="pix_b_dz" value="0.580*m"/>
+        <constant name="pix_e_nz" value="-1.210*m"/>
+        <constant name="pix_e_pz" value="+1.210*m"/>
+        <constant name="pix_e_dz" value="26*cm"/>
         <!--Dimensions of the Pixel Support tube -->
+        <!--
         <constant name="pst_rmin" value="200.*mm"/>
         <constant name="pst_rmax" value="204.*mm"/>
-        <constant name="pst_length" value="2.0*m"/>        
+        <constant name="pst_length" value="2.0*m"/>
+        -->
         <!--Dimensions of the Short Strips volume & sub volumes -->
+        <!--
         <constant name="ss_env_rmin" value="204.*mm"/>
         <constant name="ss_env_rmax" value="720.*mm"/>
         <constant name="ss_env_dz" value="3.15*m"/>  
@@ -42,7 +47,9 @@
         <constant name="ss_e_nz" value="-2.175*m"/>                
         <constant name="ss_e_pz" value="2.175*m"/>                
         <constant name="ss_e_dz" value="0.975*m"/>  
+        -->
         <!--Dimensions of the Long Strips volume & sub volumes -->
+        <!--
         <constant name="ls_env_rmin" value="720.*mm"/>
         <constant name="ls_env_rmax" value="1140.*mm"/>
         <constant name="ls_env_dz" value="3.15*m"/>  
@@ -51,10 +58,13 @@
         <constant name="ls_e_nz" value="-2.175*m"/>                
         <constant name="ls_e_pz" value="2.175*m"/>                
         <constant name="ls_e_dz" value="0.975*m"/>   
+        -->
         <!--Dimensions of the Solenoid -->
+        <!--
         <constant name="sol_rmin" value="1140.*mm"/>
         <constant name="sol_rmax" value="1200.*mm"/>
         <constant name="sol_hlength" value="3.0*m"/>  
+        -->
         <!-- Material binning section -->
         <!-- beam pipe section -->
         <constant name="mat_bp_bPhi" value="1"/>
@@ -69,6 +79,7 @@
         <constant name="mat_pix_inter_bR" value="50"/>
         <constant name="mat_pix_inter_bPhi" value="72"/>
         <!-- short strip section -->
+        <!--
         <constant name="mat_sst_barrel_bPhi" value="72"/>
         <constant name="mat_sst_barrel_bZ" value="150"/>
         <constant name="mat_sst_endcap_bPhi" value="72"/>
@@ -77,7 +88,9 @@
         <constant name="mat_sst_outer_bPhi" value="72"/>
         <constant name="mat_sst_inter_bR" value="25"/>
         <constant name="mat_sst_inter_bPhi" value="72"/>
+        -->
         <!-- long strip section -->
+        <!--
         <constant name="mat_lst_barrel_bPhi" value="72"/>
         <constant name="mat_lst_barrel_bZ" value="250"/>
         <constant name="mat_lst_endcap_bPhi" value="72"/>
@@ -86,6 +99,7 @@
         <constant name="mat_lst_outer_bPhi" value="72"/>
         <constant name="mat_lst_inter_bR" value="100"/>
         <constant name="mat_lst_inter_bPhi" value="72"/>
+        -->
     </define>
             
     <display>
@@ -136,22 +150,24 @@
     <include ref="OpenDataLongStrips.xml"/>
     -->
     <detectors>
+      <!--
       <detector id="0" name="BeamPipe" type="ODDCylinder" vis="Beryllium">
             <beampipe/>
             <tubs name="BeamPipeCylinder" rmin="bp_rmin" rmax="bp_rmax" dz="bp_length" material="Beryllium">
               <layer_material surface="representing" binning="binPhi,binZ" bins0="mat_bp_bPhi" bins1="mat_bp_bZ"/>
             </tubs>
       </detector>
+      -->
       <detector id="1" name="Pixels" type="DD4hep_SubdetectorAssembly" vis="invisible">
           <shape name="PixelVolume" type="Tube" rmin="pix_env_rmin" rmax="pix_env_rmax" dz="pix_env_dz" material="Air"/>
           <composite name="PixelEndcapN"/>
           <composite name="PixelBarrel"/>
           <composite name="PixelEndcapP"/>
       </detector>
+      <!--
       <detector id="2" name="PST" type="ODDCylinder" beampipe="false" vis="CarbonFiber">
             <tubs name="PixelSupportCylinder" rmin="pst_rmin" rmax="pst_rmax" dz="pst_length" material="CarbonFiber"/>
       </detector>
-      <!--
       <detector id="3" name="ShortStrips" type="DD4hep_SubdetectorAssembly" vis="invisible">
           <shape name="ShortStripVolume" type="Tube" rmin="ss_env_rmin" rmax="ss_env_rmax" dz="ss_env_dz" material="Air"/>
           <composite name="ShortStripEndcapN"/>
@@ -164,9 +180,9 @@
           <composite name="LongStripBarrel"/>
           <composite name="LongStripEndcapP"/>
       </detector>
-      -->
       <detector id="5" name="Solenoid" type="ODDCylinder" beampipe="false" vis="grey">
             <tubs name="Solenoid" rmin="sol_rmin" rmax="sol_rmax" dz="sol_hlength" material="CarbonFiber"/>
       </detector>
+      -->
     </detectors>
 </lccdd>
