@@ -181,10 +181,11 @@
   </display>
 
   <comment> Include the IP components first </comment>
-  <include ref="ip6/forward_ion_beamline.xml"/>
-  <include ref="ip6/beampipe.xml"/>
+  <!--include ref="ip6/forward_ion_beamline.xml"/-->
+  <!--include ref="ip6/beampipe.xml"/-->
 
   <detectors>
+    <!--
     <detector id="VertexBarrelSubAssembly_ID"
       name="VertexBarrelSubAssembly"
       type="DD4hep_SubdetectorAssembly"
@@ -198,7 +199,9 @@
       <composite name="VertexEndcapN" />
       <composite name="VertexEndcapP" />
     </detector>
+    -->
 
+    <!--
     <detector id="TrackerEndcapSubAssembly_Inner_ID"
       name="TrackerSubAssembly_Inner"
       type="DD4hep_SubdetectorAssembly"
@@ -215,6 +218,7 @@
       <composite name="TrackerEndcapP_Outer"/>
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
+    -->
 
     <detector id="TOFSubAssembly_ID"
       name="TOFSubAssembly"
@@ -289,10 +293,10 @@
   <include ref="compact/forward_trd.xml"/>
   <include ref="compact/gaseous_rich.xml"/>
 
-  <include ref="ip6/B0_tracker.xml"/>
-  <include ref="ip6/far_forward_offM_tracker.xml"/>
-  <include ref="ip6/far_forward_romanpots.xml"/>
-  <include ref="ip6/far_forward_detectors.xml"/>
+  <!--include ref="ip6/B0_tracker.xml"/-->
+  <!--include ref="ip6/far_forward_offM_tracker.xml"/-->
+  <!--include ref="ip6/far_forward_romanpots.xml"/-->
+  <!--include ref="ip6/far_forward_detectors.xml"/-->
 
 
   <!--
