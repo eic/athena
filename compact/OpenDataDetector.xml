@@ -158,7 +158,7 @@
             </tubs>
       </detector>
       -->
-      <detector id="1" name="Pixels" type="DD4hep_SubdetectorAssembly" vis="invisible">
+      <detector id="TrackerEndcapSubAssembly_Inner_ID" name="Pixels" type="DD4hep_SubdetectorAssembly" vis="invisible">
           <shape name="PixelVolume" type="Tube" rmin="pix_env_rmin" rmax="pix_env_rmax" dz="pix_env_dz" material="Air"/>
           <composite name="PixelEndcapN"/>
           <composite name="PixelBarrel"/>

@@ -1,6 +1,6 @@
 <detectors>
     <!--EndcapN-->
-    <detector id="101" name="PixelEndcapN" type="ODDPixelEndcap" readout="PixelEndcapReadout" vis="invisible">
+    <detector id="TrackerEndcapN_Inner_ID" name="PixelEndcapN" type="ODDPixelEndcap" readout="PixelEndcapReadout" vis="invisible">
         <dimensions name="PixelEndcapShape" rmin="pix_env_rmin" rmax="pix_env_rmax" dz="pix_e_dz" z="pix_e_nz"/>
         <ring id="0" r="150.*mm" nphi="24" z_offset="3.5*mm" phi0="0." gap="0.6*mm" vis="invisible">
           <module name="PixelEndcapModule" vis="invisible">
@@ -62,7 +62,7 @@
         -->
     </detector>
     <!--Barrel-->
-    <detector id="100" name="PixelBarrel" type="ODDPixelBarrel" readout="PixelBarrelReadout" vis="invisible">
+    <detector id="TrackerBarrel_Inner_ID" name="PixelBarrel" type="ODDPixelBarrel" readout="PixelBarrelReadout" vis="invisible">
         <dimensions name="PixelBarrelShape" rmin="pix_env_rmin" rmax="pix_env_rmax" dz="pix_b_dz" z="0.*mm"/>
         <boundary_material surface="negative" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         <boundary_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
@@ -126,7 +126,7 @@
         -->
     </detector>
     <!--EndcapP-->
-    <detector id="102" name="PixelEndcapP" type="ODDPixelEndcap" readout="PixelEndcapReadout" vis="invisible">
+    <detector id="TrackerEndcapP_Inner_ID" name="PixelEndcapP" type="ODDPixelEndcap" readout="PixelEndcapReadout" vis="invisible">
         <dimensions name="PixelEndcapShape" rmin="pix_env_rmin" rmax="pix_env_rmax" dz="pix_e_dz" z="pix_e_pz"/>
         <ring id="0" r="150.*mm" nphi="24" z_offset="-3.5*mm" phi0="0." gap="0.6*mm" vis="invisible">
           <module name="PixelEndcapModule" vis="invisible">
