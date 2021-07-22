@@ -282,7 +282,7 @@
   <include ref="compact/ce_ecal_crystal_glass.xml"/>
   <!-- <include ref="compact/ecal_barrel.xml"/> -->
   <!-- <include ref="compact/ecal_barrel_hybrid.xml"/> -->
-  <!--<include ref="compact/ecal_barrel_interlayers.xml"/>-->
+  <include ref="compact/ecal_barrel_interlayers.xml"/>
 
   <include ref="compact/hcal.xml"/>
 
