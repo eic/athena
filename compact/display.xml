@@ -23,7 +23,7 @@
 
     <comment>Tracker_Layer_Vis is AnlGold</comment>
     <!--vis name="Tracker_Layer_Vis"  alpha="0.5" r="248/256" g="178/256" b="0/256" showDaughters="true" /-->
-    <vis name="Tracker_Layer_Vis" ref="AnlGold" alpha="0.5"/>
+    <vis name="Tracker_Layer_Vis" ref="AnlRed" drawingStyle="wireframe"/>
 
     <vis name="InvisibleNoDaughters"      showDaughters="false" visible="false"/>
     <vis name="InvisibleWithDaughters"    showDaughters="true" visible="false"/>

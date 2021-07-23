@@ -194,7 +194,7 @@
         <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapInner_rmin1"
           rmax="TrackerEndcapInner_rmax2"
           length="TrackerEndcapInnerLayer_dz"
@@ -219,7 +219,7 @@
         <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapInner_rmin1"
           rmax="TrackerEndcapInner_rmax2"
           length="TrackerEndcapInnerLayer_dz"
@@ -327,7 +327,7 @@
         <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin1"
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
@@ -338,7 +338,7 @@
           nmodules="12" dz="2.5 * mm" module="Module1" />
       </layer>
       <layer id="2">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin2"
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
@@ -349,7 +349,7 @@
           nmodules="12" dz="2.5 * mm" module="Module2" />
       </layer>
       <layer id="3">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin3"
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
@@ -384,7 +384,7 @@
         <module_component thickness="0.25/100*9.37*cm-ITS3Thickness" material="Silicon"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin1 + 0 * 1.2*cm"
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
@@ -395,7 +395,7 @@
           nmodules="12" dz="2.5 * mm" module="Module1" />
       </layer>
       <layer id="2">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin2"
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
@@ -406,7 +406,7 @@
           nmodules="12" dz="2.5 * mm" module="Module2" />
       </layer>
       <layer id="3">
-        <envelope  vis="AnlRed"
+        <envelope  vis="Tracker_Layer_Vis"
           rmin="TrackerEndcapOuter_rmin3"
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
