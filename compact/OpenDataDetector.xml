@@ -120,27 +120,27 @@
         
     <readouts>
         <readout name="PixelBarrelReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,stave:8,module:4,sensor:2,x:32:-16,y:-16</id>
         </readout>
         <readout name="PixelEndcapReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,ring:2,module:8,sensor:2,x:32:-16,y:-16</id>
         </readout>
         <readout name="ShortStripBarrelReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,stave:8,module:8,sensor:2,x:32:-16,y:-16</id>
         </readout>
         <readout name="ShortStripEndcapReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,ring:2,module:8,sensor:2,x:32:-16,y:-16</id>
         </readout>
         <readout name="LongStripBarrelReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,stave:8,module:8,sensor:4,x:32:-16,y:-16</id>
         </readout>>
         <readout name="LongStripEndcapReadout">
-            <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="0.05*mm"/>
+            <segmentation type="CartesianGridXY" grid_size_x="0.01*mm" grid_size_y="0.01*mm"/>
             <id>system:8,layer:4,ring:4,module:8,sensor:4,x:32:-16,y:-16</id>
         </readout>
     </readouts> 
