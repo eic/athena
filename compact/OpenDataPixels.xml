@@ -85,7 +85,7 @@
           -->
         </stave>
         <comment>B-0.0</comment>
-        <layer id="0" name="PixelLayer0" rmin="31.*mm" r="33.*mm" rmax="35.*mm" outer_z="15.*mm" nphi="12" phi_tilt="0.12" phi0="0." vis="invisible">
+        <layer id="0" name="PixelLayer0" rmin="30.*mm" r="33.*mm" rmax="36.*mm" outer_z="15.*mm" nphi="12" phi_tilt="0.12" phi0="0." vis="invisible">
           <layer_material surface="outer" binning="binPhi,binZ" bins0="mat_pix_barrel_bPhi" bins1="mat_pix_barrel_bZ"/>
           <!--support name="SupportCylinder" rmin="37.*mm" rmax="39.*mm" dz="500.*mm" material="CarbonFiber" z_offset="0.*mm" nsides="1" vis="CarbonFiber"/-->
         </layer>
