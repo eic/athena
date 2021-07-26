@@ -352,7 +352,7 @@
       ### PID Detector Region Parameters
     </comment>
 
-    <constant name="ForwardRICH_length"       value="1.1*m"/>
+    <constant name="ForwardRICH_length"       value="150*cm"/>
     <constant name="ForwardTRD_length"        value="10.0*cm"/>
     <constant name="ForwardTOF_length"        value="3.0*cm"/>
     
@@ -381,7 +381,7 @@
       Generic tracking space allocations
     </comment>
 
-    <constant name="ForwardTracking_length" value="0.0*cm"/>
+    <constant name="ForwardTracking_length" value="15.0*cm"/>
     <comment>This compensates for the asymmetry of the setup</comment>
     <constant name="BackwardTracking_length" value="7.5*cm"/>
 

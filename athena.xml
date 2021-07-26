@@ -160,7 +160,6 @@
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
   <!--include ref="compact/mrich.xml"/-->
   <include ref="compact/forward_trd.xml"/>
-  <include ref="compact/gaseous_rich.xml"/>
 
   <include ref="ip6/B0_tracker.xml"/>
   <include ref="ip6/far_forward_offM_tracker.xml"/>
