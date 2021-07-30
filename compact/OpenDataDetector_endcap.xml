@@ -31,6 +31,16 @@
         <constant name="pix_e_nz" value="-0.730*m"/>
         <constant name="pix_e_pz" value="+0.730*m"/>
         <constant name="pix_e_dz" value="50*cm"/>
+        <!--Dimensions of the Barrel pixel detectors in endcap config -->
+        <constant name="pix_b_n" value="5"/>
+        <!--Dimensions of the Endcap pixel detectors in endcap config -->
+        <constant name="pix_e_rmin" value="31.8*mm"/>
+        <constant name="pix_e_rmax" value="432.3*mm"/>
+        <constant name="pix_e_z0" value="250.*mm"/>
+        <constant name="pix_e_z1" value="490.*mm"/>
+        <constant name="pix_e_z2" value="730.*mm"/>
+        <constant name="pix_e_z3" value="970.*mm"/>
+        <constant name="pix_e_z4" value="1210.*mm"/>
         <!--Dimensions of the Pixel Support tube -->
         <!--
         <constant name="pst_rmin" value="200.*mm"/>
@@ -144,7 +154,7 @@
             <id>system:8,layer:4,ring:4,module:8,sensor:4,x:32:-16,y:-16</id>
         </readout>
     </readouts> 
-    <include ref="OpenDataPixels_endcaps.xml"/>
+    <include ref="OpenDataPixels.xml"/>
     <!--
     <include ref="OpenDataShortStrips.xml"/>
     <include ref="OpenDataLongStrips.xml"/>

@@ -20,7 +20,7 @@
           -->
           </module>
         </ring>
-        <ring_support rmin="31.8*mm" rmax="432.3*mm" dz="2*mm" material="CarbonFiber" vis="CarbonFiber"/>
+        <ring_support rmin="pix_e_rmin" rmax="pix_e_rmax" dz="2*mm" material="CarbonFiber" vis="CarbonFiber"/>
         <!--
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="50.*mm" gap="2.6*mm" nphi="32" z_offset="-4.*mm" material="Ti" vis="orange"/>
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="70.*mm" gap="3.6*mm" nphi="32" z_offset="-4.*mm" material="Ti" vis="orange"/>
@@ -29,19 +29,19 @@
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="145.*mm" gap="7.2*mm" nphi="32" z_offset="+6.1*mm" material="Ti" vis="orange"/>
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="170.*mm" gap="8.4*mm" nphi="32" z_offset="+4.*mm" material="Ti" vis="orange"/>
         -->
-        <layer id="0" name="PixelEndcapN0" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="-250.*mm" vis="invisible">
+        <layer id="0" name="PixelEndcapN0" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="-pix_e_z0" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="1" name="PixelEndcapN1" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="-490.*mm" vis="invisible">
+        <layer id="1" name="PixelEndcapN1" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="-pix_e_z1" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="2" name="PixelEndcapN2" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="-730.*mm" vis="invisible">
+        <layer id="2" name="PixelEndcapN2" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="-pix_e_z2" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="3" name="PixelEndcapN3" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="-970.*mm" vis="invisible">
+        <layer id="3" name="PixelEndcapN3" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="-pix_e_z3" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="4" name="PixelEndcapN4" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="-1210.*mm" vis="invisible">
+        <layer id="4" name="PixelEndcapN4" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="-pix_e_z4" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
         <!--
@@ -71,7 +71,7 @@
           <module_component name="Connector" alpha="0." dx="3*mm" dy="60*mm" dz="0.15*mm" x_offset="-8.*mm" y_offset="0." z_offset="-1.35*mm" material="Al" vis="red" sensitive="false"/>
           -->
         </module>
-        <stave name="PixelBarrelStave" nmodules="5" gap="0.5*mm" vis="invisible">
+        <stave name="PixelBarrelStave" nmodules="pix_b_n" gap="0.5*mm" vis="invisible">
           <!--
           <subtraction name="PixelBarrelStaveFoam" material="CarbonFoam" x_offset="0.*mm" y_offset="0.*mm" z_offset="0.6*mm" vis="CarbonFoam">
              <trd name="FoamStructure" x1="6.*mm" x2="1.*mm" thickness="2.*mm" dz="15.*mm"/>
@@ -143,7 +143,7 @@
           -->
           </module>
         </ring>
-        <ring_support rmin="31.8*mm" rmax="432.3*mm" dz="2*mm" material="CarbonFiber" vis="CarbonFiber"/>
+        <ring_support rmin="pix_e_rmin" rmax="pix_e_rmax" dz="2*mm" material="CarbonFiber" vis="CarbonFiber"/>
         <!--
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="50.*mm" gap="2.6*mm" nphi="32" z_offset="4.*mm" material="Ti" vis="orange"/>
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="70.*mm" gap="3.6*mm" nphi="32" z_offset="4.*mm" material="Ti" vis="orange"/>
@@ -152,19 +152,19 @@
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="145.*mm" gap="7.2*mm" nphi="32" z_offset="-6.1*mm" material="Ti" vis="orange"/>
         <cooling_ring rmin="1.4*mm" rmax="1.6*mm" r="170.*mm" gap="8.4*mm" nphi="32" z_offset="-4.*mm" material="Ti" vis="orange"/>
         -->
-        <layer id="0" name="PixelEndcapP0" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="250.*mm" vis="invisible">
+        <layer id="0" name="PixelEndcapP0" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="pix_e_z0" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="1" name="PixelEndcapP1" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="490.*mm" vis="invisible">
+        <layer id="1" name="PixelEndcapP1" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="pix_e_z1" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="2" name="PixelEndcapP2" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="730.*mm" vis="invisible">
+        <layer id="2" name="PixelEndcapP2" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="pix_e_z2" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="3" name="PixelEndcapP3" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="970.*mm" vis="invisible">
+        <layer id="3" name="PixelEndcapP3" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="pix_e_z3" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
-        <layer id="4" name="PixelEndcapP4" rmin="31.8*mm" rmax="432.3*mm" dz="20.*mm" z_offset="1210.*mm" vis="invisible">
+        <layer id="4" name="PixelEndcapP4" rmin="pix_e_rmin" rmax="pix_e_rmax" dz="20.*mm" z_offset="pix_e_z4" vis="invisible">
           <layer_material surface="representing" binning="binPhi,binR" bins0="mat_pix_endcap_bPhi" bins1="mat_pix_endcap_bR"/>
         </layer>
         <!--

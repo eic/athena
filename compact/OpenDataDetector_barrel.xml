@@ -25,12 +25,22 @@
         <!--Dimensions of the Pixel volume & sub volumes -->
         <constant name="pix_env_rmin" value="25.*mm"/>
         <constant name="pix_env_rmax" value="450.*mm"/>
-        <constant name="pix_env_dz" value="1.2*m"/>
+        <constant name="pix_env_dz" value="1.25*m"/>
         <constant name="pix_b_z"  value="0.*m"/>
         <constant name="pix_b_dz" value="0.580*m"/>
         <constant name="pix_e_nz" value="-0.870*m"/>
         <constant name="pix_e_pz" value="+0.870*m"/>
         <constant name="pix_e_dz" value="27*cm"/>
+        <!--Dimensions of the Barrel pixel detectors in barrel config -->
+        <constant name="pix_b_n" value="14"/>
+        <!--Dimensions of the Endcap pixel detectors in barrel config -->
+        <constant name="pix_e_rmin" value="31.8*mm"/>
+        <constant name="pix_e_rmax" value="432.3*mm"/>
+        <constant name="pix_e_z0" value="620.*mm"/>
+        <constant name="pix_e_z1" value="720.*mm"/>
+        <constant name="pix_e_z2" value="820.*mm"/>
+        <constant name="pix_e_z3" value="920.*mm"/>
+        <constant name="pix_e_z4" value="1020.*mm"/>
         <!--Dimensions of the Pixel Support tube -->
         <!--
         <constant name="pst_rmin" value="200.*mm"/>
@@ -144,7 +154,7 @@
             <id>system:8,layer:4,ring:4,module:8,sensor:4,x:32:-16,y:-16</id>
         </readout>
     </readouts> 
-    <include ref="OpenDataPixels_barrel.xml"/>
+    <include ref="OpenDataPixels.xml"/>
     <!--
     <include ref="OpenDataShortStrips.xml"/>
     <include ref="OpenDataLongStrips.xml"/>

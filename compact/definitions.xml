@@ -95,6 +95,8 @@
 
     </comment>
 
+    <constant name="ITS3Thickness"                   value="30*um"/>
+
     <constant name="TrackerBarrelSubAssembly_Inner_ID" value="50"/>
     <constant name="TrackerEndcapSubAssembly_Inner_ID" value="51"/>
 
