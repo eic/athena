@@ -144,7 +144,7 @@
             <id>system:8,layer:4,ring:4,module:8,sensor:4,x:32:-16,y:-16</id>
         </readout>
     </readouts> 
-    <include ref="OpenDataPixels.xml"/>
+    <include ref="OpenDataPixels_barrel.xml"/>
     <!--
     <include ref="OpenDataShortStrips.xml"/>
     <include ref="OpenDataLongStrips.xml"/>
