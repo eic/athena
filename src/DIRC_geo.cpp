@@ -68,4 +68,4 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   return det;
 }
 
-DECLARE_DETELEMENT(cb_DIRC, createDetector)
+DECLARE_DETELEMENT(DIRC, createDetector)

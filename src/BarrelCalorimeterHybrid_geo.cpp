@@ -29,37 +29,41 @@ using namespace dd4hep::detail;
 typedef ROOT::Math::XYPoint Point;
 
 // Fill fiber lattice into trapezoid starting from position (0,0) in x-z coordinate system
-vector<Point> fiberPositions(double radius, double x_spacing, double z_spacing, double x, double z, double phi, double spacing_tol = 1e-2) {
+vector<vector<Point>> fiberPositions(double radius, double x_spacing, double z_spacing, double x, double z, double phi, double spacing_tol = 1e-2) {
   // z_spacing - distance between fiber layers in z
   // x_spacing - distance between fiber centers in x
   // x - half-length of the shorter (bottom) base of the trapezoid
   // z - height of the trapezoid
   // phi - angle between z and trapezoid arm
 
-  vector<Point> positions;
+  vector<vector<Point>> positions;
   int z_layers = floor((z/2-radius-spacing_tol)/z_spacing); // number of layers that fit in z/2
 
-    double z_pos = 0.;
-    double x_pos = 0.;
+  double z_pos = 0.;
+  double x_pos = 0.;
 
-    for(int l = -z_layers; l < z_layers+1; l++) {
+  for(int l = -z_layers; l < z_layers+1; l++) {
+    vector<Point> xline;
+    z_pos = l*z_spacing;
+    double x_max = x + (z/2. + z_pos)*tan(phi) - spacing_tol; // calculate max x at particular z_pos
+    (l % 2 == 0) ? x_pos = 0. : x_pos = x_spacing/2; // account for spacing/2 shift
 
-      z_pos = l*z_spacing;
-      double x_max = x + (z/2. + z_pos)*tan(phi) - spacing_tol; // calculate max x at particular z_pos
-      (l % 2 == 0) ? x_pos = 0. : x_pos = x_spacing/2; // account for spacing/2 shift
-
-      while(x_pos < (x_max - radius)) {
-        positions.push_back(Point(x_pos,z_pos));
-        if(x_pos != 0.) positions.push_back(Point(-x_pos,z_pos)); // using symmetry around x=0
-        x_pos += x_spacing;
-      }
+    while(x_pos < (x_max - radius)) {
+      xline.push_back(Point(x_pos, z_pos));
+      if(x_pos != 0.) xline.push_back(Point(-x_pos, z_pos)); // using symmetry around x=0
+      x_pos += x_spacing;
     }
-
-    return positions;
+    // Sort fiber IDs for a better organization
+    sort(xline.begin(), xline.end(), [](const Point &p1, const Point &p2) {
+        return p1.x() < p2.x();
+      });
+    positions.emplace_back(std::move(xline));
+  }
+  return positions;
 }
 
 // Calculate number of divisions for the readout grid for the fiber layers
-std::pair<int, int> getNdivisions(double x, double z, double dx, double dz){
+std::pair<int, int> getNdivisions(double x, double z, double dx, double dz) {
   // x and z defined as in vector<Point> fiberPositions
   // dx, dz - size of the grid in x and z we want to get close to with the polygons
   // See also descripltion when the function is called
@@ -302,14 +306,6 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
             std::string f_id_fiber = getAttrOrDefault(x_fiber, _Unicode(identifier_fiber), "fiber");
 
             // Calculate fiber positions inside the slice
-            vector<Point> f_pos = fiberPositions(f_radius, f_spacing_x, f_spacing_z, s_trd_x1, s_thick-tolerance, hphi);
-            // Sort fiber IDs fo better organization
-            sort(f_pos.begin(), f_pos.end(),
-              [](const Point &p1, const Point &p2) {
-              if (p1.y() == p2.y()) { return p1.x() < p2.x(); }
-                return p1.y() < p2.y();
-              });
-
             Tube f_tube(0, f_radius, stave_z-tolerance);
 
             // Set up the readout grid for the fiber layers
@@ -325,42 +321,44 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
             vector<tuple<int, Point, Point, Point, Point>> grid_vtx = gridPoints(grid_div.first, grid_div.second, s_trd_x1, s_thick-tolerance, hphi);
 
             vector<int> f_id_count(grid_div.first*grid_div.second,0);
-            for (auto &p : f_pos) {
-              int f_grid_id = -1;
-              int f_id = -1;
-              // Check to which grid fiber belongs to
-              for (auto &poly_vtx : grid_vtx) {
-                auto [grid_id, vtx_a, vtx_b, vtx_c, vtx_d] = poly_vtx;
-                double poly_x[4] = {vtx_a.x(), vtx_b.x(), vtx_c.x(), vtx_d.x()};
-                double poly_y[4] = {vtx_a.y(), vtx_b.y(), vtx_c.y(), vtx_d.y()};
-                double f_xy[2] = {p.x(), p.y()};
+            auto f_pos = fiberPositions(f_radius, f_spacing_x, f_spacing_z, s_trd_x1, s_thick-tolerance, hphi);
+            for (auto &line : f_pos) {
+              for (auto &p : line) {
+                int f_grid_id = -1;
+                int f_id = -1;
+                // Check to which grid fiber belongs to
+                for (auto &poly_vtx : grid_vtx) {
+                  auto [grid_id, vtx_a, vtx_b, vtx_c, vtx_d] = poly_vtx;
+                  double poly_x[4] = {vtx_a.x(), vtx_b.x(), vtx_c.x(), vtx_d.x()};
+                  double poly_y[4] = {vtx_a.y(), vtx_b.y(), vtx_c.y(), vtx_d.y()};
+                  double f_xy[2] = {p.x(), p.y()};
 
-                TGeoPolygon poly(4);
-                poly.SetXY(poly_x,poly_y);
-                poly.FinishPolygon();
+                  TGeoPolygon poly(4);
+                  poly.SetXY(poly_x,poly_y);
+                  poly.FinishPolygon();
 
-                if(poly.Contains(f_xy)) {
-                  f_grid_id = grid_id;
-                  f_id = f_id_count[grid_id];
-                  f_id_count[grid_id]++;
+                  if(poly.Contains(f_xy)) {
+                    f_grid_id = grid_id;
+                    f_id = f_id_count[grid_id];
+                    f_id_count[grid_id]++;
+                  }
                 }
+
+                string f_name = "fiber" + to_string(f_grid_id) + "_" + to_string(f_id);
+                Volume f_vol(f_name, f_tube, description.material(x_fiber.materialStr()));
+                DetElement fiber(slice, f_name, det_id);
+                if ( x_fiber.isSensitive() ) {
+                  f_vol.setSensitiveDetector(sens);
+                }
+                fiber.setAttributes(description,f_vol,x_fiber.regionStr(),x_fiber.limitsStr(),x_fiber.visStr());
+
+                // Fiber placement
+                Transform3D f_tr(RotationZYX(0,0,M_PI*0.5),Position(p.x(), 0 ,p.y()));
+                PlacedVolume fiber_phv = s_vol.placeVolume(f_vol, f_tr);
+                fiber_phv.addPhysVolID(f_id_grid, f_grid_id + 1).addPhysVolID(f_id_fiber, f_id + 1);
+                fiber.setPlacement(fiber_phv);
               }
-
-              string f_name = "fiber" + to_string(f_grid_id) + "_" + to_string(f_id);
-              Volume f_vol(f_name, f_tube, description.material(x_fiber.materialStr()));
-              DetElement fiber(slice, f_name, det_id);
-              if ( x_fiber.isSensitive() ) {
-                f_vol.setSensitiveDetector(sens);
-              }
-              fiber.setAttributes(description,f_vol,x_fiber.regionStr(),x_fiber.limitsStr(),x_fiber.visStr());
-
-              // Fiber placement
-              Transform3D f_tr(RotationZYX(0,0,M_PI*0.5),Position(p.x(), 0 ,p.y()));
-              PlacedVolume fiber_phv = s_vol.placeVolume(f_vol, f_tr);
-              fiber_phv.addPhysVolID(f_id_grid, f_grid_id + 1).addPhysVolID(f_id_fiber, f_id + 1);
-              fiber.setPlacement(fiber_phv);
-
-	          }
+	        }
           }
 
           if ( x_slice.isSensitive() ) {

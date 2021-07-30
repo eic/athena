@@ -44,28 +44,29 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 
-# Side  view
-dawncut 1 0 0 1 ${INPUT_FILE} ${FILE_TAG}_temp0.prim 
-dawncut -1 0 0 1 ${FILE_TAG}_temp0.prim  ${FILE_TAG}.prim
-../../bin/dawn_tweak --mag 10 
-dawn -d ${FILE_TAG}.prim 
+# Side view (lines)
+dawncut -1 0 0 1 ${INPUT_FILE} ${FILE_TAG}.prim
+# dawncut 1 0 0 1 ${INPUT_FILE} ${FILE_TAG}_temp0.prim 
+# dawncut -1 0 0 1 ${FILE_TAG}_temp0.prim  ${FILE_TAG}.prim
+../../bin/dawn_tweak --mag 10 --draw 4 --theta 165 --phi 75
+dawn -d ${FILE_TAG}.prim
 ps2pdf ${FILE_TAG}.eps ${FILE_TAG}_full.pdf
 gs -o ${FILE_TAG}.pdf -sDEVICE=pdfwrite \
   -c "[/CropBox [51 250 550 590] /PAGES pdfmark" \
   -f ${FILE_TAG}_full.pdf
 
-pdftoppm ${FILE_TAG}.pdf ${FILE_TAG} -png -singlefile -cropbox
-
+pdftoppm ${FILE_TAG}.pdf ${FILE_TAG} -png -singlefile -cropbox -thinlinemode solid -aaVector yes
 
 # Top view
-dawncut 0 1 0 1 ${INPUT_FILE} ${FILE_TAG}_temp0.prim 
-dawncut 0 -1 0 1 ${FILE_TAG}_temp0.prim  ${FILE_TAG}.prim
-../../bin/dawn_tweak --theta 270 --mag 20
+dawncut 0 -1 0 1 ${INPUT_FILE} ${FILE_TAG}.prim 
+# dawncut 0 1 0 1 ${INPUT_FILE} ${FILE_TAG}_temp0.prim 
+# dawncut 0 -1 0 1 ${FILE_TAG}_temp0.prim  ${FILE_TAG}.prim
+../../bin/dawn_tweak --mag 10 --theta 270 --phi 90
 dawn -d ${FILE_TAG}.prim 
 ps2pdf ${FILE_TAG}.eps ${FILE_TAG}_top_full.pdf
 gs -o ${FILE_TAG}_top.pdf -sDEVICE=pdfwrite \
   -c "[/CropBox [51 250 550 590] /PAGES pdfmark" \
   -f ${FILE_TAG}_top_full.pdf
 
-pdftoppm ${FILE_TAG}_top.pdf ${FILE_TAG}_top -png -singlefile -cropbox
+pdftoppm ${FILE_TAG}_top.pdf ${FILE_TAG}_top -png -singlefile -cropbox -thinlinemode solid -aaVector yes
 

@@ -82,13 +82,14 @@ compile:
   stage: docs
   before_script:
     - source .local/bin/env.sh
-    - sed -i 's?<support inside?<\!--support inside?' compact/ecal_barrel_hybrid.xml 
-    - sed -i 's?</support>?</support-->?' compact/ecal_barrel_hybrid.xml
-    - sed -i 's?<fiber material?<\!--fiber material?' compact/ecal_barrel_hybrid.xml 
-    - sed -i 's?</fiber>?</fiber-->?' compact/ecal_barrel_hybrid.xml
-    - echo $DETECTOR_PATH
-    - cp compact/ecal_barrel_hybrid.xml ${DETECTOR_PATH}/compact/ecal_barrel_hybrid.xml
+      #    - sed -i 's?<support inside?<\!--support inside?' compact/ecal_barrel_hybrid.xml 
+      #    - sed -i 's?</support>?</support-->?' compact/ecal_barrel_hybrid.xml
+      #    - sed -i 's?<fiber material?<\!--fiber material?' compact/ecal_barrel_interlayers.xml 
+      #    - sed -i 's?</fiber>?</fiber-->?' compact/ecal_barrel_interlayers.xml
+      #    - echo $DETECTOR_PATH
+      #    - cp compact/ecal_barrel_interlayers.xml ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
     - env
+    - pip3 install psutil
   needs:
     - ["common:detector"]
 
@@ -104,6 +105,16 @@ include:
   - local: 'views/view14.yml'
   - local: 'views/view15.yml'
 
+ce_ecal_placement:
+  stage: test
+  needs:
+    - common:detector
+  script:
+    - python scripts/ce_ecal_placement.py --save ce_ecal_crystal_glass.xml
+    - mv ce_ecal_placement.png doc/ce_ecal_placement.png
+    - if ! diff ce_ecal_crystal_glass.xml compact/ce_ecal_crystal_glass.xml ; then echo "ce_ecal_crystal_glaxs.xml not reproducible" && false ; fi
+    - echo "EndcapN layout at https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/doc/ce_ecal_placement.png"
+
 dump_geometry:
   stage: test
   needs:
@@ -118,6 +129,20 @@ dump_geometry:
    - sed -i '/far_forward/d' ${DETECTOR_PATH}/athena.xml
    - dd_web_display --output geo/detector_geo.root ${DETECTOR_PATH}/athena.xml
    - echo "Geometry viewer at https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/detector_geo_full.root?job=dump_geometry&item=default;1&opt=clipxyz;transp30;zoom75;ROTY290;ROTZ350;trz0;trr0;ctrl;all&"
+
+detector_documentation:
+  stage: docs
+  needs:
+    - common:detector
+  script:
+    - mkdir -p doc
+    - bash bin/build_documentation | tee doc/detector.md
+      #- |
+      #  xmllint --format --xpath '//comment/text()' ${DETECTOR_PATH}/athena.xml | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee  doc/detector.md
+      #  xmllint --format --xpath '//comment/text()' ${DETECTOR_PATH}/ip6/ip6_defs.xml | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee -a doc/detector.md || true
+      #  for afile in ${DETECTOR_PATH}/compact/*.xml ; do
+      #    xmllint --format --xpath '//comment/text()' ${afile} | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee -a doc/detector.md || true
+      #  done
 
 report:
   stage: finalize
@@ -135,6 +160,7 @@ report:
     - dump_constants
     - dump_geometry
     - convert_to_gdml
+    - ce_ecal_placement
   script:
     - pip3 install jinja2 &&  ls -lrth
     - ./bin/make_images > doc/dawn_views.md

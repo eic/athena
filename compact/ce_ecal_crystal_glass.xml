@@ -25,47 +25,49 @@
         <lines sector="1" mirrorx="true" mirrory="true">
           <module sizex="CrystalModule_sx" sizey="CrystalModule_sy" sizez="CrystalModule_sz" material="PbWO4" vis="AnlTeal"/>
           <wrapper thickness="CrystalModule_wrap" material="Epoxy" vis="WhiteVis"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*1/2." z="CrystalModule_z0" begin="7" nmods="17"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*3/2." z="CrystalModule_z0" begin="7" nmods="17"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*5/2." z="CrystalModule_z0" begin="7" nmods="17"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*7/2." z="CrystalModule_z0" begin="6" nmods="18"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*9/2." z="CrystalModule_z0" begin="6" nmods="18"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*11/2." z="CrystalModule_z0" begin="5" nmods="19"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*13/2." z="CrystalModule_z0" begin="3" nmods="19"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*15/2." z="CrystalModule_z0" begin="0" nmods="22"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*17/2." z="CrystalModule_z0" begin="0" nmods="22"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*19/2." z="CrystalModule_z0" begin="0" nmods="22"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*21/2." z="CrystalModule_z0" begin="0" nmods="22"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*23/2." z="CrystalModule_z0" begin="0" nmods="22"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*25/2." z="CrystalModule_z0" begin="0" nmods="20"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*27/2." z="CrystalModule_z0" begin="0" nmods="20"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*29/2." z="CrystalModule_z0" begin="0" nmods="18"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*31/2." z="CrystalModule_z0" begin="0" nmods="18"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*33/2." z="CrystalModule_z0" begin="0" nmods="16"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*35/2." z="CrystalModule_z0" begin="0" nmods="16"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*37/2." z="CrystalModule_z0" begin="0" nmods="14"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*39/2." z="CrystalModule_z0" begin="0" nmods="14"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*41/2." z="CrystalModule_z0" begin="0" nmods="12"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*43/2." z="CrystalModule_z0" begin="0" nmods="12"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*45/2." z="CrystalModule_z0" begin="0" nmods="6"/>
-          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*47/2." z="CrystalModule_z0" begin="0" nmods="6"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*1/2." z="CrystalModule_z0" begin="5" nmods="21"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*3/2." z="CrystalModule_z0" begin="5" nmods="21"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*5/2." z="CrystalModule_z0" begin="5" nmods="21"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*7/2." z="CrystalModule_z0" begin="4" nmods="22"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*9/2." z="CrystalModule_z0" begin="3" nmods="23"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*11/2." z="CrystalModule_z0" begin="0" nmods="26"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*13/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*15/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*17/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*19/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*21/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*23/2." z="CrystalModule_z0" begin="0" nmods="24"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*25/2." z="CrystalModule_z0" begin="0" nmods="22"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*27/2." z="CrystalModule_z0" begin="0" nmods="22"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*29/2." z="CrystalModule_z0" begin="0" nmods="20"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*31/2." z="CrystalModule_z0" begin="0" nmods="20"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*33/2." z="CrystalModule_z0" begin="0" nmods="18"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*35/2." z="CrystalModule_z0" begin="0" nmods="18"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*37/2." z="CrystalModule_z0" begin="0" nmods="16"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*39/2." z="CrystalModule_z0" begin="0" nmods="16"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*41/2." z="CrystalModule_z0" begin="0" nmods="14"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*43/2." z="CrystalModule_z0" begin="0" nmods="14"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*45/2." z="CrystalModule_z0" begin="0" nmods="12"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*47/2." z="CrystalModule_z0" begin="0" nmods="12"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*49/2." z="CrystalModule_z0" begin="0" nmods="6"/>
+          <line axis="x" x="CrystalModule_dx/2." y="CrystalModule_dy*51/2." z="CrystalModule_z0" begin="0" nmods="6"/>
         </lines>
         <lines sector="2" mirrorx="true" mirrory="true">
           <module sizex="GlassModule_sx" sizey="GlassModule_sy" sizez="GlassModule_sz" material="PbGlass" vis="AnlBlue"/>
           <wrapper thickness="GlassModule_wrap" material="Epoxy" vis="WhiteVis"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*1/2." z="GlassModule_z0" begin="12" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*3/2." z="GlassModule_z0" begin="12" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*5/2." z="GlassModule_z0" begin="12" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*7/2." z="GlassModule_z0" begin="11" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*9/2." z="GlassModule_z0" begin="11" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*11/2." z="GlassModule_z0" begin="11" nmods="11"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*13/2." z="GlassModule_z0" begin="10" nmods="12"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*15/2." z="GlassModule_z0" begin="9" nmods="12"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*17/2." z="GlassModule_z0" begin="8" nmods="13"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*19/2." z="GlassModule_z0" begin="7" nmods="14"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*21/2." z="GlassModule_z0" begin="6" nmods="14"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*23/2." z="GlassModule_z0" begin="3" nmods="16"/>
-          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*25/2." z="GlassModule_z0" begin="0" nmods="19"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*1/2." z="GlassModule_z0" begin="13" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*3/2." z="GlassModule_z0" begin="13" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*5/2." z="GlassModule_z0" begin="13" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*7/2." z="GlassModule_z0" begin="12" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*9/2." z="GlassModule_z0" begin="12" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*11/2." z="GlassModule_z0" begin="12" nmods="10"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*13/2." z="GlassModule_z0" begin="11" nmods="11"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*15/2." z="GlassModule_z0" begin="10" nmods="11"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*17/2." z="GlassModule_z0" begin="9" nmods="12"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*19/2." z="GlassModule_z0" begin="8" nmods="13"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*21/2." z="GlassModule_z0" begin="7" nmods="13"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*23/2." z="GlassModule_z0" begin="6" nmods="14"/>
+          <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*25/2." z="GlassModule_z0" begin="3" nmods="16"/>
           <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*27/2." z="GlassModule_z0" begin="0" nmods="18"/>
           <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*29/2." z="GlassModule_z0" begin="0" nmods="18"/>
           <line axis="x" x="GlassModule_dx/2." y="GlassModule_dy*31/2." z="GlassModule_z0" begin="0" nmods="16"/>

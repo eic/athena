@@ -1,0 +1,66 @@
+<lccdd>
+
+  <comment>Initial implementation of the Athena Detector
+           DIRC (ported from g4e). Currently constructed around
+           a fixed radius of 83.65cm (between the uRWEL layers).
+           TODO: this needs to be properly parameterized.
+  </comment>
+
+  <define>
+    <comment>
+      ### DIRC parameters
+    </comment>
+    <constant name="DIRC_length"           value="CentralTracking_length + BackwardPIDLength"/>
+    <constant name="DIRC_offset"           value="(CentralTracking_length - DIRC_length)/2.0"/>
+
+    <constant name="DIRC_rmin"           value="83.65*cm"/>
+    <constant name="DIRCBars_DX"          value="1.7*cm"/>
+    <constant name="DIRCBars_DY"          value="42.*cm"/>
+    <constant name="DIRCNum"              value="2*Pi*DIRC_rmin/DIRCBars_DY"/>
+    <constant name="DIRCDPhi"             value="DIRCBars_DY/DIRC_rmin"/>
+
+    <constant name="DIRC_rmin"              value="82.00*cm"/>
+    <constant name="DIRC_rmax"              value="88.00*cm"/>
+  </define>
+
+  <limits>
+  </limits>
+
+  <regions>
+  </regions>
+
+  <display>
+  </display>
+
+  <detectors>
+    <detector id="BarrelDIRC_ID" name="DIRC" type="DIRC" readout="DIRCHits" vis="AnlTeal">
+      <dimensions rmin="DIRC_rmin" rmax="DIRC_rmax" length="DIRC_length" radius="DIRC_rmin" dx="DIRCBars_DX" dy="DIRCBars_DY" number="DIRCNum" deltaphi="DIRCDPhi"/>
+      <position x="0" y="0" z="DIRC_offset"/>
+      <module name="Module0"  R="DIRC_rmin" phi="0*DIRCDPhi"  />
+      <module name="Module1"  R="DIRC_rmin" phi="1*DIRCDPhi"  />
+      <module name="Module2"  R="DIRC_rmin" phi="2*DIRCDPhi"  />
+      <module name="Module3"  R="DIRC_rmin" phi="3*DIRCDPhi"  />
+      <module name="Module4"  R="DIRC_rmin" phi="4*DIRCDPhi"  />
+      <module name="Module5"  R="DIRC_rmin" phi="5*DIRCDPhi"  />
+      <module name="Module6"  R="DIRC_rmin" phi="6*DIRCDPhi"  />
+      <module name="Module7"  R="DIRC_rmin" phi="7*DIRCDPhi"  />
+      <module name="Module8"  R="DIRC_rmin" phi="8*DIRCDPhi"  />
+      <module name="Module9"  R="DIRC_rmin" phi="9*DIRCDPhi"  />
+      <module name="Module10" R="DIRC_rmin" phi="10*DIRCDPhi" />
+      <module name="Module11" R="DIRC_rmin" phi="11*DIRCDPhi" />
+    </detector>
+  </detectors>
+
+  <readouts>
+    <readout name="DIRCHits">
+      <segmentation type="CartesianGridXY" grid_size_x="3.0*mm" grid_size_y="3.0*mm" />
+      <id>system:8,barrel:3,module:12,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
+
+  <plugins>
+  </plugins>
+
+  <fields>
+  </fields>
+</lccdd>

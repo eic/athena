@@ -5,7 +5,6 @@
     Silicon Tracker
     ---------------
 
-
     Some references:
     With some added info on ITS3 chip from
     https://indico.bnl.gov/event/10677/contributions/45591/attachments/33204/53254/20210318-IR2%40EIC-SVT.pdf
@@ -17,8 +16,8 @@
 
   <define>
 
-    <constant name="TrackerBarrelSpaceFrame_width"   value="40.0*mm"/>
-    <constant name="TrackerBarrelSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
+    <constant name="TrackerBarrelSpaceFrame_width"   value="4.0*cm"/>
+    <constant name="TrackerBarrelSpaceFrame_height"  value="2.5*cm"/>
     <constant name="TrackerSensor_thickness"         value="0.03*mm"/>
     <constant name="TrackerBarrel_thickness"         value="0.55/100*9.37*cm"/>
     <constant name="TrackerBarrelService_thickness"  value="TrackerBarrel_thickness-TrackerSensor_thickness"/>

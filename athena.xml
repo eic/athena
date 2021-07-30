@@ -2,167 +2,47 @@
        xmlns:xs="http://www.w3.org/2001/XMLSchema"
        xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/compact/1.0/compact.xsd">
 
+       <debug>
+         <type name="surface"       value="1"/>
+         <type name="material"       value="1"/>
+         <type name="readout"       value="1"/>
+         <type name="segmentation"  value="1"/>
+         <type name="limits"        value="1"/>
+         <type name="region"        value="1"/>
+         <type name="includes"      value="1"/>
+       </debug>
+
+  <documentation level="-1">
+  # Athena Detector 
+  - https://eicweb.phy.anl.gov/EIC/detectors/athena.git 
+  - https://eicweb.phy.anl.gov/EIC/detectors/ip6.git
+  </documentation>
+
   <!-- Some information about detector  -->
   <info name="Athena Detector" title="Athena Detector"
         author="Athena Collaboration"
 	url="https://eicweb.phy.anl.gov/EIC/detectors/athena.git"
 	status="development"
 	version="v1 2021-03-16">
-    <comment>Athena Detector
-    - https://eicweb.phy.anl.gov/EIC/detectors/athena.git
-    - https://eicweb.phy.anl.gov/EIC/detectors/ip6.git
-    </comment>
+  <comment> Athena </comment>
   </info>
-
   <define>
-    <include ref="ip6/ip6_defs.xml" /> <comment> IP definitions should be first</comment>
+  <documentation level="2">
+      ## Main Constant Definitions
+
+      The ip6 (or other ip) defines should be included first.
+      These files have only a define tags.
+  </documentation>
+    <include ref="ip6/ip6_defs.xml" /> 
     <include ref="compact/definitions.xml" />
   </define>
-
-  <properties>
-    <matrix name="RINDEX__Vacuum" coldim="2" values="
-      1.0*eV 1.0
-      5.1*eV 1.0
-      "/>
-    <matrix name="RINDEX__Air" coldim="2" values="
-      1.0*eV 1.00029
-      5.1*eV 1.00029
-      "/>
-    <matrix name="RINDEX__Quartz" coldim="2" values="
-      1.0*eV 1.46
-      5.1*eV 1.46
-      "/>
-    <matrix name="RINDEX__N2" coldim="2" values="
-      1.0*eV 1.00033
-      4.0*eV 1.00033
-      5.1*eV 1.00033
-      "/>
-    <matrix name="RINDEX__Pyrex" coldim="2" values="
-      1.0*eV 1.5
-      4.0*eV 1.5
-      5.1*eV 1.5
-      "/>
-    <matrix name="ABSLENGTH__Pyrex" coldim="2" values="
-      1.0*eV 10.0*cm
-      4.0*eV 10.0*cm
-      5.1*eV 10.0*cm
-      "/>
-    <matrix name= "REFLECTIVITY_mirror" coldim="2" values="
-      1.0*eV  0.9
-      4.0*eV  0.9
-      5.1*eV  0.9
-      "/>
-    <matrix name="RINDEX__Aerogel" coldim="2" values="
-      1.0*eV 1.030
-      4.0*eV 1.030
-      5.1*eV 1.030
-      "/>
-    <matrix name="ABSLENGTH__Aerogel" coldim="2" values="
-      1.0*eV 4.0*cm
-      4.0*eV 4.0*cm
-      5.1*eV 4.0*cm
-      "/>
-    <matrix name="RINDEX__Acrylic" coldim="2" values="
-      1240*eV/1100  1.49
-      1240*eV/600   1.49
-      1240*eV/400   1.49
-      "/>
-  </properties>
 
   <includes>
     <gdmlFile ref="compact/elements.xml"/>
     <gdmlFile ref="compact/materials.xml"/>
+    <file     ref="compact/optical_materials.xml"/>
   </includes>
 
-  <materials>
-    <material name="AirOptical">
-      <D type="density" unit="g/cm3" value="0.0012"/>
-      <fraction n="0.754" ref="N"/>
-      <fraction n="0.234" ref="O"/>
-      <fraction n="0.012" ref="Ar"/>
-      <property name="RINDEX" ref="RINDEX__Air"/>
-      <property name="ABSLENGTH"               coldim="2" values="1*eV  200*m  5*eV  200*m"/>
-    </material>
-    <material name="N2cherenkov">
-      <D type="density" value="0.00125" unit="g/cm3"/>
-      <composite n="1" ref="N"/>
-      <property name="RINDEX"  ref="RINDEX__N2"/>
-    </material>
-    <material name="PyrexGlassOptical">
-      <D type="density" value="2.23" unit="g/cm3"/>
-      <fraction n="0.806" ref="SiliconOxide"/>
-      <fraction n="0.130" ref="BoronOxide"/>
-      <fraction n="0.040" ref="SodiumOxide"/>
-      <fraction n="0.023" ref="AluminumOxide"/>
-      <property name="RINDEX" ref="RINDEX__Pyrex"/>
-      <property name="ABSLENGTH" ref="ABSLENGTH__Pyrex"/>
-    </material>
-    <material name="AerogelOptical">
-      <D value="0.2" unit="g / cm3"/>
-      <fraction n="0.625" ref="SiliconOxide"/>
-      <fraction n="0.374" ref="SiliconOxide"/>
-      <fraction n="0.1"   ref="C"/>
-      <property name="RINDEX" ref="RINDEX__Aerogel"/>
-      <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel"/>
-    </material>
-    <material name="AcrylicOptical">
-      <D type="density" value="1.18" unit="g/cm3"/>
-      <composite n="5" ref="C"/>
-      <composite n="2" ref="O"/>
-      <composite n="8" ref="H"/>
-      <property name="RINDEX" ref="RINDEX__Acrylic"/>
-    </material>
-  </materials>
-
-  <surfaces>
-    <comment> For the values of "finish", model and type, see TGeoOpticalSurface.h !
-    </comment>
-
-    <opticalsurface finish="polished" model="glisur" name="MirrorOpticalSurface" type="dielectric_metal" value="0">
-      <property name="REFLECTIVITY" ref="REFLECTIVITY_mirror"/>
-      <property name="RINDEX"       coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
-      <!--<property name="EFFICIENCY"   ref="EFFICIENCY0x8b77240"/>-->
-    </opticalsurface>
-
-    <!--
-    <opticalsurface name="mirror2" finish="polished" model="glisur" type="dielectric_dielectric">
-      <property name="REFLECTIVITY"            coldim="2" values="1.034*eV  0.8   4.136*eV  0.9"/>
-      <property name="EFFICIENCY"              coldim="2" values="2.034*eV  0.8   4.136*eV  1.0"/>
-      <property name="RINDEX"                  coldim="2" values="1.034*eV  1.5   4.136*eV  1.5"/>
-    </opticalsurface>
-    -->
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_MirrorOpticalSurface" type="dielectric_metal" value="0">
-    </opticalsurface>
-    <opticalsurface finish="polished" model="unified" name="MRICH_LensOpticalSurface" type="dielectric_dielectric" value="0">
-      <property name="REFLECTIVITY"            coldim="2" values="1240*eV/1100  0.08   1240*eV/400  0.08"/>
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.56  4.136*eV  1.56"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-        -->
-    </opticalsurface>
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_PhotoSensorOpticalSurface" type="dielectric_dielectric" value="0">
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.35  4.136*eV  1.40"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      -->
-    </opticalsurface>
-
-    <opticalsurface finish="polished" model="unified" name="MRICH_AerogelOpticalSurface" type="dielectric_dielectric" value="0">
-      <!--
-      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.010  4.136*eV  1.010"/>
-      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
-      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
-      -->
-    </opticalsurface>
-
-  </surfaces>
   <limits>
     <limitset name="EICBeamlineLimits">
       <limit name="step_length_max" particles="*" value="1.0" unit="mm" />
@@ -180,9 +60,28 @@
   <include ref="compact/display.xml" />
   </display>
 
-  <comment> Include the IP components first </comment>
-  <!--include ref="ip6/forward_ion_beamline.xml"/-->
-  <!--include ref="ip6/beampipe.xml"/-->
+  <documentation level="0">
+    ## Detector Subsystems
+
+    ### IP Subsystems
+
+    The interaction point subsystems are included before the central detector subsystems.
+    This is becuase the IP subsystems, for exmaple the beampipe, will define paramters
+    which are subsquently used in the central detector construction -- e.g. the vertex tracker
+    uses the beampipe OD to help define its placement. 
+
+    The IP subsystems include the Far forward and backward regions. The list of subsystem includes:
+     - Interaction region beampipe 
+     - B0 tracker
+     - Off-momentum tracker
+     - Far forward roman pots
+     - Zero Degree Calorimeter
+     - Beam line magnets.
+     - and more...
+  </documentation>
+
+  <include ref="ip6/forward_ion_beamline.xml"/>
+  <include ref="ip6/beampipe.xml"/>
 
   <detectors>
     <!--
@@ -229,35 +128,6 @@
       <composite name="BackwardTOF"/>
     </detector>
 
-    <!--
-    <detector id="TrackerBarrelSubAssembly_Inner_ID"
-      name="TrackerBarrelSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Inner"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Inner_ID"
-      name="TrackerEndcapSubAssembly_Inner"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapN_Inner"/>
-      <composite name="TrackerBarrel_Inner"/>
-      <composite name="TrackerEndcapP_Inner"/>
-    </detector>
-    <detector id="TrackerBarrelSubAssembly_Outer_ID"
-      name="TrackerBarrelSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerBarrel_Outer"/>
-    </detector>
-    <detector id="TrackerEndcapSubAssembly_Outer_ID"
-      name="TrackerEndcapSubAssembly_Outer"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="TrackerEndcapP_Outer"/>
-      <composite name="TrackerEndcapN_Outer"/>
-    </detector>
-    -->
   </detectors>
 
   <!--
@@ -268,10 +138,11 @@
   <include ref="compact/OpenDataDetector.xml"/>
 
   <include ref="compact/tof_barrel.xml"/>
+  <include ref="compact/tof_endcap.xml"/>
 
   <!--include ref="compact/rwell_tracker_barrel.xml"-->
-  <include ref="compact/cb_DIRC.xml"/>
-  
+
+  <!--include ref="compact/dirc.xml"/-->
 
   <!-- When changing magnet, also select dimensions in definitions.xml. -->
   <include ref="compact/solenoid.xml"/>
@@ -289,7 +160,6 @@
   <!--include ref="compact/ce_GEM.xml"/-->
   <!--include ref="compact/gem_tracker_endcap.xml"/-->
   <!--include ref="compact/mrich.xml"/-->
-  <include ref="compact/tof_endcap.xml"/>
   <include ref="compact/forward_trd.xml"/>
   <include ref="compact/gaseous_rich.xml"/>
 
@@ -298,7 +168,6 @@
   <!--include ref="ip6/far_forward_romanpots.xml"/-->
   <!--include ref="ip6/far_forward_detectors.xml"/-->
 
-
   <!--
   <include ref="compact/mm_tracker_barrel.xml"/>
   <include ref="compact/cb_VTX_Barrel.xml"/>
@@ -306,6 +175,5 @@
 
   <readouts>
   </readouts>
-
 
 </lccdd>
