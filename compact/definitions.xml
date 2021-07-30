@@ -381,8 +381,6 @@
       Generic tracking space allocations
     </comment>
 
-    <constant name="ITS3Thickness"                   value="30*um"/>
-
     <constant name="ForwardTracking_length" value="0.0*cm"/>
     <comment>This compensates for the asymmetry of the setup</comment>
     <constant name="BackwardTracking_length" value="7.5*cm"/>
