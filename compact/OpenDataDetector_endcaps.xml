@@ -25,12 +25,12 @@
         <!--Dimensions of the Pixel volume & sub volumes -->
         <constant name="pix_env_rmin" value="25.*mm"/>
         <constant name="pix_env_rmax" value="450.*mm"/>
-        <constant name="pix_env_dz" value="1.2*m"/>
+        <constant name="pix_env_dz" value="1.25*m"/>
         <constant name="pix_b_z"  value="0.*m"/>
-        <constant name="pix_b_dz" value="0.580*m"/>
-        <constant name="pix_e_nz" value="-0.870*m"/>
-        <constant name="pix_e_pz" value="+0.870*m"/>
-        <constant name="pix_e_dz" value="27*cm"/>
+        <constant name="pix_b_dz" value="0.230*m"/>
+        <constant name="pix_e_nz" value="-0.730*m"/>
+        <constant name="pix_e_pz" value="+0.730*m"/>
+        <constant name="pix_e_dz" value="50*cm"/>
         <!--Dimensions of the Pixel Support tube -->
         <!--
         <constant name="pst_rmin" value="200.*mm"/>
