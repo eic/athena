@@ -84,7 +84,6 @@
   <include ref="ip6/beampipe.xml"/>
 
   <detectors>
-    <!--
     <detector id="VertexBarrelSubAssembly_ID"
       name="VertexBarrelSubAssembly"
       type="DD4hep_SubdetectorAssembly"
@@ -98,9 +97,13 @@
       <composite name="VertexEndcapN" />
       <composite name="VertexEndcapP" />
     </detector>
-    -->
 
-    <!--
+    <detector id="TrackerBarrelSubAssembly_Inner_ID"
+      name="TrackerBarrelSubAssembly_Inner"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TrackerSubAssemblyVis">
+      <composite name="TrackerBarrel_Inner"/>
+    </detector>
     <detector id="TrackerEndcapSubAssembly_Inner_ID"
       name="TrackerEndcapSubAssembly_Inner"
       type="DD4hep_SubdetectorAssembly"
@@ -117,7 +120,6 @@
       <composite name="TrackerEndcapP_Outer"/>
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
-    -->
 
     <detector id="TOFSubAssembly_ID"
       name="TOFSubAssembly"
@@ -130,11 +132,9 @@
 
   </detectors>
 
-  <!--include ref="compact/vertex_tracker.xml"/-->
+  <include ref="compact/vertex_tracker.xml"/>
 
-  <!--include ref="compact/central_tracker.xml"/-->
-
-  <include ref="compact/OpenDataDetector_barrel.xml"/>
+  <include ref="compact/central_tracker.xml"/>
 
   <include ref="compact/tof_barrel.xml"/>
   <include ref="compact/tof_endcap.xml"/>
