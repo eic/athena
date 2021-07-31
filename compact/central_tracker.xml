@@ -38,8 +38,10 @@
 
     <constant name="TrackerBarrelInner_thickness"  value="TrackerBarrelInner_rmin2 - TrackerBarrelInner_rmin1"/>
     <constant name="TrackerBarrelOuter_thickness"  value="TrackerBarrelOuter_rmin2 - TrackerBarrelOuter_rmin1"/>
-    <constant name="TrackerBarrelInner_length"     value="TrackerBarrelInner_length2"/>
-    <constant name="TrackerBarrelOuter_length"     value="TrackerBarrelOuter_length2"/>
+    <constant name="TrackerBarrelInner_length"     value="TrackerBarrelInner_length2+1.0*cm"/>
+    <constant name="TrackerBarrelOuter_length"     value="TrackerBarrelOuter_length2+1.0*cm"/>
+
+
 
     <comment>
       Here we are assuming the two endcaps (P and N) are symmetric.
@@ -283,12 +285,11 @@
       <comment>
         Tracker Barrel Inner Layers
       </comment>
-      <!--
       <layer module="TrackerBarrelOuter_Module1" id="1" vis="VertexVis">
         <barrel_envelope
           inner_r="TrackerBarrelOuter_rmin1-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelOuter_rmin1-TrackerBarrelLayer_rOffset + TrackerBarrelOuter_thickness-1.0*mm"
-          z_length="TrackerBarrelOuter_length"/>
+          z_length="TrackerBarrelOuter_length1"/>
         <rphi_layout phi_tilt="10.0*degree" nphi="TrackerBarrelOuter_NModules" phi0="0.0" rc="TrackerBarrelOuter_rmin1" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -296,11 +297,10 @@
         <barrel_envelope
           inner_r="TrackerBarrelOuter_rmin2-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelOuter_rmin2-TrackerBarrelLayer_rOffset + TrackerBarrelOuter_thickness"
-          z_length="TrackerBarrelOuter_length"/>
+          z_length="TrackerBarrelOuter_length2"/>
         <rphi_layout phi_tilt="10.0*degree" nphi="TrackerBarrelOuter_NModules" phi0="0.0" rc="TrackerBarrelOuter_rmin2" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-      -->
     </detector>
 
     <detector
