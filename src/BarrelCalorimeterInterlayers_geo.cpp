@@ -205,7 +205,7 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, xml_com
     }
     double l_pos_y = line.front().y();
     // use assembly as intermediate volume container to reduce number of daughter volumes
-    Assembly lfibers(Form("fiber_array_line_%d", il));
+    Assembly lfibers(Form("fiber_array_line_%lu", il));
     for (auto &p : line) {
       int f_grid_id = -1;
       int f_id = -1;

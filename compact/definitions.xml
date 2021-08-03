@@ -49,6 +49,7 @@
 
     </comment> 
     <constant name="BeamPipe_ID" value="10"/>
+    <constant name="BeamPipeB0_ID" value="11"/>
 
 
     <comment> 
@@ -267,11 +268,10 @@
     <constant name="B0Tracker_Station_2_ID"          value="151"/>
     <constant name="B0Tracker_Station_3_ID"          value="152"/>
     <constant name="B0Tracker_Station_4_ID"          value="153"/>
-    <constant name="ForwardRomanPot_Station_1_ID"    value="155"/>
+    <constant name="B0Preshower_Station_1_ID"        value="154"/>
+	  <constant name="ForwardRomanPot_Station_1_ID"    value="155"/>
     <constant name="ForwardRomanPot_Station_2_ID"    value="156"/>
-    <constant name="ForwardRomanPotB_ID"             value="157"/>
-    <constant name="ForwardRomanPotC_ID"             value="158"/>
-    <constant name="ForwardOffMTracker_station_1_ID" value="159"/>
+	  <constant name="ForwardOffMTracker_station_1_ID" value="159"/>
     <constant name="ForwardOffMTracker_station_2_ID" value="160"/>
     <constant name="ForwardOffMTracker_station_3_ID" value="161"/>
     <constant name="ForwardOffMTracker_station_4_ID" value="162"/>
