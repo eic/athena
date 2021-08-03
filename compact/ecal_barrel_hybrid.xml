@@ -20,7 +20,7 @@
     <constant name="EcalBarrel_EpoxyThickness"       value="100*um"/>
     <constant name="EcalBarrel_CarbonThickness"      value="0.5*mm"/>
     <constant name="EcalBarrel_CarbonSpacerWidth"    value="4*mm"/>
-    <constant name="EcalBarrel_LayerSpacing"         value="6.0*mm"/>
+    <constant name="EcalBarrel_LayerSpacing"         value="10.0*mm"/>
     <constant name="EcalBarrel_FiberRadius"          value="0.5*mm"/>
     <constant name="EcalBarrel_FiberXSpacing"        value="1.34*mm"/>
     <constant name="EcalBarrel_FiberZSpacing"        value="1.22*mm"/>
