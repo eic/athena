@@ -1,10 +1,6 @@
 <lccdd>
 
     <display>
-      <vis name="EcalBarrelEnvelope_vis" alpha="0.9" r="0.99" g="0.5" b="0" showDaughters="true" visible="false" />
-      <vis name="EcalBarrelStave_vis"    alpha="0.9" r="0.99" g="0.5" b="0" showDaughters="true" visible="false" />
-      <vis name="EcalBarrelFiberLayerVis" alpha="1.0" r="102/256" g="102/256" b="102/256" showDaughters="false" visible="true" />
-      <vis name="EcalBarrelFiberVis" alpha="1.0" r="0/256" g="130/256" b="202/256" showDaughters="false" visible="false" />
     </display>
   <define>
     <comment>
@@ -95,10 +91,9 @@
         <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="AnlGray"/>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>
         <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/>
-        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFibersVis">
+        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis">
           <fiber material="PlasticScint" 
             sensitive="yes"
-            vis="EcalBarrelFiberVis"
             radius="EcalBarrel_FiberRadius" 
             spacing_x="EcalBarrel_FiberXSpacing" 
             spacing_z="EcalBarrel_FiberZSpacing">
@@ -123,7 +118,6 @@
           vis="EcalBarrelFiberLayerVis">
           <fiber material="PlasticScint" 
             sensitive="yes"
-            vis="EcalBarrelFiberVis"
             radius="EcalBarrel_FiberRadius" 
             spacing_x="EcalBarrel_FiberXSpacing" 
             spacing_z="EcalBarrel_FiberZSpacing">
