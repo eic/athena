@@ -83,14 +83,14 @@
         Imaging layers with silicon
         ---------------------------
       </comment>
-      <layer repeat="EcalBarrelImagingLayers-1" vis="AnlBlue">  
-        <slice material="Silicon" thickness="EcalBarrel_SiliconThickness" sensitive="yes" limits="cal_limits" vis="AnlGray"/>
-        <slice material="Silicon" thickness="EcalBarrel_ElectronicsThickness" vis="AnlGold"/>
-        <slice material="Copper" thickness="EcalBarrel_CopperThickness" vis="AnlGray"/>
-        <slice material="Kapton" thickness="EcalBarrel_KaptonThickness" vis="AnlGold"/>
-        <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="AnlGray"/>
-        <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>
-        <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/>
+      <layer repeat="EcalBarrelImagingLayers-1" vis="EcalBarrelLayerVis">  
+        <slice material="Silicon" thickness="EcalBarrel_SiliconThickness" sensitive="yes" limits="cal_limits" vis="EcalBarrelSliceVis"/>
+        <slice material="Silicon" thickness="EcalBarrel_ElectronicsThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Copper" thickness="EcalBarrel_CopperThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Kapton" thickness="EcalBarrel_KaptonThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="EcalBarrelSliceVis"/>
         <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis">
           <fiber material="PlasticScint" 
             sensitive="yes"
@@ -99,21 +99,21 @@
             spacing_z="EcalBarrel_FiberZSpacing">
           </fiber>
         </slice>
-        <!-- <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>  -->
-        <!-- <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/> -->
+        <!-- <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>  -->
+        <!-- <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="EcalBarrelSliceVis"/> -->
       </layer>
       <comment>
         ---------------------------
         Last imiging layer with thick scint fiber layer
         ---------------------------
       </comment>
-      <layer repeat="1" vis="AnlBlue">
-        <slice material="Silicon" thickness="EcalBarrel_SiliconThickness" sensitive="yes" limits="cal_limits" vis="AnlGray"/>
-        <slice material="Silicon" thickness="EcalBarrel_ElectronicsThickness" vis="AnlGold"/>
-        <slice material="Copper" thickness="EcalBarrel_CopperThickness" vis="AnlGray"/>
-        <slice material="Kapton" thickness="EcalBarrel_KaptonThickness" vis="AnlGold"/>
-        <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="AnlGray"/>
-        <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>
+      <layer repeat="1" vis="EcalBarrelLayerVis">
+        <slice material="Silicon" thickness="EcalBarrel_SiliconThickness" sensitive="yes" limits="cal_limits" vis="EcalBarrelSliceVis"/>
+        <slice material="Silicon" thickness="EcalBarrel_ElectronicsThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Copper" thickness="EcalBarrel_CopperThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Kapton" thickness="EcalBarrel_KaptonThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="EcalBarrelSliceVis"/>
+        <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
         <slice material="Lead" thickness="min(EcalBarrel_FiberLayerThickness_max, EcalBarrel_FiberLayerThickness)" 
           vis="EcalBarrelFiberLayerVis">
           <fiber material="PlasticScint" 
