@@ -39,7 +39,6 @@
       + EcalBarrel_CopperThickness
       + EcalBarrel_KaptonThickness
       + EcalBarrel_EpoxyThickness
-      + EcalBarrel_CarbonThickness
       + EcalBarrel_LayerSpacing
       + EcalBarrel_RadiatorThickness"/>
 
@@ -95,6 +94,7 @@
         <slice material="Kapton" thickness="EcalBarrel_KaptonThickness" vis="AnlGold"/>
         <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness" vis="AnlGray"/>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>
+        <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/>
         <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFibersVis">
           <fiber material="PlasticScint" 
             sensitive="yes"
@@ -104,8 +104,8 @@
             spacing_z="EcalBarrel_FiberZSpacing">
           </fiber>
         </slice>
-        <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/> 
-        <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/>
+        <!-- <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/>  -->
+        <!-- <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/> -->
       </layer>
       <comment>
         ---------------------------
