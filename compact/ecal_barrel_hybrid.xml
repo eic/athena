@@ -101,7 +101,8 @@
             vis="EcalBarrelFiberVis"
             radius="EcalBarrel_FiberRadius" 
             spacing_x="EcalBarrel_FiberXSpacing" 
-            spacing_z="EcalBarrel_FiberZSpacing"/>
+            spacing_z="EcalBarrel_FiberZSpacing">
+          </fiber>
         </slice>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="AnlGold"/> 
         <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="AnlGold"/>
