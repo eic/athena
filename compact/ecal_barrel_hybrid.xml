@@ -73,10 +73,10 @@
         rmin="EcalBarrel_rmin" 
         z="EcalBarrel_length"/>
       <staves vis="EcalBarrelStave_vis">
-        <support inside="true" material="Steel235" vis="AnlOrange"
+        <!-- <support inside="true" material="Steel235" vis="AnlOrange"
           thickness="EcalBarrel_Support_thickness"
           n_beams="3" grid_size="25.0*cm">
-        </support>
+        </support> -->
       </staves>
       <comment>
         ---------------------------
@@ -116,12 +116,12 @@
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
         <slice material="Lead" thickness="min(EcalBarrel_FiberLayerThickness_max, EcalBarrel_FiberLayerThickness)" 
           vis="EcalBarrelFiberLayerVis">
-          <fiber material="PlasticScint" 
+          <!-- <fiber material="PlasticScint" 
             sensitive="yes"
             radius="EcalBarrel_FiberRadius" 
             spacing_x="EcalBarrel_FiberXSpacing" 
             spacing_z="EcalBarrel_FiberZSpacing">
-          </fiber>
+          </fiber> -->
         </slice>
       </layer>
      
