@@ -78,9 +78,9 @@
         rmin="EcalBarrel_rmin" 
         z="EcalBarrel_length"/>
       <staves vis="EcalBarrelStave_vis">
-        <support inside="true"  material="Steel235" vis="AnlOrange"
+        <support inside="true" material="Steel235" vis="AnlOrange"
           thickness="EcalBarrel_Support_thickness"
-          n_beams="3" grid_size="25.0*cm" >
+          n_beams="3" grid_size="25.0*cm">
         </support>
       </staves>
       <comment>

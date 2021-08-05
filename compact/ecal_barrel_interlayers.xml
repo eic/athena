@@ -46,7 +46,7 @@
     <constant name="EcalBarrelImagingLayers_num"
         value="min(EcalBarrelImagingLayers_nMax,
                floor(EcalBarrel_AvailThickness/
-                     (EcalBarrel_ImagingLayerThickness+EcalBarrel_RadiatorThickness+EcalBarrel_SpaceBetween)))"/>
+                     (EcalBarrel_ImagingLayerThickness+EcalBarrel_ScFiLayerThickness+EcalBarrel_SpaceBetween)))"/>
     <constant name="EcalBarrel_FiberLayerThickness_max"
         value="max(0, EcalBarrel_AvailThickness-
                (EcalBarrelImagingLayers_num*EcalBarrel_ImagingLayerThickness))"/>
