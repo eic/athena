@@ -81,6 +81,15 @@ build:simple:
   stage: docs
   before_script:
     - source .local/bin/env.sh
+<<<<<<< master
+=======
+    - sed -i 's?<support inside?<\!--support inside?' compact/ecal_barrel_interlayers.xml 
+    - sed -i 's?</support>?</support-->?' compact/ecal_barrel_interlayers.xml
+    - sed -i 's?<fiber material?<\!--fiber material?' compact/ecal_barrel_interlayers.xml 
+    - sed -i 's?</fiber>?</fiber-->?' compact/ecal_barrel_interlayers.xml
+    - echo $DETECTOR_PATH
+    - cp compact/ecal_barrel_interlayers.xml ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
+>>>>>>> Test interlayers plugin with sed
     - env
     - pip3 install psutil
   needs:
