@@ -148,6 +148,13 @@
       <composite name="BackwardTOF"/>
     </detector>
 
+    <detector id="B0Tracker_Station_2"
+      name="B0TrackerSubAssembly"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TOFSubAssemblyVis">
+      <composite name="B0Tracker"/>
+    </detector>
+
   </detectors>
 
   <documentation level="10">
