@@ -239,6 +239,7 @@ benchmarks:detector:
   variables:
     JUGGLER_DETECTOR: "$JUGGLER_DETECTOR"
     JUGGLER_DETECTOR_VERSION: "$JUGGLER_DETECTOR_VERSION"
+    RUN_EXTENDED_BENCHMARK: "true"
   trigger:
     project: EIC/benchmarks/detector_benchmarks
     strategy: depend
