@@ -144,16 +144,18 @@
       type="DD4hep_SubdetectorAssembly"
       vis="TOFSubAssemblyVis">
       <composite name="BarrelTOF"/>
-      <composite name="ForwardTOF"/>
+      <!--composite name="ForwardTOF"/-->
+      <composite name="B0Tracker"/>
       <composite name="BackwardTOF"/>
     </detector>
 
+    <!--
     <detector id="B0Tracker_Station_2_ID"
       name="B0TrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TOFSubAssemblyVis">
-      <composite name="B0Tracker"/>
     </detector>
+    -->
 
   </detectors>
 
