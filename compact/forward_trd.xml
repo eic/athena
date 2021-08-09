@@ -61,7 +61,7 @@
         </frame>
         <comment> Going from HV side to readout side</comment>
         <module_component thickness="25.0*um"               material="Mylar"   name="entrance_window"/>
-        <module_component thickness=" 2.0*mm"               material="Xe20CO2" name="entrance_region" />
+        <module_component thickness=" 400.0*um"               material="Xe20CO2" name="entrance_region" />
         <module_component thickness="50.0*um"               material="Kapton"  name="cathode_foil"/>
         <module_component thickness=" 5.0*um"               material="Copper"  name="cathode_cu"/>
         <module_component thickness=" 21.0*mm"              material="Xe20CO2" name="drift_region" sensitive="true" vis="AnlProcess_Blue"/>
