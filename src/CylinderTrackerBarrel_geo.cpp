@@ -121,7 +121,7 @@ static Ref_t CylinderTrackerBarrel_create_detector(Detector& description, xml_h 
     Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
     layerExtension->addType("sensitive cylinder", "layer");
     //// layerExtension->addValue(10. * Acts::UnitConstants::mm, "r", "envelope");
-    //lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
+    lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
 
     Placements& sensVols = sensitives[m_nam];
 
