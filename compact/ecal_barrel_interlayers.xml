@@ -95,7 +95,7 @@
         <!-- <slice material="Air" thickness="EcalBarrel_LayerSpacing " vis="EcalBarrelSliceVis"/> -->
       </layer>
     </detector>
-
+ 
     <comment>
       ---------------------------------------
       Pb/ScFi Layers of Barrel EM Calorimeter
