@@ -89,7 +89,7 @@
   </comment>
   <include ref="ip6/forward_ion_beamline.xml"/>
   <include ref="ip6/beampipe_hadron_B0.xml" />
-  <include ref="ip6/beampipe.xml" />
+  <!--include ref="ip6/beampipe.xml" /-->
 
   <documentation level="5">
      ## Main magnet
@@ -145,17 +145,15 @@
       vis="TOFSubAssemblyVis">
       <composite name="BarrelTOF"/>
       <!--composite name="ForwardTOF"/-->
-      <composite name="B0Tracker"/>
-      <composite name="BackwardTOF"/>
     </detector>
 
-    <!--
     <detector id="B0Tracker_Station_2_ID"
       name="B0TrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TOFSubAssemblyVis">
+      <composite name="B0Tracker"/>
+      <composite name="BackwardTOF"/>
     </detector>
-    -->
 
   </detectors>
 
