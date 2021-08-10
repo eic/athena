@@ -119,7 +119,7 @@ static Ref_t CylinderTrackerBarrel_create_detector(Detector& description, xml_h 
     DetElement lay_elt(sdet, _toString(x_layer.id(), "layer%d"), lay_id);
 
     Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
-    layerExtension->addType("layer", "layer");
+    layerExtension->addType("sensitive cylinder", "layer");
     //// layerExtension->addValue(10. * Acts::UnitConstants::mm, "r", "envelope");
     //lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
 
