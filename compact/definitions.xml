@@ -369,7 +369,7 @@ Examples:
     <documentation>
       ## Vertex Tracker Parameters
     </documentation>
-    <constant name="VertexTrackerBarrel_rmin"   value="Beampipe_rmax + 5.0*mm"/>
+    <constant name="VertexTrackerBarrel_rmin"   value="Beampipe_rmax + 1.0*mm"/>
     <constant name="VertexTrackerBarrel_rmax"   value="200.0*mm"/>
     <constant name="VertexTrackerBarrel_length" value="300.0*mm"/>
     <constant name="VertexTrackerBarrel_zmax"   value="VertexTrackerBarrel_length/2.0"/>

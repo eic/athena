@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lccdd>
   <define>
+    <comment>
+      THis value probably can live in the file that includes this one.
+    </comment>
     <constant name="ITS3Thickness"       value="40*um"/>
 
-    <constant name="VertexBarrelLayer_thickness"     value="ITS3Thickness"/>
-    <constant name="VertexBarrelShell_thickness"     value="300*um"/>
-    <constant name="VertexBarrelLayer_rmin1"         value="3.3*cm"/>
-    <constant name="VertexBarrelLayer_rmin2"         value="5.7*cm"/>
-    <constant name="VertexBarrelLayer_offset"        value="VertexBarrelLayer_rmin2-VertexBarrelLayer_rmin1"/>
-    <constant name="VertexBarrelShell_rmin"          value="VertexBarrelLayer_rmin2+VertexBarrelLayer_offset"/>
-    <constant name="VertexBarrelLayer_rmax1"         value="VertexBarrelLayer_rmin2"/>
-    <constant name="VertexBarrelLayer_rmax2"         value="VertexBarrelShell_rmin"/>
-    <constant name="VertexBarrelShell_rmax"          value="VertexBarrelShell_rmin + VertexBarrelShell_thickness"/>
-    <constant name="VertexBarrel_length"             value="VertexTrackerBarrel_length"/>
+    <documentation>
+      #### Vertex Tracker Barrel Parameters
 
-    <constant name="VertexTrackerEndcapN_zmin" value="VertexTrackerBarrel_zmax"/>
-    <constant name="VertexTrackerEndcapP_zmin" value="VertexTrackerBarrel_zmax"/>
+- The sensor modules are 2 half-cylinders.
+- There are 2 sensitive layers
+- Each sensor has a thickness is 40um
+- There is an outer shell for structural support 300um thick.
+- The ID of this shell is set (arbitrarily) to 10 cm.
 
-    <constant name="VertexEndcap_NLayers" value="1"/>
-    <constant name="VertexTrackerEndcap_delta" value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
-    <constant name="VertexEndcapLayer_dz" value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
+      ##### Sensor layers
 
-    <constant name="VertexEndcapModOpeningAngle" value="30.0*degree"/>
+Currently there are 2 sensor layers. Each is composed of 2 half-cylinders modules with only 40um of silicon thickness.
+
+    </documentation>
+
+    <constant name="VertexBarrel_length"            value="VertexTrackerBarrel_length"/>
+    <constant name="VertexBarrelLayer_length"       value="VertexBarrel_length - 1*mm"/>
+    <constant name="VertexBarrelMod_length"         value="VertexBarrel_length - 2*mm"/>
+
+    <constant name="VertexBarrelSensor_thickness"   value="ITS3Thickness"/>
+    <constant name="VertexBarrelLayer_thickness"    value="0.5*cm"/>
+    <constant name="VertexBarrelMod_thickness"      value="0.2*cm"/>
+    <constant name="VertexBarrelMod1_rmin"          value="3.3*cm"/>
+    <constant name="VertexBarrelMod2_rmin"          value="5.7*cm"/>
+    <constant name="VertexBarrelLayer_rmin1"        value="VertexBarrelMod1_rmin - VertexBarrelLayer_thickness/2.0"/>
+    <constant name="VertexBarrelLayer_rmin2"        value="VertexBarrelMod2_rmin - VertexBarrelLayer_thickness/2.0"/>
+
+    <constant name="VertexBarrelLayer_offset"       value="VertexBarrelLayer_rmin2-VertexBarrelLayer_rmin1"/>
+    <constant name="VertexBarrelLayer_rmax1"        value="VertexBarrelLayer_rmin1 + VertexBarrelLayer_thickness"/>
+    <constant name="VertexBarrelLayer_rmax2"        value="VertexBarrelLayer_rmin2 + VertexBarrelLayer_thickness"/>
+
+    <constant name="VertexBarrelShell_rmin"         value="VertexBarrelLayer_rmin2+2*VertexBarrelLayer_offset"/>
+    <constant name="VertexBarrelShell_thickness"    value="300*um"/>
+    <constant name="VertexBarrelShell_rmax"         value="VertexBarrelShell_rmin + VertexBarrelShell_thickness"/>
+    <constant name="VertexBarrelShell_length"       value="VertexBarrel_length"/>
+
+    <constant name="VertexTrackerEndcapN_zmin"      value="VertexTrackerBarrel_zmax"/>
+    <constant name="VertexTrackerEndcapP_zmin"      value="VertexTrackerBarrel_zmax"/>
+
+    <constant name="VertexEndcap_NLayers"           value="1"/>
+    <constant name="VertexTrackerEndcap_delta"      value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
+    <constant name="VertexEndcapLayer_dz"           value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
+
+    <constant name="VertexEndcapModOpeningAngle"    value="30.0*degree"/>
     <constant name="VertexEndcapMod1_x1"            value="2.0*VertexTrackerEndcapP_rmin*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_x2"            value="2.0*VertexTrackerEndcapP_rmax*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_y"             value="VertexTrackerEndcapP_rmax*cos(VertexEndcapModOpeningAngle/2.0) - VertexTrackerEndcapP_rmin"/>
@@ -39,19 +67,19 @@
       insideTrackingVolume="true">
       <comment>Vertex Barrel Modules</comment>
       <module name="Module1" vis="VertexLayerVis">
-        <module_envelope rmin="VertexBarrelLayer_rmin1" length="VertexBarrel_length" thickness="VertexBarrelLayer_thickness" phi="180*degree" />
-        <module_component thickness="VertexBarrelLayer_thickness" material="Silicon" sensitive="true">
+        <module_envelope rmin="VertexBarrelMod1_rmin" length="VertexBarrelMod_length" thickness="VertexBarrelMod_thickness" phi="180*degree" />
+        <module_component thickness="VertexBarrelSensor_thickness" material="Silicon" sensitive="true">
           <position x="0" />
         </module_component>
       </module>
       <module name="Module2" vis="VertexLayerVis">
-        <module_envelope rmin="VertexBarrelLayer_rmin2" length="VertexBarrel_length" thickness="VertexBarrelLayer_thickness" phi="180*degree" />
-        <module_component thickness="VertexBarrelLayer_thickness" material="Silicon" sensitive="true">
+        <module_envelope rmin="VertexBarrelMod2_rmin" length="VertexBarrelMod_length" thickness="VertexBarrelMod_thickness" phi="180*degree" />
+        <module_component thickness="VertexBarrelSensor_thickness" material="Silicon" sensitive="true">
           <position x="0" />
         </module_component>
       </module>
-      <module name="Frame" vis="VertexSupportVis">
-        <module_envelope rmin="VertexBarrelShell_rmin" length="VertexBarrel_length" thickness="VertexBarrelShell_thickness" phi="180*degree" />
+      <module name="SupportShell" vis="VertexSupportVis">
+        <module_envelope rmin="VertexBarrelShell_rmin" length="VertexBarrelShell_length" thickness="VertexBarrelShell_thickness" phi="180*degree" />
         <module_component thickness="VertexBarrelShell_thickness" material="CarbonFiber">
           <position x="0" />
         </module_component>
@@ -61,7 +89,7 @@
         <barrel_envelope
           inner_r="VertexBarrelLayer_rmin1"
           outer_r="VertexBarrelLayer_rmax1"
-          z_length="VertexBarrel_length" />
+          z_length="VertexBarrelLayer_length" />
         <comment>
           phi0     : Starting phi of first module.
           phi_tilt : Phi tilt of a module.
@@ -72,23 +100,23 @@
           nz       : Number of modules to place in z.
           dr       : Radial displacement parameter, of every other module.
         </comment>
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelLayer_rmin1" dr="0.0 * mm"/>
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelMod1_rmin+VertexBarrelMod_thickness/2.0" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
       <layer module="Module2" id="2" vis="VertexLayerVis">
         <barrel_envelope
           inner_r="VertexBarrelLayer_rmin2"
           outer_r="VertexBarrelLayer_rmax2"
-          z_length="VertexBarrel_length" />
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelLayer_rmin2" dr="0.0 * mm"/>
+          z_length="VertexBarrelLayer_length" />
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelMod1_rmin+VertexBarrelMod_thickness/2.0" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
-      <layer module="Frame" id="3" vis="VertexSupportVis">
+      <layer module="SupportShell" id="3" vis="VertexSupportVis">
         <barrel_envelope
           inner_r="VertexBarrelShell_rmin"
           outer_r="VertexBarrelShell_rmax"
-          z_length="VertexBarrel_length" />
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelShell_rmin" dr="0.0 * mm"/>
+          z_length="VertexBarrelShell_length" />
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelShell_rmin +VertexBarrelShell_thickness/2.0" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
