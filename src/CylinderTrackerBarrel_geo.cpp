@@ -48,7 +48,7 @@ static Ref_t CylinderTrackerBarrel_create_detector(Detector& description, xml_h 
     auto     module_length    = m_env.length();
     auto     module_phi       = getAttrOrDefault(m_env, _Unicode(phi), 90.0);
 
-    Volume m_vol(m_nam, Tube(module_rmin, module_rmin + module_thickness, module_length / 2), air);
+    Volume m_vol(m_nam, Tube(module_rmin, module_rmin + module_thickness, module_length / 2,-moulde_phi / 2.0 , comp_phi / 2.0 ), air);
     int    ncomponents = 0, sensor_number = 1;
     module_assembly.placeVolume(m_vol, Position(-module_rmin, 0, 0));
     mod_volumes[m_nam] = module_assembly;

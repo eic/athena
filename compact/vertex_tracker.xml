@@ -19,6 +19,10 @@
 
 Currently there are 2 sensor layers. Each is composed of 2 half-cylinders modules with only 40um of silicon thickness.
 
+      ##### Support shell
+
+Simple carbon fiber support shell.
+
     </documentation>
 
     <constant name="VertexBarrel_length"            value="VertexTrackerBarrel_length"/>
