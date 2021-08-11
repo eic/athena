@@ -104,7 +104,7 @@ Simple carbon fiber support shell.
           nz       : Number of modules to place in z.
           dr       : Radial displacement parameter, of every other module.
         </comment>
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="0.0" dr="0.0 * mm"/>
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelMod1_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
       <layer module="Module2" id="2" vis="VertexLayerVis">
@@ -112,7 +112,7 @@ Simple carbon fiber support shell.
           inner_r="VertexBarrelLayer_rmin2"
           outer_r="VertexBarrelLayer_rmax2"
           z_length="VertexBarrelLayer_length" />
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="0.0" dr="0.0 * mm"/>
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelMod2_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
       <layer module="SupportShell" id="3" vis="VertexSupportVis">
@@ -120,7 +120,7 @@ Simple carbon fiber support shell.
           inner_r="VertexBarrelShell_rmin"
           outer_r="VertexBarrelShell_rmax"
           z_length="VertexBarrelShell_length" />
-        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="0.2" dr="0.0 * mm"/>
+        <rphi_layout phi_tilt="0.0*degree" nphi="2" phi0="0.0" rc="VertexBarrelShell_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
