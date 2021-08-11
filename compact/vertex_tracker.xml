@@ -66,7 +66,7 @@ Simple carbon fiber support shell.
     <detector
       id="VertexBarrel_ID"
       name="VertexBarrel"
-      type="athena_VertexBarrel"
+      type="athena_CylinderVertexBarrel"
       readout="VertexBarrelHits"
       insideTrackingVolume="true">
       <comment>Vertex Barrel Modules</comment>
