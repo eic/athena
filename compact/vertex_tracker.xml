@@ -30,9 +30,9 @@ Simple carbon fiber support shell.
     <constant name="VertexBarrelMod_length"         value="VertexBarrel_length - 2*mm"/>
 
     <constant name="VertexBarrelSensor_thickness"   value="ITS3Thickness"/>
-    <constant name="VertexBarrelLayer_thickness"    value="0.5*cm"/>
-    <constant name="VertexBarrelMod_thickness"      value="0.2*cm"/>
-    <constant name="VertexBarrelMod1_rmin"          value="3.3*cm"/>
+    <constant name="VertexBarrelLayer_thickness"    value="0.2*cm"/>
+    <constant name="VertexBarrelMod_thickness"      value="0.1*cm"/>
+    <constant name="VertexBarrelMod1_rmin"          value="3.4*cm"/>
     <constant name="VertexBarrelMod2_rmin"          value="5.7*cm"/>
     <constant name="VertexBarrelLayer_rmin1"        value="VertexBarrelMod1_rmin - VertexBarrelLayer_thickness/2.0"/>
     <constant name="VertexBarrelLayer_rmin2"        value="VertexBarrelMod2_rmin - VertexBarrelLayer_thickness/2.0"/>
