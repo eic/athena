@@ -2,7 +2,6 @@
 <lccdd>
   <define>
 
-    <constant name="ITS3Thickness"                   value="30*um"/>
     <constant name="VertexBarrel_rmin1"              value="3.3*cm"/>
     <constant name="VertexBarrel_rmin2"              value="5.7*cm"/>
     <constant name="VertexBarrelModule_maxThickness" value="VertexBarrel_rmin2 - VertexBarrel_rmin1"/>

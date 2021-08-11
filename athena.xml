@@ -87,8 +87,6 @@
       Beamline elements
       -----------------
   </comment>
-  <include ref="ip6/forward_ion_beamline.xml"/>
-  <include ref="ip6/beampipe_hadron_B0.xml" />
   <!--include ref="ip6/beampipe.xml" /-->
 
   <documentation level="5">
@@ -102,6 +100,7 @@
       ### Tracker subassemblies for ACTS
   </documentation>
   <detectors>
+  <!--
     <detector id="VertexBarrelSubAssembly_ID"
       name="VertexBarrelSubAssembly"
       type="DD4hep_SubdetectorAssembly"
@@ -138,21 +137,17 @@
       <composite name="TrackerEndcapP_Outer"/>
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
+      <composite name="ForwardTOF"/>
+    -->
 
-    <detector id="TOFSubAssembly_ID"
-      name="TOFSubAssembly"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TOFSubAssemblyVis">
-      <composite name="BarrelTOF"/>
-      <!--composite name="ForwardTOF"/-->
-    </detector>
 
     <detector id="B0Tracker_Station_2_ID"
       name="B0TrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TOFSubAssemblyVis">
-      <composite name="B0Tracker"/>
+      <composite name="BarrelTOF"/>
       <composite name="BackwardTOF"/>
+      <composite name="B0Tracker"/>
     </detector>
 
   </detectors>
@@ -170,24 +165,18 @@
   </documentation>
   <!--include ref="compact/dirc.xml"/-->
   <!--include ref="compact/mrich.xml"/-->
-  <include ref="compact/forward_trd.xml"/>
-  <include ref="compact/drich.xml"/>
+  <!--include ref="compact/forward_trd.xml"/-->
+  <!--include ref="compact/drich.xml"/-->
 
   <documentation level="10">
   ## Central calorimetry
   </documentation>
-  <include ref="compact/ecal.xml"/>
-  <include ref="compact/hcal.xml"/>
 
 
   <documentation level="11">
   ## Far foward detectors
   </documentation>
   <include ref="ip6/B0_tracker.xml"/>
-  <include ref="ip6/B0_preshower.xml"/>
-  <include ref="ip6/far_forward_offM_tracker.xml"/>
-  <include ref="ip6/far_forward_detectors.xml"/>
-  <include ref="ip6/roman_pots_eRD24_design.xml"/>
 
   <fields>
     <field name="B0PF_Magnet" type="MultipoleMagnet">

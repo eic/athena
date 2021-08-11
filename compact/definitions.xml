@@ -7,6 +7,7 @@
     <constant name="Pi" value="3.14159265359"/>
     <constant name="mil" value="0.0254*mm"/>
     <constant name="inch" value="2.54*cm"/>
+    <constant name="ITS3Thickness"                   value="30*um"/>
 
     <documentation>
       ## Detector IDs
