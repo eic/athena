@@ -46,6 +46,7 @@ common:setup:
     - git clone https://eicweb.phy.anl.gov/EIC/benchmarks/common_bench.git setup 
   script:
     - export JUGGLER_DETECTOR="athena"
+    - export BEAMLINE_CONFIG_VERSION="b0_acts"
     - |
       if [[ "x${CI_PIPELINE_SOURCE}" == "xmerge_request_event"  || "$CI_COMMIT_BRANCH" == "master" ]]; then
         export JUGGLER_DETECTOR_VERSION="${CI_COMMIT_REF_NAME}"
