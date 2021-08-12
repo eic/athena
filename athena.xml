@@ -102,11 +102,16 @@
       ### Tracker subassemblies for ACTS
   </documentation>
   <detectors>
+    <detector id="VertexBarrelSubAssembly_ID"
+      name="VertexBarrelSubAssembly"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TrackerSubAssemblyVis">
+      <composite name="VertexBarrel" />
+    </detector>
     <detector id="VertexEndcapSubAssembly_ID"
       name="VertexEndcapSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
-      <composite name="VertexBarrel" />
       <composite name="VertexEndcapN" />
       <composite name="VertexEndcapP" />
     </detector>
