@@ -36,7 +36,7 @@
       type="athena_DRICH"
       readout="DRICHHits"
       gas="C2F6_DRICH"
-      material="Aluminum"
+      material="C2F6_DRICH"
       vis_vessel="DRICH_vessel_vis"
       vis_gas="DRICH_gas_vis"
       >
@@ -74,12 +74,12 @@
         pitch="0*degree"
         >
         <aerogel
-          material="Aerogel_DRICH"
+          material="C2F6_DRICH"
           vis="DRICH_aerogel_vis"
           thickness="DRICH_aerogel_thickness"
           />
         <filter
-          material="Acrylic_DRICH"
+          material="C2F6_DRICH"
           vis="DRICH_filter_vis"
           thickness="0.3*mm"
           />
@@ -127,7 +127,7 @@
                as it can in the specified patch below
              -->
         <module
-          material="Silicon"
+          material="C2F6_DRICH"
           surface="SensorSurface_DRICH"
           vis="DRICH_sensor_vis"
           side="DRICH_sensor_size"
