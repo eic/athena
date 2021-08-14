@@ -1,0 +1,63 @@
+default:
+  before_script:
+    - source .local/bin/env.sh
+  artifacts:
+    expire_in: 1 week 
+    paths:
+      - .local/detector
+      - .local/lib
+      - .local/bin
+      - .local/include
+      - .local/share
+      - results
+      - config
+      - images
+      - doc
+      - juggler.env
+      - geo
+    reports:
+      dotenv: juggler.env
+
+common:setup:
+  stage: config
+  rules:
+    - if: '$CI_SERVER_HOST == "eicweb.phy.anl.gov"' 
+  before_script:
+    - git clone https://eicweb.phy.anl.gov/EIC/benchmarks/common_bench.git setup 
+  script:
+    - export JUGGLER_DETECTOR="athena"
+    - |
+      if [[ "x${CI_PIPELINE_SOURCE}" == "xmerge_request_event"  || "$CI_COMMIT_BRANCH" == "master" ]]; then
+        export JUGGLER_DETECTOR_VERSION="${CI_COMMIT_REF_NAME}"
+        echo "BEAMLINE_CONFIG          = ${BEAMLINE_CONFIG}"
+        echo "BEAMLINE_CONFIG_VERSION  = ${BEAMLINE_CONFIG_VERSION}"
+        echo "JUGGLER_DETECTOR         = ${JUGGLER_DETECTOR}"
+        echo "JUGGLER_DETECTOR_VERSION = ${CI_COMMIT_REF_NAME}"
+        echo "JUGGLER_DETECTOR_VERSION=$CI_COMMIT_REF_NAME" >> juggler.env
+        echo "JUGGLER_DETECTOR=$JUGGLER_DETECTOR" >> juggler.env
+      fi
+    - source setup/bin/env.sh && ./setup/bin/install_common.sh
+
+common:detector:
+  stage: initialize
+  needs: ["common:setup"]
+  script:
+    - source .local/bin/env.sh && build_detector.sh
+    - mkdir_local_data_link sim_output
+    - mkdir -p results
+    - mkdir -p config
+    - mkdir -p doc
+    - mkdir -p geo
+    - print_env.sh
+
+
+overlap_check_geant4:full:
+  stage: test
+  needs: 
+    - ["common:detector"]
+  script:
+    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
+    - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
+    - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+
+

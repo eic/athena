@@ -187,7 +187,7 @@ overlap_check_geant4:full:
   needs: 
     - ["common:detector"]
   script:
-    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
+    - python scripts/checkOverlaps.py -r 100 -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
@@ -197,9 +197,19 @@ overlap_check_geant4:inner_detector:
     - ["common:detector"]
   script:
     - cp ${DETECTOR_PATH}/compact/subsystem_views/inner_detector.xml ${DETECTOR_PATH}/inner_detector.xml
-    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/inner_detector.xml | tee doc/overlap_check_geant4.out
+    - python scripts/checkOverlaps.py -r 100 -c ${DETECTOR_PATH}/inner_detector.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+
+overlap_check:full_detailed:
+  stage: test
+  needs: 
+    - ["overlap_check_geant4:inner_detector","overlap_check_geant4:full"]
+  variables:
+    JUGGLER_DETECTOR: "$JUGGLER_DETECTOR"
+    JUGGLER_DETECTOR_VERSION: "$JUGGLER_DETECTOR_VERSION"
+  trigger:
+    include: path/to/child-pipeline.yml
 
 convert_to_gdml:
   stage: test
