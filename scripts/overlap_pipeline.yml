@@ -50,6 +50,8 @@ common:setup:
 
 common:detector:
   stage: initialize
+  rules:
+    - if: '$CI_SERVER_HOST == "eicweb.phy.anl.gov"' 
   needs: ["common:setup"]
   script:
     - source .local/bin/env.sh && build_detector.sh
@@ -63,10 +65,12 @@ common:detector:
 
 overlap_check_geant4:full:
   stage: test
+  rules:
+    - if: '$CI_SERVER_HOST == "eicweb.phy.anl.gov"' 
   needs: 
     - ["common:detector"]
   script:
-    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
+    - python scripts/checkOverlaps.py -r 1 -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
