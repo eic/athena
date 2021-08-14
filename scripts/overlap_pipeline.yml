@@ -1,3 +1,13 @@
+stages:
+  - config
+  - initialize
+  - build
+  - docs
+  - test 
+  - collect
+  - finalize 
+  - deploy
+
 default:
   before_script:
     - source .local/bin/env.sh

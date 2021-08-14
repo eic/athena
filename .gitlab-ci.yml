@@ -202,7 +202,7 @@ overlap_check_geant4:inner_detector:
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
 overlap_check:full_detailed:
-  stage: test
+  stage: deploy
   needs: 
     - ["overlap_check_geant4:inner_detector","overlap_check_geant4:full"]
   variables:
