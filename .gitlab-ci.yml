@@ -209,7 +209,7 @@ overlap_check:full_detailed:
     JUGGLER_DETECTOR: "$JUGGLER_DETECTOR"
     JUGGLER_DETECTOR_VERSION: "$JUGGLER_DETECTOR_VERSION"
   trigger:
-    include: path/to/child-pipeline.yml
+    include: scripts/overlap_pipeline.yml
 
 convert_to_gdml:
   stage: test
