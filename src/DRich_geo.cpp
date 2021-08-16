@@ -353,6 +353,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           //   generator coordinates are provided in the comments
           auto sensorPV = vesselVol.placeVolume(sensorVol,
                 RotationZ(sectorRotation) // rotate about beam axis to sector
+              * Translation3D(0,(isec==0?1:-1)*sensorSphRadius,0) // TEST: MOVE SENSORS OUT OF THE WAY TO SEE FULL FOCAL PLANE
               * Translation3D(sensorSphCenterX, sensorSphCenterY, sensorSphCenterZ) // move sphere to specified center
               * Translation3D(snoutFront.x(), snoutFront.y(), snoutFront.z()) // move sphere to reference position
               * RotationX(phiGen) // rotate about `zGen`
