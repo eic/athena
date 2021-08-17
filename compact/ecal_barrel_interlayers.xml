@@ -46,13 +46,17 @@
     <constant name="EcalBarrelImagingLayers_nMax"  value="6"/>
     <constant name="EcalBarrelImagingLayers_num"
         value="min(EcalBarrelImagingLayers_nMax,
-               floor(EcalBarrel_AvailThickness/
-                     (EcalBarrel_ImagingLayerThickness+EcalBarrel_RadiatorThickness+EcalBarrel_SpaceBetween)))"/>
-    <constant name="EcalBarrel_FiberLayerThickness_max"
-        value="max(0, EcalBarrel_AvailThickness-
-               (EcalBarrelImagingLayers_num*EcalBarrel_ImagingLayerThickness))"/>
-    <constant name="EcalBarrel_FiberLayerThickness"
-        value="min(EcalBarrel_FiberLayerThickness_max, EcalBarrel_FiberZSpacing*13*15)"/>
+               floor((EcalBarrel_AvailThickness-EcalBarrel_ImagingLayerThickness)/
+                     (EcalBarrel_ImagingLayerThickness + EcalBarrel_ScFiLayerThickness + EcalBarrel_SpaceBetween)))"/>
+    <constant name="EcalBarrel_ImagingPartThickness"
+        value="(EcalBarrelImagingLayers_num-1)*(EcalBarrel_ImagingLayerThickness + EcalBarrel_ScFiLayerThickness + EcalBarrel_SpaceBetween)
+              + EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween"/>
+    <constant name="EcalBarrel_ScFiPartThickness_max"
+        value="max(0, EcalBarrel_AvailThickness-EcalBarrel_ImagingPartThickness)"/>
+    <constant name="EcalBarrel_ScFiPartThickness"
+        value="min(EcalBarrel_ScFiPartThickness_max, EcalBarrel_FiberZSpacing*13*15)"/>
+    <constant name="EcalBarrel_SensitiveLayers_rmax"
+        value="EcalBarrel_rmin + EcalBarrel_ImagingPartThickness + EcalBarrel_ScFiPartThickness"/>
   </define>
 
   <limits>
@@ -82,6 +86,7 @@
       offset="EcalBarrel_offset">
       <dimensions numsides="EcalBarrel_ModRepeat"
         rmin="EcalBarrel_rmin"
+        rmax="EcalBarrel_SensitiveLayers_rmax"
         z="EcalBarrel_length"/>
       <layer repeat="EcalBarrelImagingLayers_num" vis="EcalBarrelLayerVis"
         space_between="EcalBarrel_ScFiLayerThickness + EcalBarrel_SpaceBetween"
@@ -110,6 +115,7 @@
       offset="EcalBarrel_offset">
       <dimensions numsides="EcalBarrel_ModRepeat"
         rmin="EcalBarrel_rmin"
+        rmax="EcalBarrel_SensitiveLayers_rmax"
         z="EcalBarrel_length"/>
       <staves vis="EcalBarrelStaveVis">
         <support material="Steel235" vis="EcalBarrelSupportVis" n_beams="3" grid_size="25.0*cm"
@@ -120,13 +126,13 @@
        space_between="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween"
        space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween/2.">
         <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis">
-          <fiber material="PlasticScint"
+          <!-- <fiber material="PlasticScint"
             sensitive="yes"
             radius="EcalBarrel_FiberRadius"
             spacing_x="EcalBarrel_FiberXSpacing"
             spacing_z="EcalBarrel_FiberZSpacing"
             vis="EcalBarrelFiberLayerVis">
-          </fiber>
+          </fiber> -->
         </slice>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
         <slice material="Air" thickness="EcalBarrel_LayerSpacing " vis="EcalBarrelSliceVis"/>
@@ -134,15 +140,15 @@
       <layer repeat="EcalBarrel_FiberChunkLayers_num" vis="EcalBarrelLayerVis"
           space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween">
         <slice material="Lead"
-          thickness="EcalBarrel_FiberLayerThickness/EcalBarrel_FiberChunkLayers_num"
+          thickness="EcalBarrel_ScFiPartThickness/EcalBarrel_FiberChunkLayers_num"
           vis="EcalBarrelFiberLayerVis">
-          <fiber material="PlasticScint"
+          <!-- <fiber material="PlasticScint"
             sensitive="yes"
             radius="EcalBarrel_FiberRadius"
             spacing_x="EcalBarrel_FiberXSpacing"
             spacing_z="EcalBarrel_FiberZSpacing"
             vis="EcalBarrelFiberLayerVis">
-          </fiber>
+          </fiber> -->
         </slice>
       </layer>
     </detector>

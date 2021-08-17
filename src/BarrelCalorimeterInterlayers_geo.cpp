@@ -48,6 +48,16 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
   double        dphi      = (2*M_PI/nsides);
   double        hphi      = dphi/2;
 
+  // Take the outer radius of the sensitive layers of the barrel 
+  // to be able to implement projective cut at positive eta.
+  // Since the Imaging layers and ScFi layers are implemented as 
+  // separate detectors this information  needs to be passed
+  // from the .xml file. It could be calculated for the ScFi detector 
+  // here from the thicknesses of layers, but Imaging detector finishes
+  // only after 6 layers and don't have access to the thickness of the 
+  // thick chunk of the ScFi detector after it. 
+  double        outer_r   = x_dim.rmax();
+
   DetElement    sdet      (det_name, det_id);
   Volume        motherVol = desc.pickMotherVolume(sdet);
 
@@ -63,9 +73,14 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
   DetElement    stave_det("stave0", det_id);
   Assembly      mod_vol("stave");
 
-  // keep tracking of the total thickness
+  // Calculate distance from IP ((0,0,0) in global coordinates) 
+  // to the edge of barrel (in z in global coordinates) at positive eta
+  double dist_ip_to_edge = x_dim.z()/2 + offset;
+
+  // Keep tracking of the total thickness
   double l_pos_z = inner_r;
   { // =====  buildBarrelStave(desc, sens, module_volume) =====
+
     // Parameters for computing the layer X dimension:
     double tan_hphi = std::tan(hphi);
     double l_dim_y  = x_dim.z()/2.;
@@ -84,13 +99,17 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
         double l_thickness = layering.layer(l_num - 1)->thickness();  // Layer's thickness.
         double l_dim_x = tan_hphi* l_pos_z;
         l_pos_z += l_thickness;
+        
+        double shift_pos_y = (l_dim_y + offset - (dist_ip_to_edge * l_pos_z)/outer_r)/2.;
+        Position   l_pos(0, -shift_pos_y, l_pos_z - l_thickness/2.);      // Position of the layer.
+        
+	      double l_trd_x1 = l_dim_x;
+	      double l_trd_x2 = l_dim_x + l_thickness*tan_hphi;     
+	      
+        double l_trd_y1 = (-offset + (dist_ip_to_edge * l_pos_z)/outer_r + l_dim_y)/2.; // projection at positive eta
+	      double l_trd_y2 = l_trd_y1;
 
-        Position   l_pos(0, 0, l_pos_z - l_thickness/2.);      // Position of the layer.
-	    double l_trd_x1 = l_dim_x;
-	    double l_trd_x2 = l_dim_x + l_thickness*tan_hphi;
-	    double l_trd_y1 = l_dim_y;
-	    double l_trd_y2 = l_trd_y1;
-	    double l_trd_z  = l_thickness/2;
+	      double l_trd_z  = l_thickness/2;
         Trapezoid  l_shape(l_trd_x1, l_trd_x2, l_trd_y1, l_trd_y2, l_trd_z);
         Volume     l_vol(l_name, l_shape, air);
         DetElement layer(stave_det, l_name, det_id);
@@ -102,11 +121,11 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
           xml_comp_t x_slice = si;
           string     s_name  = Form("slice%d", s_num);
           double     s_thick = x_slice.thickness();
-	      double s_trd_x1 = l_dim_x + (s_pos_z + l_thickness/2)*tan_hphi;
-	      double s_trd_x2 = l_dim_x + (s_pos_z + l_thickness/2 + s_thick)*tan_hphi;
-	      double s_trd_y1 = l_trd_y1;
-	      double s_trd_y2 = s_trd_y1;
-	      double s_trd_z  = s_thick/2.;
+	        double s_trd_x1 = l_dim_x + (s_pos_z + l_thickness/2)*tan_hphi;
+	        double s_trd_x2 = l_dim_x + (s_pos_z + l_thickness/2 + s_thick)*tan_hphi;
+	        double s_trd_y1 = l_trd_y1;
+	        double s_trd_y2 = l_trd_y2;
+	        double s_trd_z  = s_thick/2.;
           Trapezoid  s_shape(s_trd_x1, s_trd_x2, s_trd_y1, s_trd_y2, s_trd_z);
           Volume     s_vol(s_name, s_shape, desc.material(x_slice.materialStr()));
           DetElement slice(layer, s_name, det_id);
@@ -157,7 +176,7 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
     sdet.add(sd);
   }
 
-  // optional stave support
+  // Build stave support
   if (x_det.hasChild(_U(staves))) {
     xml_comp_t x_staves = x_det.staves();
     mod_vol.setVisAttributes(desc.visAttributes(x_staves.visStr()));
