@@ -48,7 +48,7 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 dawncut -1 0 0 1 ${INPUT_FILE} ${FILE_TAG}.prim
 # dawncut 1 0 0 1 ${INPUT_FILE} ${FILE_TAG}_temp0.prim 
 # dawncut -1 0 0 1 ${FILE_TAG}_temp0.prim  ${FILE_TAG}.prim
-../../bin/dawn_tweak --mag 10 --draw 3 --theta 165 --phi 75 --light-theta 180 --light-phi 90
+../../bin/dawn_tweak --mag 10 --draw 4 --theta 165 --phi 75 --light-theta 180 --light-phi 90
 
 dawn -d ${FILE_TAG}.prim
 ps2pdf ${FILE_TAG}.eps ${FILE_TAG}_full.pdf
