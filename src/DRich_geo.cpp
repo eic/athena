@@ -38,7 +38,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // TODO [low priority]: some attributes have default values, some do not;
   //                      make this more consistent
   // - vessel
-  double vesselZ0 = dims.attr<double>(_Unicode(z0));
+  double vesselZmin = dims.attr<double>(_Unicode(zmin));
   double vesselLength = dims.attr<double>(_Unicode(length));
   double vesselRmin0 = dims.attr<double>(_Unicode(rmin0));
   double vesselRmin1 = dims.attr<double>(_Unicode(rmin1));
@@ -77,8 +77,8 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   auto mirrorSurf = surfMgr.opticalSurface(getAttrOrDefault(mirrorElem, _Unicode(surface), "MirrorOpticalSurface"));
   double mirrorBackplane = getAttrOrDefault<double>(mirrorElem, _Unicode(backplane), 240.*cm);
   double mirrorThickness = getAttrOrDefault<double>(mirrorElem, _Unicode(thickness), 2.*mm);
-  double mirrorRadius = getAttrOrDefault<double>(mirrorElem, _Unicode(radius), 190*cm);
-  double mirrorCenterX = getAttrOrDefault<double>(mirrorElem, _Unicode(centerx), 95*cm);
+  //double mirrorRadius = getAttrOrDefault<double>(mirrorElem, _Unicode(radius), 190*cm); // OLD
+  //double mirrorCenterX = getAttrOrDefault<double>(mirrorElem, _Unicode(centerx), 95*cm); // OLD
   double mirrorRmin = getAttrOrDefault<double>(mirrorElem, _Unicode(rmin), 10.*cm);
   double mirrorRmax = getAttrOrDefault<double>(mirrorElem, _Unicode(rmax), 150.*cm);
   double mirrorPhiw = getAttrOrDefault<double>(mirrorElem, _Unicode(phiw), 2*M_PI/nSectors);
@@ -95,7 +95,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   auto sensorSphElem = detElem.child(_Unicode(sensors)).child(_Unicode(sphere));
   double sensorSphRadius = sensorSphElem.attr<double>(_Unicode(radius));
   double sensorSphCenterX = sensorSphElem.attr<double>(_Unicode(centerx));
-  double sensorSphCenterY = sensorSphElem.attr<double>(_Unicode(centery));
   double sensorSphCenterZ = sensorSphElem.attr<double>(_Unicode(centerz));
   int sensorSphDebug = getAttrOrDefault<int>(sensorSphElem, _Unicode(debug), 0);
   // - sensor sphere patch cuts
@@ -114,6 +113,10 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
    *   in the front, housing the aerogel, while the tank refers to the cylindrical
    *   region, housing the rest of the detector components
    */
+
+  // derived attributes // TODO can we simplify expressions below with these new attributes?
+  double tankLength = vesselLength - snoutLength;
+  double vesselZmax = vesselZmin + vesselLength;
 
   // snout solids
   double boreDelta = vesselRmin1 - vesselRmin0;
@@ -174,8 +177,15 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   vesselVol.setVisAttributes(vesselVis);
   gasvolVol.setVisAttributes(gasvolVis);
 
-  // reference position
-  auto snoutFront = Position(0., 0., -(vesselLength + snoutLength)/2.);
+  // reference positions
+  // - the vessel is created such that the center of the cylindrical tank volume
+  //   coincides with the origin; this is called the "origin position" of the vessel
+  // - when the vessel (and its children volumes) is placed, it is translated in 
+  //   the z-direction to be in the proper ATHENA-integration location
+  // - these reference positions are for the frontplane and backplane of the vessel,
+  //   with respect to the vessel origin position
+  auto originFront = Position(0., 0., -tankLength/2.0 - snoutLength );
+  auto originBack =  Position(0., 0., tankLength/2.0 );
 
 
   // sensitive detector type
@@ -192,7 +202,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // BUILD RADIATOR ====================================================================
 
     // derived attributes
-    auto radiatorPos = Position(0., 0., radiatorFrontplane) + snoutFront;
+    auto radiatorPos = Position(0., 0., radiatorFrontplane) + originFront;
 
     // solid and volume: create aerogel and filter sectors
     Tube aerogelSolid(radiatorRmin, radiatorRmax, aerogelThickness/2, -radiatorPhiw/2.0, radiatorPhiw/2.0);
@@ -205,13 +215,13 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // placement
     auto aerogelPV = vesselVol.placeVolume(aerogelVol,
           RotationZ(sectorRotation) // rotate about beam axis to sector
-        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to snoutFront
+        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
         * RotationY(radiatorPitch) // change polar angle to specified pitch
         );
     /* // disable filter and surface properties
     auto filterPV = vesselVol.placeVolume(filterVol,
             RotationZ(sectorRotation) // rotate about beam axis to sector
-        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to snoutFront
+        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
         * RotationY(radiatorPitch) // change polar angle
         * Translation3D(0., 0., (aerogelThickness+filterThickness)/2.) // move to aerogel backplane
         );
@@ -231,8 +241,25 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
     // BUILD MIRROR ====================================================================
 
-    // derived attributes
-    auto mirrorPos = Position(mirrorCenterX, 0., mirrorBackplane) + snoutFront;
+    // assumed attributes, aliased and defined w.r.t. IP
+    double zS = sensorSphCenterZ + vesselZmin;
+    double xS = sensorSphCenterX;
+    double rS = sensorSphRadius;
+    double B = vesselZmax - mirrorBackplane;
+
+    // derived attributes: sphere center `(zM,xM)` and radius `rM`
+    double zM = B*zS / (2*B-zS);
+    double xM = B*xS / (2*B-zS);
+    double rM = B - zM;
+
+    // unalias attributes, and re-define w.r.t vessel frontPlane
+    double mirrorCenterZ = zM - vesselZmin;
+    double mirrorCenterX = xM;
+    double mirrorRadius = rM;
+    printf("RESULT = %f  %f  %f\n",zM,xM,rM);
+    auto mirrorPos = Position(mirrorCenterX, 0., mirrorCenterZ) + originFront;
+
+    // spherical mirror patch cuts and rotation
     double mirrorThetaRot = std::asin(mirrorCenterX/mirrorRadius);
     double mirrorTheta1 = mirrorThetaRot - std::asin((mirrorCenterX-mirrorRmin)/mirrorRadius);
     double mirrorTheta2 = mirrorThetaRot + std::asin((mirrorRmax-mirrorCenterX)/mirrorRadius);
@@ -255,10 +282,10 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // placement (note: transformations are in reverse order)
     auto mirrorPV = vesselVol.placeVolume(mirrorVol,
           RotationZ(sectorRotation) // rotate about beam axis to sector
-        * Translation3D(0,0,-mirrorRadius) // move longitudinally so it intersects snoutFront
-        * Translation3D(mirrorPos.x(), mirrorPos.y(), mirrorPos.z()) // re-center to snoutFront
+        * Translation3D(mirrorPos.x(), mirrorPos.y(), mirrorPos.z()) // re-center to specified position
         * RotationY(-mirrorThetaRot) // rotate about origin
         );
+
 
     // properties
     DetElement mirrorDE(det, Form("mirror_de%d", isec), isec);
@@ -354,8 +381,8 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           auto sensorPV = vesselVol.placeVolume(sensorVol,
                 RotationZ(sectorRotation) // rotate about beam axis to sector
               * Translation3D(0,(isec==0?1:-1)*sensorSphRadius,0) // TEST: MOVE SENSORS OUT OF THE WAY TO SEE FULL FOCAL PLANE
-              * Translation3D(sensorSphCenterX, sensorSphCenterY, sensorSphCenterZ) // move sphere to specified center
-              * Translation3D(snoutFront.x(), snoutFront.y(), snoutFront.z()) // move sphere to reference position
+              * Translation3D(sensorSphCenterX, 0.0, sensorSphCenterZ) // move sphere to specified center
+              * Translation3D(originFront.x(), originFront.y(), originFront.z()) // move sphere to reference position
               * RotationX(phiGen) // rotate about `zGen`
               * RotationZ(thetaGen) // rotate about `yGen`
               * Translation3D(sensorSphRadius, 0., 0.) // push radially to spherical surface
@@ -395,7 +422,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // place mother volume (vessel)
   Volume motherVol = desc.pickMotherVolume(det);
   PlacedVolume vesselPV = motherVol.placeVolume(vesselVol,
-      Position(0, 0, vesselZ0) - snoutFront
+      Position(0, 0, vesselZmin) - originFront
       );
   vesselPV.addPhysVolID("system", detID);
   det.setPlacement(vesselPV);

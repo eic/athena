@@ -46,7 +46,7 @@
 	   - `window_thickness`: thickness of entrance and exit disks
 	   -->
       <dimensions
-        z0="DRICH_zmin"
+        zmin="DRICH_zmin"
         length="DRICH_Length"
         snout_length="DRICH_SnoutLength"
         rmin0="DRICH_rmin0"
@@ -89,9 +89,8 @@
       <!-- spherical mirror is part of a sphere
            - `rmin` and `rmax` provide polar angle boundaries
            - `phiw` is the azimuthal width
-           - `radius` is the radius of the sphere
-           - `centerx` is the transverse position of the center 
-             of the sphere, for the sector on the +x axis
+           - `backplane` is the position of the maximum z-plane intersected by the sphere,
+             w.r.t. the back plane of vessel envelope
            - the back of the mirror will pass through `backplane`
            - set `debug` to 1 so draw reference sphere instead, view with y-clipping
            -->
@@ -99,10 +98,8 @@
         material="Acrylic_DRICH"
         surface="MirrorSurface_DRICH"
         vis="DRICH_mirror_vis"
-        backplane="DRICH_Length-2.0*cm"
         thickness="0.2*cm"
-        radius="290*DRICH_scale*cm"
-        centerx="145*DRICH_scale*cm"
+        backplane="DRICH_window_thickness + 10.0*cm"
         rmin="DRICH_rmin1 + DRICH_wall_thickness + 0.0*cm"
         rmax="DRICH_rmax2 - DRICH_wall_thickness - 2.0*cm"
         phiw="54*degree"
@@ -145,7 +142,6 @@
         <sphere
           radius="159.76*DRICH_scale*cm"
           centerx="144.91*DRICH_scale*cm"
-          centery="0*DRICH_scale*cm"
           centerz="-197.25*DRICH_scale*cm + DRICH_Length - 0.5*DRICH_scale*DRICH_f4a_length"
           debug="0"
           />
