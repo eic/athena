@@ -132,7 +132,7 @@ static Ref_t create_detector(Detector& desc, xml_h e, SensitiveDetector sens)  {
 
           // build fibers
           if (x_slice.hasChild(_Unicode(fiber))) {
-              buildFibers(desc, sens, s_vol, x_slice.child(_Unicode(fiber)), {s_trd_x1, s_thick, l_dim_y, hphi});
+              buildFibers(desc, sens, s_vol, x_slice.child(_Unicode(fiber)), {s_trd_x1, s_thick, l_trd_y1, hphi});
           }
 
           if ( x_slice.isSensitive() ) {
