@@ -452,9 +452,7 @@ end of the solenoid coils.
 
     <constant name="EcalBarrel_rmin"            value="BarrelTrackingAndPID_rmax + BarrelExtraSpaceThickness"/>
     <constant name="Barrel_rmax"                value="Solenoid_rmin - 1.0 *cm "/>
-    <constant name="Barrel_TotalCalThickness"   value="Barrel_rmax - EcalBarrel_rmin"/>
-
-    <constant name="EcalBarrel_TotalThickness"  value="40.0*cm"/>
+    <constant name="EcalBarrel_TotalThickness"   value="Barrel_rmax - EcalBarrel_rmin"/>
 
     <constant name="EcalEndcapP_zmin"           value="CentralTrackingHalfP_length + ForwardInnerEndcap_length + ForwardServiceGap_length"/>
     <constant name="EcalEndcapN_zmin"           value="max(CentralTrackingHalfN_length+ BackwardInnerEndcap_length, SolenoidYokeEndcapN_zmin)"/>
@@ -483,7 +481,7 @@ end of the solenoid coils.
 
 
     <documentation>
-EcalEndcapP_rmin and EcalEndcapN_rmin need to be set in sync with the forward and backward detectors.
+      EcalEndcapP_rmin and EcalEndcapN_rmin need to be set in sync with the forward and backward detectors.
     </documentation>
     <constant name="EcalEndcapP_rmin"                      value="200.0*mm"/>
     <constant name="EcalEndcapN_rmin"                      value="max((EcalEndcapN_zmin + EcalEndcapN_length) * tan(abs(CrossingAngle)) + 12.5 * mm, 5*cm)"/>
@@ -492,13 +490,12 @@ EcalEndcapP_rmin and EcalEndcapN_rmin need to be set in sync with the forward an
     <documentation>
       ## EM Calorimeter Parameters
 
-       ### Note about Calormieter parameterization.
+      ### Note about Calormieter parameterization.
       
-The logic goes like this: 
-1. The space for the calorimeter is fixed via parameterization above.
-2. The layer thicknesses are fixed (first parameters below)
-3. From the space/thickness the number of layers is computed.
-
+      The logic goes like this: 
+      1. The space for the calorimeter is fixed via parameterization above.
+      2. The layer thicknesses are fixed (first parameters below)
+      3. From the space/thickness the number of layers is computed.
     </documentation>
     <constant name="CaloSides"                  value="12"/>
       
@@ -520,18 +517,6 @@ The logic goes like this:
         value="EcalThinTungstenThickness + EcalAir2Thickness + EcalSiliconThickness + EcalCopperThickness + EcalKaptonThickness + EcalAir1Thickness"/>
     <constant name="EcalLayer3_thickness"   
         value="EcalThickTungstenThickness + EcalAir2Thickness + EcalSiliconThickness + EcalCopperThickness + EcalKaptonThickness + EcalAir1Thickness"/>
-      
-    <comment> EM Barrel N Layer; same number of layers for EcalThin and EcalThick</comment>
-    <constant name="EcalBarrelLayers" 
-        value="floor((EcalBarrel_TotalThickness - EcalLayer1_thickness) / (EcalLayer2_thickness + EcalLayer3_thickness))"/>
-    <constant name="EcalBarrelLayer1_NRepeat"       value="1"/>
-    <constant name="EcalBarrelLayer2_NRepeat"       value="EcalBarrelLayers"/>
-    <constant name="EcalBarrelLayer3_NRepeat"       value="EcalBarrelLayers"/>
-
-    <comment> EM Barrel Thickness </comment>
-    <constant name="EcalBarrelThickness"
-        value="EcalBarrelLayer1_NRepeat*EcalLayer1_thickness + EcalBarrelLayer2_NRepeat * EcalLayer2_thickness + EcalBarrelLayer3_NRepeat * EcalLayer3_thickness"/>
-    <constant name="EcalBarrel_rmax"            value="EcalBarrel_rmin + EcalBarrelThickness"/>
 
     <comment> EM Endcap N Layer; same number of layers for EcalThin and EcalThick </comment>
     <constant name="EcalEndcapPLayers" 
@@ -551,12 +536,12 @@ The logic goes like this:
     <!--constant name="EcalEndcapNThickness"        
         value="EcalEndcapNLayer1_NRepeat*EcalLayer1_thickness + EcalEndcapNLayer2_NRepeat*EcalLayer2_thickness + EcalEndcapNLayer3_NRepeat*EcalLayer3_thickness"/-->
 
-    <constant name="EcalBarrelForward_length"       value="4*cm"/>
+    <constant name="EcalBarrelForward_length"       value="45*cm"/>
+    <constant name="EcalBarrelForward_readout"      value="5*cm"/>
     <constant name="EcalBarrelForward_zmax"         value="CentralTrackingHalfP_length + EcalBarrelForward_length"/>
     <constant name="EcalBarrelBackward_zmax"        value="CentralTrackingHalfN_length + BackwardInnerEndcap_length + EcalEndcapN_length"/>
     <constant name="EcalBarrel_length"              value="EcalBarrelForward_zmax + EcalBarrelBackward_zmax"/>
     <constant name="EcalBarrel_offset"              value="(EcalBarrelForward_zmax - EcalBarrelBackward_zmax)/2.0"/>
-
 
     <comment> Special DIRC parameters (depend on the ECAL setup) </comment>
     <constant name="DIRCReadout_length"         value="30*cm"/>
