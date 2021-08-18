@@ -551,7 +551,7 @@ The logic goes like this:
     <!--constant name="EcalEndcapNThickness"        
         value="EcalEndcapNLayer1_NRepeat*EcalLayer1_thickness + EcalEndcapNLayer2_NRepeat*EcalLayer2_thickness + EcalEndcapNLayer3_NRepeat*EcalLayer3_thickness"/-->
 
-    <constant name="EcalBarrelForward_length"       value="4*cm"/>
+    <constant name="EcalBarrelForward_length"       value="10*cm"/>
     <constant name="EcalBarrelForward_zmax"         value="CentralTrackingHalfP_length + EcalBarrelForward_length"/>
     <constant name="EcalBarrelBackward_zmax"        value="CentralTrackingHalfN_length + BackwardInnerEndcap_length + EcalEndcapN_length"/>
     <constant name="EcalBarrel_length"              value="EcalBarrelForward_zmax + EcalBarrelBackward_zmax"/>
