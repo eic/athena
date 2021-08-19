@@ -117,7 +117,7 @@ Simple carbon fiber support shell.
                           width="VertexBarrelShellStave_width" 
                           length="VertexBarrelShell_length"
                           thickness="VertexBarrelShell_thickness" 
-                          vis="VertexLayerVis" />
+                          vis="VertexSupportVis" />
       </module>
       <comment> Layers composed of many arrayed modules  </comment>
       <layer module="Module1" id="1" vis="VertexLayerVis">
@@ -161,7 +161,7 @@ Simple carbon fiber support shell.
       name="VertexEndcapP"
       type="athena_TrapEndcapTracker"
       readout="VertexEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="false">
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="VertexEndcapMod1_x1/2.0" x2="VertexEndcapMod1_x2/2.0" z="VertexEndcapMod1_y/2"/>
@@ -170,12 +170,12 @@ Simple carbon fiber support shell.
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="VertexTrackerEndcapP_rmin"
           rmax="VertexTrackerEndcapP_rmax"
           length="VertexEndcapLayer_thickness"
           zstart="VertexTrackerEndcapP_zmin + VertexEndcapLayer_dz/2.0" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="VertexTrackerEndcapP_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
           nmodules="12" dz="2.5 * mm" module="Module1" />
@@ -188,7 +188,7 @@ Simple carbon fiber support shell.
       name="VertexEndcapN"
       type="athena_TrapEndcapTracker"
       readout="VertexEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="true">
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="VertexEndcapMod1_x1/2.0" x2="VertexEndcapMod1_x2/2.0" z="VertexEndcapMod1_y/2"/>
@@ -197,12 +197,12 @@ Simple carbon fiber support shell.
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="VertexTrackerEndcapN_rmin"
           rmax="VertexTrackerEndcapN_rmax"
           length="VertexEndcapLayer_thickness"
           zstart="VertexTrackerEndcapN_zmin + VertexEndcapLayer_dz/2.0" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="VertexTrackerEndcapN_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
           nmodules="12" dz="2.5 * mm" module="Module1" />
@@ -216,7 +216,7 @@ Simple carbon fiber support shell.
       type="athena_SimpleDiskTracker"
       readout="VertexEndcapHits"
       insideTrackingVolume="true" 
-      reflect="false" vis="AnlRed">
+      reflect="false" vis="TrackerVis">
       <position x="0" y="0" z="0.0*mm"/>
       <layer id="1" vis="AnlOrange"
         inner_z="VertexTrackerEndcapP_zmin + 0.5*VertexTrackerEndcap_delta" 
@@ -241,7 +241,7 @@ Simple carbon fiber support shell.
       type="athena_SimpleDiskTracker"
       readout="VertexEndcapHits"
       insideTrackingVolume="true"
-      reflect="true" vis="AnlRed">
+      reflect="true" vis="TrackerVis">
       <position x="0" y="0" z="-0.0*mm-1.0e-9*mm"/>
       <layer id="1" vis="AnlOrange"
         inner_z="VertexTrackerEndcapN_zmin + 0.5*VertexTrackerEndcap_delta" 

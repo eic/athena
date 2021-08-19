@@ -111,6 +111,7 @@ dump_geometry:
     ## subsystem views
     - |
       mv ${DETECTOR_PATH}/compact/display_geoviewer.xml ${DETECTOR_PATH}/compact/display.xml
+      mv ${DETECTOR_PATH}/compact/colors_geoviewer.xml ${DETECTOR_PATH}/compact/colors.xml
       for xml in ${DETECTOR_PATH}/compact/subsystem_views/*.xml; do
         geo_name=`basename $xml .xml`_geo.root
         cp $xml ${DETECTOR_PATH}/geo.xml

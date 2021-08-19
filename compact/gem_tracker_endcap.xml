@@ -91,7 +91,7 @@
       name="GEMTrackerEndcapP"
       type="athena_GEMTrackerEndcap"
       readout="GEMTrackerEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="false">
       <module name="GEMModule1" vis="TrackerLayerVis">
         <trd x1="GEMTrackerEndcapP_x1/2.0" x2="GEMTrackerEndcapP_x2/2.0" z="GEMTrackerEndcapP_y/2"/>
@@ -133,12 +133,12 @@
         <module_component thickness="1.0*mm" material="Mylar" vis="TrackerSupportVis"/>
       </module>
       <layer id="1" >
-        <envelope vis="AnlRed"
+        <envelope vis="TrackerVis"
           rmin = "GEMTrackerEndcapP_rmin"
           rmax = "GEMTrackerEndcapP_rmax"
           length="GEMTrackerEndcapP_thickness"
           zstart="GEMTrackerEndcapP_zmin" />
-        <ring vis="AnlRed" module="GEMModule1"
+        <ring vis="TrackerVis" module="GEMModule1"
           r="GEMTrackerEndcapP_rmin+GEMTrackerEndcapP_y/2.0"
           zstart="0"
           nmodules="12" dz="GEMTrackerEndcap_dz" />
@@ -154,7 +154,7 @@
       name="GEMTrackerEndcapN"
       type="athena_GEMTrackerEndcap"
       readout="GEMTrackerEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="true">
       <module name="GEMModule1" vis="TrackerLayerVis">
         <trd x1="GEMTrackerEndcapN_x1/2.0" x2="GEMTrackerEndcapN_x2/2.0" z="GEMTrackerEndcapN_y/2"/>
@@ -172,7 +172,7 @@
         </frame>
         </comment>
         <comment> Going from HV side to readout side</comment>
-	      <module_component thickness="25.0*um" material="Mylar" name="entrance_window"/>
+        <module_component thickness="25.0*um" material="Mylar" name="entrance_window" vis="TrackerLayerVis"/>
 	      <module_component thickness=" 2.0*mm" material="Ar10CO2" name="entrance_region" />
         <module_component thickness="50.0*um" material="Kapton" name="cathode_foil"/>
 	      <module_component thickness=" 5.0*um" material="Copper" name="cathode_cu"/>
@@ -189,19 +189,19 @@
         <module_component thickness="50.0*um" material="Kapton"  name="readout_foil"/>
 	      <module_component thickness=" 5.0*um" material="Copper"  name="readout_cu"/>
 	      <module_component thickness=" 2.0*mm" material="Ar10CO2" name="exit_region"/>
-        <module_component thickness="25.0*um" material="Mylar" name="exit_window"/>
+        <module_component thickness="25.0*um" material="Mylar" name="exit_window" vis="TrackerLayerVis"/>
       </module>
       <module name="GEMSupportSpokes" vis="TrackerSupportVis">
         <trd x1="GEMTrackerEndcapFrameSideEdge_width" x2="GEMTrackerEndcapFrameSideEdge_width" z="GEMTrackerEndcapN_y/2"/>
         <module_component thickness="1.0*mm" material="Mylar" vis="TrackerSupportVis"/>
       </module>
       <layer id="1" >
-        <envelope vis="AnlRed"
+        <envelope vis="TrackerVis"
           rmin = "GEMTrackerEndcapN_rmin"
           rmax = "GEMTrackerEndcapN_rmax"
           length="GEMTrackerEndcapN_thickness"
           zstart="GEMTrackerEndcapN_zmin" />
-        <ring vis="AnlRed" module="GEMModule1"
+        <ring vis="TrackerVis" module="GEMModule1"
           r="GEMTrackerEndcapN_rmin+GEMTrackerEndcapN_y/2.0"
           zstart="0.1"
           nmodules="12" dz="GEMTrackerEndcap_dz" />

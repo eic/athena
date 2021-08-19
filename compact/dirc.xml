@@ -38,7 +38,7 @@
 
     <!-- DIRC length -->
     <constant name="DIRCMain_length"           value="DIRC_length"/>
-    <constant name="DIRCFake_offset"           value="DIRC_offset-20*cm"/>
+    <constant name="DIRCFake_offset"           value="DIRC_offset+15*cm"/>
 
     <!-- Box - main DIRC modules -->
     <constant name="DIRCBox_count"          value="16"  comment="Number of DIRC boxes per... DIRC. 16 - default"/>
@@ -107,16 +107,16 @@
   </regions>
 
   <display>
-    <vis name="DIRCTube"   alpha="0.1" r="0"       g="0.6"     b="0.6"     visible="true"  showDaughters="true"   lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCBox"    alpha="0.1" r="256/256" g="256/256" b="256/256" visible="true"  showDaughters="true"   lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCLens1"  alpha="1"   r="3/256"   g="37/256"  b="76/256"  visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCLens2"  alpha="1"   r="17/256"  g="103/256" b="177/256" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCLens3"  alpha="1"   r="0/256"   g="128/256" b="128/256" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCBar"    alpha="1"   r="0/256"   g="128/256" b="128/256" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCGlue"   alpha="1"   r="125/256" g="0/256"   b="128/256" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCMirror" alpha="1"   r="0"       g="0"       b="1"       visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCPrism"  alpha="1"   r="212/256" g="175/256" b="55/256"  visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
-    <vis name="DIRCFd"     alpha="1"   r="0.7"     g="0"       b="0"       visible="true"  showDaughters="false" />
+    <vis name="DIRCTube"   ref="AnlTeal" alpha="0.1" visible="true"  showDaughters="true"   lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCBox"    ref="AnlLight_Gray" alpha="0.1" visible="true"  showDaughters="true"   lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCLens1"  ref="AnlProcess_Blue" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCLens2"  ref="AnlProcess_Blue" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCLens3"  ref="AnlTeal" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCBar"    ref="AnlTeal" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCGlue"   ref="AnlViolet" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCMirror" ref="AnlGray" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCPrism"  ref="AnlTeal" visible="true"  showDaughters="false"  lineStyle="solid" drawingStyle="solid" />
+    <vis name="DIRCFd"     ref="AnlRed" visible="true"  showDaughters="false" />
   </display>
 
   <detectors>

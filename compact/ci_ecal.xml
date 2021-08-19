@@ -33,13 +33,13 @@
         zmin="EcalEndcapP_zmin" 
         rmin="EcalEndcapP_rmin" 
         rmax="EcalEndcapP_rmax " />
-      <layer repeat="EcalEndcapPLayer1_NRepeat">
+      <layer repeat="EcalEndcapPLayer1_NRepeat" vis="EcalEndcapLayerVis">
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
         <slice material="Copper" thickness="EcalCopperThickness"/>
         <slice material="Kapton" thickness="EcalKaptonThickness"/>
         <slice material="Air" thickness="EcalAir1Thickness"/>
       </layer>
-      <layer repeat="EcalEndcapPLayer2_NRepeat">
+      <layer repeat="EcalEndcapPLayer2_NRepeat" vis="EcalEndcapLayerVis">
         <slice material="TungstenDens24" thickness="EcalThinTungstenThickness"/>
         <slice material="Air" thickness="EcalAir2Thickness"/>
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
@@ -47,7 +47,7 @@
         <slice material="Kapton" thickness="EcalKaptonThickness"/>
         <slice material="Air" thickness="EcalAir1Thickness"/>
       </layer>
-      <layer repeat="EcalEndcapPLayer3_NRepeat">
+      <layer repeat="EcalEndcapPLayer3_NRepeat" vis="EcalEndcapLayerVis">
         <slice material="TungstenDens24" thickness="EcalThickTungstenThickness"/>
         <slice material="Air" thickness="EcalAir2Thickness"/>
         <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>

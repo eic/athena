@@ -200,7 +200,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       name="TrackerEndcapP_Inner"
       type="athena_TrapEndcapTracker"
       readout="TrackerEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="false">
       <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis">
         <shape type="Cone" 
@@ -215,12 +215,12 @@ total X0 0.24% per disk layer （4 sectors per disk):
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapInner_rmin1"
           rmax="TrackerEndcapInner_rmax1"
           length="TrackerEndcapInnerLayer_thickness"
           zstart="TrackerEndcapInner_zmin" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapInner_rmin1+TrackerEndcapInnerMod1_y/2.0"
           zstart="0.0"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module1" />
@@ -232,7 +232,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       name="TrackerEndcapN_Inner"
       type="athena_TrapEndcapTracker"
       readout="TrackerEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="true">
       <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis">
         <shape type="Cone" 
@@ -247,12 +247,12 @@ total X0 0.24% per disk layer （4 sectors per disk):
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapInner_rmin1"
           rmax="TrackerEndcapInner_rmax1"
           length="TrackerEndcapInnerLayer_thickness"
           zstart="TrackerEndcapInner_zmin" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapInner_rmin1+TrackerEndcapInnerMod1_y/2.0" 
           zstart="0"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module1" />
@@ -355,34 +355,34 @@ total X0 0.24% per disk layer （4 sectors per disk):
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin1"
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin1" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin1+TrackerEndcapOuterMod1_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module1" />
       </layer>
       <layer id="2">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin2"
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin2" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin2+TrackerEndcapOuterMod2_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module2" />
       </layer>
       <layer id="3">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin3"
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin3" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin3+TrackerEndcapOuterMod3_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module3" />
@@ -394,7 +394,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       name="TrackerEndcapN_Outer"
       type="athena_TrapEndcapTracker"
       readout="TrackerEndcapHits"
-      vis="AnlRed"
+      vis="TrackerVis"
       reflect="true">
       <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis" 
         rmin="TrackerEndcapOuter_rmax3+1.0*mm"
@@ -422,34 +422,34 @@ total X0 0.24% per disk layer （4 sectors per disk):
         <module_component thickness="TrackerCarbon_thickness"          material="CarbonFiber"/>
       </module>
       <layer id="1">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin1"
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin1" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin1+TrackerEndcapOuterMod1_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module1" />
       </layer>
       <layer id="2">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin2"
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin2" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin2+TrackerEndcapOuterMod2_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module2" />
       </layer>
       <layer id="3">
-        <envelope  vis="AnlRed"
+        <envelope  vis="TrackerVis"
           rmin="TrackerEndcapOuter_rmin3"
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin3" />
-        <ring vis="AnlRed"
+        <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin3+TrackerEndcapOuterMod3_y/2.0"
           zstart="0.0*mm"
           nmodules="TrackerEndcap_NModules" dz="TrackerEndcapModule_dz" module="Module3" />
