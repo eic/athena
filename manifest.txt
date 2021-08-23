@@ -1,0 +1,232 @@
+B0Preshower_length             =        5.000 = 5.0*cm
+B0Tracker_length               =       60.000 = 60.0*cm
+B0Tracker_zmin                 =      590.000 = B0TrackerCenter_zpos - B0Tracker_length/2.0 
+BackwardInnerEndcap_length     =       48.000 = BackwardPID_length + BackwardTracking_length
+BackwardPID_length             =       40.000 = 40.0*cm
+BackwardPID_rmax               =       95.000 = 95.*cm
+BackwardServiceGap_length      =       10.000 = 10.0*cm
+BackwardTOF_length             =        0.000 = 0.0*cm
+BackwardTracking_length        =        8.000 = 8.0*cm
+BarrelTrackingAndPID_length    =      260.000 = BarrelTracking_length
+BarrelTrackingAndPID_rmax      =      105.000 = BarrelTracking_rmax   + BarrelPIDThickness
+BarrelTracking_length          =      260.000 = TrackerBarrel_length
+BarrelTracking_rmax            =       95.000 = TrackerBarrel_rmax
+BarrelTracking_zmax            =      130.000 = BarrelTracking_length/2.0
+Barrel_rmax                    =      159.000 = Solenoid_rmin - 1.0 *cm 
+Beampipe_rmax                  =        3.176 = IPBeampipe_rmax
+CentralTrackingHalfN_length    =      137.000 = BarrelTracking_length/2. + TrackerBarrelBackwardPadding
+CentralTrackingHalfP_length    =      155.000 = BarrelTracking_length/2. + TrackerBarrelForwardPadding
+CentralTracking_length         =      292.000 = BarrelTracking_length + TrackerBarrelForwardPadding + TrackerBarrelBackwardPadding
+CentralTracking_rmax           =       95.000 = TrackerBarrel_rmax
+CrystalModule_length           =       20.000 = 200.00*mm
+DIRCBackward_zmax              =      275.000 = CentralTrackingHalfN_length + BackwardInnerEndcap_length + EcalEndcapN_length + DIRCReadout_length
+DIRCBar_length                 =      422.000 = DIRC_length-8*cm
+DIRCForward_length             =        0.000 = 0*cm
+DIRCForward_zmax               =      155.000 = CentralTrackingHalfP_length + DIRCForward_length
+DIRCFrame_length               =      430.000 = DIRC_length
+DIRCFrame_rmax                 =       99.000 = DIRC_rmin + DIRCFrame_thickness
+DIRCModule_rmax                =       97.200 = DIRC_rmin + DIRCBar_thickness + DIRCSkinFront_thickness + DIRCSkinBack_thickness
+DIRCModule_rmin                =       96.000 = DIRC_rmin + 1*cm
+DIRCReadout_length             =       30.000 = 30*cm
+DIRC_length                    =      430.000 = DIRCForward_zmax + DIRCBackward_zmax
+DIRC_rmax                      =      105.000 = DIRC_rmin + BarrelPIDThickness
+DIRC_rmin                      =       95.000 = BarrelTracking_rmax
+DRICH_f4a_length               =      161.000 = 161.0*cm
+DRICH_rmax0                    =       92.537 = DRICH_SnoutSlope * DRICH_zmin
+DRICH_rmax1                    =      122.388 = DRICH_SnoutSlope * ( DRICH_zmin + DRICH_SnoutLength)
+DRICH_rmax2                    =      200.000 = 200*cm
+DRICH_rmin0                    =       11.176 = ForwardPID_rmin1
+DRICH_rmin1                    =       19.000 = 19.0*cm
+DRICH_zmin                     =      155.000 = CentralTrackingHalfP_length
+EcalBarrelBackward_zmax        =      245.000 = CentralTrackingHalfN_length + BackwardInnerEndcap_length + EcalEndcapN_length
+EcalBarrelForward_length       =       10.000 = 10*cm
+EcalBarrelForward_zmax         =      165.000 = CentralTrackingHalfP_length + EcalBarrelForward_length
+EcalBarrel_length              =      410.000 = EcalBarrelForward_zmax + EcalBarrelBackward_zmax
+EcalBarrel_rmax                =      151.272 = EcalBarrel_rmin + EcalBarrelThickness
+EcalBarrel_rmin                =      112.000 = BarrelTrackingAndPID_rmax + BarrelExtraSpaceThickness
+EcalEndcapNCrystal_rmax        =       40.000 = 40*cm
+EcalEndcapN_length             =       60.000 = 60*cm
+EcalEndcapN_rmax               =       95.000 = BarrelTracking_rmax
+EcalEndcapN_rmin               =        7.526 = max((EcalEndcapN_zmin + EcalEndcapN_length) * tan(abs(CrossingAngle)) + 12.5 * mm, 5*cm)
+EcalEndcapN_zmin               =      191.000 = max(CentralTrackingHalfN_length+ BackwardInnerEndcap_length, SolenoidYokeEndcapN_zmin)
+EcalEndcapP_length             =       40.000 = 40*cm
+EcalEndcapP_rmax               =      224.000 = Solenoid_rmax 
+EcalEndcapP_rmin               =       20.000 = 200.0*mm
+EcalEndcapP_zmin               =      350.000 = CentralTrackingHalfP_length + ForwardInnerEndcap_length + ForwardServiceGap_length
+EndcapNExtra_length            =        0.000 = 0.0*cm
+EndcapNTotalCal_length         =      -10.000 = (SolenoidYokeEndcapN_zmin + EcalEndcapNSolenoid_offset) - (EcalEndcapN_zmin)
+EndcapPExtra_length            =       40.000 = 40.0*cm
+EndcapPTotalCal_length         =      -37.000 = (SolenoidYokeEndcapP_zmin + EcalEndcapPSolenoid_offset) - (EcalEndcapP_zmin)
+ForwardInnerEndcap_length      =      185.000 = ForwardPID_length + ForwardTracking_length
+ForwardPID_length              =      180.000 = 180.0*cm
+ForwardPID_rmin1               =       11.176 = Beampipe_rmax + 80*mm
+ForwardPID_rmin2               =       19.000 = 19.0*cm
+ForwardServiceGap_length       =       10.000 = 10.0*cm
+ForwardTracking_length         =        5.000 = 5.0*cm
+GEMTrackerEndcapN_rmax         =       95.000 = BackwardPID_rmax
+GEMTrackerEndcapN_rmin         =       10.000 = 10*cm
+GEMTrackerEndcapN_zmin         =      177.000 = CentralTrackingHalfN_length + BackwardPID_length
+GEMTrackerEndcapP_rmax         =      200.000 = 200*cm
+GEMTrackerEndcapP_rmin         =       19.000 = 19*cm
+GEMTrackerEndcapP_zmin         =      335.000 = CentralTrackingHalfP_length + ForwardPID_length
+GlassModule_length             =       40.000 = 40.00*cm
+HcalBarrel_rmax                =      324.000 = HcalBarrel_rmin + HcalBarrel_thickness
+HcalBarrel_rmin                =      224.000 = Solenoid_rmax
+HcalEndcapN_length             =      105.000 = 105.0*cm
+HcalEndcapN_rmin               =       11.977 = max((HcalEndcapN_zmin + HcalEndcapN_length) * tan(abs(CrossingAngle)) + 22.25 * mm, 11 * cm)
+HcalEndcapN_zmin               =      285.000 = DIRCBackward_zmax + BackwardServiceGap_length
+HcalEndcapP_length             =      120.000 = 120.0*cm
+HcalEndcapP_rmin               =       28.698 = max((HcalEndcapP_zmin + HcalEndcapP_length) * tan(2.0 * abs(CrossingAngle)) + BeampipeOD / 2.0, 15 * cm)
+HcalEndcapP_zmin               =      390.000 = max(EcalEndcapP_zmin + EcalEndcapP_length, Solenoid_length / 2.0 + Solenoid_offset) 
+IPBeampipe_rmax                =        3.176 = 2.501*25.4*mm/2.0
+MRICHCarbonFrame_length        =       18.792 = MRICHAerogel_thickness
+MRICHLensPhotoDet_length       =       13.640 = 136.4*mm
+MRICHMirror_length             =       13.440 = MRICHLensPhotoDet_length - MRICHLensMirrorGap_thickness
+MRICHPhotoDet_length           =        4.850 = 48.5*mm
+MRICH_length                   =       40.000 = BackwardPID_length
+MRICH_rmax                     =       95.000 = BackwardPID_rmax
+MRICH_rmin                     =       10.000 = 10*cm
+MRICH_zmin                     =      137.000 = CentralTrackingHalfN_length
+SolenoidBarrelCoilFormer_rmax  =      174.500 = SolenoidBarrelCoilFormer_rmin + SolenoidBarrelCoilFormerThickness
+SolenoidBarrelCoilFormer_rmin  =      169.500 = SolenoidBarrelInnerHelium_rmax
+SolenoidBarrelCoilFormer_zmax  =      180.000 = 1800.0 * mm
+SolenoidBarrelCoilOverbind_rmax =      214.500 = SolenoidBarrelCoilOverbind_rmin + SolenoidBarrelCoilOverbindThickness
+SolenoidBarrelCoilOverbind_rmin =      194.500 = SolenoidBarrelCoil_rmax
+SolenoidBarrelCoilOverbind_zmax =      180.000 = 1800.0 * mm
+SolenoidBarrelCoil_rmax        =      194.500 = SolenoidBarrelCoil_rmin + SolenoidBarrelCoilThickness
+SolenoidBarrelCoil_rmin        =      174.500 = SolenoidBarrelCoilFormer_rmax
+SolenoidBarrelCoil_zmax        =      180.000 = 1800.0 * mm
+SolenoidBarrelInnerFirstMLILayer_rmax =      166.500 = SolenoidBarrelInnerFirstMLILayer_rmin + SolenoidBarrelInnerFirstMLILayerThickness
+SolenoidBarrelInnerFirstMLILayer_rmin =      165.000 = SolenoidBarrelInnerThermalShield_rmax
+SolenoidBarrelInnerFirstMLILayer_zmax =      185.500 = 1855.0 * mm
+SolenoidBarrelInnerHeliumVessel_rmax =      168.500 = SolenoidBarrelInnerHeliumVessel_rmin + SolenoidBarrelInnerHeliumVesselThickness
+SolenoidBarrelInnerHeliumVessel_rmin =      166.500 = SolenoidBarrelInnerFirstMLILayer_rmax
+SolenoidBarrelInnerHeliumVessel_zmax =      184.000 = 1840.0 * mm
+SolenoidBarrelInnerHelium_rmax =      169.500 = SolenoidBarrelInnerHelium_rmin + SolenoidBarrelInnerHeliumThickness
+SolenoidBarrelInnerHelium_rmin =      168.500 = SolenoidBarrelInnerHeliumVessel_rmax
+SolenoidBarrelInnerHelium_zmax =      182.000 = 1820.0 * mm
+SolenoidBarrelInnerSecondMLILayer_rmax =      164.000 = SolenoidBarrelInnerSecondMLILayer_rmin + SolenoidBarrelInnerSecondMLILayerThickness
+SolenoidBarrelInnerSecondMLILayer_rmin =      162.000 = SolenoidBarrelInnerVacuumVessel_rmax
+SolenoidBarrelInnerSecondMLILayer_zmax =      189.500 = 1895.0 * mm
+SolenoidBarrelInnerThermalShield_rmax =      165.000 = SolenoidBarrelInnerThermalShield_rmin + SolenoidBarrelInnerThermalShieldThickness
+SolenoidBarrelInnerThermalShield_rmin =      164.000 = SolenoidBarrelInnerSecondMLILayer_rmax
+SolenoidBarrelInnerThermalShield_zmax =      187.500 = 1875.0 * mm
+SolenoidBarrelInnerVacuumVessel_rmax =      162.000 = SolenoidBarrelInnerVacuumVessel_rmin + SolenoidBarrelInnerVacuumVesselThickness
+SolenoidBarrelInnerVacuumVessel_rmin =      160.000 = SolenoidBarrel_rmin
+SolenoidBarrelInnerVacuumVessel_zmax =      192.000 = 1920.0 * mm
+SolenoidBarrelOuterFirstMLILayer_rmax =      218.500 = SolenoidBarrelOuterFirstMLILayer_rmin + SolenoidBarrelOuterFirstMLILayerThickness
+SolenoidBarrelOuterFirstMLILayer_rmin =      217.000 = SolenoidBarrelOuterHeliumVessel_rmax
+SolenoidBarrelOuterFirstMLILayer_zmax =      185.500 = 1855.0 * mm
+SolenoidBarrelOuterHeliumVessel_rmax =      217.000 = SolenoidBarrelOuterHeliumVessel_rmin + SolenoidBarrelOuterHeliumVesselThickness
+SolenoidBarrelOuterHeliumVessel_rmin =      216.000 = SolenoidBarrelOuterHelium_rmax
+SolenoidBarrelOuterHeliumVessel_zmax =      184.000 = 1840.0 * mm
+SolenoidBarrelOuterHelium_rmax =      216.000 = SolenoidBarrelOuterHelium_rmin + SolenoidBarrelOuterHeliumThickness
+SolenoidBarrelOuterHelium_rmin =      214.500 = SolenoidBarrelCoilOverbind_rmax
+SolenoidBarrelOuterHelium_zmax =      182.000 = 1820.0 * mm
+SolenoidBarrelOuterSecondMLILayer_rmax =      221.500 = SolenoidBarrelOuterSecondMLILayer_rmin + SolenoidBarrelOuterSecondMLILayerThickness
+SolenoidBarrelOuterSecondMLILayer_rmin =      219.500 = SolenoidBarrelOuterThermalShield_rmax
+SolenoidBarrelOuterSecondMLILayer_zmax =      189.500 = 1895.0 * mm
+SolenoidBarrelOuterThermalShield_rmax =      219.500 = SolenoidBarrelOuterThermalShield_rmin + SolenoidBarrelOuterThermalShieldThickness
+SolenoidBarrelOuterThermalShield_rmin =      218.500 = SolenoidBarrelOuterFirstMLILayer_rmax
+SolenoidBarrelOuterThermalShield_zmax =      187.500 = 1875.0 * mm
+SolenoidBarrelOuterVacuumVessel_rmax =      224.000 = SolenoidBarrelOuterVacuumVessel_rmin + SolenoidBarrelOuterVacuumVesselThickness
+SolenoidBarrelOuterVacuumVessel_rmin =      221.500 = SolenoidBarrelOuterSecondMLILayer_rmax
+SolenoidBarrelOuterVacuumVessel_zmax =      192.000 = 1920.0 * mm
+SolenoidBarrel_length          =      384.000 = Solenoid_length
+SolenoidBarrel_rmin            =      160.000 = Solenoid_rmin
+SolenoidBarrel_zmax            =      192.000 = Solenoid_length/2.0
+SolenoidEndcapCoilEndSupport_rmax =      214.500 = SolenoidBarrelCoilOverbind_rmax
+SolenoidEndcapCoilEndSupport_rmin =      169.500 = SolenoidBarrelCoilFormer_rmin
+SolenoidEndcapCoilEndSupport_zmin =      180.000 = 1800.0 * mm
+SolenoidEndcapFirstMLILayer_rmax =      218.500 = SolenoidBarrelOuterFirstMLILayer_rmax
+SolenoidEndcapFirstMLILayer_rmin =      165.000 = SolenoidBarrelInnerFirstMLILayer_rmin
+SolenoidEndcapFirstMLILayer_zmin =      185.500 = 1855.0 * mm
+SolenoidEndcapHeliumVessel_rmax =      217.000 = SolenoidBarrelOuterHeliumVessel_rmax
+SolenoidEndcapHeliumVessel_rmin =      166.500 = SolenoidBarrelInnerHeliumVessel_rmin
+SolenoidEndcapHeliumVessel_zmin =      184.000 = 1840.0 * mm
+SolenoidEndcapHelium_rmax      =      216.000 = SolenoidBarrelOuterHelium_rmax
+SolenoidEndcapHelium_rmin      =      168.500 = SolenoidBarrelInnerHelium_rmin
+SolenoidEndcapHelium_zmin      =      182.000 = 1820.0 * mm
+SolenoidEndcapSecondMLILayer_rmax =      219.500 = SolenoidBarrelOuterSecondMLILayer_rmin
+SolenoidEndcapSecondMLILayer_rmin =      164.000 = SolenoidBarrelInnerSecondMLILayer_rmax
+SolenoidEndcapSecondMLILayer_zmin =      187.500 = 1875.0 * mm
+SolenoidEndcapThermalShield_rmax =      218.500 = SolenoidBarrelOuterThermalShield_rmin
+SolenoidEndcapThermalShield_rmin =      165.000 = SolenoidBarrelInnerThermalShield_rmax
+SolenoidEndcapThermalShield_zmin =      186.500 = 1865.0 * mm
+SolenoidEndcapVacuumVessel_rmax =      221.500 = SolenoidBarrelOuterVacuumVessel_rmin
+SolenoidEndcapVacuumVessel_rmin =      162.000 = SolenoidBarrelInnerVacuumVessel_rmax
+SolenoidEndcapVacuumVessel_zmin =      189.500 = 1895.0 * mm
+SolenoidYokeEndcapN_zmin       =      191.000 = Solenoid_length/2.0 - Solenoid_offset + EndcapNExtra_length
+SolenoidYokeEndcapP_zmin       =      233.000 = Solenoid_length/2.0 + Solenoid_offset + EndcapPExtra_length
+Solenoid_length                =      384.000 = 3840.0*mm
+Solenoid_rmax                  =      224.000 = Solenoid_rmin + Solenoid_thickness
+Solenoid_rmin                  =      160.000 = 1600.0*mm
+TrackerBarrelInner_length      =       61.000 = TrackerBarrelInner_length2+1.0*cm
+TrackerBarrelInner_length1     =       54.000 = 54.0*cm
+TrackerBarrelInner_length2     =       60.000 = 60.0*cm
+TrackerBarrelInner_rmin1       =       21.000 = 21.0*cm
+TrackerBarrelInner_rmin2       =       22.680 = 22.68*cm
+TrackerBarrelInside_length     =       60.000 = VertexTrackingRegion_length
+TrackerBarrelInside_zmax       =       30.000 = TrackerBarrelInside_length/2.0
+TrackerBarrelOuter_length      =      115.000 = TrackerBarrelOuter_length2+1.0*cm
+TrackerBarrelOuter_length1     =      105.000 = 105.0*cm
+TrackerBarrelOuter_length2     =      114.000 = 114.0*cm
+TrackerBarrelOuter_rmin1       =       39.300 = 39.3*cm
+TrackerBarrelOuter_rmin2       =       43.230 = 43.23*cm
+TrackerBarrel_length           =      260.000 = VertexTrackingRegion_length + 2000.0*mm
+TrackerBarrel_rmax             =       95.000 = BackwardPID_rmax
+TrackerBarrel_rmin             =       20.000 = VertexTrackingRegion_rmax
+TrackerBarrel_zmax             =      130.000 = TrackerBarrel_length/2.0
+TrackerEndcapInner_length      =        2.000 = TrackerEndcapLayer_dz
+TrackerEndcapInner_rmax1       =       35.760 = 36.26*cm-5.0*mm
+TrackerEndcapInner_rmin1       =        4.176 = Beampipe_rmax+1.0*cm
+TrackerEndcapInner_zmax        =       51.000 = TrackerEndcapInner_zmin+TrackerEndcapLayer_dz
+TrackerEndcapInner_zmin        =       49.000 = 49*cm
+TrackerEndcapOuterShell_length =       62.764 = TrackerEndcapOuter_zmax- TrackerEndcapOuterShell_zmin
+TrackerEndcapOuterShell_zmin   =       60.236 = TrackerEndcapOuter_rmax1 * TrackerEndcapInner_zmin/TrackerEndcapInner_rmax1+1*cm
+TrackerEndcapOuter_rmax1       =       43.230 = 43.23*cm
+TrackerEndcapOuter_rmax2       =       43.230 = 43.23*cm
+TrackerEndcapOuter_rmax3       =       43.230 = 43.23*cm
+TrackerEndcapOuter_rmin1       =        3.600 = 3.6*cm
+TrackerEndcapOuter_rmin2       =        4.700 = 4.7*cm
+TrackerEndcapOuter_rmin3       =        5.910 = 5.91*cm
+TrackerEndcapOuter_zmax        =      123.000 = TrackerEndcapOuter_zmin3 + TrackerEndcapLayer_dz
+TrackerEndcapOuter_zmin        =       73.000 = TrackerEndcapOuter_zmin1
+TrackerEndcapOuter_zmin1       =       73.000 = 73*cm
+TrackerEndcapOuter_zmin2       =       97.000 = 97*cm
+TrackerEndcapOuter_zmin3       =      121.000 = 121*cm
+VertexBarrelLayer_length       =       29.900 = VertexBarrel_length - 1*mm
+VertexBarrelLayer_rmax1        =        3.500 = VertexBarrelLayer_rmin1 + VertexBarrelLayer_thickness
+VertexBarrelLayer_rmax2        =        5.800 = VertexBarrelLayer_rmin2 + VertexBarrelLayer_thickness
+VertexBarrelLayer_rmin1        =        3.300 = VertexBarrelMod1_rmin - VertexBarrelLayer_thickness/2.0
+VertexBarrelLayer_rmin2        =        5.600 = VertexBarrelMod2_rmin - VertexBarrelLayer_thickness/2.0
+VertexBarrelMod1_rmin          =        3.400 = 3.4*cm
+VertexBarrelMod2_rmin          =        5.700 = 5.7*cm
+VertexBarrelMod_length         =       29.800 = VertexBarrel_length - 2*mm
+VertexBarrelShell_length       =       29.870 = VertexBarrelLayer_length-VertexBarrelShell_thickness
+VertexBarrelShell_rmax         =       10.030 = VertexBarrelShell_rmin + VertexBarrelShell_thickness
+VertexBarrelShell_rmin         =       10.000 = 10.0*cm
+VertexBarrelSupport_length     =       29.900 = VertexBarrelLayer_length
+VertexBarrelSupport_rmax       =       10.500 = VertexBarrelSupport_rmin + VertexBarrelSupport_thickness
+VertexBarrelSupport_rmin       =        9.500 = VertexBarrelShell_rmin-VertexBarrelSupport_thickness/2.0
+VertexBarrel_length            =       30.000 = VertexTrackerBarrel_length
+VertexTrackerBarrel_length     =       30.000 = 300.0*mm
+VertexTrackerBarrel_rmax       =       20.000 = 200.0*mm
+VertexTrackerBarrel_rmin       =        3.276 = Beampipe_rmax + 1.0*mm
+VertexTrackerBarrel_zmax       =       15.000 = VertexTrackerBarrel_length/2.0
+VertexTrackerEndcapN_rmax      =       20.000 = VertexTrackerBarrel_rmax
+VertexTrackerEndcapN_rmin      =        3.676 = Beampipe_rmax + 5.0*mm
+VertexTrackerEndcapN_zmax      =       30.000 = 300.0*mm
+VertexTrackerEndcapN_zmin      =       15.000 = VertexTrackerBarrel_zmax
+VertexTrackerEndcapP_rmax      =       20.000 = VertexTrackerBarrel_rmax
+VertexTrackerEndcapP_rmin      =        3.676 = Beampipe_rmax + 5.0*mm
+VertexTrackerEndcapP_zmax      =       30.000 = 300.0*mm
+VertexTrackerEndcapP_zmin      =       15.000 = VertexTrackerBarrel_zmax
+VertexTrackingRegion_length    =       60.000 = VertexTrackerEndcapP_zmax + VertexTrackerEndcapN_zmax 
+VertexTrackingRegion_rmax      =       20.000 = VertexTrackerBarrel_rmax
+VertexTrackingRegion_zmax      =       30.000 = VertexTrackerEndcapP_zmax
+ffi_ZDC_ECAL_length            =       26.378 = ffi_ZDC_SiPbWO4_NRepeat * ffi_ZDC_ECAL_layer_thickness
+ffi_ZDC_HCAL_length            =      200.000 = ffi_ZDC_length
+ffi_ZDC_length                 =      200.000 = 200.0 * cm
+tracker_region_rmax            =       95.000 = CentralTracking_rmax
+tracker_region_zmax            =      146.000 = CentralTracking_length/2.0
