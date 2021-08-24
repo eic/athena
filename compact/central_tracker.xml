@@ -44,15 +44,13 @@ total X0 0.24% per disk layer （4 sectors per disk):
 
     <constant name="TrackerBarrelOuter_rmin1"       value="39.3*cm"/>
     <constant name="TrackerBarrelOuter_rmin2"       value="43.23*cm"/>
-
     <constant name="TrackerBarrelOuter_length1"     value="105.0*cm"/>
     <constant name="TrackerBarrelOuter_length2"     value="114.0*cm"/>
 
     <constant name="TrackerBarrelInner_thickness"   value="TrackerBarrelInner_rmin2 - TrackerBarrelInner_rmin1"/>
     <constant name="TrackerBarrelOuter_thickness"   value="TrackerBarrelOuter_rmin2 - TrackerBarrelOuter_rmin1"/>
-
-    <constant name="TrackerBarrelInner_length"      value="TrackerBarrelInner_length2+1.0*cm"/>
-    <constant name="TrackerBarrelOuter_length"      value="TrackerBarrelOuter_length2+1.0*cm"/>
+    <constant name="TrackerBarrelInner_length"      value="TrackerBarrelInner_length2+0.5*cm"/>
+    <constant name="TrackerBarrelOuter_length"      value="TrackerBarrelOuter_length2+0.5*cm"/>
 
     <comment>
       Here we are assuming the two endcaps (P and N) are symmetric.
@@ -85,18 +83,41 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="TrackerEndcapOuter_rmin2" value="4.7*cm"/>
     <constant name="TrackerEndcapOuter_rmin3" value="5.91*cm"/>
 
-    <constant name="TrackerEndcapInner_rmax1" value="36.26*cm-5.0*mm"/>
+    <constant name="TrackerEndcapInner_rmax1"  value="36.26*cm-5.0*mm"/>
     <constant name="TrackerEndcapOuter_rmax1"  value="43.23*cm"/>
     <constant name="TrackerEndcapOuter_rmax2"  value="43.23*cm"/>
     <constant name="TrackerEndcapOuter_rmax3"  value="43.23*cm"/>
 
-    <comment> The carbonfiber shell covers the outer 3 disks and intercepts with the diagonal cone at
-   TrackerEndcapOuter_rmax1 * TrackerEndcapInner_zmin/TrackerEndcapInner_rmax1 ~ 60cm </comment>
+    <comment> build the cone from vertex endcap to inner barrel endcap </comment>
+    <constant name="TrackerSupportCarbon_thickness"    value="2*mm"/>
+    <constant name="TrackerEndcapInnerCone_zmax"       value="TrackerEndcapInner_zmin-0.5*cm"/>
+    <constant name="TrackerEndcapInnerCone_zmin"       value="TrackerBarrelInner_length2/2+0.5*cm"/>
+    <constant name="TrackerEndcapInnerCone_rmin1"      value="TrackerBarrelInner_rmin1"/>
+    <constant name="TrackerEndcapInnerCone_rmin2"      value="TrackerEndcapInner_rmax1"/>
+    <constant name="TrackerEndcapInnerCone_length"     value="TrackerEndcapInnerCone_zmax - TrackerEndcapInnerCone_zmin"/>
+    <constant name="TrackerEndcapInnerConeService_rmin1"      value="TrackerEndcapInnerCone_rmin1+TrackerSupportCarbon_thickness+0.1*mm"/>
+    <constant name="TrackerEndcapInnerConeService_rmin2"      value="TrackerEndcapInnerCone_rmin2+TrackerSupportCarbon_thickness+0.1*mm"/>
+    <constant name="TrackerEndcapInnerConeService_thickness"  value="2.5*mm"/>
+
+    <comment> The carbonfiber shell covers the outer 3 disks and intercepts with the diagonal cone at TrackerEndcapOuter_rmax1 * TrackerEndcapInner_zmin/TrackerEndcapInner_rmax1 ~ 60cm </comment>
+    <constant name="TrackerEndcapOuterShell_rmin"       value="TrackerEndcapOuter_rmax3 + 0.5*cm"/>
     <constant name="TrackerEndcapOuterShell_zmin"      value="TrackerEndcapOuter_rmax1 * TrackerEndcapInner_zmin/TrackerEndcapInner_rmax1+1*cm"/>
-    <constant name="TrackerEndcapOuterShell_length"    value="TrackerEndcapOuter_zmax- TrackerEndcapOuterShell_zmin"/>
+    <constant name="TrackerEndcapOuterShell_length"    value="TrackerEndcapOuter_zmax - TrackerEndcapOuterShell_zmin"/>
+
+    <comment> build the cone from inner barrel endcap to outer barrel endcap1. For now can not make zmin start at the inner endcap location, will overlap with outer barrel volume </comment>
+    <!-- <constant name="TrackerEndcapOuterCone_zmax"       value="TrackerEndcapOuterShell_zmin-0.2*cm"/> -->
+    <constant name="TrackerEndcapOuterCone_zmin"       value="TrackerBarrelOuter_length/2.0+0.1*cm"/>
+    <constant name="TrackerEndcapOuterCone_zmax"       value="TrackerEndcapOuterShell_zmin -0.1*cm"/>
+    <constant name="TrackerEndcapOuterCone_rmin1"      value="TrackerEndcapOuterCone_zmin * TrackerEndcapInner_rmax1 / TrackerEndcapInner_zmin"/>
+    <!-- <constant name="TrackerEndcapOuterCone_rmin1"      value="TrackerEndcapInner_rmax1"/> -->
+    <constant name="TrackerEndcapOuterCone_rmin2"      value="TrackerEndcapOuterShell_rmin"/>
+    <constant name="TrackerEndcapOuterConeService_rmin1"      value="TrackerEndcapOuterCone_rmin1+TrackerSupportCarbon_thickness+0.1*mm"/>
+    <constant name="TrackerEndcapOuterConeService_rmin2"      value="TrackerEndcapOuterCone_rmin2+TrackerSupportCarbon_thickness+0.1*mm"/>
+    <constant name="TrackerEndcapOuterConeService_thickness"      value="2*mm"/>
+    <constant name="TrackerEndcapOuterCone_length"     value="TrackerEndcapOuterCone_zmax - TrackerEndcapOuterCone_zmin"/>
+
 
     <constant name="TrackerEndcap_NModules" value="12"/>
-
     <comment> nmodules = np.pi/np.arcsin(frame_width*np.cos(tilt_angle)/2.0/R) </comment>
     <constant name="TrackerBarrel_StaveTiltAngle" value="5.0*degree"/>
     <constant name="TrackerBarrelInner_NModules1" value="33"/>
@@ -110,7 +131,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="TrackerEndcapInnerMod1_x2"            value="2.0*TrackerEndcapInner_rmax1*sin(TrackerEndcapInnerModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapInnerMod1_y"             value="TrackerEndcapInner_rmax1*cos(TrackerEndcapInnerModOpeningAngle/2.0) - TrackerEndcapInner_rmin1"/>
 
-    <constant name="TrackerEndcapOuterModOpeningAngle" value="30.0*degree"/>
+    <constant name="TrackerEndcapOuterModOpeningAngle" value="360.0/TrackerEndcap_NModules*degree"/>
     <constant name="TrackerEndcapOuterMod1_x1"            value="2.0*TrackerEndcapOuter_rmin1*sin(TrackerEndcapOuterModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapOuterMod1_x2"            value="2.0*TrackerEndcapOuter_rmax1*sin(TrackerEndcapOuterModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapOuterMod1_y"             value="TrackerEndcapOuter_rmax1*cos(TrackerEndcapOuterModOpeningAngle/2.0) - TrackerEndcapOuter_rmin1"/>
@@ -202,12 +223,20 @@ total X0 0.24% per disk layer （4 sectors per disk):
       readout="TrackerEndcapHits"
       vis="TrackerVis"
       reflect="false">
-      <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis">
+
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
         <shape type="Cone" 
-          rmin1="TrackerEndcapInner_rmax1-14.0*cm" rmax1="TrackerEndcapInner_rmax1-14.0*cm+0.2*mm"
-          rmin2="TrackerEndcapInner_rmax1" rmax2="TrackerEndcapInner_rmax1+0.2*mm" z="8*cm"/>
-        <position x="0*cm"  y="0*cm"   z="TrackerEndcapInner_zmin-10.0*cm"/>
+          rmin1="TrackerEndcapInnerCone_rmin1" rmax1="TrackerEndcapInnerCone_rmin1 + TrackerSupportCarbon_thickness"
+          rmin2="TrackerEndcapInnerCone_rmin2" rmax2="TrackerEndcapInnerCone_rmin2 + TrackerSupportCarbon_thickness" z="TrackerEndcapInnerCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(TrackerEndcapInnerCone_zmax+TrackerEndcapInnerCone_zmin)/2.0"/>
       </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+      <shape type="Cone" 
+          rmin1="TrackerEndcapInnerConeService_rmin1" rmax1="TrackerEndcapInnerConeService_rmin1 + TrackerEndcapInnerConeService_thickness"
+          rmin2="TrackerEndcapInnerConeService_rmin2" rmax2="TrackerEndcapInnerConeService_rmin2 + TrackerEndcapInnerConeService_thickness" z="TrackerEndcapInnerCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(TrackerEndcapInnerCone_zmax+TrackerEndcapInnerCone_zmin)/2.0"/>
+      </support>
+
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="TrackerEndcapInnerMod1_x1/2.0" x2="TrackerEndcapInnerMod1_x2/2.0" z="TrackerEndcapInnerMod1_y/2"/>
         <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
@@ -234,12 +263,20 @@ total X0 0.24% per disk layer （4 sectors per disk):
       readout="TrackerEndcapHits"
       vis="TrackerVis"
       reflect="true">
-      <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis">
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
         <shape type="Cone" 
-          rmin2="TrackerEndcapInner_rmax1-14.0*cm" rmax2="TrackerEndcapInner_rmax1-14.0*cm+0.2*mm"
-          rmin1="TrackerEndcapInner_rmax1-1.0*cm" rmax1="TrackerEndcapInner_rmax1-1.0*cm+0.2*mm" z="8*cm"/>
-        <position x="0*cm"  y="0*cm"   z="-1.0*(TrackerEndcapInner_zmin-10.0*cm)"/>
+          rmin2="TrackerEndcapInnerCone_rmin1" rmax2="TrackerEndcapInnerCone_rmin1 + TrackerSupportCarbon_thickness"
+          rmin1="TrackerEndcapInnerCone_rmin2" rmax1="TrackerEndcapInnerCone_rmin2 + TrackerSupportCarbon_thickness" z="TrackerEndcapInnerCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(TrackerEndcapInnerCone_zmax+TrackerEndcapInnerCone_zmin)/2.0"/>
       </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+      <shape type="Cone" 
+          rmin2="TrackerEndcapInnerConeService_rmin1" rmax2="TrackerEndcapInnerConeService_rmin1 + TrackerEndcapInnerConeService_thickness"
+          rmin1="TrackerEndcapInnerConeService_rmin2" rmax1="TrackerEndcapInnerConeService_rmin2 + TrackerEndcapInnerConeService_thickness" z="TrackerEndcapInnerCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(TrackerEndcapInnerCone_zmax+TrackerEndcapInnerCone_zmin)/2.0"/>
+      </support>
+
+
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="TrackerEndcapInnerMod1_x1/2.0" x2="TrackerEndcapInnerMod1_x2/2.0" z="TrackerEndcapInnerMod1_y/2"/>
         <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
@@ -333,9 +370,27 @@ total X0 0.24% per disk layer （4 sectors per disk):
       readout="TrackerEndcapHits"
       vis="TrackerVis"
       reflect="false">
-      <support vis="TrackerSupportVis"  material="CarbonFiber"
-        rmin="TrackerEndcapOuter_rmax3+1.0*mm"
-        thickness="2.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+
+      <support vis="TrackerSupportVis"  material="CarbonFiber" name="sup_cylinder"
+        rmin="TrackerEndcapOuterShell_rmin"
+        thickness="TrackerSupportCarbon_thickness" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+      <support vis="TrackerSupportVis"  material="Aluminum" name="sup_cylinder_service"
+        rmin="TrackerEndcapOuterShell_rmin+1.0*mm+TrackerSupportCarbon_thickness"
+        thickness="8.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+        
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin1="TrackerEndcapOuterCone_rmin1" rmax1="TrackerEndcapOuterCone_rmin1+TrackerSupportCarbon_thickness"
+          rmin2="TrackerEndcapOuterCone_rmin2" rmax2="TrackerEndcapOuterCone_rmin2+TrackerSupportCarbon_thickness" z="TrackerEndcapOuterCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(TrackerEndcapOuterCone_zmin+TrackerEndcapOuterCone_zmax)/2.0"/>
+      </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin1="TrackerEndcapOuterConeService_rmin1" rmax1="TrackerEndcapOuterConeService_rmin1+TrackerEndcapOuterConeService_thickness"
+          rmin2="TrackerEndcapOuterConeService_rmin2" rmax2="TrackerEndcapOuterConeService_rmin2+TrackerEndcapOuterConeService_thickness" z="TrackerEndcapOuterCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(TrackerEndcapOuterCone_zmin+TrackerEndcapOuterCone_zmax)/2.0"/>
+      </support>
+
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="TrackerEndcapOuterMod1_x1/2.0" x2="TrackerEndcapOuterMod1_x2/2.0" z="TrackerEndcapOuterMod1_y/2"/>
         <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
@@ -396,11 +451,27 @@ total X0 0.24% per disk layer （4 sectors per disk):
       readout="TrackerEndcapHits"
       vis="TrackerVis"
       reflect="true">
-      <support  material="CarbonFiber" name="sup_cylinder" vis="TrackerSupportVis" 
-        rmin="TrackerEndcapOuter_rmax3+1.0*mm"
-        thickness="2.0*mm" 
-        length="TrackerEndcapOuterShell_length" 
-        zstart="TrackerEndcapOuterShell_zmin"/>
+
+      <support vis="TrackerSupportVis"  material="CarbonFiber" name="sup_cylinder"
+        rmin="TrackerEndcapOuterShell_rmin"
+        thickness="TrackerSupportCarbon_thickness" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+      <support vis="TrackerSupportVis"  material="Aluminum" name="sup_cylinder_service"
+        rmin="TrackerEndcapOuterShell_rmin+1.0*mm+TrackerSupportCarbon_thickness"
+        thickness="8.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+        <comment>the cone can not be reflected. need to flip z explicitly</comment>
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin2="TrackerEndcapOuterCone_rmin1" rmax2="TrackerEndcapOuterCone_rmin1+TrackerSupportCarbon_thickness"
+          rmin1="TrackerEndcapOuterCone_rmin2" rmax1="TrackerEndcapOuterCone_rmin2+TrackerSupportCarbon_thickness" z="TrackerEndcapOuterCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(TrackerEndcapOuterCone_zmin+TrackerEndcapOuterCone_zmax)/2.0"/>
+      </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin2="TrackerEndcapOuterConeService_rmin1" rmax2="TrackerEndcapOuterConeService_rmin1+TrackerEndcapOuterConeService_thickness"
+          rmin1="TrackerEndcapOuterConeService_rmin2" rmax1="TrackerEndcapOuterConeService_rmin2+TrackerEndcapOuterConeService_thickness" z="TrackerEndcapOuterCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(TrackerEndcapOuterCone_zmin+TrackerEndcapOuterCone_zmax)/2.0"/>
+      </support>
+
 
 
       <module name="Module1" vis="AnlProcess_Blue">

@@ -54,18 +54,34 @@ Simple carbon fiber support shell.
     <constant name="VertexBarrelSupport_rmax"       value="VertexBarrelSupport_rmin + VertexBarrelSupport_thickness"/>
     <constant name="VertexBarrelSupport_length"     value="VertexBarrelLayer_length"/>
 
-    <constant name="VertexTrackerEndcapN_zmin"      value="VertexTrackerBarrel_zmax"/>
-    <constant name="VertexTrackerEndcapP_zmin"      value="VertexTrackerBarrel_zmax"/>
+    <constant name="VertexTrackerEndcapN_zmin"      value="25*cm"/>
+    <constant name="VertexTrackerEndcapP_zmin"      value="25*cm"/>
 
     <constant name="VertexEndcap_NLayers"           value="1"/>
     <constant name="VertexTrackerEndcap_delta"      value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
-    <constant name="VertexEndcapLayer_dz"           value="(VertexTrackerEndcapP_zmax - VertexTrackerEndcapP_zmin)/VertexEndcap_NLayers"/>
-    <constant name="VertexEndcapLayer_thickness"    value="min(5*cm,VertexEndcapLayer_dz)"/>
+    <constant name="VertexEndcapLayer_dz"           value="2*cm"/>
+    <constant name="VertexEndcapLayer_thickness"    value="min(3*cm,VertexEndcapLayer_dz-0.5*cm)"/>
 
-    <constant name="VertexEndcapModOpeningAngle"    value="30.0*degree"/>
+    <constant name="VertexEndcap_NModules" value="12"/>
+    <constant name="VertexEndcapModOpeningAngle"    value="360.0/VertexEndcap_NModules*degree"/>
     <constant name="VertexEndcapMod1_x1"            value="2.0*VertexTrackerEndcapP_rmin*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_x2"            value="2.0*VertexTrackerEndcapP_rmax*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_y"             value="VertexTrackerEndcapP_rmax*cos(VertexEndcapModOpeningAngle/2.0) - VertexTrackerEndcapP_rmin"/>
+
+    <comment> cone connecting vertex barrel to endcap </comment>
+    <!-- <constant name="VertexEndcapCone_zmax"       value="VertexEndcapShell_zmin-0.2*cm"/> -->
+    <constant name="VertexSupportCarbon_thickness"       value="2*mm"/>
+
+    <constant name="VertexEndcapCone_zmin"       value="VertexBarrelLayer_length/2.0 + 0.1*cm"/>
+    <constant name="VertexEndcapCone_zmax"       value="VertexTrackerEndcapN_zmin    - 0.1*cm"/>
+    <constant name="VertexEndcapCone_rmin1"      value="VertexEndcapCone_zmin * 36.26/49"/>
+    <!-- <constant name="VertexEndcapCone_rmin1"      value="TrackerEndcapInner_rmax1"/> -->
+    <constant name="VertexEndcapCone_rmin2"      value="VertexTrackerEndcapP_rmax"/>
+    <constant name="VertexEndcapConeService_rmin1"      value="VertexEndcapCone_rmin1+VertexSupportCarbon_thickness+0.1*mm"/>
+    <constant name="VertexEndcapConeService_rmin2"      value="VertexEndcapCone_rmin2+VertexSupportCarbon_thickness+0.1*mm"/>
+    <constant name="VertexEndcapConeService_thickness"      value="0.6*mm"/>
+    <constant name="VertexEndcapCone_length"     value="VertexEndcapCone_zmax - VertexEndcapCone_zmin"/>
+
 
     <comment>
       Extra parameters to approximate a cylinder as a set of skinny staves
@@ -163,6 +179,21 @@ Simple carbon fiber support shell.
       readout="VertexEndcapHits"
       vis="TrackerVis"
       reflect="false">
+
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin1="VertexEndcapCone_rmin1" rmax1="VertexEndcapCone_rmin1+VertexSupportCarbon_thickness"
+          rmin2="VertexEndcapCone_rmin2" rmax2="VertexEndcapCone_rmin2+VertexSupportCarbon_thickness" z="VertexEndcapCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(VertexEndcapCone_zmin+VertexEndcapCone_zmax)/2.0"/>
+      </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin1="VertexEndcapConeService_rmin1" rmax1="VertexEndcapConeService_rmin1+VertexEndcapConeService_thickness"
+          rmin2="VertexEndcapConeService_rmin2" rmax2="VertexEndcapConeService_rmin2+VertexEndcapConeService_thickness" z="VertexEndcapCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="(VertexEndcapCone_zmin+VertexEndcapCone_zmax)/2.0"/>
+      </support>
+
+
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="VertexEndcapMod1_x1/2.0" x2="VertexEndcapMod1_x2/2.0" z="VertexEndcapMod1_y/2"/>
         <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
@@ -190,6 +221,20 @@ Simple carbon fiber support shell.
       readout="VertexEndcapHits"
       vis="TrackerVis"
       reflect="true">
+
+      <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin2="VertexEndcapCone_rmin1" rmax2="VertexEndcapCone_rmin1+VertexSupportCarbon_thickness"
+          rmin1="VertexEndcapCone_rmin2" rmax1="VertexEndcapCone_rmin2+VertexSupportCarbon_thickness" z="VertexEndcapCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(VertexEndcapCone_zmin+VertexEndcapCone_zmax)/2.0"/>
+      </support>
+      <support  material="Aluminum" name="sup_cone_service" vis="TrackerSupportVis">
+        <shape type="Cone" 
+          rmin2="VertexEndcapConeService_rmin1" rmax2="VertexEndcapConeService_rmin1+VertexEndcapConeService_thickness"
+          rmin1="VertexEndcapConeService_rmin2" rmax1="VertexEndcapConeService_rmin2+VertexEndcapConeService_thickness" z="VertexEndcapCone_length/2.0"/>
+        <position x="0*cm"  y="0*cm"   z="-1.0*(VertexEndcapCone_zmin+VertexEndcapCone_zmax)/2.0"/>
+      </support>
+
       <module name="Module1" vis="AnlProcess_Blue">
         <trd x1="VertexEndcapMod1_x1/2.0" x2="VertexEndcapMod1_x2/2.0" z="VertexEndcapMod1_y/2"/>
         <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
