@@ -1,14 +1,29 @@
+/** \addtogroup Trackers Trackers
+ * \brief Type: **BarrelTrackerWithFrame**.
+ * \author W. Armstrong
+ *
+ * \ingroup trackers
+ *
+ * @{
+ */
 #include <map>
 #include "DD4hep/DetFactoryHelper.h"
+#include "DD4hep/Printout.h"
+#include "DD4hep/Shapes.h"
+#include "DDRec/Surface.h"
+#include "DDRec/DetectorData.h"
+#include "XML/Utilities.h"
+#include "XML/Layering.h"
+
 #include "Acts/Plugins/DD4hep/ActsExtension.hpp"
 #include "Acts/Definitions/Units.hpp"
-#include "XML/Utilities.h"
 
 using namespace std;
 using namespace dd4hep;
+using namespace dd4hep::rec;
 using namespace dd4hep::detail;
 
-/*! Endcap Trapezoidal Tracker.
+/** Endcap Trapezoidal Tracker.
  *
  * @author Whitney Armstrong
  *
@@ -24,13 +39,14 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   DetElement                   sdet(det_name, det_id);
   Assembly                     assembly(det_name);
 
-
   Material  air  = description.material("Air");
   // Volume      assembly    (det_name,Box(10000,10000,10000),vacuum);
   Volume                  motherVol = description.pickMotherVolume(sdet);
   int                     m_id = 0, c_id = 0, n_sensor = 0;
   map<string, Volume>     modules;
   map<string, Placements> sensitives;
+  map<string, std::vector<VolPlane>>        volplane_surfaces;
+  map<string, std::array<double, 2>> module_thicknesses;
   PlacedVolume            pv;
 
 
@@ -88,12 +104,15 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     double     x1 = trd.x1();
     double     x2 = trd.x2();
     double     z  = trd.z();
-    double     y1, y2, total_thickness = 0.;
+    double     total_thickness = 0.;
     xml_coll_t ci(x_mod, _U(module_component));
     for (ci.reset(), total_thickness = 0.0; ci; ++ci)
       total_thickness += xml_comp_t(ci).thickness();
 
-    y1 = y2 = total_thickness / 2;
+    double     thickness_so_far = 0.0;
+    double     thickness_sum    = -total_thickness / 2.0;
+    double     y1               = total_thickness / 2;
+    double     y2               = total_thickness / 2;
     Trapezoid m_solid(x1, x2, y1, y2, z);
     Volume m_volume(m_nam, m_solid, vacuum);
     m_volume.setVisAttributes(description.visAttributes(x_mod.visStr()));
@@ -142,6 +161,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
       c_vol.setVisAttributes(description.visAttributes(c.visStr()));
       pv = m_volume.placeVolume(c_vol, Position(0, posY + c_thick / 2, 0));
       if (c.isSensitive()) {
+        module_thicknesses[m_nam] = {thickness_so_far + c_thick/2.0, total_thickness-thickness_so_far - c_thick/2.0};
         //std::cout << " adding sensitive volume" << c_name << "\n";
         sdet.check(n_sensor > 2, "SiTrackerEndcap2::fromCompact: " + c_name + " Max of 2 modules allowed!");
         pv.addPhysVolID("sensor", n_sensor);
@@ -149,8 +169,30 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
         ++n_sensor;
+        // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
+        Vector3D u(1., 0., 0.);
+        Vector3D v(0., 1., 0.);
+        Vector3D n(0., 0., 1.);
+        // Vector3D o( 0. , 0. , 0. ) ;
+
+        // compute the inner and outer thicknesses that need to be assigned to the tracking surface
+        // depending on wether the support is above or below the sensor
+        double inner_thickness = module_thicknesses[m_nam][0];
+        double outer_thickness = module_thicknesses[m_nam][1];
+
+        SurfaceType type(SurfaceType::Sensitive);
+
+        // if( isStripDetector )
+        //  type.setProperty( SurfaceType::Measurement1D , true ) ;
+
+        VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
+        volplane_surfaces[m_nam].push_back(surf);
+
+        //--------------------------------------------
       }
       posY += c_thick;
+      thickness_sum += c_thick;
+      thickness_so_far += c_thick;
     }
     modules[m_nam] = m_volume;
   }
@@ -229,6 +271,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         //std::cout << " adding ACTS extension" << "\n";
             Acts::ActsExtension* moduleExtension = new Acts::ActsExtension("XZY");
             comp_elt.addExtension<Acts::ActsExtension>(moduleExtension);
+            volSurfaceList(comp_elt)->push_back(volplane_surfaces[m_nam][ic]);
           }
         } else {
           pv = layer_vol.placeVolume(
@@ -243,6 +286,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         //std::cout << " adding ACTS extension" << "\n";
             Acts::ActsExtension* moduleExtension = new Acts::ActsExtension("XZY");
             comp_elt.addExtension<Acts::ActsExtension>(moduleExtension);
+            volSurfaceList(comp_elt)->push_back(volplane_surfaces[m_nam][ic]);
           }
         }
         dz = -dz;
@@ -257,6 +301,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   return sdet;
 }
 
+//@}
 // clang-format off
 DECLARE_DETELEMENT(athena_TrapEndcapTracker, create_detector)
 DECLARE_DETELEMENT(athena_GEMTrackerEndcap, create_detector)

@@ -1,12 +1,8 @@
-/** \addtogroup VertexTracker Vertex Trackers
- * \brief Type: **SiVertexBarrel**.
+/** \addtogroup Trackers Trackers
+ * \brief Type: **BarrelTrackerWithFrame**.
  * \author W. Armstrong
  *
  * \ingroup trackers
- *
- *
- * \code
- * \endcode
  *
  * @{
  */
@@ -34,7 +30,10 @@ using namespace dd4hep::detail;
  * - Optional "frame" tag within the module element.
  * - Optional "support" tag within the detector element.
  *
+ * \ingroup trackers
  *
+ * \code
+ * \endcode
  */
 static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, SensitiveDetector sens) {
   typedef vector<PlacedVolume> Placements;
@@ -43,15 +42,14 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
   int                          det_id   = x_det.id();
   string                       det_name = x_det.nameStr();
   DetElement                   sdet(det_name, det_id);
-  //Assembly                     assembly(det_name);
-  map<string, Volume>          volumes;
-  map<string, Placements>      sensitives;
-  map<string, std::vector<VolPlane>>        volplane_surfaces;
-  //map<string, xml_h>      xmleles;
-  PlacedVolume                 pv;
-  dd4hep::xml::Dimension dimensions(x_det.dimensions());
 
+  map<string, Volume>                volumes;
+  map<string, Placements>            sensitives;
+  map<string, std::vector<VolPlane>> volplane_surfaces;
   map<string, std::array<double, 2>> module_thicknesses;
+
+  PlacedVolume           pv;
+  dd4hep::xml::Dimension dimensions(x_det.dimensions());
 
   Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
   detWorldExt->addType("barrel", "detector");
@@ -169,29 +167,26 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
         sensitives[m_nam].push_back(pv);
         module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness()/2.0, total_thickness-thickness_so_far - x_comp.thickness()/2.0};
 
+        // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
+        Vector3D u(0., 1., 0.);
+        Vector3D v(0., 0., 1.);
+        Vector3D n(1., 0., 0.);
+        //    Vector3D o( 0. , 0. , 0. ) ;
 
-          // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-          Vector3D u( 0. , 1. , 0. ) ;
-          Vector3D v( 0. , 0. , 1. ) ;
-          Vector3D n( 1. , 0. , 0. ) ;
-          //    Vector3D o( 0. , 0. , 0. ) ;
+        // compute the inner and outer thicknesses that need to be assigned to the tracking surface
+        // depending on wether the support is above or below the sensor
+        double inner_thickness = module_thicknesses[m_nam][0];
+        double outer_thickness = module_thicknesses[m_nam][1];
 
-          // compute the inner and outer thicknesses that need to be assigned to the tracking surface
-          // depending on wether the support is above or below the sensor
-          double inner_thickness = module_thicknesses[m_nam][0];
-          double outer_thickness = module_thicknesses[m_nam][1];
+        SurfaceType type(SurfaceType::Sensitive);
 
-          SurfaceType type( SurfaceType::Sensitive ) ;
+        // if( isStripDetector )
+        //  type.setProperty( SurfaceType::Measurement1D , true ) ;
 
-          //if( isStripDetector )
-          //  type.setProperty( SurfaceType::Measurement1D , true ) ;
+        VolPlane surf(c_vol, type, inner_thickness, outer_thickness, u, v, n); //,o ) ;
+        volplane_surfaces[m_nam].push_back(surf);
 
-          VolPlane surf( c_vol , type , inner_thickness , outer_thickness , u,v,n ) ; //,o ) ;
-          volplane_surfaces[m_nam].push_back(surf);
-
-    //--------------------------------------------
-
-
+        //--------------------------------------------
       }
       thickness_sum += x_comp.thickness();
       thickness_so_far += x_comp.thickness();
@@ -274,9 +269,7 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
           //                      xml_det_t(xmleles[m_nam]).visStr());
           //
 
-      volSurfaceList( comp_de )->push_back( volplane_surfaces[m_nam][ic] ) ;
-
-
+          volSurfaceList(comp_de)->push_back(volplane_surfaces[m_nam][ic]);
         }
 
         /// Increase counters etc.
