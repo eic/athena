@@ -32,7 +32,7 @@
     <constant name="EcalBarrel_ModRepeat"            value="CaloSides"/> 
     <constant name="EcalBarrel_ModLength"            value="0.5*m"/>
     <constant name="EcalBarrel_ModWidth"             value="0.5*m"/>
-    <constant name="EcalBarrel_AvailThickness"       value="EcalBarrel_TotalThickness-EcalBarrel_Support_thickness"/>
+    <constant name="EcalBarrel_AvailThickness"       value="EcalBarrelEnvelope_thickness-EcalBarrel_Support_thickness"/>
     <constant name="EcalBarrel_ImagingLayerThickness"
       value="EcalBarrel_SiliconThickness
       + EcalBarrel_ElectronicsThickness

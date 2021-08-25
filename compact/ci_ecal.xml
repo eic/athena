@@ -1,6 +1,27 @@
 <lccdd>
   <define>
-    <constant name="EcalEndcapP_rmax" value="Solenoid_rmax "/>
+
+    <constant name="EcalEndcapPSiliconThickness"       value="9.00 * mm" />
+    <constant name="EcalEndcapPCopperThickness"        value="0.05 * mm" />
+    <constant name="EcalEndcapPKaptonThickness"        value="0.30 * mm" />
+    <constant name="EcalEndcapPAir1Thickness"          value="0.33 * mm" />
+    <constant name="EcalEndcapPAir2Thickness"          value="0.25 * mm" />
+    <constant name="EcalEndcapPThinTungstenThickness"  value="2.50 * mm" />
+    <constant name="EcalEndcapPThickTungstenThickness" value="5.00 * mm" />
+    <constant name="EcalEndcapPLayer1_thickness"
+        value="EcalEndcapPSiliconThickness + EcalEndcapPCopperThickness + EcalEndcapPKaptonThickness + EcalEndcapPAir1Thickness"/>
+    <constant name="EcalEndcapPLayer2_thickness"   
+        value="EcalEndcapPThinTungstenThickness + EcalEndcapPAir2Thickness + EcalEndcapPSiliconThickness + EcalEndcapPCopperThickness + EcalEndcapPKaptonThickness + EcalEndcapPAir1Thickness"/>
+    <constant name="EcalEndcapPLayer3_thickness"   
+        value="EcalEndcapPThickTungstenThickness + EcalEndcapPAir2Thickness + EcalEndcapPSiliconThickness + EcalEndcapPCopperThickness + EcalEndcapPKaptonThickness + EcalEndcapPAir1Thickness"/>
+    <constant name="EcalEndcapPLayers" 
+        value="floor((EcalEndcapP_length - EcalEndcapPLayer1_thickness) / (EcalEndcapPLayer2_thickness + EcalEndcapPLayer3_thickness))"/>
+    <constant name="EcalEndcapPLayer1_NRepeat"      value="1"/>
+    <constant name="EcalEndcapPLayer2_NRepeat"      value="EcalEndcapPLayers"/>
+    <constant name="EcalEndcapPLayer3_NRepeat"      value="EcalEndcapPLayers"/>
+
+
+
   </define>
 
 
@@ -34,26 +55,26 @@
         rmin="EcalEndcapP_rmin" 
         rmax="EcalEndcapP_rmax " />
       <layer repeat="EcalEndcapPLayer1_NRepeat" vis="EcalEndcapLayerVis">
-        <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Copper" thickness="EcalCopperThickness"/>
-        <slice material="Kapton" thickness="EcalKaptonThickness"/>
-        <slice material="Air" thickness="EcalAir1Thickness"/>
+        <slice material="Silicon" thickness="EcalEndcapPSiliconThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Copper" thickness="EcalEndcapPCopperThickness"/>
+        <slice material="Kapton" thickness="EcalEndcapPKaptonThickness"/>
+        <slice material="Air" thickness="EcalEndcapPAir1Thickness"/>
       </layer>
       <layer repeat="EcalEndcapPLayer2_NRepeat" vis="EcalEndcapLayerVis">
-        <slice material="TungstenDens24" thickness="EcalThinTungstenThickness"/>
-        <slice material="Air" thickness="EcalAir2Thickness"/>
-        <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Copper" thickness="EcalCopperThickness"/>
-        <slice material="Kapton" thickness="EcalKaptonThickness"/>
-        <slice material="Air" thickness="EcalAir1Thickness"/>
+        <slice material="TungstenDens24" thickness="EcalEndcapPThinTungstenThickness"/>
+        <slice material="Air" thickness="EcalEndcapPAir2Thickness"/>
+        <slice material="Silicon" thickness="EcalEndcapPSiliconThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Copper" thickness="EcalEndcapPCopperThickness"/>
+        <slice material="Kapton" thickness="EcalEndcapPKaptonThickness"/>
+        <slice material="Air" thickness="EcalEndcapPAir1Thickness"/>
       </layer>
       <layer repeat="EcalEndcapPLayer3_NRepeat" vis="EcalEndcapLayerVis">
-        <slice material="TungstenDens24" thickness="EcalThickTungstenThickness"/>
-        <slice material="Air" thickness="EcalAir2Thickness"/>
-        <slice material="Silicon" thickness="EcalSiliconThickness" sensitive="yes" limits="cal_limits"/>
-        <slice material="Copper" thickness="EcalCopperThickness"/>
-        <slice material="Kapton" thickness="EcalKaptonThickness"/>
-        <slice material="Air" thickness="EcalAir1Thickness"/>
+        <slice material="TungstenDens24" thickness="EcalEndcapPThickTungstenThickness"/>
+        <slice material="Air" thickness="EcalEndcapPAir2Thickness"/>
+        <slice material="Silicon" thickness="EcalEndcapPSiliconThickness" sensitive="yes" limits="cal_limits"/>
+        <slice material="Copper" thickness="EcalEndcapPCopperThickness"/>
+        <slice material="Kapton" thickness="EcalEndcapPKaptonThickness"/>
+        <slice material="Air" thickness="EcalEndcapPAir1Thickness"/>
       </layer>
     </detector>
   </detectors>

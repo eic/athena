@@ -5,8 +5,8 @@
   <define>
     <constant name="GEMTrackerEndcapP_thickness"      value="min(10.0*cm,ForwardTracking_length)" />
     <constant name="GEMTrackerEndcapN_thickness"      value="min(10.0*cm,BackwardTracking_length)" />
-    <constant name="GEMTrackerEndcapP_zmin"           value="CentralTrackingHalfP_length + ForwardPID_length"/>
-    <constant name="GEMTrackerEndcapN_zmin"           value="CentralTrackingHalfN_length + BackwardPID_length"/>
+    <constant name="GEMTrackerEndcapP_zmin"           value="ForwardTracking_zmin"/>
+    <constant name="GEMTrackerEndcapN_zmin"           value="BackwardTracking_zmin"/>
     <constant name="GEMTrackerEndcapP_rmin"           value="19*cm" />
     <constant name="GEMTrackerEndcapN_rmin"           value="10*cm" />
     <constant name="GEMTrackerEndcapP_rmax"           value="200*cm" />

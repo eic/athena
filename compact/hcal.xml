@@ -2,6 +2,42 @@
 
   <define>
     <constant name="HcalBarrel_offset"              value="(HcalEndcapP_zmin-HcalEndcapN_zmin)/2.0" />
+
+    <constant name="HcalBarrelAvailThickness" value="HcalBarrel_thickness"/>
+    <documentation>
+      #### Material Thickness 
+    </documentation>
+    <constant name="HcalBarrelSteelThickness"        value="2.0 * cm"/>
+    <constant name="HcalBarrelPolystyreneThickness"  value="0.5 * cm"/>
+    <constant name="HcalEndcapNSteelThickness"       value="HcalBarrelSteelThickness"/>
+    <constant name="HcalEndcapNPolystyreneThickness" value="HcalBarrelPolystyreneThickness"/>
+    <constant name="HcalEndcapPSteelThickness"       value="HcalBarrelSteelThickness"/>
+    <constant name="HcalEndcapPPolystyreneThickness" value="0.3 * cm"/>
+
+    <documentation>
+      - Hcal Barrel Layers and computed Thickness
+    </documentation>
+    <constant name="HcalBarrelSingleLayerThickness"
+             value="HcalBarrelSteelThickness + HcalBarrelPolystyreneThickness"/>
+    <constant name="HcalBarrelLayer_NRepeat" value="floor(HcalBarrelAvailThickness / HcalBarrelSingleLayerThickness)"/>
+    <constant name="HcalBarrelThickness" value="HcalBarrelLayer_NRepeat * HcalBarrelSingleLayerThickness"/>
+
+    <documentation>
+      - Hcal Endcap N Layers and computed Thickness
+    </documentation>
+    <constant name="HcalEndcapNSingleLayerThickness"
+             value="HcalEndcapNSteelThickness + HcalEndcapNPolystyreneThickness"/>
+    <constant name="HcalEndcapNLayer_NRepeat" value="floor(HcalEndcapN_length / HcalEndcapNSingleLayerThickness)"/>
+    <constant name="HcalEndcapN_thickness" value="HcalEndcapNLayer_NRepeat * HcalEndcapNSingleLayerThickness"/>
+
+    <documentation>
+      - Hcal Endcap P Layers and computed Thickness
+    </documentation>
+    <constant name="HcalEndcapPSingleLayerThickness"
+             value="HcalEndcapPSteelThickness + HcalEndcapPPolystyreneThickness"/>
+    <constant name="HcalEndcapPLayer_NRepeat" value="floor(HcalEndcapP_length / HcalEndcapPSingleLayerThickness)"/>
+    <constant name="HcalEndcapP_thickness" value="HcalEndcapPLayer_NRepeat * HcalEndcapPSingleLayerThickness"/>
+
   </define>
 
   <limits>
@@ -29,7 +65,7 @@
       <dimensions 
         numsides="CaloSides" 
         rmin="HcalBarrel_rmin" 
-        z="HcalBarrelLength"/>
+        z="HcalBarrel_length"/>
       <staves vis="HcalBarrelStaveVis"/>
       <layer repeat="HcalBarrelLayer_NRepeat" vis="HcalBarrelLayerVis">
         <slice material="Steel235" thickness="HcalBarrelSteelThickness" vis="HcalAbsorberVis"/>
