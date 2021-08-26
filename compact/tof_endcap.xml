@@ -130,8 +130,8 @@
   
   <readouts>
     <readout name="TOFEndcapHits">
-      <segmentation type="CartesianGridXY" grid_size_x="0.20*mm" grid_size_y="0.20*mm" />
-      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+      <segmentation type="CartesianGridXZ" grid_size_x="0.20*mm" grid_size_z="0.20*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
   </readouts>
 

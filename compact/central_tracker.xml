@@ -532,11 +532,11 @@ total X0 0.24% per disk layer （4 sectors per disk):
   <readouts>
     <readout name="TrackerBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.010*mm" grid_size_y="0.010*mm" />
-      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
     </readout>
     <readout name="TrackerEndcapHits">
       <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
-      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
 
 
     </readout>

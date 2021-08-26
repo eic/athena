@@ -97,7 +97,7 @@
   <readouts>
     <readout name="DIRCBarHits">
       <segmentation type="CartesianGridXY" grid_size_x="3.0*mm" grid_size_y="3.0*mm" />
-      <id>system:8,barrel:2,layer:4,module:8,section:4,x:32:-16,y:-16</id>
+      <id>system:8,layer:4,module:8,section:4,x:32:-16,y:-16</id>
     </readout>
   </readouts>
 

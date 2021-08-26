@@ -22,7 +22,7 @@ using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
 
-static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens)
+static Ref_t SimpleDiskDetector_create_detector(Detector& description, xml_h e, SensitiveDetector sens)
 {
   xml_det_t      x_det    = e;
   Material       air      = description.air();
@@ -126,6 +126,5 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   return sdet;
 }
 
-DECLARE_DETELEMENT(athena_SimpleDiskTracker, create_detector)
-DECLARE_DETELEMENT(ref_DiskTracker, create_detector)
-DECLARE_DETELEMENT(ref_SolenoidEndcap, create_detector)
+DECLARE_DETELEMENT(ref_SolenoidEndcap, SimpleDiskDetector_create_detector)
+DECLARE_DETELEMENT(athena_SolenoidEndcap, SimpleDiskDetector_create_detector)

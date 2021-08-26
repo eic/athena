@@ -319,7 +319,6 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
   assembly.setVisAttributes(description.invisible());
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
   pv.addPhysVolID("system", det_id);  // Set the subdetector system ID.
-  pv.addPhysVolID("barrel", 1);       // Flag this as a barrel subdetector.
   sdet.setPlacement(pv);
   return sdet;
 }

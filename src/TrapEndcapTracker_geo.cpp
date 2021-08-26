@@ -224,11 +224,11 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     if (reflect) {
       layer_pv =
           assembly.placeVolume(layer_vol, Transform3D(RotationZYX(0.0, -M_PI, 0.0), Position(0, 0, -layer_center_z)));
-      layer_pv.addPhysVolID("barrel", 3).addPhysVolID("layer", l_id);
+      layer_pv.addPhysVolID("layer", l_id);
       layer_name += "_N";
     } else {
       layer_pv = assembly.placeVolume(layer_vol, Position(0, 0, layer_center_z));
-      layer_pv.addPhysVolID("barrel", 2).addPhysVolID("layer", l_id);
+      layer_pv.addPhysVolID("layer", l_id);
       layer_name += "_P";
     }
     DetElement layer_element(sdet, layer_name, l_id);
@@ -262,7 +262,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
           DetElement module(layer_element, m_base + "_pos", det_id);
           pv = layer_vol.placeVolume(
               m_vol, Transform3D(RotationZYX(0, -M_PI / 2 - phi, -M_PI / 2), Position(x, y, zstart + dz)));
-          pv.addPhysVolID("barrel", 1).addPhysVolID("layer", l_id).addPhysVolID("module", mod_num);
+          pv.addPhysVolID("module", mod_num);
           module.setPlacement(pv);
           for (size_t ic = 0; ic < sensVols.size(); ++ic) {
             PlacedVolume sens_pv = sensVols[ic];
@@ -276,7 +276,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         } else {
           pv = layer_vol.placeVolume(
               m_vol, Transform3D(RotationZYX(0, -M_PI / 2 - phi, -M_PI / 2), Position(x, y, -zstart - dz)));
-          pv.addPhysVolID("barrel", 2).addPhysVolID("layer", l_id).addPhysVolID("module", mod_num);
+          pv.addPhysVolID("module", mod_num);
           DetElement r_module(layer_element, m_base + "_neg", det_id);
           r_module.setPlacement(pv);
           for (size_t ic = 0; ic < sensVols.size(); ++ic) {

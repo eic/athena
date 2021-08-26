@@ -37,8 +37,7 @@ dd4hep_add_plugin(${a_lib_name} SOURCES
   src/MRich_geo.cpp
   src/PolyhedraEndcapCalorimeter2_geo.cpp
   src/ShashlikCalorimeter_geo.cpp
-  src/SimpleDiskTracker_geo.cpp
-  src/SimpleRectangularTracker_geo.cpp
+  src/SimpleDiskDetector_geo.cpp
   src/SolenoidCoil_geo.cpp
   src/TrapEndcapTracker_geo.cpp
   USES ActsCore ActsPluginDD4hep
