@@ -33,14 +33,15 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
   OpticalSurfaceManager surfMgr = description.surfaceManager();
 
   // read module positions
-  std::vector<std::pair<double,double>> positions;
+  std::vector<std::tuple<double,double,double>> positions;
   for (xml_coll_t x_positions_i(x_det, _Unicode(positions)); x_positions_i; ++x_positions_i) {
     xml_comp_t x_positions = x_positions_i;
     for (xml_coll_t x_position_i(x_positions, _U(position)); x_position_i; ++x_position_i) {
       xml_comp_t x_position = x_position_i;
       positions.push_back(
-        std::make_pair(x_positions.scale() * x_position.x() * mm,
-                       x_positions.scale() * x_position.y() * mm));
+        std::make_tuple(x_positions.scale() * x_position.x() * mm,
+                        x_positions.scale() * x_position.y() * mm,
+                        -x_positions.z0()));
     }
   }
 
@@ -303,20 +304,21 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
   for (auto& p: positions) {
 
     // get positions in one quadrant
-    double x = p.first;
-    double y = p.second;
-    double z = -zpos;
+    double x = std::get<0>(p);
+    double y = std::get<1>(p);
+    double z0 = std::get<2>(p);
 
     // and place in all quadrants (intentional shadowing)
-    for (auto& p: decltype(positions){{x,y}, {y,-x}, {-x,-y}, {-y,x}}) {
+    for (auto& p: decltype(positions){{x,y,z0}, {y,-x,z0}, {-x,-y,z0}, {-y,x,z0}}) {
 
       // get positions (intentional shadowing)
-      double x = p.first;
-      double y = p.second;
+      double x = std::get<0>(p);
+      double y = std::get<1>(p);
+      double z0 = std::get<2>(p);
 
       // get angles
-      double rotAngX = atan(y/z);
-      double rotAngY = -1.*atan(x/z);
+      double rotAngX = atan(y/z0);
+      double rotAngY = -1.*atan(x/z0);
 
       /*
       ROOT::Math::XYZVector x_location(p.x(), p.y(), zmin+std::signbit(zmin)*mod_length/2.0);
