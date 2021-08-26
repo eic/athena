@@ -185,14 +185,18 @@ overlap_check_tgeo:
     - echo "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
-overlap_check_geant4:full:
+overlap_check_geant4:full_fast:
   stage: test
   needs: 
     - ["common:detector"]
   script:
+    ## disable fibers in ECAL for normal overlap check
+    - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
     - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+
+## TODO: add real full overlap check as child pipeline to run on branches only
 
 overlap_check_geant4:inner_detector:
   stage: test
