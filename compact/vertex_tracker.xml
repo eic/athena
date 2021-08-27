@@ -314,7 +314,7 @@ Simple carbon fiber support shell.
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
     </readout>
     <readout name="VertexEndcapHits">
-      <segmentation type="CartesianGridXZ" grid_size_x="0.20*mm" grid_size_z="0.20*mm" />
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
   </readouts>
