@@ -1,5 +1,9 @@
 image: eicweb.phy.anl.gov:4567/eic/juggler/juggler:latest
 
+variables:
+  ## set to 1 to run expensive tests
+  EXPENSIVE_TESTS: 0
+
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -8,6 +12,17 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == "master"'
     - if: '$CI_COMMIT_BRANCH == "acadia"'
     - if: '$CI_COMMIT_TAG'
+
+.expensive:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "webide"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "acadia"'
+    - if: '$CI_COMMIT_TAG'
+    - if: '$EXPENSIVE_TESTS == "0"'
+      when: never
 
 default:
   before_script:
@@ -185,6 +200,16 @@ overlap_check_tgeo:
     - echo "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
+overlap_check_geant4:full:
+  stage: test
+  extends: .expensive
+  needs: 
+    - ["common:detector"]
+  script:
+    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
+    - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
+    - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+
 overlap_check_geant4:full_fast:
   stage: test
   needs: 
@@ -196,17 +221,15 @@ overlap_check_geant4:full_fast:
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
-## TODO: add real full overlap check as child pipeline to run on branches only
-
-overlap_check_geant4:inner_detector:
-  stage: test
-  needs: 
-    - ["common:detector"]
-  script:
-    - cp ${DETECTOR_PATH}/compact/subsystem_views/inner_detector.xml ${DETECTOR_PATH}/inner_detector.xml
-    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/inner_detector.xml | tee doc/overlap_check_geant4.out
-    - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
-    - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
+#overlap_check_geant4:inner_detector:
+#  stage: test
+#  needs: 
+#    - ["common:detector"]
+#  script:
+#    - cp ${DETECTOR_PATH}/compact/subsystem_views/inner_detector.xml ${DETECTOR_PATH}/inner_detector.xml
+#    - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/inner_detector.xml | tee doc/overlap_check_geant4.out
+#    - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
+#    - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
 convert_to_gdml:
   stage: test
