@@ -1,11 +1,15 @@
-//==========================================================================
-//  Gaseous Ring Imaging Cherenkov Detector
-//--------------------------------------------------------------------------
-//
-// Author: C. Peng (ANL)
-// Date: 09/30/2020
-//
-//==========================================================================
+/**
+ * \addtogroup rich
+ */
+//@{
+
+/** Gaseous Ring Imaging Cherenkov Detector.
+ *
+ *
+ * \author Chao Peng (ANL)
+ * \author Whitney Armstrong (ANL)
+ *
+ */
 
 #include <XML/Helper.h>
 #include "TMath.h"
@@ -42,7 +46,7 @@ Position get_xml_xyz(XmlComp &comp, dd4hep::xml::Strng_t name)
 }
 
 // create the detector
-static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetector sens)
+static Ref_t GaseousRICH_createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetector sens)
 {
     xml::DetElement detElem = handle;
     std::string detName = detElem.nameStr();
@@ -211,5 +215,5 @@ void build_sensors(Detector &desc, Volume &env, xml::Component plm, const Positi
 //@}
 
 // clang-format off
-DECLARE_DETELEMENT(athena_GaseousRICH, createDetector)
+DECLARE_DETELEMENT(athena_GaseousRICH, GaseousRICH_createDetector)
 

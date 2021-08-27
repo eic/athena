@@ -169,6 +169,13 @@ report:
     - ./bin/make_images > doc/dawn_views.md
     - echo "Geometry viewer at https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/detector_geo_full.root?job=finalize&item=default;1&opt=clipxyz;transp30;zoom75;ROTY290;ROTZ350;trz0;trr0;ctrl;all&"
 
+xmllint:
+  stage: test
+  needs:
+    - ["common:detector"]
+  script:
+    - xmllint athena.xml ip6/*.xml compact/*.xml compact/subsystem_views/*.xml > /dev/null
+
 dump_constants:
   stage: test
   needs: 
