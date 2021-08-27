@@ -1,9 +1,7 @@
 /** \addtogroup Trackers Trackers
  * \brief Type: **BarrelTrackerWithFrame**.
- * \author W. Armstrong
  *
  * \ingroup trackers
- *
  * @{
  */
 #include <map>
@@ -25,10 +23,10 @@ using namespace dd4hep::detail;
 
 /** Endcap Trapezoidal Tracker.
  *
+ * \ingroup trackers
  * @author Whitney Armstrong
- *
  */
-static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens)
+static Ref_t TrapEndcapTracker_create_detector(Detector& description, xml_h e, SensitiveDetector sens)
 {
   typedef vector<PlacedVolume> Placements;
   xml_det_t                    x_det    = e;
@@ -303,5 +301,5 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
 //@}
 // clang-format off
-DECLARE_DETELEMENT(athena_TrapEndcapTracker, create_detector)
-DECLARE_DETELEMENT(athena_GEMTrackerEndcap, create_detector)
+DECLARE_DETELEMENT(athena_TrapEndcapTracker, TrapEndcapTracker_create_detector)
+DECLARE_DETELEMENT(athena_GEMTrackerEndcap, TrapEndcapTracker_create_detector)
