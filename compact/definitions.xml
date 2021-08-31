@@ -346,6 +346,8 @@ Examples:
     <documentation>
       ### Tracker Detector Parameters
       TrackerBarrel_rmax: also the rmin for the barrel PID system (DIRC)
+      Note: The barrel rmax and endcap lengths are the maximum extent allowed for
+      the barrel and endcap layers, not the position of the final layer.
     </documentation>
 
     <constant name="TrackerBarrel_rmin"         value="VertexTrackingRegion_rmax"/>
