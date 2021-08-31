@@ -391,16 +391,16 @@
       6.19921*eV  1.00084
       "/>
     <matrix name="ABSLENGTH__C2F6_DRICH" coldim="2" values="
-      1.7712*eV   1000*mm
-      1.92389*eV  1000*mm
-      2.10539*eV  1000*mm
-      2.3247*eV   1000*mm
-      2.59502*eV  1000*mm
-      2.93647*eV  1000*mm
-      3.38139*eV  1000*mm
-      3.98521*eV  1000*mm
-      4.85156*eV  1000*mm
-      6.19921*eV  1000*mm
+      1.7712*eV   10.0*m
+      1.92389*eV  10.0*m
+      2.10539*eV  10.0*m
+      2.3247*eV   10.0*m
+      2.59502*eV  10.0*m
+      2.93647*eV  10.0*m
+      3.38139*eV  10.0*m
+      3.98521*eV  10.0*m
+      4.85156*eV  10.0*m
+      6.19921*eV  10.0*m
       "/>
     <!-- dRICh aerogel -->
     <matrix name="RINDEX__Aerogel_DRICH" coldim="2" values="
