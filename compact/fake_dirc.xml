@@ -1,11 +1,7 @@
 <lccdd>
 
-  <comment>
-    DIRC consists of 16 (default) identical modules making a barrel.
-  </comment>
-
   <define>
-    <constant name="DIRCModule_count"           value="16"  comment="Number of DIRC boxes per... DIRC. 16 - default"/>
+    <constant name="DIRCModule_count"           value="CaloSides" />
 
     <constant name="DIRCBar_thickness"          value="17*mm" />
     <constant name="DIRCBar_length"             value="DIRC_length-8*cm" />
@@ -21,7 +17,7 @@
     <constant name="DIRCModule_thickness"       value="DIRCModule_rmax - DIRC_rmin" />
     <constant name="DIRCFrame_rmax"             value="DIRC_rmin + DIRCFrame_thickness" />
 
-    <constant name="DIRCModule_halfangle" value="180*degree/DIRCModule_count" />
+    <constant name="DIRCModule_halfangle"       value="180*degree/DIRCModule_count" />
     <constant name="DIRCModule_width"           value="2*DIRC_rmin * tan(DIRCModule_halfangle)"/>
 
     <constant name="DIRCModule_rmin"            value="DIRC_rmin + 1*cm"/>

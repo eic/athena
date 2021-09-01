@@ -373,8 +373,8 @@ Examples:
     <constant name="BackwardPID_rmax"             value="TrackerBarrel_rmax"/>
 
     <comment> Note: PID has space for DIRC, ExtraSpace has room for other detectors past the PID</comment>
-    <constant name="BarrelPIDThickness"           value="10.0 * cm"/>
-    <constant name="BarrelExtraSpaceThickness"    value="7.0 * cm"/>
+    <constant name="BarrelPIDThickness"           value="8.0 * cm"/>
+    <constant name="BarrelExtraSpaceThickness"    value="0.0 * cm"/>
 
     <documentation level="0">
 ### Extra tracking region behind the endcap PID system
@@ -424,9 +424,9 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
     <constant name="EcalEndcapN_rmin"               value="max((EcalEndcapN_zmin + EcalEndcapN_length) * tan(abs(CrossingAngle)) + 12.5 * mm, 5*cm)"/>
     <constant name="EcalEndcapN_rmax"               value="TrackerBarrel_rmax"/>
 
-    <constant name="EcalBarrelEnvelope_thickness"      value="40.0*cm"/>
+    <constant name="EcalBarrelEnvelope_thickness"      value="45.0*cm"/>
     <constant name="EcalBarrel_rmin"                value="CentralTracking_rmax + BarrelPIDThickness + BarrelExtraSpaceThickness"/>
-    <constant name="EcalBarrelForward_length"       value="4*cm"/>
+    <constant name="EcalBarrelForward_length"       value="3*cm"/>
     <constant name="EcalBarrelForward_zmax"         value="ForwardPID_zmin + EcalBarrelForward_length"/>
     <constant name="EcalBarrelBackward_zmax"        value="BackwardPID_zmin + BackwardInnerEndcap_length + EcalEndcapN_length"/>
     <constant name="EcalBarrel_length"              value="EcalBarrelForward_zmax + EcalBarrelBackward_zmax"/>
