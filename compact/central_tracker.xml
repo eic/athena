@@ -58,7 +58,6 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="TrackerEndcapInner_nLayers"          value="1"/>
     <constant name="TrackerEndcapOuter_nLayers"          value="3"/>
     <constant name="TrackerEndcapLayer_dz"               value="2*cm"/>
-    <constant name="TrackerEndcapModule_dz"              value="2.5*mm"/>
 
     <constant name="TrackerEndcapInner_zmin"            value="49*cm"/>
     <constant name="TrackerEndcapInner_zmax"            value="TrackerEndcapInner_zmin+TrackerEndcapLayer_dz"/>
@@ -117,21 +116,22 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="TrackerEndcapOuterCone_length"     value="TrackerEndcapOuterCone_zmax - TrackerEndcapOuterCone_zmin"/>
 
 
-    <constant name="TrackerEndcap_NModules" value="12"/>
-    <comment> nmodules = np.pi/np.arcsin(frame_width*np.cos(tilt_angle)/2.0/R) </comment>
+    <comment> Barrel staves, nmodules = np.pi/np.arcsin(frame_width*np.cos(tilt_angle)/2.0/R) </comment>
     <constant name="TrackerBarrel_StaveTiltAngle" value="5.0*degree"/>
     <constant name="TrackerBarrelInner_NModules1" value="33"/>
     <constant name="TrackerBarrelInner_NModules2" value="36"/>
     <constant name="TrackerBarrelOuter_NModules1" value="62"/>
     <constant name="TrackerBarrelOuter_NModules2" value="68"/>
 
-
-    <constant name="TrackerEndcapInnerModOpeningAngle" value="360.0/TrackerEndcap_NModules*degree"/>
+    <comment> endcap panels, with z offset of 2.5mm each panel, and 0.5 degree overlap </comment>
+    <constant name="TrackerEndcap_NModules" value="12"/>
+    <constant name="TrackerEndcapModule_dz"               value="2.5*mm"/>
+    <constant name="TrackerEndcapInnerModOpeningAngle"    value="360.0/TrackerEndcap_NModules*degree + 0.5*degree"/>
     <constant name="TrackerEndcapInnerMod1_x1"            value="2.0*TrackerEndcapInner_rmin1*sin(TrackerEndcapInnerModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapInnerMod1_x2"            value="2.0*TrackerEndcapInner_rmax1*sin(TrackerEndcapInnerModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapInnerMod1_y"             value="TrackerEndcapInner_rmax1*cos(TrackerEndcapInnerModOpeningAngle/2.0) - TrackerEndcapInner_rmin1"/>
 
-    <constant name="TrackerEndcapOuterModOpeningAngle" value="360.0/TrackerEndcap_NModules*degree"/>
+    <constant name="TrackerEndcapOuterModOpeningAngle" value="360.0/TrackerEndcap_NModules*degree + 0.5*degree"/>
     <constant name="TrackerEndcapOuterMod1_x1"            value="2.0*TrackerEndcapOuter_rmin1*sin(TrackerEndcapOuterModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapOuterMod1_x2"            value="2.0*TrackerEndcapOuter_rmax1*sin(TrackerEndcapOuterModOpeningAngle/2.0)"/>
     <constant name="TrackerEndcapOuterMod1_y"             value="TrackerEndcapOuter_rmax1*cos(TrackerEndcapOuterModOpeningAngle/2.0) - TrackerEndcapOuter_rmin1"/>

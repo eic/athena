@@ -62,8 +62,9 @@ Simple carbon fiber support shell.
     <constant name="VertexEndcapLayer_dz"           value="2*cm"/>
     <constant name="VertexEndcapLayer_thickness"    value="min(3*cm,VertexEndcapLayer_dz-0.5*cm)"/>
 
-    <constant name="VertexEndcap_NModules" value="12"/>
-    <constant name="VertexEndcapModOpeningAngle"    value="360.0/VertexEndcap_NModules*degree"/>
+    <constant name="VertexEndcap_NModules"          value="12"/>
+    <constant name="VertexEndcapMod_dz"             value="2.5*mm"/>
+    <constant name="VertexEndcapModOpeningAngle"    value="360.0/VertexEndcap_NModules*degree + 0.5*degree"/>
     <constant name="VertexEndcapMod1_x1"            value="2.0*VertexTrackerEndcapP_rmin*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_x2"            value="2.0*VertexTrackerEndcapP_rmax*sin(VertexEndcapModOpeningAngle/2.0)"/>
     <constant name="VertexEndcapMod1_y"             value="VertexTrackerEndcapP_rmax*cos(VertexEndcapModOpeningAngle/2.0) - VertexTrackerEndcapP_rmin"/>
@@ -209,7 +210,7 @@ Simple carbon fiber support shell.
         <ring vis="TrackerVis"
           r="VertexTrackerEndcapP_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
-          nmodules="12" dz="2.5 * mm" module="Module1" />
+          nmodules="VertexEndcap_NModules" dz="VertexEndcapMod_dz" module="Module1" />
       </layer>
     </detector>
 
@@ -250,7 +251,7 @@ Simple carbon fiber support shell.
         <ring vis="TrackerVis"
           r="VertexTrackerEndcapN_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
-          nmodules="12" dz="2.5 * mm" module="Module1" />
+          nmodules="VertexEndcap_NModules" dz="VertexEndcapMod_dz" module="Module1" />
       </layer>
     </detector>
 
