@@ -426,7 +426,7 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
 
     <constant name="EcalBarrelEnvelope_thickness"      value="45.0*cm"/>
     <constant name="EcalBarrel_rmin"                value="CentralTracking_rmax + BarrelPIDThickness + BarrelExtraSpaceThickness"/>
-    <constant name="EcalBarrelForward_length"       value="3*cm"/>
+    <constant name="EcalBarrelForward_length"       value="5*cm"/>
     <constant name="EcalBarrelForward_zmax"         value="ForwardPID_zmin + EcalBarrelForward_length"/>
     <constant name="EcalBarrelBackward_zmax"        value="BackwardPID_zmin + BackwardInnerEndcap_length + EcalEndcapN_length"/>
     <constant name="EcalBarrel_length"              value="EcalBarrelForward_zmax + EcalBarrelBackward_zmax"/>
