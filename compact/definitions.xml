@@ -401,10 +401,6 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
     <constant name="BackwardTracking_zmin" value="BackwardPID_zmin + BackwardPID_length"/>
     <constant name="ForwardTracking_zmin" value="ForwardPID_zmin + ForwardPID_length"/>
 
-    <comment> These are used by ddsim </comment>
-    <constant name="tracker_region_rmax"   value="CentralTracking_rmax"/>
-    <constant name="tracker_region_zmax"   value="max(BackwardPID_zmin, ForwardPID_zmin)"/>
-
     <comment> Total length of the endcap detectors in front of the calorimeter</comment>
     <constant name="BackwardInnerEndcap_length"    value="BackwardPID_length + BackwardTracking_length"/>
     <constant name="ForwardInnerEndcap_length"     value="ForwardPID_length + ForwardTracking_length"/>
@@ -463,5 +459,15 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
     <constant name="HcalBarrel_rmin"      value="Solenoid_rmax"/>
     <constant name="HcalBarrel_rmax"      value="HcalBarrel_rmin + HcalBarrel_thickness"/>
     <constant name="HcalBarrel_length"    value="HcalEndcapP_zmin + HcalEndcapN_zmin "/>
+
+    <comment> 
+      These are used by ddsim, the region where we store all secondaries 
+
+      For now they are forced to be symmetric, and we cover up to the start of the backward ECAL.
+      (this means in the forward region we stop in the middle of the RICH).
+    </comment>
+
+    <constant name="tracker_region_rmax"   value="EcalBarrel_rmin"/>
+    <constant name="tracker_region_zmax"   value="EcalEndcapN_zmin"/>
 
   </define>
