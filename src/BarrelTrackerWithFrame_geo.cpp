@@ -13,11 +13,9 @@
 #include "DDRec/DetectorData.h"
 #include "XML/Layering.h"
 #include "XML/Utilities.h"
+
 #include "Acts/Plugins/DD4hep/ActsExtension.hpp"
-#include "Acts/Surfaces/PlanarBounds.hpp"
-#include "Acts/Surfaces/RectangleBounds.hpp"
-#include "Acts/Surfaces/TrapezoidBounds.hpp"
-#include "Acts/Definitions/Units.hpp"
+#include "Acts/Plugins/DD4hep/ConvertDD4hepMaterial.hpp"
 
 
 using namespace std;
@@ -62,9 +60,18 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
   PlacedVolume           pv;
   dd4hep::xml::Dimension dimensions(x_det.dimensions());
 
-  Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
-  detWorldExt->addType("barrel", "detector");
-  sdet.addExtension<Acts::ActsExtension>(detWorldExt);
+  // ACTS extension
+  {
+    Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
+    detWorldExt->addType("barrel", "detector");
+    // Add the volume boundary material if configured
+    for (xml_coll_t bmat(x_det, _Unicode(boundary_material)); bmat; ++bmat) {
+      xml_comp_t x_boundary_material = bmat;
+      Acts::xmlToProtoSurfaceMaterial(x_boundary_material, *detWorldExt, "boundary_material");
+    }
+    sdet.addExtension<Acts::ActsExtension>(detWorldExt);
+  }
+
   Tube topVolumeShape(dimensions.rmin(), dimensions.rmax(), dimensions.length() * 0.5);
   Volume assembly(det_name,topVolumeShape,air);
 
@@ -238,19 +245,22 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
     double      z_dr       = z_layout.dr();       // Radial displacement parameter, of every other module.
 
     Volume      module_env = volumes[m_nam];
-    DetElement  lay_elt(sdet, _toString(x_layer.id(), "layer%d"), lay_id);
+    DetElement  lay_elt(sdet, lay_nam, lay_id);
     Placements& sensVols = sensitives[m_nam];
 
     // the local coordinate systems of modules in dd4hep and acts differ
     // see http://acts.web.cern.ch/ACTS/latest/doc/group__DD4hepPlugins.html
-    Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
-    layerExtension->addType("sensitive cylinder", "layer");
-    //layerExtension->addValue(0, "r_min", "envelope");
-    //layerExtension->addValue(0, "r_max", "envelope");
-    //layerExtension->addValue(0, "z_min", "envelope");
-    //layerExtension->addValue(0, "z_max", "envelope");
-    //layerExtension->addType("axes", "definitions", "XzY");
-    lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
+    {
+      Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
+      // layer is simple tube so no need to set envelope
+      layerExtension->addType("sensitive cylinder", "layer");
+      // Add the proto layer material
+      for(xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
+        xml_comp_t x_layer_material = lmat;
+        xmlToProtoSurfaceMaterial(x_layer_material, *layerExtension, "layer_material");
+      }
+      lay_elt.addExtension<Acts::ActsExtension>(layerExtension);
+    }
 
     // Z increment for module placement along Z axis.
     // Adjust for z0 at center of module rather than
@@ -282,9 +292,12 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
           PlacedVolume sens_pv = sensVols[ic];
           DetElement comp_de(mod_elt, std::string("de_") + sens_pv.volume().name(), module);
           comp_de.setPlacement(sens_pv);
-          Acts::ActsExtension* sensorExtension = new Acts::ActsExtension();
-          //sensorExtension->addType("sensor", "detector");
-          comp_de.addExtension<Acts::ActsExtension>(sensorExtension);
+          // ACTS extension
+          {
+            Acts::ActsExtension* sensorExtension = new Acts::ActsExtension();
+            //sensorExtension->addType("sensor", "detector");
+            comp_de.addExtension<Acts::ActsExtension>(sensorExtension);
+          }
           //comp_de.setAttributes(description, sens_pv.volume(), x_layer.regionStr(), x_layer.limitsStr(),
           //                      xml_det_t(xmleles[m_nam]).visStr());
           //

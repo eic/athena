@@ -138,6 +138,7 @@
           rmax = "GEMTrackerEndcapP_rmax"
           length="GEMTrackerEndcapP_thickness"
           zstart="GEMTrackerEndcapP_zmin" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="40*12" bins1="1024"/>
         <ring vis="TrackerVis" module="GEMModule1"
           r="GEMTrackerEndcapP_rmin+GEMTrackerEndcapP_y/2.0"
           zstart="0"
@@ -201,6 +202,7 @@
           rmax = "GEMTrackerEndcapN_rmax"
           length="GEMTrackerEndcapN_thickness"
           zstart="GEMTrackerEndcapN_zmin" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="40*12" bins1="1024"/>
         <ring vis="TrackerVis" module="GEMModule1"
           r="GEMTrackerEndcapN_rmin+GEMTrackerEndcapN_y/2.0"
           zstart="0.1"

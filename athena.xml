@@ -172,7 +172,7 @@
   <documentation level="10">
   ### PID detectors
   </documentation>
-  <include ref="compact/pid_config_acadia.xml" />
+  <!--include ref="compact/pid_config_acadia.xml" /-->
 
   <documentation level="10">
   ## Central calorimetry

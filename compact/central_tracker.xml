@@ -203,6 +203,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           inner_r="TrackerBarrelInner_rmin1-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelInner_rmin1-TrackerBarrelLayer_rOffset + TrackerBarrelInner_thickness-1.0*mm"
           z_length="TrackerBarrelInner_length1"/>
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="100*TrackerBarrelInner_NModules1" bins1="100" />
         <rphi_layout phi_tilt="TrackerBarrel_StaveTiltAngle" nphi="TrackerBarrelInner_NModules1" phi0="0.0" rc="TrackerBarrelInner_rmin1" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -211,6 +212,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           inner_r="TrackerBarrelInner_rmin2-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelInner_rmin2-TrackerBarrelLayer_rOffset + TrackerBarrelInner_thickness"
           z_length="TrackerBarrelInner_length2"/>
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="100*TrackerBarrelInner_NModules2" bins1="100" />
         <rphi_layout phi_tilt="TrackerBarrel_StaveTiltAngle" nphi="TrackerBarrelInner_NModules2" phi0="0.0" rc="TrackerBarrelInner_rmin2" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -249,6 +251,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapInner_rmax1"
           length="TrackerEndcapInnerLayer_thickness"
           zstart="TrackerEndcapInner_zmin" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapInner_rmin1+TrackerEndcapInnerMod1_y/2.0"
           zstart="0.0"
@@ -289,6 +292,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapInner_rmax1"
           length="TrackerEndcapInnerLayer_thickness"
           zstart="TrackerEndcapInner_zmin" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapInner_rmin1+TrackerEndcapInnerMod1_y/2.0" 
           zstart="0"
@@ -350,6 +354,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           inner_r="TrackerBarrelOuter_rmin1-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelOuter_rmin1-TrackerBarrelLayer_rOffset + TrackerBarrelOuter_thickness-1.0*mm"
           z_length="TrackerBarrelOuter_length1"/>
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="100*TrackerBarrelOuter_NModules1" bins1="100" />
         <rphi_layout phi_tilt="TrackerBarrel_StaveTiltAngle" nphi="TrackerBarrelOuter_NModules1" phi0="0.0" rc="TrackerBarrelOuter_rmin1" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -358,6 +363,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           inner_r="TrackerBarrelOuter_rmin2-TrackerBarrelLayer_rOffset"
           outer_r="TrackerBarrelOuter_rmin2-TrackerBarrelLayer_rOffset + TrackerBarrelOuter_thickness"
           z_length="TrackerBarrelOuter_length2"/>
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="100*TrackerBarrelOuter_NModules2" bins1="100" />
         <rphi_layout phi_tilt="TrackerBarrel_StaveTiltAngle" nphi="TrackerBarrelOuter_NModules2" phi0="0.0" rc="TrackerBarrelOuter_rmin2" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -415,6 +421,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin1" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin1+TrackerEndcapOuterMod1_y/2.0"
           zstart="0.0*mm"
@@ -426,6 +433,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin2" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin2+TrackerEndcapOuterMod2_y/2.0"
           zstart="0.0*mm"
@@ -437,6 +445,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin3" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin3+TrackerEndcapOuterMod3_y/2.0"
           zstart="0.0*mm"
@@ -498,6 +507,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax1"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin1" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin1+TrackerEndcapOuterMod1_y/2.0"
           zstart="0.0*mm"
@@ -509,6 +519,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax2"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin2" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin2+TrackerEndcapOuterMod2_y/2.0"
           zstart="0.0*mm"
@@ -520,6 +531,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
           rmax="TrackerEndcapOuter_rmax3"
           length="TrackerEndcapOuterLayer_thickness"
           zstart="TrackerEndcapOuter_zmin3" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*TrackerEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="TrackerEndcapOuter_rmin3+TrackerEndcapOuterMod3_y/2.0"
           zstart="0.0*mm"

@@ -16,7 +16,7 @@
 #include "XML/Layering.h"
 
 #include "Acts/Plugins/DD4hep/ActsExtension.hpp"
-#include "Acts/Definitions/Units.hpp"
+#include "Acts/Plugins/DD4hep/ConvertDD4hepMaterial.hpp"
 
 using namespace std;
 using namespace dd4hep;
@@ -50,9 +50,21 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   PlacedVolume            pv;
 
 
-  Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
-  detWorldExt->addType("endcap", "detector");
-  sdet.addExtension<Acts::ActsExtension>(detWorldExt);
+  // ACTS extension
+  {
+    Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
+    detWorldExt->addType("endcap", "detector");
+    // SJJ probably need to set the envelope here, as ACTS can't figure
+    // that out for Assembly volumes. May also need binning to properly pick up
+    // on the support material @TODO
+    //
+    // Add the volume boundary material if configured
+    for (xml_coll_t bmat(x_det, _Unicode(boundary_material)); bmat; ++bmat) {
+      xml_comp_t x_boundary_material = bmat;
+      Acts::xmlToProtoSurfaceMaterial(x_boundary_material, *detWorldExt, "boundary_material");
+    }
+    sdet.addExtension<Acts::ActsExtension>(detWorldExt);
+  }
 
   assembly.setVisAttributes(description.invisible());
   sens.setType("tracker");
@@ -233,12 +245,18 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     }
     DetElement layer_element(sdet, layer_name, l_id);
     layer_element.setPlacement(layer_pv);
-    Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
-    layerExtension->addType("layer", "layer");
-    //layerExtension->addType("axes", "definitions", "XZY");
-    //layerExtension->addType("sensitive disk", "layer");
-    //layerExtension->addType("axes", "definitions", "XZY");
-    layer_element.addExtension<Acts::ActsExtension>(layerExtension);
+    // ACTS extension
+    {
+      Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
+      // layer is simple tube so no need to set envelope
+      layerExtension->addType("layer", "layer");
+      // Add the proto layer material
+      for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
+        xml_comp_t x_layer_material = lmat;
+        xmlToProtoSurfaceMaterial(x_layer_material, *layerExtension, "layer_material");
+      }
+      layer_element.addExtension<Acts::ActsExtension>(layerExtension);
+    }
 
     for (xml_coll_t ri(x_layer, _U(ring)); ri; ++ri) {
       xml_comp_t  x_ring   = ri;

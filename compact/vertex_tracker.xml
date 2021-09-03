@@ -141,6 +141,7 @@ Simple carbon fiber support shell.
           inner_r="VertexBarrelLayer_rmin1"
           outer_r="VertexBarrelLayer_rmax1"
           z_length="VertexBarrelLayer_length" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="VertexBarrelStave_count" bins1="100" />
         <comment>
           phi0     : Starting phi of first module.
           phi_tilt : Phi tilt of a module.
@@ -159,6 +160,7 @@ Simple carbon fiber support shell.
           inner_r="VertexBarrelLayer_rmin2"
           outer_r="VertexBarrelLayer_rmax2"
           z_length="VertexBarrelLayer_length" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="VertexBarrelStave_count" bins1="100" />
         <rphi_layout phi_tilt="0.0*degree" nphi="VertexBarrelStave_count" phi0="0.0" rc="VertexBarrelMod2_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -167,6 +169,7 @@ Simple carbon fiber support shell.
           inner_r="VertexBarrelSupport_rmin"
           outer_r="VertexBarrelSupport_rmax"
           z_length="VertexBarrelSupport_length" />
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="VertexBarrelStave_count" bins1="100" />
         <rphi_layout phi_tilt="0.0*degree" nphi="VertexBarrelStave_count" phi0="0.0" rc="VertexBarrelShell_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
@@ -206,6 +209,7 @@ Simple carbon fiber support shell.
           rmax="VertexTrackerEndcapP_rmax"
           length="VertexEndcapLayer_thickness"
           zstart="VertexTrackerEndcapP_zmin + VertexEndcapLayer_dz/2.0" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*VertexEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="VertexTrackerEndcapP_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
@@ -247,6 +251,7 @@ Simple carbon fiber support shell.
           rmax="VertexTrackerEndcapN_rmax"
           length="VertexEndcapLayer_thickness"
           zstart="VertexTrackerEndcapN_zmin + VertexEndcapLayer_dz/2.0" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*VertexEndcap_NModules" bins1="256"/>
         <ring vis="TrackerVis"
           r="VertexTrackerEndcapN_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
