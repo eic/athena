@@ -330,8 +330,8 @@ Examples:
     <constant name="VertexTrackerEndcapP_rmax"  value="VertexTrackerBarrel_rmax"/>
     <constant name="VertexTrackerEndcapN_rmax"  value="VertexTrackerBarrel_rmax"/>
 
-    <constant name="VertexTrackerEndcapP_rmin"  value="Beampipe_rmax + 5.0*mm"/>
-    <constant name="VertexTrackerEndcapN_rmin"  value="Beampipe_rmax + 5.0*mm"/>
+    <constant name="VertexTrackerEndcapP_rmin"  value="Beampipe_rmax + 1.0*mm"/>
+    <constant name="VertexTrackerEndcapN_rmin"  value="Beampipe_rmax + 1.0*mm"/>
 
     <constant name="VertexTrackerEndcapP_zmax"  value="300.0*mm"/>
     <constant name="VertexTrackerEndcapN_zmax"  value="300.0*mm"/>

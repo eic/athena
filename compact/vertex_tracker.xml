@@ -129,7 +129,7 @@ Simple carbon fiber support shell.
       <module name="SupportShell" vis="VertexSupportVis">
         <module_component name="CF Shell"
                           material="CarbonFiber" 
-                          sensitive="true"
+                          sensitive="false"
                           width="VertexBarrelShellStave_width" 
                           length="VertexBarrelShell_length"
                           thickness="VertexBarrelShell_thickness" 
