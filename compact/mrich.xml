@@ -151,6 +151,7 @@
         <!--position x="782.7750000006"  y="316.0250000001"/-->
         <!--position x="782.7750000006"  y="453.3750000002"/-->
       </positions>
+      <layer thickness="MRICHCarbonFrame_thickness" material="CarbonFiber"/>
     </detector>
   </detectors>
 

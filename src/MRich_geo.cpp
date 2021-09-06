@@ -355,6 +355,14 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
     }
   }
 
+  // place frame
+  xml_comp_t x_layer = x_det.child(_Unicode(layer));
+  double   layer_thickness = x_layer.thickness();
+  Material layer_mat = description.material(x_layer.materialStr());
+  Tube   frameShape(rmin, rmax, layer_thickness / 2., 0., 2 * M_PI);
+  Volume frameVol("MRICH_Frame", frameShape, layer_mat);
+  pv = envVol.placeVolume(frameVol, Position(0, 0, (length - layer_thickness) / 2.0));
+
   // place envelope
   Volume motherVol = description.pickMotherVolume(sdet);
   if (reflect) {
