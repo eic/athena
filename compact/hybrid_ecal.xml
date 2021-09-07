@@ -30,7 +30,7 @@
     <constant name="CrystalModule_z0" value="10.*cm"/>
 
     <constant name="GlassModule_width" value="2*CrystalModule_width"/>
-    <constant name="GlassModule_length" value="40.00*cm"/>
+    <constant name="GlassModule_length" value="55.00*cm"/>
     <constant name="GlassModule_wrap" value="2*CrystalModule_wrap"/>
     <constant name="GlassModule_z0" value="0.0*cm"/>
 
