@@ -8,13 +8,15 @@
   <documentation level="10">
     ### Ecal configuration
   </documentation>
-  <include ref="ci_ecal.xml"/>
-  <!--<include ref="compact/ci_ecal_shashlik.xml"/>-->
-  <!--<include ref="compact/ce_ecal.xml"/>-->
-<!--  <include ref="ce_ecal_crystal_glass.xml"/>-->
+  <include ref="ci_ecal_scfi.xml"/>
+  <!--<include ref="ci_ecal.xml"/>-->
+
+  <!--<include ref="ce_ecal.xml"/>-->
+  <!--<include ref="ce_ecal_crystal_glass.xml"/>-->
   <include ref="hybrid_ecal.xml"/>
-  <!-- <include ref="compact/ecal_barrel.xml"/> -->
-  <!-- <include ref="compact/ecal_barrel_hybrid.xml"/> -->
+
+  <!-- <include ref="ecal_barrel.xml"/> -->
+  <!-- <include ref="ecal_barrel_hybrid.xml"/> -->
   <include ref="ecal_barrel_interlayers.xml"/>
 
 </lccdd>

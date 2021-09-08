@@ -192,6 +192,8 @@ overlap_check_geant4:full_fast:
   script:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
+    ## reduce the number of fibers in Hadron EMCal for overlap check
+    - sed -i 's/radius="EcalEndcapP_FiberRadius"/radius="EcalEndcapP_FiberRadius*10"/' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
     - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi

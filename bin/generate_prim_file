@@ -54,7 +54,7 @@ parser.add_argument('-t', '--tag', type=str,dest='file_tag',
 parser.add_argument('--timeout', type=int,
         default=60,
         help='Timeout in seconds')
-        
+
 parser.add_argument('passthrough', nargs='*')
 
 args = parser.parse_args()
@@ -70,6 +70,11 @@ args.input = os.path.abspath(args.input)
 args.out_dir = os.path.abspath(args.out_dir)
 args.compact = os.path.abspath(args.compact)
 macro = os.path.abspath(macro)
+
+# adjust fiber radius to reduce the number of fibers
+compact_dir = os.path.dirname(os.path.realpath(args.compact))
+ci_ecal = os.path.join(compact_dir, 'compact', 'ci_ecal_scfi.xml')
+os.system('sed -i \'s/radius=\"EcalEndcapP_FiberRadius\"/radius=\"EcalEndcapP_FiberRadius*10\"/\' {}'.format(ci_ecal))
 
 prim_file = 'g4_0000.prim'
 dawn_env = os.environ.copy()
@@ -137,6 +142,9 @@ for proc in psutil.process_iter():
     if pinfo['pid'] == p.pid + 1 and pinfo['name'] == 'python':
         print('kill {}, generated from {}'.format(pinfo, p.pid))
         os.kill(pinfo['pid'], signal.SIGTERM)
+
+# revert the change
+os.system('sed -i \'s/radius=\"EcalEndcapP_FiberRadius*10\"/radius=\"EcalEndcapP_FiberRadius\"/\' {}'.format(ci_ecal))
 
 line = b'stderr outputs:\n'
 while line:
