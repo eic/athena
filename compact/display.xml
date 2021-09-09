@@ -33,8 +33,9 @@
     <vis name="EcalBarrelSliceVis"      ref="AnlGray"   showDaughters="false" visible="true"/>
     <vis name="EcalBarrelFiberLayerVis" ref="AnlGold"   showDaughters="false" visible="true" />
 
-    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="false" visible="true"/>
+    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="true" visible="false"/>
     <vis name="EcalEndcapLayerVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
+    <vis name="EcalEndcapBlockVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
 
     <vis name="EcalEndcapNModuleVis"    ref="AnlGold"   showDaughters="false" visible="true"/>
 

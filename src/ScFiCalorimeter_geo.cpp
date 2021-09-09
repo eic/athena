@@ -53,15 +53,17 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     Volume env(detName + "_envelope", envShape, desc.material("Air"));
     env.setVisAttributes(desc.visAttributes(detElem.visStr()));
 
-    // build shashlik module
+    // build module
     auto [modVol, modSize] = build_module(desc, detElem.child(_Unicode(module)), sens);
     double modSizeR = std::sqrt(modSize.x() * modSize.x() + modSize.y() * modSize.y());
     double assembly_rwidth = modSizeR*2.;
     int nas = int((rmax - rmin) / assembly_rwidth) + 1;
     std::vector<Assembly> assemblies;
+    // calorimeter block z-offsets (as blocks are shorter than the volume length)
+    const double block_offset = -0.5*(length - modSize.z());
     for (int i = 0; i < nas; ++i) {
         Assembly assembly(detName + Form("_ring%d", i + 1));
-        auto assemblyPV = env.placeVolume(assembly, Position{0., 0., 0.});
+        auto assemblyPV = env.placeVolume(assembly, Position{0., 0., block_offset});
         assemblyPV.addPhysVolID("ring", i + 1);
         assemblies.emplace_back(std::move(assembly));
     }
