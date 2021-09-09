@@ -113,58 +113,60 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
         modVol.setVisAttributes(desc.visAttributes(mod_x.attr<std::string>(_Unicode(vis))));
     }
 
-    auto fiber_x  = mod_x.child(_Unicode(fiber));
-    auto fr       = fiber_x.attr<double>(_Unicode(radius));
-    auto fsx      = fiber_x.attr<double>(_Unicode(spacex));
-    auto fsy      = fiber_x.attr<double>(_Unicode(spacey));
-    auto foff     = dd4hep::getAttrOrDefault<double>(fiber_x, _Unicode(offset), 0.5*mm);
-    auto fiberMat = desc.material(fiber_x.attr<std::string>(_Unicode(material)));
-    Tube fiberShape(0., fr, sz/2.);
-    Volume fiberVol("fiber_vol", fiberShape, fiberMat);
-    fiberVol.setSensitiveDetector(sens);
+    if (mod_x.hasChild("fiber")) {
+      auto fiber_x  = mod_x.child(_Unicode(fiber));
+      auto fr       = fiber_x.attr<double>(_Unicode(radius));
+      auto fsx      = fiber_x.attr<double>(_Unicode(spacex));
+      auto fsy      = fiber_x.attr<double>(_Unicode(spacey));
+      auto foff     = dd4hep::getAttrOrDefault<double>(fiber_x, _Unicode(offset), 0.5*mm);
+      auto fiberMat = desc.material(fiber_x.attr<std::string>(_Unicode(material)));
+      Tube fiberShape(0., fr, sz/2.);
+      Volume fiberVol("fiber_vol", fiberShape, fiberMat);
+      fiberVol.setSensitiveDetector(sens);
 
-    // Fibers are placed in a honeycomb with the radius = sqrt(3)/2. * hexagon side length
-    // So each fiber is fully contained in a regular hexagon, which are placed as
-    //           ______________________________________
-    //           |          ____        ____          |
-    // even:     |         /    \      /    \         |
-    //           |    ____/      \____/      \____    |
-    //           |   /    \      /    \      /    \   |
-    // odd:      |  /      \____/      \____/      \  |
-    //           |  \      /    \      /    \      /  |
-    //           |   \____/      \____/      \____/   |
-    // even:     |        \      /    \      /        |
-    //           |         \____/      \____/      ___|___
-    //           |____________________________________|___offset
-    //                                              | |
-    //                                              |offset
-    // the parameters space x and space y are used to add additional spaces between the hexagons
-    double fside  = 2. / std::sqrt(3.) * fr;
-    double fdistx = 2. * fside + fsx;
-    double fdisty = 2. * fr + fsy;
+      // Fibers are placed in a honeycomb with the radius = sqrt(3)/2. * hexagon side length
+      // So each fiber is fully contained in a regular hexagon, which are placed as
+      //           ______________________________________
+      //           |          ____        ____          |
+      // even:     |         /    \      /    \         |
+      //           |    ____/      \____/      \____    |
+      //           |   /    \      /    \      /    \   |
+      // odd:      |  /      \____/      \____/      \  |
+      //           |  \      /    \      /    \      /  |
+      //           |   \____/      \____/      \____/   |
+      // even:     |        \      /    \      /        |
+      //           |         \____/      \____/      ___|___
+      //           |____________________________________|___offset
+      //                                              | |
+      //                                              |offset
+      // the parameters space x and space y are used to add additional spaces between the hexagons
+      double fside  = 2. / std::sqrt(3.) * fr;
+      double fdistx = 2. * fside + fsx;
+      double fdisty = 2. * fr + fsy;
 
-    // maximum numbers of the fibers, help narrow the loop range
-    int nx = int(sx / (2.*fr)) + 1;
-    int ny = int(sy / (2.*fr)) + 1;
+      // maximum numbers of the fibers, help narrow the loop range
+      int nx = int(sx / (2.*fr)) + 1;
+      int ny = int(sy / (2.*fr)) + 1;
 
-    // std::cout << sx << ", " << sy << ", " << fr << ", " << nx << ", " << ny << std::endl;
+      // std::cout << sx << ", " << sy << ", " << fr << ", " << nx << ", " << ny << std::endl;
 
-    // place the fibers
-    double y0 = (foff + fside);
-    int nfibers = 0;
-    for (int iy = 0; iy < ny; ++iy) {
-        double y = y0 + fdisty * iy;
-        // about to touch the boundary
-        if ((sy - y) < y0) { break; }
-        double x0 = (iy % 2) ? (foff + fside) : (foff + fside + fdistx / 2.);
-        for (int ix = 0; ix < nx; ++ix) {
-            double x = x0 + fdistx * ix;
-            // about to touch the boundary
-            if ((sx - x) < x0) { break; }
-            auto fiberPV = modVol.placeVolume(fiberVol, nfibers++, Position{x - sx/2., y - sy/2., 0});
-            std::cout << "(" << ix << ", " << iy << ", " << x - sx/2. << ", " << y - sy/2. << ", " << fr << "),\n";
-            fiberPV.addPhysVolID("fiber_x", ix + 1).addPhysVolID("fiber_y", iy + 1);
-        }
+      // place the fibers
+      double y0 = (foff + fside);
+      int nfibers = 0;
+      for (int iy = 0; iy < ny; ++iy) {
+          double y = y0 + fdisty * iy;
+          // about to touch the boundary
+          if ((sy - y) < y0) { break; }
+          double x0 = (iy % 2) ? (foff + fside) : (foff + fside + fdistx / 2.);
+          for (int ix = 0; ix < nx; ++ix) {
+              double x = x0 + fdistx * ix;
+              // about to touch the boundary
+              if ((sx - x) < x0) { break; }
+              auto fiberPV = modVol.placeVolume(fiberVol, nfibers++, Position{x - sx/2., y - sy/2., 0});
+              //std::cout << "(" << ix << ", " << iy << ", " << x - sx/2. << ", " << y - sy/2. << ", " << fr << "),\n";
+              fiberPV.addPhysVolID("fiber_x", ix + 1).addPhysVolID("fiber_y", iy + 1);
+          }
+      }
     }
 
     return std::make_tuple(modVol, Position{sx, sy, sz});

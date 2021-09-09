@@ -108,6 +108,8 @@ dump_geometry:
   script:
     - echo "dumping geometry"
     - mkdir -p geo
+    ## disable fibers in SciFi endcap ECAL for better performance
+    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
     ## subsystem views
     - |
       mv ${DETECTOR_PATH}/compact/display_geoviewer.xml ${DETECTOR_PATH}/compact/display.xml
@@ -121,7 +123,10 @@ dump_geometry:
     - dd_web_display --output geo/detector_geo_full.root ${DETECTOR_PATH}/athena.xml
     ## only central detector geo
     - sed -i '/forward_ion_beamline/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/beampipe_hadron_B0/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/B0_/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/far_forward/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/roman_pots/d' ${DETECTOR_PATH}/athena.xml
     - dd_web_display --output geo/detector_geo.root ${DETECTOR_PATH}/athena.xml
     ## print some useful output
     - |

@@ -35,27 +35,26 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     DetElement det(detName, detID);
     sens.setType("calorimeter");
 
-    auto glass_material = desc.material("PbGlass");
+    auto glass_material = desc.material("SciGlass");
     auto crystal_material = desc.material("PbWO4");
     auto air_material = desc.material("Air");
 
     double ROut = desc.constantAsDouble("EcalEndcapN_rmax");
     double RIn = desc.constantAsDouble("EcalEndcapN_rmin");
     double SizeZ = desc.constantAsDouble("EcalEndcapN_thickness");
-    double glass_shift_z = desc.constantAsDouble("GlassModule_z0");
-    double Thickness = desc.constantAsDouble("EcalEndcapN_thickness");
+    double thickness = desc.constantAsDouble("EcalEndcapN_thickness");
     double trans_radius = desc.constantAsDouble("EcalEndcapNCrystal_rmax");
-    double Glass_ShiftZ = desc.constantAsDouble("GlassModule_z0");
+    double Glass_z0 = desc.constantAsDouble("GlassModule_z0");
     double Glass_Width = desc.constantAsDouble("GlassModule_width");
-    double Glass_Thickness = desc.constantAsDouble("GlassModule_length");
+    double Glass_thickness = desc.constantAsDouble("GlassModule_length");
     double Glass_Gap = desc.constantAsDouble("GlassModule_wrap");
     double glass_distance = desc.constantAsDouble("GlassModule_distance");
 
     double Crystal_Width = desc.constantAsDouble("CrystalModule_width");
-    double Crystal_Thickness = desc.constantAsDouble("CrystalModule_length");
+    double Crystal_thickness = desc.constantAsDouble("CrystalModule_length");
     double Crystal_Gap = desc.constantAsDouble("CrystalModule_wrap");
     double crystal_distance = desc.constantAsDouble("CrystalModule_distance");
-    double Crystal_shift_z = desc.constantAsDouble("CrystalModule_z0");
+    double Crystal_z0 = desc.constantAsDouble("CrystalModule_z0");
 
     // RIn and ROut will define outer tube embedding the calorimeter
     // centers_rin/out define the maximum radius of module centers
@@ -63,6 +62,9 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     double hypotenuse = sqrt(0.5 * glass_distance * glass_distance);
     double centers_rin = RIn + hypotenuse + 1*mm;
     double centers_rout = ROut - hypotenuse - 1*mm;
+
+    const double Crystal_offset = -0.5*(Crystal_thickness - thickness);
+    const double Glass_offset = -0.5*(Glass_thickness - thickness);
 
     // envelope
 
@@ -74,15 +76,14 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
 
     double Glass_OuterR = ROut - 1 * cm ;
     double Glass_InnerR = trans_radius;
-    glass_shift_z = Thickness / 2. - Glass_Thickness / 2.;
 
     // Geometry of modules
-    Box glass_box("glass_box", Glass_Width * 0.5, Glass_Width * 0.5, Glass_Thickness * 0.5);
+    Box glass_box("glass_box", Glass_Width * 0.5, Glass_Width * 0.5, Glass_thickness * 0.5);
     Volume glass_module("glass_module", glass_box, glass_material);
     glass_module.setVisAttributes(desc.visAttributes("EcalEndcapNModuleVis"));
     glass_module.setSensitiveDetector(sens);
     
-    Box crystal_box("crystal_box",  Crystal_Width* 0.5, Crystal_Width * 0.5, Crystal_Thickness * 0.5);
+    Box crystal_box("crystal_box",  Crystal_Width* 0.5, Crystal_Width * 0.5, Crystal_thickness * 0.5);
     Volume crystal_module("crystal_module", crystal_box, crystal_material);
     crystal_module.setVisAttributes(desc.visAttributes("EcalEndcapNModuleVis"));
     crystal_module.setSensitiveDetector(sens);
@@ -114,7 +115,7 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     int moduleIndex = 0;
 
 //    fmt::print("\nCE EMCAL GLASS SQUARE START\n");
-//    fmt::print("Glass_Thickness = {} cm;\n", Glass_Thickness / cm);
+//    fmt::print("Glass_thickness = {} cm;\n", Glass_thickness / cm);
 //    fmt::print("Glass_Width     = {} cm;\n", Glass_Width / cm);
 //    fmt::print("Glass_Gap       = {} cm;\n", Glass_Gap / cm);
 //    fmt::print("Glass_InnerR    = {} cm;\n", Glass_InnerR / cm);
@@ -180,35 +181,35 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
             // first crystal module
             double crystal_x = glass_x - crystal_distance / 2;
             double crystal_y = glass_y - crystal_distance / 2;
-            auto   placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_shift_z));
+            auto   placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
             placement.addPhysVolID("sector", 1);
             placement.addPhysVolID("module", cryst_module_index++);
 
             // second crystal module
             crystal_x = glass_x + crystal_distance / 2;
             crystal_y = glass_y - crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_shift_z));
+            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
             placement.addPhysVolID("sector", 1);
             placement.addPhysVolID("module", cryst_module_index++);
 
             // third crystal module
             crystal_x = glass_x - crystal_distance / 2;
             crystal_y = glass_y + crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_shift_z));
+            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
             placement.addPhysVolID("sector", 1);
             placement.addPhysVolID("module", cryst_module_index++);
 
             // forth crystal module
             crystal_x = glass_x + crystal_distance / 2;
             crystal_y = glass_y + crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_shift_z));
+            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
             placement.addPhysVolID("sector", 1);
             placement.addPhysVolID("module", cryst_module_index++);
           }
           else
           {
             // glass module
-            auto placement = ecal_vol.placeVolume(glass_module, Position(glass_x, glass_y, glass_shift_z));
+            auto placement = ecal_vol.placeVolume(glass_module, Position(glass_x, glass_y, Glass_z0 + Glass_offset));
             placement.addPhysVolID("sector", 2);
             placement.addPhysVolID("module", glass_module_index++);
           }

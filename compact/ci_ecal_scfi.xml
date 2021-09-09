@@ -25,16 +25,16 @@
       ------------------------------------------
       Forward (Positive Z) Endcap EM Calorimeter
       ------------------------------------------
-      An EM calorimeter with shashlik hexagon modules
+      An EM calorimeter with ScFi modules
     </comment>
     <detector id="ECalEndcapP_ID"
       name="EcalEndcapP"
       type="ScFiCalorimeter"
-      vis="InvisibleWithDaughters"
+      vis="EcalEndcapVis"
       readout="EcalEndcapPHits">
       <position x="0" y="0" z="EcalEndcapP_zmin + EcalEndcapP_length/2."/>
       <dimensions rmin="EcalEndcapP_rmin" rmax="EcalEndcapP_rmax" length="EcalEndcapP_length"/>
-      <module sizex="25*mm" sizey="25*mm" sizez="170*mm" material="TungstenDens24" vis="EcalEndcapVis">
+      <module sizex="25*mm" sizey="25*mm" sizez="170*mm" material="TungstenDens24" vis="EcalEndcapLayerVis">
         <fiber material="Polystyrene"
           radius="EcalEndcapP_FiberRadius"
           offset="EcalEndcapP_FiberOffset"

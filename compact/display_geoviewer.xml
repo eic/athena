@@ -33,7 +33,7 @@
     <vis name="EcalBarrelSupportVis"    ref="AnlOrange"/>
 
     <vis name="EcalVis"                 ref="AnlGold"   showDaughters="true"  visible="false"/>
-    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="true" visible="true"/>
+    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="false" visible="true"/>
     <vis name="EcalEndcapLayerVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
 
     <vis name="EcalEndcapNModuleVis"    ref="AnlGold"   showDaughters="false" visible="true"/>
