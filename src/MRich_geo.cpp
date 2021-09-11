@@ -239,7 +239,7 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
   int     sensor_ny   = getAttrOrDefault(x_photodet_sensor, _Unicode(ny), 2);
 
   Box    window_box(photodet_width/2.0,photodet_width/2.0,photodet_thickness/2.0);
-  Volume           window_vol(mod_name+"_window", window_box, photodet_mat);
+  Volume window_vol(mod_name+"_window", window_box, photodet_mat);
   double window_zpos = mirror_zpos + mirror_length/2.0+photodet_thickness/2.0;
   pv = m_volume.placeVolume(window_vol,Position(0,0,window_zpos));
   DetElement   comp_de(mod_de, std::string("mod_sensor_de_") + std::to_string(1) ,  1);
