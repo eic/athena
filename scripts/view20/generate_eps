@@ -47,7 +47,7 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 # Top view with a thin slice down the middle
 dawncut 0 1 0 1 ${INPUT_FILE} ${FILE_TAG}_top_temp0.prim   
 dawncut 0 -1 0 1 ${FILE_TAG}_top_temp0.prim  ${FILE_TAG}_top.prim
-../../bin/dawn_tweak --mag 2 --draw 1 --theta 270 --phi 90
+../../bin/dawn_tweak --mag 2 --draw 1 --theta 90 --phi 90
 dawn -d ${FILE_TAG}_top.prim 
 ps2pdf ${FILE_TAG}_top.eps ${FILE_TAG}_top_full.pdf
 gs -o ${FILE_TAG}_top.pdf -sDEVICE=pdfwrite \
