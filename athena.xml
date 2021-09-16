@@ -221,7 +221,7 @@
     </field>
     <field name="Q2PF_Magnet" type="MultipoleMagnet">
       <position x="Q2PF_XPosition" y="0" z="Q2PF_CenterPosition"/>
-      <rotation x="0" y="Q2PF_RotationAngle" z="pi/2.0"/>
+      <rotation x="0" y="Q2PF_RotationAngle" z="0"/>
       <shape type="Tube" rmin="0.0" rmax="Q2PF_InnerRadius" dz="Q2PF_Length*0.5"/>
       <coefficient coefficient="Q2PF_Bmax" skew="0.0*tesla"/>
       <coefficient coefficient="Q2PF_GradientMax" skew="0.0*tesla/cm"/>
