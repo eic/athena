@@ -90,6 +90,9 @@
   <include ref="ip6/forward_ion_beamline.xml"/>
   <include ref="ip6/beampipe_hadron_B0.xml" />
   <include ref="ip6/beampipe.xml" />
+  <include ref="ip6/inner_vacuum_FF_magnets.xml"/>
+
+
 
   <documentation level="5">
      ## Main magnet

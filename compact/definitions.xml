@@ -243,6 +243,7 @@ The unused IDs below are saved for future use.
     <comment> TODO naming consistency </comment>
     <constant name="ffi_ZDC_ECAL_ID"                 value="163"/>
     <constant name="ffi_ZDC_HCAL_ID"                 value="164"/>
+    <constant name="VacuumMagnetElement_1_ID"        value="165"/>
 
     <documentation> 
       #### (170-189) Forward Beamline Magnets
