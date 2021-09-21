@@ -1,0 +1,141 @@
+<lccdd>
+
+    <comment>Gridpix detector
+
+        Approximate naming
+
+        +---------+----------------+----------+
+        | endcap2 |      barrel    | endcap1  |
+        |         |                | membrane |
+        +---------+----------------+----------+
+        | ...                                 |
+
+
+        Implementation:
+           Since the most of the detector is presented by cylindrical elements (Tubes)
+           the "layer" xml element just builds a Tube with a given material, dimensions, etc.
+
+           The only special layer is a layer with name="gas_volume":
+           it being divided by "nrep" identical sub-layers to represent hits properly
+           sensitive="yes" indicates that detector sensitive is set for this layer
+
+           cooling boxes are represented by "module" xml elements
+
+    </comment>
+
+    <define>
+
+        <comments>Initial constants</comments>
+        <constant name="Gridpix_verbose" value="1" comment="0-print none, 1-print some, 2-print more"/>
+        <constant name="Gridpix_z_offset" value="0*cm"/>
+        <constant name="Gridpix_length" value="65.0*cm" comment="total length"/>
+        <constant name="Gridpix_inner_radius" value="25*cm"/>
+        <constant name="Gridpix_outer_radius" value="37*cm"/>
+        <constant name="Gridpix_memb_length" value="0.5*cm" comment="5mm kapton"/>
+        <constant name="Gridpix_cbox_length" value="2.0*cm" comment="2x2 C-fiber box (2mm wall  hollow)"/>
+        <constant name="Gridpix_ecap_wall_thickness" value="0.063 *  2.54 * cm" comment="gridpix side endcap"/>
+        <constant name="Gridpix_kapton_thickness" value="1*mm"/>
+
+        <comments>Computed constants</comments>
+        <constant name="Gridpix_endcap1_length" value="Gridpix_memb_length*2 + Gridpix_cbox_length"/>
+        <constant name="Gridpix_endcap1_z" value="Gridpix_length/2 - Gridpix_endcap1_length"/>
+        <constant name="Gridpix_endcap1_cbox_z" value="-Gridpix_endcap1_z -Gridpix_memb_length - Gridpix_cbox_length/2"/>
+
+        <constant name="Gridpix_endcap2_length" value="Gridpix_ecap_wall_thickness*2 + Gridpix_cbox_length"/>
+        <constant name="Gridpix_endcap2_z" value="Gridpix_length/2 - Gridpix_endcap2_length"/>
+        <constant name="Gridpix_endcap2_cbox_z" value="Gridpix_endcap2_z + Gridpix_ecap_wall_thickness + Gridpix_cbox_length/2"/>
+
+        <constant name="Gridpix_barrel_z" value="(Gridpix_endcap1_length - Gridpix_endcap2_length)/2"/>
+        <constant name="Gridpix_barrel_length" value="Gridpix_length - Gridpix_endcap1_length - Gridpix_endcap2_length"/>
+    </define>
+
+    <limits>
+    </limits>
+
+    <regions>
+    </regions>
+
+    <display>
+    </display>
+
+    <detectors>
+        <detector id="Gridpix_ID" name="Gridpix" type="athena_Gridpix" readout="GridpixHits" vis="DIRCVis">
+            <dimensions rmin="Gridpix_inner_radius" rmax="Gridpix_outer_radius" length="Gridpix_length"/>
+            <position x="0" y="0" z="Gridpix_z_offset"/>
+            <layer name="inner_kapton" material="Kapton" vis="AnlOrange"
+                   z_offset="Gridpix_barrel_z"
+                   rmin="Gridpix_inner_radius"
+                   rmax="Gridpix_inner_radius+Gridpix_kapton_thickness"
+                   length="Gridpix_barrel_length" />
+
+            <layer name="outer_kapton" material="Kapton" vis="AnlOrange"
+                   z_offset="Gridpix_barrel_z"
+                   rmin="Gridpix_outer_radius-Gridpix_kapton_thickness"
+                   rmax="Gridpix_outer_radius"
+                   length="Gridpix_barrel_length" />
+
+
+            <layer name="gas_volume" material="Air" vis="AnlYellow"
+                   z_offset="Gridpix_barrel_z"
+                   rmin="Gridpix_inner_radius+Gridpix_kapton_thickness"
+                   rmax="Gridpix_outer_radius-Gridpix_kapton_thickness"
+                   length="Gridpix_barrel_length"
+                   sensitive="yes"
+                   ndivide="50"
+                   comment="ndivide here is on how many sublayers we divide it for sensitive"/>
+
+            <layer name="membrane_1" material="Kapton" vis="AnlGreen"
+                   z_offset="-Gridpix_endcap1_z - Gridpix_memb_length/2"
+                   rmin="Gridpix_inner_radius"
+                   rmax="Gridpix_outer_radius"
+                   length="Gridpix_memb_length"/>
+
+            <layer name="membrane_2" material="Kapton" vis="AnlGray"
+                   z_offset="-Gridpix_endcap1_z - Gridpix_memb_length*3/2 - Gridpix_cbox_length"
+                   rmin="Gridpix_inner_radius"
+                   rmax="Gridpix_outer_radius"
+                   length="Gridpix_memb_length"/>
+
+            <layer name="ecap2_layer_1" material="Fr4" vis="AnlGray"
+                   z_offset="Gridpix_endcap2_z + Gridpix_ecap_wall_thickness/2"
+                   rmin="Gridpix_inner_radius"
+                   rmax="Gridpix_outer_radius"
+                   length="Gridpix_ecap_wall_thickness"/>
+
+            <layer name="ecap2_layer_2" material="Fr4" vis="AnlGray"
+                   z_offset="Gridpix_endcap2_z + Gridpix_ecap_wall_thickness*3/2 + Gridpix_cbox_length"
+                   rmin="Gridpix_inner_radius"
+                   rmax="Gridpix_outer_radius"
+                   length="Gridpix_ecap_wall_thickness"/>
+
+            <cbox name="cbox_ec1" material="Aluminum" vis="AnlBlack">
+                <dimensions width="Gridpix_cbox_length" height="Gridpix_cbox_length" length="Gridpix_cbox_length"/>
+                <module x="Gridpix_inner_radius + Gridpix_cbox_length"  y="0" z="Gridpix_endcap1_cbox_z"/>
+                <module x="-Gridpix_inner_radius - Gridpix_cbox_length" y="0" z="Gridpix_endcap1_cbox_z"/>
+                <module x="-Gridpix_outer_radius + Gridpix_cbox_length" y="0" z="Gridpix_endcap1_cbox_z"/>
+                <module x="Gridpix_outer_radius - Gridpix_cbox_length"  y="0" z="Gridpix_endcap1_cbox_z"/>
+            </cbox>
+
+            <cbox name="cbox_ec2" material="Aluminum" vis="AnlBlack">
+                <dimensions width="Gridpix_cbox_length" height="Gridpix_cbox_length" length="Gridpix_cbox_length"/>
+                <module x="Gridpix_inner_radius + Gridpix_cbox_length"  y="0" z="Gridpix_endcap2_cbox_z"/>
+                <module x="-Gridpix_inner_radius - Gridpix_cbox_length" y="0" z="Gridpix_endcap2_cbox_z"/>
+                <module x="-Gridpix_outer_radius + Gridpix_cbox_length" y="0" z="Gridpix_endcap2_cbox_z"/>
+                <module x="Gridpix_outer_radius - Gridpix_cbox_length"  y="0" z="Gridpix_endcap2_cbox_z"/>
+            </cbox>
+        </detector>
+    </detectors>
+
+    <readouts>
+        <readout name="GridpixHits">
+            <segmentation type="CartesianGridXY" grid_size_x="1.0*mm" grid_size_y="1.0*mm" />
+            <id>system:8,sector:8,module:14,x:32:-16,y:-16</id>
+        </readout>
+    </readouts>
+
+    <plugins>
+    </plugins>
+
+    <fields>
+    </fields>
+</lccdd>

@@ -1,0 +1,115 @@
+# npsim --runType vis --compactFile athena.xml --macro macro/gridpix_vis.mac --outputFile gridpix.root --enableG4GPS --enableQtUI
+# npsim --runType vis --compactFile athena.xml --random.seed 1 --enableGun --gun.energy 2*GeV --gun.thetaMin 90*deg --gun.thetaMax 90*deg --gun.distribution uniform --macro macro/dirc_vis.mac --outputFile dirc_vis.root
+
+# Use this open statement to create an OpenGL view:
+/vis/open OGL 1000x1000-0+0
+
+# Disable auto refresh and quieten vis messages whilst scene and
+# trajectories are established:
+/vis/viewer/set/autoRefresh false
+/vis/viewer/set/rotationStyle freeRotation
+/vis/verbose errors
+
+# Draw geometry:
+/vis/drawVolume
+
+# Specify zoom value:
+/vis/viewer/zoom 1.4
+
+
+# Draw coordinate axes:
+/vis/scene/add/axes 0 0 0 1 m
+#
+# Draw smooth trajectories at end of event, showing trajectory points
+# as markers 2 pixels wide:
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set e- cyan
+/vis/modeling/trajectories/drawByParticleID-0/set e+ gray
+/vis/modeling/trajectories/drawByParticleID-0/set kaon- magenta
+/vis/modeling/trajectories/drawByParticleID-0/set kaon+ magenta
+/vis/modeling/trajectories/drawByParticleID-0/set pion+ magenta
+/vis/modeling/trajectories/drawByParticleID-0/set pion- magenta
+/vis/modeling/trajectories/drawByParticleID-0/set muon- red
+/vis/modeling/trajectories/drawByParticleID-0/set muon+ red
+/vis/modeling/trajectories/drawByParticleID-0/set pion0 blue
+/vis/modeling/trajectories/drawByParticleID-0/set gamma yellow
+/vis/modeling/trajectories/drawByParticleID-0/set proton blue
+/vis/modeling/trajectories/drawByParticleID-0/set neutron gray
+/vis/modeling/trajectories/drawByParticleID-0/set lambda green
+#/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton yellow
+#/vis/modeling/trajectories/drawByParticleID-0/setRGBA opticalphoton 1 0.8 0 0.3
+#/vis/modeling/trajectories/drawByParticleID-0/setRGBA e+ 1 0 1 1
+#/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts false
+#/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsSize 2
+
+# (if too many tracks cause core dump => /tracking/storeTrajectory 0)
+#
+# Draw hits at end of event:
+#/vis/scene/add/hits
+#
+# To draw only gammas:
+#/vis/filtering/trajectories/create/particleFilter
+#/vis/filtering/trajectories/particleFilter-0/add gamma
+#
+# To invert the above, drawing all particles except gammas,
+# keep the above two lines but also add:
+#/vis/filtering/trajectories/particleFilter-0/invert true
+#
+# Many other options are available with /vis/modeling and /vis/filtering.
+# For example, to select colour by particle ID:
+#/vis/modeling/trajectories/create/drawByParticleID
+#/vis/modeling/trajectories/drawByParticleID-0/set e- blue
+#
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+
+
+/vis/viewer/set/projection p 40 deg
+/vis/viewer/set/style s
+/vis/viewer/set/hiddenEdge true
+#/vis/viewer/set/background 1 1 1 0
+#/vis/viewer/set/background 0 0 0 0
+/vis/viewer/set/hiddenMarker 
+/vis/geometry/set/forceLineSegmentsPerCircle all 0 50
+# /vis/viewer/set/globalLineWidthScale 1.5
+# /vis/geometry/set/lineWidth all 0 1
+
+/vis/ogl/set/displayListLimit 500000
+
+  #/vis/viewer/set/cutawayMode intersection
+/vis/viewer/clearCutawayPlanes
+
+/vis/viewer/addCutawayPlane 0  1  0  cm  0. -500 0
+
+
+/vis/viewer/refresh
+
+
+/gps/verbose 2
+/gps/particle pi-
+/gps/number 1
+
+#/gps/ene/type Gauss
+/gps/ene/mono  6.0 GeV
+#/gps/ene/sigma 3.0 GeV
+
+#/gps/pos/type Volume
+#/gps/pos/shape Cylinder
+#/gps/pos/centre 0.0 0.0 0.0 cm
+#/gps/pos/radius 0.01 cm
+#/gps/pos/halfz  10 cm
+/gps/position 0 0 0 cm
+#/gps/direction 1 0 0
+
+/gps/direction 0 1 0
+#/gps/ang/type iso
+#/gps/ang/mintheta  10 degree
+#/gps/ang/maxtheta  170 degree
+
+
+/run/beamOn 1
