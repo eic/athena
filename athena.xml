@@ -130,7 +130,6 @@
       <composite name="TrackerEndcapP_Inner"/>
     </detector>
 
-    <comment>
     <detector id="TrackerBarrelSubAssembly_Outer_ID"
       name="TrackerSubAssembly_Outer"
       type="DD4hep_SubdetectorAssembly"
@@ -139,7 +138,6 @@
       <composite name="TrackerEndcapP_Outer"/>
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
-    </comment>
 
     <comment>
       TOF disabled for baseline-->
