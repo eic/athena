@@ -12,6 +12,7 @@
     <constant name="TOFEndcapService_thickness" value="TOFEndcap_thickness-TOFEndcapSensor_thickness"/>
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
+    <constant name="ForwardTOF_length"          value="10*cm"/>
     <constant name="ForwardTOF_zmin"            value="ForwardTracking_zmin"/>
     <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
     <constant name="ForwardTOF_rmin1"           value="ForwardPID_rmin1"/>
@@ -26,6 +27,7 @@
     <constant name="ForwardTOFMod2_x2"          value="2.0*ForwardTOF_rmax2*sin(ForwardTOFModOpeningAngle/2.0)"/>
     <constant name="ForwardTOFMod2_y"           value="ForwardTOF_rmax2*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin2"/>
 
+    <constant name="BackwardTOF_length"         value="10*cm"/>
     <constant name="BackwardTOF_zmin"           value="BackwardTracking_zmin"/>
     <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
     <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
