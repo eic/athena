@@ -8,8 +8,8 @@
     </comment>
     
     <constant name="TOFEndcapSensor_thickness"  value="0.3*mm"/>
-    <constant name="TOFEndcap_thickness"        value="2.00/100*9.37*cm"/>
-    <constant name="TOFEndcapService_thickness" value="TOFEndcap_thickness-TOFEndcapSensor_thickness"/>
+    <constant name="ForwardTOFService_thickness" value="15.00/100*9.37*cm-TOFEndcapSensor_thickness"/>
+    <constant name="BackwardTOFService_thickness" value="5.00/100*9.37*cm-TOFEndcapSensor_thickness"/>
     <constant name="TOFEndcap_nLayers"          value="2"/>
 
     <constant name="ForwardTOF_length"          value="10*cm"/>
@@ -56,13 +56,13 @@
         reflect="false">
         <module name="Module1" vis="TOFVis">
           <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
-          <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
+          <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
         </module>
         <module name="Module2" vis="TOFVis">
           <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
         </module>
         <layer id="1">
           <envelope  vis="TOFVis"
@@ -98,12 +98,12 @@
         <module name="Module1" vis="TOFVis">
           <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
         </module>
         <module name="Module2" vis="TOFVis">
           <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
           <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
         </module>
         <layer id="1">
           <envelope  vis="TOFVis"
