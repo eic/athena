@@ -139,7 +139,7 @@
       <composite name="TrackerEndcapN_Outer"/>
     </detector>
 
-    <comment>
+    <!--comment>
       TOF disabled for baseline-->
       <detector id="OuterTrackingSubAssembly_ID"
       name="OuterTrackingSubAssembly"
@@ -149,7 +149,7 @@
       <composite name="ForwardTOF"/>
       <composite name="BackwardTOF"/>
     </detector>
-    </comment>
+    <!--/comment-->
 
     <comment>
     <detector id="OuterTrackingSubAssembly_ID"
@@ -167,9 +167,11 @@
     ## Central tracking detectors
   </documentation>
 
-  <include ref="compact/tracking_config_acadia.xml"/>
+  <!--include ref="compact/tracking_config_acadia.xml"/-->
 
   <!--include ref="compact/tracking_config_mgpds.xml"/-->
+
+  <include ref="compact/tracking_config_tof.xml"/>
 
   <documentation level="10">
   ### PID detectors
