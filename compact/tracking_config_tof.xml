@@ -1,0 +1,17 @@
+<lccdd>
+
+  <display>
+  </display>
+  <define>
+  </define>
+
+  <documentation level="10">
+    ### Silicon tracking configuration
+  </documentation>
+
+  <include ref="vertex_tracker.xml"/>
+  <include ref="central_tracker.xml"/>
+  <include ref="tof.xml"/>
+
+</lccdd>
+
