@@ -17,8 +17,8 @@
     <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
     <constant name="ForwardTOF_rmin1"           value="ForwardPID_rmin1"/>
     <constant name="ForwardTOF_rmin2"           value="ForwardPID_rmin1"/>
-    <constant name="ForwardTOF_rmax1"           value="Solenoid_rmin"/>
-    <constant name="ForwardTOF_rmax2"           value="Solenoid_rmin"/>
+    <constant name="ForwardTOF_rmax1"           value="BackwardPID_rmax"/>
+    <constant name="ForwardTOF_rmax2"           value="BackwardPID_rmax"/>
     <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
     <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
     <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
@@ -35,8 +35,8 @@
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
     <constant name="BackwardTOF_rmin1"          value="ForwardPID_rmin1"/>
     <constant name="BackwardTOF_rmin2"          value="ForwardPID_rmin1"/>
-    <constant name="BackwardTOF_rmax1"          value="BarrelTracking_rmax"/>
-    <constant name="BackwardTOF_rmax2"          value="BarrelTracking_rmax"/>
+    <constant name="BackwardTOF_rmax1"          value="200*cm"/>
+    <constant name="BackwardTOF_rmax2"          value="200*cm"/>
     <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
     <constant name="BackwardTOFMod1_x1"         value="2.0*BackwardTOF_rmin1*sin(BackwardTOFModOpeningAngle/2.0)"/>
     <constant name="BackwardTOFMod1_x2"         value="2.0*BackwardTOF_rmax1*sin(BackwardTOFModOpeningAngle/2.0)"/>
