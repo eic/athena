@@ -12,7 +12,8 @@
     <constant name="ForwardTOF_nLayers"          value="2"/>
 
     <constant name="ForwardTOF_length"          value="10*cm"/>
-    <constant name="ForwardTOF_zmin"            value="ForwardTracking_zmin"/>
+    <!--constant name="ForwardTOF_zmin"            value="ForwardTracking_zmin"/-->
+    <constant name="ForwardTOF_zmin"            value="ForwardPID_zmin-ForwardTOF_length-1.0*mm"/>
     <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/ForwardTOF_nLayers"/>
     <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
