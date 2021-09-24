@@ -20,8 +20,10 @@
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
     <constant name="ForwardTOF_rmin1"           value="19*cm"/>
     <constant name="ForwardTOF_rmin2"           value="19*cm"/>
-    <constant name="ForwardTOF_rmax1"           value="200*cm"/>
-    <constant name="ForwardTOF_rmax2"           value="200*cm"/>
+    <!--constant name="ForwardTOF_rmax1"           value="200*cm"/>
+    <constant name="ForwardTOF_rmax2"           value="200*cm"/-->
+    <constant name="ForwardTOF_rmax1"           value="BackwardPID_rmax"/>
+    <constant name="ForwardTOF_rmax2"           value="BackwardPID_rmax"/>
     <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
     <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
     <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
