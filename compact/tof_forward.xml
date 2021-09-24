@@ -8,7 +8,8 @@
     </comment>
     
     <constant name="ForwardTOFSensor_thickness"  value="0.3*mm"/>
-    <constant name="ForwardTOFService_thickness" value="15.00/100*9.37*cm-ForwardTOFSensor_thickness"/>
+    <!--constant name="ForwardTOFService_thickness" value="15.00/100*9.37*cm-ForwardTOFSensor_thickness"/-->
+    <constant name="ForwardTOFService_thickness" value="5.00/100*9.37*cm-ForwardTOFSensor_thickness"/>
     <constant name="ForwardTOF_nLayers"          value="2"/>
 
     <constant name="ForwardTOF_length"          value="10*cm"/>
