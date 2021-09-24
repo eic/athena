@@ -35,7 +35,7 @@
         id="BackwardTOF_ID"
         name="BackwardTOF"
         type="athena_TrapEndcapTracker"
-        readout="TOFEndcapHits"
+        readout="BackwardTOFHits"
         vis="TOFVis"
         reflect="true">
         <module name="Module1" vis="TOFVis">

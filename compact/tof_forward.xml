@@ -32,7 +32,7 @@
         id="ForwardTOF_ID"
         name="ForwardTOF"
         type="athena_TrapEndcapTracker"
-        readout="TOFEndcapHits"
+        readout="ForwardTOFHits"
         vis="TOFVis"
         reflect="false">
         <module name="Module1" vis="TOFVis">
