@@ -382,7 +382,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
         thickness="TrackerSupportCarbon_thickness" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
       <support vis="TrackerSupportVis"  material="Aluminum" name="sup_cylinder_service"
         rmin="TrackerEndcapOuterShell_rmin+1.0*mm+TrackerSupportCarbon_thickness"
-        thickness="8.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+        thickness="2.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
         
       <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
         <shape type="Cone" 
@@ -466,7 +466,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
         thickness="TrackerSupportCarbon_thickness" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
       <support vis="TrackerSupportVis"  material="Aluminum" name="sup_cylinder_service"
         rmin="TrackerEndcapOuterShell_rmin+1.0*mm+TrackerSupportCarbon_thickness"
-        thickness="8.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
+        thickness="2.0*mm" length="TrackerEndcapOuterShell_length" zstart="TrackerEndcapOuterShell_zmin" />
         <comment>the cone can not be reflected. need to flip z explicitly</comment>
       <support  material="CarbonFiber" name="sup_cone" vis="TrackerSupportVis">
         <shape type="Cone" 
