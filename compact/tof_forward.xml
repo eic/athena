@@ -49,7 +49,7 @@
           <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin1"
             rmax="ForwardTOF_rmax1"
-            length="BackwardTOF_thickness"
+            length="ForwardTOF_thickness"
             zstart="ForwardTOF_zmin" />
           <ring vis="TOFVis"
             r="ForwardTOF_rmin1+ForwardTOFMod1_y/2.0"
@@ -60,7 +60,7 @@
           <envelope  vis="TOFVis"
             rmin="ForwardTOF_rmin2"
             rmax="ForwardTOF_rmax2"
-            length="BackwardTOF_thickness"
+            length="ForwardTOF_thickness"
             zstart="ForwardTOF_zmin + ForwardTOF_dz" />
           <ring vis="TOFVis"
             r="ForwardTOF_rmin2+ForwardTOFMod2_y/2.0"
