@@ -14,6 +14,9 @@
     <constant name="ForwardTOF_length"          value="10*cm"/>
     <constant name="ForwardTOF_zmin"            value="ForwardTracking_zmin"/>
     <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/ForwardTOF_nLayers"/>
+    <constant name="BackwardTOF_thickness"      value="ForwardTOF_dz - 1.0*mm"/>
+    <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
+      This is a limitation of ACTS geometry which will likely go away in the future.</comment>
     <constant name="ForwardTOF_rmin1"           value="19*cm"/>
     <constant name="ForwardTOF_rmin2"           value="19*cm"/>
     <constant name="ForwardTOF_rmax1"           value="200*cm"/>
