@@ -182,9 +182,9 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         sensitives[m_nam].push_back(pv);
         ++n_sensor;
         // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-        Vector3D u(1., 0., 0.);
-        Vector3D v(0., 1., 0.);
-        Vector3D n(0., 0., 1.);
+        Vector3D u(0., 0., -1.);
+        Vector3D v(-1., 0., 0.);
+        Vector3D n(0., 1., 0.);
         // Vector3D o( 0. , 0. , 0. ) ;
 
         // compute the inner and outer thicknesses that need to be assigned to the tracking surface
@@ -245,18 +245,17 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     }
     DetElement layer_element(sdet, layer_name, l_id);
     layer_element.setPlacement(layer_pv);
-    // ACTS extension
-    {
-      Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
-      // layer is simple tube so no need to set envelope
-      layerExtension->addType("layer", "layer");
-      // Add the proto layer material
-      for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
-        xml_comp_t x_layer_material = lmat;
-        xmlToProtoSurfaceMaterial(x_layer_material, *layerExtension, "layer_material");
-      }
-      layer_element.addExtension<Acts::ActsExtension>(layerExtension);
+
+    Acts::ActsExtension* layerExtension = new Acts::ActsExtension();
+    layerExtension->addType("sensitive disk", "layer");
+    //layerExtension->addType("axes", "definitions", "XZY");
+    //layerExtension->addType("sensitive disk", "layer");
+    //layerExtension->addType("axes", "definitions", "XZY");
+    for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
+      xml_comp_t x_layer_material = lmat;
+      xmlToProtoSurfaceMaterial(x_layer_material, *layerExtension, "layer_material");
     }
+    layer_element.addExtension<Acts::ActsExtension>(layerExtension);
 
     for (xml_coll_t ri(x_layer, _U(ring)); ri; ++ri) {
       xml_comp_t  x_ring   = ri;

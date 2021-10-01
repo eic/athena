@@ -195,9 +195,9 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
         module_thicknesses[m_nam] = {thickness_so_far + x_comp.thickness()/2.0, total_thickness-thickness_so_far - x_comp.thickness()/2.0};
 
         // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
-        Vector3D u(0., 1., 0.);
-        Vector3D v(0., 0., 1.);
-        Vector3D n(1., 0., 0.);
+        Vector3D u(-1., 0., 0.);
+        Vector3D v(0., -1., 0.);
+        Vector3D n(0., 0., 1.);
         //    Vector3D o( 0. , 0. , 0. ) ;
 
         // compute the inner and outer thicknesses that need to be assigned to the tracking surface
