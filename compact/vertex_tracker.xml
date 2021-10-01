@@ -211,6 +211,7 @@ Simple carbon fiber support shell.
           length="VertexEndcapLayer_thickness"
           zstart="VertexTrackerEndcapP_zmin + VertexEndcapLayer_dz/2.0" />
         <layer_material surface="representing" binning="binPhi,binR" bins0="20*VertexEndcap_NModules" bins1="256"/>
+        <surface_binning nr="100" nphi="20*VertexEndcap_NModules"/>
         <ring vis="TrackerVis"
           r="VertexTrackerEndcapP_rmin+VertexEndcapMod1_y/2.0"
           zstart="0.0"
