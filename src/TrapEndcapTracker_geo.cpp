@@ -251,6 +251,12 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
     //layerExtension->addType("axes", "definitions", "XZY");
     //layerExtension->addType("sensitive disk", "layer");
     //layerExtension->addType("axes", "definitions", "XZY");
+    if (x_layer.hasChild(_Unicode(surface_binning))) {
+      xml_comp_t sfBinning = x_layer.child(_Unicode(surface_binning));
+      layerExtension->addValue(sfBinning.attr<int>("nr"), "n_r", "surface_binning");
+      layerExtension->addValue(sfBinning.attr<int>("nphi"), "n_phi", "surface_binning");
+    }
+    //
     for (xml_coll_t lmat(x_layer, _Unicode(layer_material)); lmat; ++lmat) {
       xml_comp_t x_layer_material = lmat;
       xmlToProtoSurfaceMaterial(x_layer_material, *layerExtension, "layer_material");
