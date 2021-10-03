@@ -12,6 +12,8 @@ workflow:
 default:
   before_script:
     - source .local/bin/env.sh
+  tags:
+    - phy
   artifacts:
     expire_in: 1 week 
     paths:
@@ -63,8 +65,8 @@ common:detector:
   needs: 
     - common:setup
   script:
-    - source .local/bin/env.sh && build_detector.sh
-    - mkdir_local_data_link sim_output
+    #- source .local/bin/env.sh && build_detector.sh
+    - build_detector.sh
     - mkdir -p results
     - mkdir -p config
     - mkdir -p doc
@@ -107,6 +109,11 @@ dump_geometry:
     - common:detector
   script:
     - echo "dumping geometry"
+    ## DEBUG
+    - echo "LD_LIBRARY_PATH - $LD_LIBRARY_PATH"
+    - echo "PATH - $PATH"
+    - print_env.sh
+    ## DEBUG
     - mkdir -p geo
     ## disable fibers in SciFi endcap ECAL for better performance
     - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
