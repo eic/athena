@@ -169,7 +169,11 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
               fiberPV.addPhysVolID("fiber_x", ix + 1).addPhysVolID("fiber_y", iy + 1);
           }
       }
+    // if no fibers we make the module itself sensitive
+    } else {
+      modVol.setSensitiveDetector(sens);
     }
+
 
     return std::make_tuple(modVol, Position{sx, sy, sz});
 }

@@ -114,7 +114,8 @@ dump_geometry:
     ## DEBUG
     - mkdir -p geo
     ## disable fibers in SciFi endcap ECAL for better performance
-    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
+    ## not needed, as we have no fibers in the current setup
+    #- sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
     ## subsystem views
     - |
       mv ${DETECTOR_PATH}/compact/display_geoviewer.xml ${DETECTOR_PATH}/compact/display.xml
@@ -132,6 +133,7 @@ dump_geometry:
     - sed -i '/B0_/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/far_forward/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/roman_pots/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/inner_vacuum_FF_magnets/d' ${DETECTOR_PATH}/athena.xml
     - dd_web_display --output geo/detector_geo.root ${DETECTOR_PATH}/athena.xml
     ## print some useful output
     - |
@@ -203,7 +205,8 @@ overlap_check_geant4:full_fast:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
     ## reduce the number of fibers in Hadron EMCal for overlap check
-    - sed -i 's/radius="EcalEndcapP_FiberRadius"/radius="EcalEndcapP_FiberRadius*10"/' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
+    ## not needed, as we are running with a different setup now
+    #- sed -i 's/radius="EcalEndcapP_FiberRadius"/radius="EcalEndcapP_FiberRadius*10"/' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
     - python scripts/checkOverlaps.py -c ${DETECTOR_PATH}/athena.xml | tee doc/overlap_check_geant4.out
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi

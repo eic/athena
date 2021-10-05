@@ -8,12 +8,11 @@
   <documentation level="10">
     ### Ecal configuration
   </documentation>
-  <include ref="ci_ecal_scfi.xml"/>
-  <!--<include ref="ci_ecal.xml"/>-->
+  <!--include ref="ecal_forward_scfi.xml"/-->
+  <include ref="ecal_forward_homogenous.xml"/>
 
-  <!--<include ref="ce_ecal.xml"/>-->
-  <!--<include ref="ce_ecal_crystal_glass.xml"/>-->
-  <include ref="hybrid_ecal.xml"/>
+  <!--<include ref="ecal_backward_crystal_glass.xml"/>-->
+  <include ref="ecal_backward_hybrid.xml"/>
 
   <!-- <include ref="ecal_barrel.xml"/> -->
   <!-- <include ref="ecal_barrel_hybrid.xml"/> -->
