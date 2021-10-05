@@ -131,7 +131,8 @@ dump_geometry:
     - sed -i '/forward_ion_beamline/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/beampipe_hadron_B0/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/B0_/d' ${DETECTOR_PATH}/athena.xml
-    - sed -i '/far_forward/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/far_forward_offM/d' ${DETECTOR_PATH}/athena.xml
+    - sed -i '/far_forward_detectors/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/roman_pots/d' ${DETECTOR_PATH}/athena.xml
     - sed -i '/inner_vacuum_FF_magnets/d' ${DETECTOR_PATH}/athena.xml
     - dd_web_display --output geo/detector_geo.root ${DETECTOR_PATH}/athena.xml
