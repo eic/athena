@@ -162,7 +162,7 @@
         inner_r="SolenoidBarrelCoilFormer_rmin" 
         outer_z="SolenoidBarrelCoilFormer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Aluminum" thickness="SolenoidBarrelCoilFormerThickness"/>
+        <slice material="Steel235" thickness="SolenoidBarrelCoilFormerThickness"/>
       </layer>
       <layer id="8" 
         inner_r="SolenoidBarrelCoil_rmin" 
@@ -174,7 +174,7 @@
         inner_r="SolenoidBarrelCoilOverbind_rmin" 
         outer_z="SolenoidBarrelCoilOverbind_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Steel235" thickness="SolenoidBarrelCoilOverbindThickness"/>
+        <slice material="Aluminum" thickness="SolenoidBarrelCoilOverbindThickness"/>
       </layer>
 
       <layer id="10" 
