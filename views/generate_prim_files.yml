@@ -50,6 +50,8 @@ view_prim:ev004:
 view_prim:calorimeters:
   extends: .views
   stage: test
+  needs:
+    - job: view_prim:detector_only
   script:
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
     - cp "compact/subsystem_views/calorimeters.xml" "${DETECTOR_PATH}/."
