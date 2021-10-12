@@ -26,7 +26,7 @@
 - `DRICH_debug_optics`:  1 = all components become vacuum, except for mirrors; test opticalphotons from IP
                          2 = all components become vacuum, except for mirrors and `gasvol`, test charged particles from IP
                          0 = off
-- `DRICH_debug_mirror`:  1 = draw full mirror shape for single sector; 0 = off
+- `DRICH_debug_mirror`:  1 or 2 = draw full mirror shape for single sector for mirror number 0 or 1;  0 = off
 - `DRICH_debug_sensors`: 1 = draw full sensor sphere for a single sector; 0 = off
 </comment>
 <constant name="DRICH_debug_optics"  value="0"/>
@@ -125,33 +125,47 @@
 #### Spherical mirror
 - spherical mirrors are built from spherical patches, and positioned near the
   vessel back plane, separately for each sector
-- dimensions:
-  - `backplane`: the position of the maximum z-plane intersected by the sphere,
-    w.r.t. the back plane of vessel envelope
+- common dimensions, applied to each mirror:
   - `rmin` and `rmax`: polar angle boundaries
   - `phiw`: azimuthal width of one sector
   - `thickness` is the radial thickness of the mirror; note that `backplane` is given for the 
     reflective mirror surface, the inner radius of the sphere
+- mirror parameters:
+  - NOTE: in principle you can define as many mirrors in a single sector as you
+    want, but so far we have only tested a maximum of two; with three or more
+    mirrors, you must be very mindful of where and how they intersect, or the intersection
+    booleans will seem like they are not working correctly
+  - `backplane`: the position of the maximum z-plane intersected by the sphere,
+    w.r.t. the back plane of vessel envelope
   - `focus_tune*` are tuning parameters for the focal region:
     - `focus_tune_z` and `focus_tune_x` will move the focal region, with respect
       to the sensor sphere center (i.e., set both to zero for focus at the sensor sphere center
       (ignoring spherical aberrations effects))
 - other settings:
-  - `debug`: set to 1 so draw reference sphere instead, view with y-clipping
+  - `debug`: set to nonzero so draw reference sphere instead, view with y-clipping; the number
+    you choose will be the mirror number (`imir+1` in the source file)
 </documentation>
-<mirror
+<mirrors
   material="Acrylic_DRICH"
   surface="MirrorSurface_DRICH"
   vis="DRICH_mirror_vis"
-  backplane="DRICH_window_thickness + 1.0*cm"
   rmin="DRICH_rmin1 + DRICH_wall_thickness - 1.0*cm"
   rmax="DRICH_rmax2 - DRICH_wall_thickness - 1.0*cm"
   phiw="59.5*degree"
   thickness="0.2*cm"
-  focus_tune_x="30.0*cm"
-  focus_tune_z="-40.0*cm"
   debug="DRICH_debug_mirror"
-  />
+  >
+  <mirror
+    backplane="DRICH_window_thickness + 5.0*cm"
+    focus_tune_x="40.0*cm"
+    focus_tune_z="-30.0*cm"
+    />
+  <mirror
+    backplane="DRICH_window_thickness + 5.0*cm"
+    focus_tune_x="20.0*cm"
+    focus_tune_z="-30.0*cm"
+    />
+</mirrors>
 
 <!-- /detectors/detector/sensors -->
 <documentation level="10">
