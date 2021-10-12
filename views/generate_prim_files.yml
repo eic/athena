@@ -2,6 +2,7 @@ view_prim:detector_only:
   extends: .views
   stage: test
   script:
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -D -t detector_view
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
     - test -f ${LOCAL_DATA_PATH}/detector_view.prim
@@ -50,6 +51,7 @@ view_prim:calorimeters:
   extends: .views
   stage: test
   script:
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
     - cp "compact/subsystem_views/calorimeters.xml" "${DETECTOR_PATH}/."
     - ./bin/generate_prim_file -c ${DETECTOR_PATH}/calorimeters.xml -o ${LOCAL_DATA_PATH} -D -t calorimeters_view
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
