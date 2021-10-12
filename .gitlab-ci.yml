@@ -80,6 +80,8 @@ build:simple:
 
 .views:
   stage: docs
+  tags:
+    - phy-scratch
   before_script:
     - source .local/bin/env.sh
     - env
