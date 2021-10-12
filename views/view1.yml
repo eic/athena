@@ -5,7 +5,7 @@ dawn_view_01:detector:
       optional: false
   script:
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
-    - ./bin/make_dawn_views -i ${LOCAL_DATA_PATH}/detector_view.prim -t view01 -d scripts/view1 -D    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - ./bin/make_dawn_views -i ${LOCAL_DATA_PATH}/detector_view.prim -t view01 -d scripts/view1 -D
 
 
 dawn_view_01:ev001:
