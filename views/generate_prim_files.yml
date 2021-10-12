@@ -4,6 +4,7 @@ view_prim:detector_only:
   script:
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -D -t detector_view
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/detector_view.prim
 
 view_prim:ev001:
   extends: .views
@@ -12,6 +13,8 @@ view_prim:ev001:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -t view_ev001 -s 1
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/view_ev001.prim
 
 view_prim:ev002:
   extends: .views
@@ -20,6 +23,8 @@ view_prim:ev002:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -t view_ev002 -s 2
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/view_ev002.prim
 
 view_prim:ev003:
   extends: .views
@@ -28,6 +33,8 @@ view_prim:ev003:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -t view_ev003 -s 3
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/view_ev003.prim
 
 view_prim:ev004:
   extends: .views
@@ -36,7 +43,8 @@ view_prim:ev004:
     - if: '$DETECTOR_EVENT_VIEWS == "ON"'
   script:
     - ./bin/generate_prim_file -o ${LOCAL_DATA_PATH} -t view_ev004 -s 4
-
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/view_ev004.prim
 
 view_prim:calorimeters:
   extends: .views
@@ -45,6 +53,7 @@ view_prim:calorimeters:
     - cp "compact/subsystem_views/calorimeters.xml" "${DETECTOR_PATH}/."
     - ./bin/generate_prim_file -c ${DETECTOR_PATH}/calorimeters.xml -o ${LOCAL_DATA_PATH} -D -t calorimeters_view
     - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/calorimeters_view.prim
 
 view_prim:calorimeters_ev001:
   extends: .views
@@ -54,6 +63,8 @@ view_prim:calorimeters_ev001:
   script:
     - cp "compact/subsystem_views/calorimeters.xml" "${DETECTOR_PATH}/."
     - ./bin/generate_prim_file -c ${DETECTOR_PATH}/calorimeters.xml -o ${LOCAL_DATA_PATH} -t calorimeters_view_ev001 -s 1
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/calorimeters_view_ev0001.prim
 
 view_prim:calorimeters_ev002:
   extends: .views
@@ -63,4 +74,5 @@ view_prim:calorimeters_ev002:
   script:
     - cp "compact/subsystem_views/calorimeters.xml" "${DETECTOR_PATH}/."
     - ./bin/generate_prim_file -c ${DETECTOR_PATH}/calorimeters.xml -o ${LOCAL_DATA_PATH} -t calorimeters_view_ev002 -s 2
-
+    - ls -lrth && ls -lrth ${LOCAL_DATA_PATH}
+    - test -f ${LOCAL_DATA_PATH}/calorimeters_view_ev0002.prim
