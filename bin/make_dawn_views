@@ -5,6 +5,7 @@
 # C. Peng (ANL), translate to python and add flexible run time for simulation
 
 import os
+import sys
 import signal
 import subprocess
 import argparse
@@ -84,6 +85,9 @@ dawn_env['DAWN_BATCH'] = 'a'
 # generate DAWN images
 out_dir = os.path.abspath(args.out_dir)
 input_file = os.path.abspath(args.input)
+if (not os.path.exists(input_file)):
+    print('Input file does not exist!')
+    sys.exit(-1)
 #prim_file = '{}/{}.prim'.format(input_dir,args.file_tag)
 #prim_file = os.path.abspath(prim_file)
 owd = os.getcwd()
