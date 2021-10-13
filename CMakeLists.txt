@@ -64,3 +64,8 @@ install(DIRECTORY compact/
 install(FILES athena.xml
     DESTINATION share/${PROJECT_NAME}/
     )
+#-----------------------------------------------------------------------------------
+# Install the detector calibration files.
+install(DIRECTORY calibrations/
+    DESTINATION share/${PROJECT_NAME}/
+    )
