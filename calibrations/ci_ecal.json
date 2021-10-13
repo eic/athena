@@ -1,0 +1,7 @@
+{
+    "electron": {
+        "particle_name": "electron",
+        "sampling_fraction": 0.253,
+        "thrown_energy": 5.0
+    }
+}
