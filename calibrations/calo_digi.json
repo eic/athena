@@ -1,0 +1,60 @@
+{
+    "ce_ecal_daq": {
+        "readout": "module",
+        "dynamicRangeADC": "20*GeV",
+        "capacityADC": 14,
+        "pedestalMean": 100,
+        "pedestalSigma": 1,
+        "energyResolutions": [0.0, 0.02, 0.0],
+        "thresholdValue": 3
+    },
+    "ce_hcal_daq": {
+        "readout": "tile",
+        "dynamicRangeADC": "20*MeV",
+        "capacityADC": 8,
+        "pedestalMean": 20,
+        "pedestalSigma": 0.3,
+        "thresholdValue": 1
+    },
+    "ci_ecal_daq": {
+        "readout": "module",
+        "dynamicRangeADC": "3*GeV",
+        "capacityADC": 14,
+        "pedestalMean": 100,
+        "pedestalSigma": 0.7,
+        "thresholdValue": 2
+    },
+    "ci_hcal_daq": {
+        "readout": "tile",
+        "dynamicRangeADC": "3.6*GeV",
+        "capacityADC": 10,
+        "pedestalMean": 20,
+        "pedestalSigma": 0.8,
+        "thresholdValue": 3
+    },
+    "cb_ecal_img_daq": {
+        "readout": "pixel",
+        "dynamicRangeADC": "3*MeV",
+        "capacityADC": 13,
+        "pedestalMean": 100,
+        "pedestalSigma": 14,
+        "energyResolutions": [0.0, 0.02, 0.0],
+        "thresholdValue": 50
+    },
+    "cb_ecal_scfi_daq": {
+        "readout": "light_guide",
+        "dynamicRangeADC": "750*MeV",
+        "capacityADC": 14,
+        "pedestalMean": 20,
+        "pedestalSigma": 0.3,
+        "thresholdValue": 1
+    },
+    "cb_hcal_daq": {
+        "readout": "tile",
+        "dynamicRangeADC": "20*MeV",
+        "capacityADC": 8,
+        "pedestalMean": 20,
+        "pedestalSigma": 0.3,
+        "thresholdValue": 1
+    }
+}
