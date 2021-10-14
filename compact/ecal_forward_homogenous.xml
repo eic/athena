@@ -4,7 +4,6 @@
   </comment>
 
   <define>
-    <constant name="EcalEndcapP_rmax" value="Solenoid_rmax"/>
     <constant name="EcalEndcapP_FiberRadius" value="0.235*cm"/>
     <constant name="EcalEndcapP_FiberOffset" value="0.5*mm"/>
     <constant name="EcalEndcapP_FiberSpaceX" value="0.265*mm"/>
