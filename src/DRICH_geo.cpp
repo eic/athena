@@ -212,9 +212,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   double sensorCentroidX = 0;
   double sensorCentroidZ = 0;
   int sensorCount = 0;
-  // mirror coordinates and half spaces
+  // mirror coordinates and splices
   std::vector<std::tuple<double,double,double>> mirrorCoords;
-  std::vector<std::pair<HalfSpace,HalfSpace>> halfSpaceList;
+  std::vector<std::pair<Transform3D,Transform3D>> spliceList;
 
 
   // sensitive detector type
@@ -275,6 +275,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
 
   // SECTOR LOOP //////////////////////////////////
+  // TODO [low priority]: do we need this large of a loop over sectors, or can
+  // we pull most of this out of the sector loop? Do only the detector
+  // placements (`DetElement::setPlacement`) need to be in the sector loop?
   for(int isec=0; isec<nSectors; isec++) {
 
     // debugging filters, limiting the number of sectors
@@ -456,21 +459,27 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     };
 
 
-    /* define half spaces for each pair of mirrors
-     * - loop over pairs of mirrors, denoted by (mirror0,mirror1)
-     * - the half spaces are defined at the intersections of pairs of mirrors,
+    /* define "splice" for each pair of mirrors: these splices will help
+     * "connect" two mirrors together, by finding their intersection and
+     * defining boolean cuts
+     * - the splice surfaces are defined at the intersections of pairs of mirrors,
      *   and are used to apply cuts (two spheres intersect at a plane (ignoring
      *   edge cases, such as osculating spheres or non-intersecting spheres))
-     * - each pair of mirrors will have two half spaces; the only difference
-     *   between the half spaces is the sign of the normal vector
+     * - ideal splice surface is a `HalfSpace`, but they are not fully supported
+     *   downstream yet; thus we use large `Box`s
+     * - loop over pairs of mirrors, denoted by (mirror0,mirror1)
+     * - each pair of mirrors will have two splice surfaces; the only difference
+     *   between the local half spaces is the sign of the normal vector
      * - in theory this algorithm should work for N mirrors; in practice it
      *   does not, likely because there are many more 'edge cases' to worry
      *   about when trying to intersect three or more spheres; however, the
      *   hope is that this algorithm is flexible enough for future development,
      *   if three or more mirrors are desired
      */
-    halfSpaceList.clear();
+    spliceList.clear();
     double mirrorCenterZ[2], mirrorCenterX[2], mirrorRadius[2];
+    double spliceBoxSize = 10*vesselRmax2;
+    Box spliceBox = Box(spliceBoxSize,spliceBoxSize,spliceBoxSize);
     for(auto mirrorC=mirrorCoords.begin();  mirrorC<mirrorCoords.end()-1; ++mirrorC) {
       for(int i=0; i<=1; i++) {
         mirrorCenterZ[i] = std::get<0>(mirrorC[i]);
@@ -495,8 +504,25 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           ( std::pow(mirrorRadius[0],2) - std::pow(mirrorRadius[1],2) + std::pow(centerDist,2) ) /
           ( 2 * centerDist );
 
-      // define pair of half spaces, one for each mirror
-      // -- position: start at mirror0 center and translate to intersection plane
+      // define pair of splice surfaces, one for each mirror
+      // Box implementation (cf. HalfSpace below):
+      Translation3D spliceBoxPos[2];
+      for(int b=0; b<2; b++) {
+        spliceBoxPos[b] = Translation3D(
+            mirrorCenterX[0] + (intersectionDist + (b==0?1:-1)*spliceBoxSize) * std::sin(psi),
+            0.,
+            mirrorCenterZ[0] + (intersectionDist + (b==0?1:-1)*spliceBoxSize) * std::cos(psi)
+            );
+      };
+      spliceList.push_back( std::pair<Transform3D,Transform3D> (
+          Transform3D( spliceBoxPos[0] * RotationY(psi) ),
+          Transform3D( spliceBoxPos[1] * RotationY(psi) )
+          ));
+
+      // HalfSpace implementation:
+      /* // TODO: use this instead, when `HalfSpace` is supported downstream
+      // -- position: start at mirror0 center and translate to intersection plane, along
+      //    the line containing both mirrors' centers
       double halfSpacePos[3] = {
         mirrorCenterX[0] + intersectionDist * std::sin(psi),
         0.,
@@ -508,10 +534,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
         { (mirrorCenterX[1]-mirrorCenterX[0])/centerDist, 0., (mirrorCenterZ[1]-mirrorCenterZ[0])/centerDist }  // toward mirror1
       };
       // -- definition
-      halfSpaceList.push_back( std::pair<HalfSpace,HalfSpace> (
+      spliceList.push_back( std::pair<HalfSpace,HalfSpace> (
           HalfSpace( halfSpacePos, halfSpaceDir[0] ), // normal vector points toward mirror0
           HalfSpace( halfSpacePos, halfSpaceDir[1] ) // normal vector points toward mirror1
           ));
+      */
 
     }; // end mirror pair loop
 
@@ -569,24 +596,25 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       // by `mirrorPhiw`
       IntersectionSolid mirrorSolid2( pieSlice, mirrorSolid1, mirrorPlacement );
 
-      /* half space cuts:
-       * - if( first mirror ) cut with halfSpaceList[imir].first only
-       * - if( last mirror  ) cut with halfSpaceList[imir-1].second only
-       * - else cut with halfSpaceList[imir].first and halfSpaceList[imir-1].second
+      /* splicing cuts
+       * - if( first mirror ) cut with spliceList[imir].first only
+       * - if( last mirror  ) cut with spliceList[imir-1].second only
+       * - else cut with spliceList[imir].first and spliceList[imir-1].second
        */
 
-      // if( not the last mirror )  cut with halfSpaceList[imir].first
+      // if( not the last mirror )  cut with spliceList[imir].first
       IntersectionSolid mirrorSolid3;
       if(mirrorC<mirrorCoords.end()-1) {
-        mirrorSolid3 = IntersectionSolid( halfSpaceList[imir].first, mirrorSolid2);
+        mirrorSolid3 = IntersectionSolid( mirrorSolid2, spliceBox, spliceList[imir].first );
+        // note: if using `HalfSpace`, instead do `IntersectionSolid(spliceList[imir].first,mirrorSolid2)`
       } else {
         mirrorSolid3 = mirrorSolid2;
       };
 
-      // if( not the first mirror ) cut with halfSpaceList[imir-1].second
+      // if( not the first mirror ) cut with spliceList[imir-1].second
       IntersectionSolid mirrorSolid4;
       if(mirrorC>mirrorCoords.begin()) {
-        mirrorSolid4 = IntersectionSolid( halfSpaceList[imir-1].second, mirrorSolid3);
+        mirrorSolid4 = IntersectionSolid( mirrorSolid3, spliceBox, spliceList[imir-1].second );
       } else {
         mirrorSolid4 = mirrorSolid3;
       };
@@ -595,8 +623,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       Volume mirrorVol(detName+"_mirror_"+secName+"_"+mirName, mirrorSolid4, mirrorMat);
       mirrorVol.setVisAttributes(mirrorVis);
       auto mirrorPV = gasvolVol.placeVolume(mirrorVol,
-            RotationZ(sectorRotation) // rotate about beam axis to sector
-          * Translation3D(0,0,0)
+          Transform3D(RotationZ(sectorRotation)) // rotate about beam axis to sector
           );
 
       // properties
