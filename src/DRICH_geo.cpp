@@ -76,6 +76,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   double  mirrorRmin       =  mirrorsElem.attr<double>(_Unicode(rmin));
   double  mirrorRmax       =  mirrorsElem.attr<double>(_Unicode(rmax));
   double  mirrorPhiw       =  mirrorsElem.attr<double>(_Unicode(phiw));
+  int     spliceMode       =  mirrorsElem.attr<int>(_Unicode(splice_mode));
   // - sensor module
   auto    sensorElem       =  detElem.child(_Unicode(sensors)).child(_Unicode(module));
   auto    sensorMat        =  desc.material(sensorElem.attr<std::string>(_Unicode(material)));
@@ -96,6 +97,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   double  sensorSphPatchRmax  =  sensorSphPatchElem.attr<double>(_Unicode(rmax));
   double  sensorSphPatchZmin  =  sensorSphPatchElem.attr<double>(_Unicode(zmin));
   // - debugging switches
+  bool  debug_verbose      =  detElem.attr<bool>(_Unicode(debug_verbose));
   int   debug_optics_mode  =  detElem.attr<int>(_Unicode(debug_optics));
   int   debug_mirror       =  mirrorsElem.attr<int>(_Unicode(debug));
   bool  debug_sensors      =  sensorSphElem.attr<bool>(_Unicode(debug));
@@ -288,7 +290,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     std::string secName = "sec" + std::to_string(isec);
 
 
-
     // BUILD SENSORS ====================================================================
 
     // if debugging sphere properties, restrict number of sensors drawn
@@ -326,6 +327,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
     // initialize module number for this sector
     int imod=0;
+    if(debug_verbose && isec==0) printf("BEGIN SENSOR LUT\n----------------\n");
 
     // thetaGen loop: iterate less than "0.5 circumference / sensor size" times
     double nTheta = M_PI*sensorSphRadius / (sensorSide+sensorGap);
@@ -378,7 +380,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           //   generator coordinates are provided in the comments
           auto sensorPV = gasvolVol.placeVolume(sensorVol,
                 RotationZ(sectorRotation) // rotate about beam axis to sector
-              * Translation3D(sensorSphPos.x(), sensorSphPos.y(), sensorSphPos.z()) // move sphere to reference position
+              * Translation3D(sensorSphPos) // move sphere to reference position
               * RotationX(phiGen) // rotate about `zGen`
               * RotationZ(thetaGen) // rotate about `yGen`
               * Translation3D(sensorSphRadius, 0., 0.) // push radially to spherical surface
@@ -387,7 +389,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
               );
 
           // generate LUT for module number -> sensor position, for readout mapping tests
-          //if(isec==0) printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
+          if(debug_verbose && isec==0) printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
 
           // properties
           sensorPV.addPhysVolID("sector", isec).addPhysVolID("module", imod);
@@ -404,6 +406,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
         }; // end patch cuts
       }; // end phiGen loop
     }; // end thetaGen loop
+    if(debug_verbose && isec==0) printf("----------------\nEND SENSOR LUT\n");
 
     // calculate centroid sensor position
     if(isec==0) {
@@ -454,6 +457,13 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       double xF = xS + focusTuneX;
       FocusMirror(zF,xF,B);
 
+      // print calculated mirror attributes
+      if(debug_verbose && isec==0) {
+        printf("\n");
+        printf("SECTOR %d  MIRROR %d coordinates (w.r.t IP):\n",isec,imir);
+        printf(" centerZ = %.2f cm\n centerX = %.2f cm\n radius  = %.2f cm\n",zM,xM,rM);
+      };
+
       // mirror coordinates (centerZ,centerX,radius) w.r.t. vessel front
       mirrorCoords.push_back(std::tuple<double,double,double>( zM - vesselZmin, xM, rM ));
     };
@@ -467,7 +477,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
      *   edge cases, such as osculating spheres or non-intersecting spheres))
      * - ideal splice surface is a `HalfSpace`, but they are not fully supported
      *   downstream yet; thus we use large `Box`s
-     * - loop over pairs of mirrors, denoted by (mirror0,mirror1)
      * - each pair of mirrors will have two splice surfaces; the only difference
      *   between the local half spaces is the sign of the normal vector
      * - in theory this algorithm should work for N mirrors; in practice it
@@ -476,9 +485,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
      *   hope is that this algorithm is flexible enough for future development,
      *   if three or more mirrors are desired
      */
+
+    // loop over pairs of mirrors, denoted by (mirror0,mirror1)
     spliceList.clear();
     double mirrorCenterZ[2], mirrorCenterX[2], mirrorRadius[2];
-    double spliceBoxSize = 10*vesselRmax2;
+    double spliceBoxSize = 5*vesselRmax2;
     Box spliceBox = Box(spliceBoxSize,spliceBoxSize,spliceBoxSize);
     for(auto mirrorC=mirrorCoords.begin();  mirrorC<mirrorCoords.end()-1; ++mirrorC) {
       for(int i=0; i<=1; i++) {
@@ -498,6 +509,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           mirrorCenterX[1] - mirrorCenterX[0],
           mirrorCenterZ[1] - mirrorCenterZ[0]
           );
+      if(debug_verbose && isec==0) printf("\nPSI = %f degrees\n\n",psi/degree);
 
       // distance between mirror0 center and plane of intersection
       double intersectionDist =
@@ -507,12 +519,19 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       // define pair of splice surfaces, one for each mirror
       // Box implementation (cf. HalfSpace below):
       Translation3D spliceBoxPos[2];
+      int spliceDir;
       for(int b=0; b<2; b++) {
-        spliceBoxPos[b] = Translation3D(
-            mirrorCenterX[0] + (intersectionDist + (b==0?1:-1)*spliceBoxSize) * std::sin(psi),
-            0.,
-            mirrorCenterZ[0] + (intersectionDist + (b==0?1:-1)*spliceBoxSize) * std::cos(psi)
-            );
+        // if mirrors intersect in a plane, there are two choices of mirror pairs, applied by `spliceDir`:
+        spliceDir = b==spliceMode ?
+          1:  // convergent choice: reflections tend to point toward each other
+          -1; // divergent choice:  reflections tend to point away from each other
+        spliceBoxPos[b] =
+          Translation3D(originFront) *
+          Translation3D(
+              mirrorCenterX[0] + (intersectionDist + spliceDir*spliceBoxSize) * std::sin(psi),
+              0.,
+              mirrorCenterZ[0] + (intersectionDist + spliceDir*spliceBoxSize) * std::cos(psi)
+              );
       };
       spliceList.push_back( std::pair<Transform3D,Transform3D> (
           Transform3D( spliceBoxPos[0] * RotationY(psi) ),
@@ -526,7 +545,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       double halfSpacePos[3] = {
         mirrorCenterX[0] + intersectionDist * std::sin(psi),
         0.,
-        mirrorCenterZ[0] + intersectionDist * std::cos(psi)
+        mirrorCenterZ[0] + intersectionDist * std::cos(psi) // NOTE: probably need to add `originFront`
       };
       // -- normals
       double halfSpaceDir[2][3] = {
@@ -559,7 +578,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       double mirrorTheta2 = mirrorThetaRot + std::asin((mirrorRmax-mirrorCenterX[0])/mirrorRadius[0]);
 
       // if debugging, draw full sphere
-      //if(debug_mirror>0 && debug_mirror==imir+1) { mirrorTheta1=0; mirrorTheta2=M_PI; }; // TODO: might not work yet
+      //if(debug_mirror>0 /*&& debug_mirror==imir+1*/) { mirrorTheta1=0; mirrorTheta2=M_PI; }; // TODO: might not work yet
 
       // create sphere at origin, with specified angular limits;
       // phi limits are increased to fill gaps (overlaps are cut away later)
@@ -588,7 +607,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       // mirror placement transformation (note: transformations are in reverse order)
       auto mirrorPos = Position(mirrorCenterX[0], 0., mirrorCenterZ[0]) + originFront;
       Transform3D mirrorPlacement(
-            Translation3D(mirrorPos.x(), mirrorPos.y(), mirrorPos.z()) // re-center to specified position
+            Translation3D(mirrorPos) // re-center to specified position
           * RotationY(-mirrorThetaRot) // rotate about vertical axis, to be within vessel radial walls
           );
 
@@ -603,7 +622,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
        */
 
       // if( not the last mirror )  cut with spliceList[imir].first
-      IntersectionSolid mirrorSolid3;
+      Solid mirrorSolid3;
       if(mirrorC<mirrorCoords.end()-1) {
         mirrorSolid3 = IntersectionSolid( mirrorSolid2, spliceBox, spliceList[imir].first );
         // note: if using `HalfSpace`, instead do `IntersectionSolid(spliceList[imir].first,mirrorSolid2)`
@@ -612,12 +631,23 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       };
 
       // if( not the first mirror ) cut with spliceList[imir-1].second
-      IntersectionSolid mirrorSolid4;
+      Solid mirrorSolid4;
       if(mirrorC>mirrorCoords.begin()) {
         mirrorSolid4 = IntersectionSolid( mirrorSolid3, spliceBox, spliceList[imir-1].second );
       } else {
         mirrorSolid4 = mirrorSolid3;
       };
+
+      // DEBUG splicing: uncomment this section to draw splicing `Box`
+      /*
+      mirrorSolid4 = mirrorSolid2; // undo splice cuts
+      if(imir==0) { // place splice volume
+        Volume spliceVol(detName+"_splice_"+secName+"_"+mirName, spliceBox, mirrorMat);
+        auto splicePV = gasvolVol.placeVolume(spliceVol,spliceList[imir].first);
+        DetElement spliceDE(det, Form("splice_de_%d_%d", isec, imir), 10*isec+imir);
+        spliceDE.setPlacement(splicePV);
+      };
+      */
 
       // mirror volume, attributes, and placement
       Volume mirrorVol(detName+"_mirror_"+secName+"_"+mirName, mirrorSolid4, mirrorMat);
