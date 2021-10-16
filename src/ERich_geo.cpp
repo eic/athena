@@ -3,19 +3,21 @@
 //  Author: C. Dilks
 //----------------------------------
 
-#include <XML/Helper.h>
-#include "TMath.h"
-#include "TString.h"
-#include "GeometryHelpers.h"
-#include "Math/Point2D.h"
-#include "DDRec/Surface.h"
+#include <TFile.h>
+
 #include "DDRec/DetectorData.h"
-#include "DD4hep/OpticalSurfaces.h"
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Printout.h"
 
+#ifdef IRTGEO
+#include <ParametricSurface.h>
+#include <CherenkovRadiator.h>
+#include <OpticalBoundary.h>
+#include <CherenkovDetectorCollection.h>
+#include <CherenkovPhotonDetector.h>
+#endif
+
 using namespace dd4hep;
-using namespace dd4hep::rec;
 
 // create the detector
 static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetector sens) {
@@ -26,6 +28,19 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   DetElement det(detName, detID);
   xml::Component dims = detElem.dimensions();
   OpticalSurfaceManager surfMgr = desc.surfaceManager();
+
+  #ifdef IRTGEO
+    /* TODO: using IRTGEO conditionals is not ideal, but let's prioritize getting the IRT algorithm
+     * working; is it possible to build this ROOT config file using the output `TGeoManager` object (e.g.,
+     * from `dd_web_display`)? If yes, we can remove all dependence on IRT code from this file.
+     */
+    //@@@ Create output file and a geometry object pointer;
+    auto irtOutFile = new TFile("erich-config.root", "RECREATE");
+    auto irtGeometry = new CherenkovDetectorCollection();
+    // Yes, a single detector in this environment;
+    irtGeometry->AddNewDetector();
+    auto irtDetector = irtGeometry->GetDetector(0);
+  #endif
 
   // attributes -----------------------------------------------------------
   // - vessel
@@ -130,6 +145,20 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   vesselVol.setVisAttributes(vesselVis);
   gasvolVol.setVisAttributes(gasvolVis);
 
+  #ifdef IRTGEO
+    {
+      // FIXME: Z-location does not really matter here, right?; but Z-axis orientation does;
+      auto boundary = new FlatSurface(TVector3(0,0,0), TVector3(1,0,0), TVector3(0,1,0));
+      // FIXME: have no connection to GEANT G4LogicalVolume pointers; however all is needed 
+      // is to make them unique so that std::map work internally; resort to using integers, 
+      // who cares; material pointer can seemingly be '0', and effective refractive index 
+      // for all radiators will be assigned at the end by hand; FIXME: should assign it on 
+      // per-photon basis, at birth, like standalone GEANT code does;
+      irtGeometry->SetContainerVolume(irtDetector, (G4LogicalVolume*)(0x0), 0, boundary);
+    }
+    // FIXME: make it simple for now, assuming no rotations involved; [cm];
+  #endif
+
   // reference positions
   // - the vessel is created such that the center of the cylindrical tank volume
   //   coincides with the origin; this is called the "origin position" of the vessel
@@ -139,6 +168,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   //   with respect to the vessel origin position
   auto originFront = Position(0., 0.,  vesselLength/2.0 );
   auto originBack =  Position(0., 0., -vesselLength/2.0 );
+  double vesselOffset = (vesselZmin + vesselZmax)/2;
 
 
   // sensitive detector type
@@ -179,6 +209,16 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     //SkinSurface aerogelSkin(desc, aerogelDE, Form("mirror_optical_surface%d", isec), aerogelSurf, aerogelVol);
     //aerogelSkin.isValid();
 
+    #ifdef IRTGEO
+      if (!isec) {
+        TVector3 nx(1,0,0), ny(0,1,0);
+        auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+aerogelPV.position().z()), nx, ny);
+        // This call will create a pair of flat refractive surfaces internally; FIXME: should make
+        // a small gas gap at the upstream end of the gas volume;
+        irtGeometry->AddFlatRadiator(irtDetector, (G4LogicalVolume*)(0x1), 0, surface, aerogelThickness/mm);
+      } //if
+    #endif
+
     // filter placement and surface properties
     if(!debug_optics) {
       auto filterPV = gasvolVol.placeVolume(filterVol,
@@ -191,6 +231,15 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       filterDE.setPlacement(filterPV);
       //SkinSurface filterSkin(desc, filterDE, Form("mirror_optical_surface%d", isec), filterSurf, filterVol);
       //filterSkin.isValid();
+
+      #ifdef IRTGEO
+        if (!isec) {
+          TVector3 nx(1,0,0), ny(0,1,0);
+          // FIXME: create a small air gap in the geometry as well;
+          auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+filterPV.position().z()-0.01), nx, ny);
+          irtGeometry->AddFlatRadiator(irtDetector, (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
+        } //if
+      #endif
     };
 
   }; // END SECTOR LOOP //////////////////////////
@@ -243,6 +292,16 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           // generate LUT for module number -> sensor position, for readout mapping tests
           //printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
 
+          #ifdef IRTGEO
+            {
+              // Assume that photosensors can have different 3D surface parameterizations;
+              auto surface = new FlatSurface((1/mm)*TVector3(0.0, 0, vesselOffset+sensorPV.position().z()), 
+                  TVector3(1,0,0), TVector3(0,1,0));
+              // [0,0]: have neither access to G4VSolid nor to G4Material; IRT code does not care; fine;
+              irtDetector->AddPhotonDetector(new CherenkovPhotonDetector(0, 0, surface));
+            } //if
+          #endif
+
           // properties
           sensorPV.addPhysVolID("module", imod);
           DetElement sensorDE(det, Form("sensor_de_%d", imod), 10000*imod); // TODO: what is this 10000?
@@ -273,6 +332,28 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       );
   vesselPV.addPhysVolID("system", detID);
   det.setPlacement(vesselPV);
+
+  #ifdef IRTGEO
+    //@@@ Write the geometry out as a custom TObject class instance;
+    {
+      // No access to GEANT codes; FIXME: replace by dd4hep interpolation (it should 
+      // be available somewhere, right?); for now assign expected average numbers (after 
+      // the QE-convolution!) by hand; <lambda> is ~470nm for Hamamatsu S13361-3050AE-08
+      // QE curve + aerogel with n ~ 1.02 Cherenkov photon spectrum;
+      //for(auto radiator: det->Radiators())
+      //radiator->SetReferenceRefractiveIndex(radiator->GetMaterial()->RefractiveIndex(eV*_MAGIC_CFF_/_LAMBDA_NOMINAL_));
+      {
+        // C4F10, aerogel, acrylic in this sequence;
+        double n[] = {1.0013, 1.0170, 1.5017}; // FIXME: read from `../compact/optical_materials.xml`
+        for(unsigned ir=0; ir<sizeof(n)/sizeof(n[0]); ir++) {
+          if (ir >= irtDetector->GetRadiatorCount()) break;
+          irtDetector->Radiators()[ir]->SetReferenceRefractiveIndex(n[ir]);
+        } //for ir
+      }
+      irtGeometry->Write();
+      irtOutFile->Close();
+    }
+  #endif
 
   return det;
 };
