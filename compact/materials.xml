@@ -256,6 +256,12 @@
     <fraction n="0.041960452" ref="H"/>
     <fraction n="0.33301847" ref="O"/>
   </material>
+  <material name="MylarMLI">
+    <D type="density" value="0.08" unit="g/cm3" />
+    <fraction n="0.62502108" ref="C"/>
+    <fraction n="0.041960452" ref="H"/>
+    <fraction n="0.33301847" ref="O"/>
+  </material>
   <material name="Nomex">
     <D type="density" value="0.029" unit="g/cm3" />
     <composite n="14" ref="C"/>

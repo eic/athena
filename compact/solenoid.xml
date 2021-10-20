@@ -11,11 +11,11 @@
     <constant name="SolenoidBarrelInnerSecondMLILayerThickness" value=" 20.0 * mm"/>
     <constant name="SolenoidBarrelInnerThermalShieldThickness"  value=" 10.0 * mm"/>
     <constant name="SolenoidBarrelInnerFirstMLILayerThickness"  value=" 15.0 * mm"/>
-    <constant name="SolenoidBarrelInnerHeliumVesselThickness"   value=" 20.0 * mm"/>
+    <constant name="SolenoidBarrelInnerHeliumVesselThickness"   value=" 15.0 * mm"/>
     <constant name="SolenoidBarrelInnerHeliumThickness"         value=" 10.0 * mm"/>
     <constant name="SolenoidBarrelCoilFormerThickness"          value=" 50.0 * mm"/>
-    <constant name="SolenoidBarrelCoilThickness"                value="200.0 * mm"/>
-    <constant name="SolenoidBarrelCoilOverbindThickness"        value="200.0 * mm"/>
+    <constant name="SolenoidBarrelCoilThickness"                value="210.0 * mm"/>
+    <constant name="SolenoidBarrelCoilOverbindThickness"        value=" 50.0 * mm"/>
     <constant name="SolenoidBarrelOuterHeliumThickness"         value=" 15.0 * mm"/>
     <constant name="SolenoidBarrelOuterHeliumVesselThickness"   value=" 10.0 * mm"/>
     <constant name="SolenoidBarrelOuterFirstMLILayerThickness"  value=" 15.0 * mm"/>
@@ -130,7 +130,7 @@
         inner_r="SolenoidBarrelInnerSecondMLILayer_rmin" 
         outer_z="SolenoidBarrelInnerSecondMLILayer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Vacuum" thickness="SolenoidBarrelInnerSecondMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidBarrelInnerSecondMLILayerThickness"/>
       </layer>
       <layer id="3" 
         inner_r="SolenoidBarrelInnerThermalShield_rmin" 
@@ -142,7 +142,7 @@
         inner_r="SolenoidBarrelInnerFirstMLILayer_rmin" 
         outer_z="SolenoidBarrelInnerFirstMLILayer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Vacuum" thickness="SolenoidBarrelInnerFirstMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidBarrelInnerFirstMLILayerThickness"/>
       </layer>
       <layer id="5" 
         inner_r="SolenoidBarrelInnerHeliumVessel_rmin" 
@@ -162,7 +162,7 @@
         inner_r="SolenoidBarrelCoilFormer_rmin" 
         outer_z="SolenoidBarrelCoilFormer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Steel235" thickness="SolenoidBarrelCoilFormerThickness"/>
+        <slice material="Aluminum" thickness="SolenoidBarrelCoilFormerThickness"/>
       </layer>
       <layer id="8" 
         inner_r="SolenoidBarrelCoil_rmin" 
@@ -194,7 +194,7 @@
         inner_r="SolenoidBarrelOuterFirstMLILayer_rmin" 
         outer_z="SolenoidBarrelOuterFirstMLILayer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Vacuum" thickness="SolenoidBarrelOuterFirstMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidBarrelOuterFirstMLILayerThickness"/>
       </layer>
       <layer id="13" 
         inner_r="SolenoidBarrelOuterThermalShield_rmin" 
@@ -206,7 +206,7 @@
         inner_r="SolenoidBarrelOuterSecondMLILayer_rmin" 
         outer_z="SolenoidBarrelOuterSecondMLILayer_zmax" 
         vis="SolenoidCryostatVis">
-        <slice material="Vacuum" thickness="SolenoidBarrelOuterSecondMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidBarrelOuterSecondMLILayerThickness"/>
       </layer>
       <layer id="15" 
         inner_r="SolenoidBarrelOuterVacuumVessel_rmin" 
@@ -228,7 +228,7 @@
         inner_z="SolenoidEndcapCoilEndSupport_zmin" 
         inner_r="SolenoidEndcapCoilEndSupport_rmin" 
         outer_r="SolenoidEndcapCoilEndSupport_rmax">
-        <slice material="Steel235" thickness="SolenoidEndcapCoilEndSupportThickness"/>
+        <slice material="Aluminum" thickness="SolenoidEndcapCoilEndSupportThickness"/>
       </layer>
       <layer id="2" 
         inner_z="SolenoidEndcapHelium_zmin" 
@@ -246,7 +246,7 @@
         inner_z="SolenoidEndcapFirstMLILayer_zmin" 
         inner_r="SolenoidEndcapFirstMLILayer_rmin" 
         outer_r="SolenoidEndcapFirstMLILayer_rmax">
-        <slice material="Vacuum" thickness="SolenoidEndcapFirstMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidEndcapFirstMLILayerThickness"/>
       </layer>
       <layer id="5" 
         inner_z="SolenoidEndcapThermalShield_zmin" 
@@ -258,7 +258,7 @@
         inner_z="SolenoidEndcapSecondMLILayer_zmin" 
         inner_r="SolenoidEndcapSecondMLILayer_rmin" 
         outer_r="SolenoidEndcapSecondMLILayer_rmax">
-        <slice material="Vacuum" thickness="SolenoidEndcapSecondMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidEndcapSecondMLILayerThickness"/>
       </layer>
       <layer id="7" 
         inner_z="SolenoidEndcapVacuumVessel_zmin" 
@@ -280,7 +280,7 @@
         inner_z="SolenoidEndcapCoilEndSupport_zmin" 
         inner_r="SolenoidEndcapCoilEndSupport_rmin" 
         outer_r="SolenoidEndcapCoilEndSupport_rmax">
-        <slice material="Steel235" thickness="SolenoidEndcapCoilEndSupportThickness"/>
+        <slice material="Aluminum" thickness="SolenoidEndcapCoilEndSupportThickness"/>
       </layer>
       <layer id="2" 
         inner_z="SolenoidEndcapHelium_zmin" 
@@ -298,7 +298,7 @@
         inner_z="SolenoidEndcapFirstMLILayer_zmin" 
         inner_r="SolenoidEndcapFirstMLILayer_rmin" 
         outer_r="SolenoidEndcapFirstMLILayer_rmax">
-        <slice material="Vacuum" thickness="SolenoidEndcapFirstMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidEndcapFirstMLILayerThickness"/>
       </layer>
       <layer id="5" 
         inner_z="SolenoidEndcapThermalShield_zmin" 
@@ -310,7 +310,7 @@
         inner_z="SolenoidEndcapSecondMLILayer_zmin" 
         inner_r="SolenoidEndcapSecondMLILayer_rmin" 
         outer_r="SolenoidEndcapSecondMLILayer_rmax">
-        <slice material="Vacuum" thickness="SolenoidEndcapSecondMLILayerThickness"/>
+        <slice material="MylarMLI" thickness="SolenoidEndcapSecondMLILayerThickness"/>
       </layer>
       <layer id="7" 
         inner_z="SolenoidEndcapVacuumVessel_zmin" 
