@@ -9,6 +9,9 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == "acadia"'
     - if: '$CI_COMMIT_TAG'
 
+variables:
+  BEAMLINE_CONFIG_VERSION: v0.5.2
+
 default:
   before_script:
     - source .local/bin/env.sh
