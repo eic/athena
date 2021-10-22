@@ -69,5 +69,5 @@ install(FILES athena.xml
 #-----------------------------------------------------------------------------------
 # Install the detector calibration files.
 install(DIRECTORY calibrations/
-    DESTINATION share/${PROJECT_NAME}/
+    DESTINATION share/${PROJECT_NAME}/calibrations
     )
