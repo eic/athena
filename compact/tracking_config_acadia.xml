@@ -48,6 +48,17 @@
 
   </detectors>
 
+  <documentation>
+      ### Material map for ACTS
+      https://eicweb.phy.anl.gov/EIC/detectors/athena/-/issues/128
+  </documentation>
+  <plugins>
+    <plugin name="FileLoader">
+      <arg value="file:calibrations/materials-map.cbor"/>
+      <arg value="url:https://eicweb.phy.anl.gov/EIC/detectors/athena/uploads/458fee1b8c95bf408159fe70d654b8c0/material-maps.cbor"/>
+    </plugin>
+  </plugins>
+
   <include ref="vertex_tracker.xml"/>
   <include ref="central_tracker.xml"/>
   <include ref="gem_tracker_endcap.xml"/>

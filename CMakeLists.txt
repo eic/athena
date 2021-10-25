@@ -35,6 +35,7 @@ dd4hep_add_plugin(${a_lib_name} SOURCES
   src/DIRC_geo.cpp
   src/DRich_geo.cpp
   src/ERich_geo.cpp
+  src/FileLoader.cpp
   src/FieldMapBrBz.cpp
   src/GaseousRICH_geo.cpp
   src/GeometryHelpers.cpp
