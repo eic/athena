@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd>
+  <define>
+    <comment>
+      --------------------------
+      Forward and backward TOF Parameters
+      --------------------------
+    </comment>
+    
+    <constant name="BackwardTOFSensor_thickness"  value="0.3*mm"/>
+    <constant name="BackwardTOFService_thickness" value="5.00/100*9.37*cm-BackwardTOFSensor_thickness"/>
+    <constant name="BackwardTOF_nLayers"          value="2"/>
+
+    <constant name="BackwardTOF_length"         value="10*cm"/>
+    <constant name="BackwardTOF_zmin"           value="BackwardTracking_zmin"/>
+    <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/BackwardTOF_nLayers"/>
+    <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
+    <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
+      This is a limitation of ACTS geometry which will likely go away in the future.</comment>
+    <constant name="BackwardTOF_rmin1"          value="10*cm"/>
+    <constant name="BackwardTOF_rmin2"          value="10*cm"/>
+    <constant name="BackwardTOF_rmax1"          value="BackwardPID_rmax"/>
+    <constant name="BackwardTOF_rmax2"          value="BackwardPID_rmax"/>
+    <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
+    <constant name="BackwardTOFMod1_x1"         value="2.0*BackwardTOF_rmin1*sin(BackwardTOFModOpeningAngle/2.0)"/>
+    <constant name="BackwardTOFMod1_x2"         value="2.0*BackwardTOF_rmax1*sin(BackwardTOFModOpeningAngle/2.0)"/>
+    <constant name="BackwardTOFMod1_y"          value="BackwardTOF_rmax1*cos(BackwardTOFModOpeningAngle/2.0) - BackwardTOF_rmin1"/>
+    <constant name="BackwardTOFMod2_x1"         value="2.0*BackwardTOF_rmin2*sin(BackwardTOFModOpeningAngle/2.0)"/>
+    <constant name="BackwardTOFMod2_x2"         value="2.0*BackwardTOF_rmax2*sin(BackwardTOFModOpeningAngle/2.0)"/>
+    <constant name="BackwardTOFMod2_y"          value="BackwardTOF_rmax2*cos(BackwardTOFModOpeningAngle/2.0) - BackwardTOF_rmin2"/>
+  </define>
+
+  <detectors>
+      <detector
+        id="BackwardTOF_ID"
+        name="BackwardTOF"
+        type="athena_TrapEndcapTracker"
+        readout="BackwardTOFHits"
+        vis="TOFVis"
+        reflect="true">
+        <module name="Module1" vis="TOFVis">
+          <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
+          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
+        </module>
+        <module name="Module2" vis="TOFVis">
+          <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
+          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
+        </module>
+        <layer id="1">
+          <envelope  vis="TOFVis"
+            rmin="BackwardTOF_rmin1 + 0 * 1.2*cm"
+            rmax="BackwardTOF_rmax1"
+            length="BackwardTOF_thickness"
+            zstart="BackwardTOF_zmin" />
+          <ring vis="TOFVis"
+            r="BackwardTOF_rmin1+BackwardTOFMod1_y/2.0"
+            zstart="0.0*mm"
+            nmodules="12" dz="2.5 * mm" module="Module1" />
+        </layer>
+        <layer id="2">
+          <envelope  vis="TOFVis"
+            rmin="BackwardTOF_rmin2"
+            rmax="BackwardTOF_rmax2"
+            length="BackwardTOF_thickness"
+            zstart="BackwardTOF_zmin + BackwardTOF_dz" />
+          <ring vis="TOFVis"
+            r="BackwardTOF_rmin2+BackwardTOFMod2_y/2.0"
+            zstart="0.0*mm"
+            nmodules="12" dz="2.5 * mm" module="Module2" />
+        </layer>
+      </detector>
+  </detectors>
+  
+  <readouts>
+    <readout name="BackwardTOFHits">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.08*mm" grid_size_z="0.08*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+  </readouts>
+
+</lccdd>

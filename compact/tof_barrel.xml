@@ -2,6 +2,11 @@
 <lccdd>
 
   <define>
+    <comment>
+      --------------------------
+      Barrel TOF Parameters
+      --------------------------
+    </comment>
 
     <constant name="BarrelTOFSpaceFrame_width"   value="40.0*mm"/>
     <constant name="BarrelTOFSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
@@ -65,15 +70,13 @@
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
-
   </detectors>
 
   <readouts>
     <readout name="BarrelTOFHits">
-      <segmentation type="CartesianGridXY" grid_size_x="0.150*mm" grid_size_y="0.150*mm" />
+      <segmentation type="CartesianGridXY" grid_size_x="0.08*mm" grid_size_y="0.08*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
     </readout>
   </readouts>
-
 
 </lccdd>

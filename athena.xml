@@ -107,7 +107,8 @@
   </documentation>
 
   <!--include ref="compact/tracking_config_acadia.xml"/-->
-  <include ref="compact/tracking_config_canyonlands.xml"/>
+  <!--include ref="compact/tracking_config_canyonlands.xml"/-->
+  <include ref="compact/tracking_config_canyonlands_tof.xml"/>
 
   <documentation level="10">
   ### PID detectors

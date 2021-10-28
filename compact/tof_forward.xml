@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd>
+  <define>
+    <comment>
+      --------------------------
+      Forward TOF Parameters
+      --------------------------
+    </comment>
+    
+    <constant name="ForwardTOFSensor_thickness"  value="0.3*mm"/>
+    <!--constant name="ForwardTOFService_thickness" value="15.00/100*9.37*cm-ForwardTOFSensor_thickness"/-->
+    <constant name="ForwardTOFService_thickness" value="5.00/100*9.37*cm-ForwardTOFSensor_thickness"/>
+    <constant name="ForwardTOF_nLayers"          value="2"/>
+
+    <constant name="ForwardTOF_length"          value="10*cm"/>
+    <!--constant name="ForwardTOF_zmin"         value="ForwardTracking_zmin"/-->
+    <constant name="ForwardTOF_zgap_dRHIC"      value="50.0*mm"/>
+    <constant name="ForwardTOF_zmin"            value="ForwardPID_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
+    <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/ForwardTOF_nLayers"/>
+    <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
+    <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
+      This is a limitation of ACTS geometry which will likely go away in the future.</comment>
+    <constant name="ForwardTOF_rmin1"           value="19*cm"/>
+    <constant name="ForwardTOF_rmin2"           value="19*cm"/>
+    <!--constant name="ForwardTOF_rmax1"           value="200*cm"/>
+    <constant name="ForwardTOF_rmax2"           value="200*cm"/-->
+    <constant name="ForwardTOF_rmax1"           value="BackwardPID_rmax"/>
+    <constant name="ForwardTOF_rmax2"           value="BackwardPID_rmax"/>
+    <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
+    <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
+    <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
+    <constant name="ForwardTOFMod1_y"           value="ForwardTOF_rmax1*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin1"/>
+    <constant name="ForwardTOFMod2_x1"          value="2.0*ForwardTOF_rmin2*sin(ForwardTOFModOpeningAngle/2.0)"/>
+    <constant name="ForwardTOFMod2_x2"          value="2.0*ForwardTOF_rmax2*sin(ForwardTOFModOpeningAngle/2.0)"/>
+    <constant name="ForwardTOFMod2_y"           value="ForwardTOF_rmax2*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin2"/>
+  </define>
+
+  <detectors>
+      <detector
+        id="ForwardTOF_ID"
+        name="ForwardTOF"
+        type="athena_TrapEndcapTracker"
+        readout="ForwardTOFHits"
+        vis="TOFVis"
+        reflect="false">
+        <module name="Module1" vis="TOFVis">
+          <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
+          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
+        </module>
+        <module name="Module2" vis="TOFVis">
+          <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
+          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
+        </module>
+        <layer id="1">
+          <envelope  vis="TOFVis"
+            rmin="ForwardTOF_rmin1"
+            rmax="ForwardTOF_rmax1"
+            length="ForwardTOF_thickness"
+            zstart="ForwardTOF_zmin" />
+          <ring vis="TOFVis"
+            r="ForwardTOF_rmin1+ForwardTOFMod1_y/2.0"
+            zstart="0.0*mm"
+            nmodules="12" dz="2.5 * mm" module="Module1" />
+        </layer>
+        <layer id="2">
+          <envelope  vis="TOFVis"
+            rmin="ForwardTOF_rmin2"
+            rmax="ForwardTOF_rmax2"
+            length="ForwardTOF_thickness"
+            zstart="ForwardTOF_zmin + ForwardTOF_dz" />
+          <ring vis="TOFVis"
+            r="ForwardTOF_rmin2+ForwardTOFMod2_y/2.0"
+            zstart="0.0*mm"
+            nmodules="12" dz="2.5 * mm" module="Module2" />
+        </layer>
+      </detector>
+  </detectors>
+
+  <readouts>
+    <readout name="ForwardTOFHits">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.08*mm" grid_size_z="0.08*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+  </readouts>
+
+</lccdd>
