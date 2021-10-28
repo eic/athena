@@ -27,6 +27,16 @@
 
     <vis name="TOFVis" ref="AnlTeal" showDaughters="true" visible="true"/>
 
+    <vis name="FFTrackerVis"        ref="AnlRed" />
+    <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
+    <vis name="FFTrackerShieldingVis" ref="AnlGray"           visible="true"  showDaughters="false" />
+    <vis name="FFTrackerServiceVis" ref="AnlGold"             visible="true"  showDaughters="false" />
+    <vis name="FFTrackerLayerVis"   ref="TrackerVis"          visible="true"  showDaughters="true" />
+    <vis name="FFTrackerModuleVis"  ref="FFTrackerLayerVis"   visible="true"  showDaughters="true" />
+    <vis name="FFTrackerSurfaceVis" ref="FFTrackerLayerVis"   visible="true"  showDaughters="true" />
+    <comment> For shielded modules by default just display to module instead of 6 layers </comment>
+    <vis name="FFTrackerShieldedModuleVis" ref="FFTrackerModuleVis"   visible="true"  showDaughters="false" />
+
     <comment>
       ECal Vis
     </comment>
@@ -43,6 +53,12 @@
     <vis name="EcalEndcapBlockVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
 
     <vis name="EcalEndcapNModuleVis"    ref="AnlGold"   showDaughters="false" visible="true"/>
+
+    <vis name="FFPreVis"            ref="AnlGold"             showDaughters="true" visible="true"/>
+    <vis name="FFPreLayerVis"       ref="FFPreVis"            showDaughters="true" visible="true"/>
+    <vis name="FFPreModuleVis"      ref="FFPreLayerVis"       showDaughters="true" visible="true"/>
+    <vis name="FFPreRadiatorVis"    ref="FFPreModuleVis"      showDaughters="true" visible="true"/>
+    <vis name="FFPreReadoutVis"     ref="FFTrackerSurfaceVis" showDaughters="true" visible="true"/>
 
     <comment>
       HCal Vis
@@ -82,9 +98,11 @@
     <vis name="DIRCBarVis"      ref="AnlTeal"       showDaughters="true" visible="true"/>
 
     <comment>
-      Beam line
+      Beam line with magnets
     </comment>
-    <vis name="BeamPipeVis"  ref="AnlLight_Gray" showDaughters="true" visible="true"/>
+    <vis name="BeamPipeVis"         ref="AnlLightGray"       showDaughters="true" visible="true"/>
+    <vis name="FFMagnetVis"         ref="AnlGreen"            showDaughters="true" visible="true"/>
+    <vis name="FFMagnetCoilVis"     ref="AnlRed"              showDaughters="true" visible="true"/>
 
     <vis name="ffi_ZDC_ECAL_Vis"        alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
     <vis name="ffi_ZDC_ECAL_module_Vis" alpha="1.0"  r= "0.1"  g="1.0"  b="0.9"  showDaughters="true" visible="true"/>
