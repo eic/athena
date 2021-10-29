@@ -61,12 +61,12 @@
       <composite name="OuterTrackerEndcapP"/>
       <composite name="GEMEndcapP"/>
     </detector>
-    <!--detector id="TOFSubAssembly_ID"
+    <detector id="TOFSubAssembly_ID"
       name="TOFSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
       <composite name="BarrelTOF"/>
-    </detector-->
+    </detector>
 
   </detectors>
 
