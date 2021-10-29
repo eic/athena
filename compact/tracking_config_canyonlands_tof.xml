@@ -27,7 +27,7 @@
       <composite name="InnerTrackerBarrel"/>
       <composite name="InnerTrackerEndcapP"/>
     </detector>
-    <detector id="TrackerSubAssembly_1_ID"
+    <!--detector id="TrackerSubAssembly_1_ID"
       name="MedialTrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
@@ -35,7 +35,7 @@
       <composite name="MedialTrackerBarrel"/>
       <composite name="MedialTrackerEndcapP"/>
     </detector>
-    <!--detector id="TrackerSubAssembly_2_ID"
+    <detector id="TrackerSubAssembly_2_ID"
       name="OuterTrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
