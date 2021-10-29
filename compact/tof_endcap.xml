@@ -6,6 +6,7 @@
 
     <comment> Medial tracker setup </comment>
     <constant name="TOFBarrel_rmin"               value="52*cm"/>
+    <constant name="InnerTrackerEndcap_zmax"              value="TOFBarrel_rmin / TrackerMainDiagonal_tan" />
 
     <constant name="LGADKaptonOverlay_thickness"              value="50*um"/>
     <constant name="LGADCuGround_thickness"                   value="1.58*um"/>
