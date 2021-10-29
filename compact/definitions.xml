@@ -137,6 +137,9 @@ The unused IDs below are saved for future use.
     <constant name="TrackerEndcapP_7_ID"          value="83"/>
     <constant name="TrackerEndcapP_8_ID"          value="84"/>
 
+    <constant name="TOFSubAssembly_ID" value="85"/>
+    <constant name="BarrelTOF_ID"  value="86"/>
+
     <documentation>
     #### (85-99) Reserved IDs
 
@@ -153,8 +156,6 @@ The unused IDs below are saved for future use.
     </documentation>
     <constant name="BarrelDIRC_ID" value="90"/>
     <constant name="BarrelTRD_ID"  value="91"/>
-    <constant name="TOFSubAssembly_ID" value="93"/>
-    <constant name="BarrelTOF_ID"  value="94"/>
     
     <documentation> 
       #### (100-109) Electromagnetic Calorimeter
