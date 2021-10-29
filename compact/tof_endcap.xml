@@ -1,137 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lccdd>
   <define>
-    <comment>
-      --------------------------
-      Forward and backward TOF Parameters
-      --------------------------
-    </comment>
-    
-    <constant name="TOFEndcapSensor_thickness"  value="0.3*mm"/>
-    <constant name="TOFEndcap_thickness"        value="2.00/100*9.37*cm"/>
-    <constant name="TOFEndcapService_thickness" value="TOFEndcap_thickness-TOFEndcapSensor_thickness"/>
-    <constant name="TOFEndcap_nLayers"          value="2"/>
+    <comment> Main diagonal direction for barrel/endcap transitions </comment>
+    <constant name="TrackerMainDiagonal_tan"                value="Eta1_1_tan"/>
 
-    <constant name="ForwardTOF_zmin"            value="BarrelTracking_length/2.0 + ForwardTracking_length + ForwardRICH_length + ForwardTRD_length"/>
-    <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
-    <constant name="ForwardTOF_rmin1"           value="ForwardPID_rmin1"/>
-    <constant name="ForwardTOF_rmin2"           value="ForwardPID_rmin1"/>
-    <constant name="ForwardTOF_rmax1"           value="Solenoid_rmin"/>
-    <constant name="ForwardTOF_rmax2"           value="Solenoid_rmin"/>
-    <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
-    <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
-    <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
-    <constant name="ForwardTOFMod1_y"           value="ForwardTOF_rmax1*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin1"/>
-    <constant name="ForwardTOFMod2_x1"          value="2.0*ForwardTOF_rmin2*sin(ForwardTOFModOpeningAngle/2.0)"/>
-    <constant name="ForwardTOFMod2_x2"          value="2.0*ForwardTOF_rmax2*sin(ForwardTOFModOpeningAngle/2.0)"/>
-    <constant name="ForwardTOFMod2_y"           value="ForwardTOF_rmax2*cos(ForwardTOFModOpeningAngle/2.0) - ForwardTOF_rmin2"/>
+    <comment> Medial tracker setup </comment>
+    <constant name="TOFBarrel_rmin"               value="52*cm"/>
 
-    <constant name="BackwardTOF_zmin"           value="BarrelTracking_length/2.0 + BackwardTracking_length + BackwardCherenkov_length "/>
-    <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/TOFEndcap_nLayers"/>
-    <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
-    <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
-      This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="BackwardTOF_rmin1"          value="ForwardPID_rmin1"/>
-    <constant name="BackwardTOF_rmin2"          value="ForwardPID_rmin1"/>
-    <constant name="BackwardTOF_rmax1"          value="BarrelTracking_rmax"/>
-    <constant name="BackwardTOF_rmax2"          value="BarrelTracking_rmax"/>
-    <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
-    <constant name="BackwardTOFMod1_x1"         value="2.0*BackwardTOF_rmin1*sin(BackwardTOFModOpeningAngle/2.0)"/>
-    <constant name="BackwardTOFMod1_x2"         value="2.0*BackwardTOF_rmax1*sin(BackwardTOFModOpeningAngle/2.0)"/>
-    <constant name="BackwardTOFMod1_y"          value="BackwardTOF_rmax1*cos(BackwardTOFModOpeningAngle/2.0) - BackwardTOF_rmin1"/>
-    <constant name="BackwardTOFMod2_x1"         value="2.0*BackwardTOF_rmin2*sin(BackwardTOFModOpeningAngle/2.0)"/>
-    <constant name="BackwardTOFMod2_x2"         value="2.0*BackwardTOF_rmax2*sin(BackwardTOFModOpeningAngle/2.0)"/>
-    <constant name="BackwardTOFMod2_y"          value="BackwardTOF_rmax2*cos(BackwardTOFModOpeningAngle/2.0) - BackwardTOF_rmin2"/>
+    <constant name="LGADKaptonOverlay_thickness"              value="50*um"/>
+    <constant name="LGADCuGround_thickness"                   value="1.58*um"/>
+    <constant name="LGADPCB_thickness"                        value="100*um"/>
+    <constant name="LGADCuStrip_thickness"                    value="12*um"/>
+    <constant name="LGADKaptonStrip_thickness"                value="75*um"/>
+    <constant name="LGADResistiveStrip_thickness"             value="128*um"/>
+    <constant name="LGADGas_thickness"                        value="20*um"/>
+    <constant name="LGADMesh_thickness"                       value="18*um"/>
+    <constant name="LGADGasGap_thickness"                     value="3000*um"/>
+    <constant name="LGADDriftCuElectrode_thickness"           value="5*um"/>
+    <constant name="LGADDriftKapton_thickness"                value="250*um"/>
+    <constant name="LGADDriftCuGround_thickness"              value="0.41*um"/>
   </define>
 
-  <detectors>
-      <detector
-        id="ForwardTOF_ID"
-        name="ForwardTOF"
-        type="athena_TrapEndcapTracker"
-        readout="TOFEndcapHits"
-        vis="TOFVis"
-        reflect="false">
-        <module name="Module1" vis="TOFVis">
-          <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
-          <module_component thickness="ITS3Thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
-        </module>
-        <module name="Module2" vis="TOFVis">
-          <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
-          <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
-        </module>
-        <layer id="1">
-          <envelope  vis="TOFVis"
-            rmin="ForwardTOF_rmin1"
-            rmax="ForwardTOF_rmax1"
-            length="BackwardTOF_thickness"
-            zstart="ForwardTOF_zmin" />
-          <ring vis="TOFVis"
-            r="ForwardTOF_rmin1+ForwardTOFMod1_y/2.0"
-            zstart="0.0*mm"
-            nmodules="12" dz="2.5 * mm" module="Module1" />
-        </layer>
-        <layer id="2">
-          <envelope  vis="TOFVis"
-            rmin="ForwardTOF_rmin2"
-            rmax="ForwardTOF_rmax2"
-            length="BackwardTOF_thickness"
-            zstart="ForwardTOF_zmin + ForwardTOF_dz" />
-          <ring vis="TOFVis"
-            r="ForwardTOF_rmin2+ForwardTOFMod2_y/2.0"
-            zstart="0.0*mm"
-            nmodules="12" dz="2.5 * mm" module="Module2" />
-        </layer>
-      </detector>
+  <define>
+    <comment> Global MMGAS variables </comment>
+    <constant 
+      name="LGADTOFBarrelMod_thickness"
+      value="LGADKaptonOverlay_thickness + LGADCuGround_thickness + LGADPCB_thickness
+           + LGADCuStrip_thickness + LGADKaptonStrip_thickness + LGADResistiveStrip_thickness
+           + LGADGas_thickness + LGADMesh_thickness + LGADGasGap_thickness
+           + LGADDriftCuElectrode_thickness + LGADDriftKapton_thickness
+           + LGADDriftCuGround_thickness" />
+    <comment> Medial barrel implementation </comment>
+    <comment> The value of InnerTrackerEndcap_zmax is calculated above based on the rmin of the TOFBarrel </comment>
+    <constant name="TOFBarrel_length"           value="2 * InnerTrackerEndcap_zmax"/>
+    <constant name="TOFBarrelMod_rmin"         value="TOFBarrel_rmin"/>
+    <constant name="TOFBarrelMod_length"        value="TOFBarrel_length - 2*um" />
+    <constant name="TOFBarrelMod_count"         value="128" />
+    <constant name="TOFBarrelMod_width"        value="2*TOFBarrelMod_rmin * tan(180*degree/TOFBarrelMod_count)" />
 
-      <detector
-        id="BackwardTOF_ID"
-        name="BackwardTOF"
-        type="athena_TrapEndcapTracker"
-        readout="TOFEndcapHits"
-        vis="TOFVis"
-        reflect="true">
-        <module name="Module1" vis="TOFVis">
-          <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
-          <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
-        </module>
-        <module name="Module2" vis="TOFVis">
-          <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
-          <module_component thickness="TOFEndcapSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="TOFEndcapService_thickness" material="Silicon"/>
-        </module>
-        <layer id="1">
-          <envelope  vis="TOFVis"
-            rmin="BackwardTOF_rmin1 + 0 * 1.2*cm"
-            rmax="BackwardTOF_rmax1"
-            length="BackwardTOF_thickness"
-            zstart="BackwardTOF_zmin" />
-          <ring vis="TOFVis"
-            r="BackwardTOF_rmin1+BackwardTOFMod1_y/2.0"
-            zstart="0.0*mm"
-            nmodules="12" dz="2.5 * mm" module="Module1" />
-        </layer>
-        <layer id="2">
-          <envelope  vis="TOFVis"
-            rmin="BackwardTOF_rmin2"
-            rmax="BackwardTOF_rmax2"
-            length="BackwardTOF_thickness"
-            zstart="BackwardTOF_zmin + BackwardTOF_dz" />
-          <ring vis="TOFVis"
-            r="BackwardTOF_rmin2+BackwardTOFMod2_y/2.0"
-            zstart="0.0*mm"
-            nmodules="12" dz="2.5 * mm" module="Module2" />
-        </layer>
-      </detector>
+    <constant name="TOFBarrelLayer_length"      value="TOFBarrel_length"/>
+    <constant name="TOFBarrelLayer_thickness"   value="LGADTOFBarrelMod_thickness + 1.0*cm"/>
+    <constant name="TOFBarrelLayer_rmin"       value="TOFBarrelMod_rmin - TOFBarrelLayer_thickness / 5" />
+    <constant name="TOFBarrelLayer_rmax"       value="TOFBarrelLayer_rmin + TOFBarrelLayer_thickness" />
+
+    <constant name="TOFBarrelEnvelope_rmin"   value="TOFBarrelLayer_rmin" />
+    <constant name="TOFBarrelEnvelope_rmax"   value="TOFBarrelLayer2_rmax" />
+    <constant name="TOFBarrelEnvelope_length" value="TOFBarrelLayer_length" />
+  </define>
+  <detectors>
+    <detector
+      id="BarrelTOF_ID"
+      name="BarrelTOF"
+      type="athena_TrackerBarrel"
+      readout="TOFBarrelHits"
+      insideTrackingVolume="true">
+      <dimensions
+        rmin="TOFBarrelEnvelope_rmin"
+        rmax="TOFBarrelEnvelope_rmax"
+        length="TOFBarrelEnvelope_length"/>
+      <module name="TOFBarrel_Mod" vis="TrackerMPGDVis">
+        <comment> Going from the inside (sensitive) side to the readout side </comment>
+        <module_component name="DriftCuGround" thickness="LGADDriftCuGround_thickness" material="Copper" vis="TrackerMPGDVis" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="DriftKapton" thickness="LGADDriftKapton_thickness" material="Kapton" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="DriftCuElectrode" thickness="LGADDriftCuElectrode_thickness" material="Copper" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="GasGap" thickness="LGADGasGap_thickness" material="Ar90IsoButane" sensitive="True" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="Mesh" thickness="LGADMesh_thickness" material="LGADGAS_InoxForMesh" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="Gas" thickness="LGADGas_thickness" material="Ar90IsoButane" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="ResistiveStrips" thickness="LGADResistiveStrip_thickness" material="LGADGAS_ResistivePaste" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="KaptonStrips" thickness="LGADKaptonStrip_thickness" material="Kapton" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="CuStrips" thickness="LGADCuStrip_thickness" material="Copper" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="PCB" thickness="LGADPCB_thickness" material="Fr4" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="CuGround" thickness="LGADCuGround_thickness" material="Copper" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="KaptonOverlay" thickness="LGADKaptonOverlay_thickness" material="Kapton" vis="TrackerSupportVis" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+      </module>
+      <layer module="TOFBarrel_Mod" id="1" vis="TrackerLGADGASLayerVis">
+        <barrel_envelope
+          inner_r="TOFBarrelLayer_rmin"
+          outer_r="TOFBarrelLayer_rmax"
+          z_length="TOFBarrelLayer_length"/>
+        <layer_material surface="outer" binning="binPhi,binZ" bins0="10*TOFBarrelMod_count" bins1="100" />
+        <rphi_layout phi_tilt="0" nphi="TOFBarrelMod_count" phi0="0.0" rc="TOFBarrelMod_rmin" dr="0.0 * mm"/>
+        <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
+      </layer>
+    </detector>
   </detectors>
-  
+
   <readouts>
-    <readout name="TOFEndcapHits">
-      <segmentation type="CartesianGridXZ" grid_size_x="0.20*mm" grid_size_z="0.20*mm" />
-      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    <readout name="TOFBarrelHits">
+      <segmentation type="CartesianGridXY" grid_size_x="0.150*mm*sqrt(12)" grid_size_y="0.150*mm*sqrt(12)" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
     </readout>
   </readouts>
 
