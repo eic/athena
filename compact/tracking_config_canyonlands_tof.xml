@@ -34,6 +34,7 @@
       <composite name="MedialTrackerEndcapN"/>
       <composite name="MedialTrackerBarrel"/>
       <composite name="MedialTrackerEndcapP"/>
+      <composite name="BarrelTOF"/>
     </detector>
     <detector id="TrackerSubAssembly_2_ID"
       name="OuterTrackerSubAssembly"
