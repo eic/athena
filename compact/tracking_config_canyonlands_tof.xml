@@ -34,6 +34,11 @@
       <composite name="MedialTrackerEndcapN"/>
       <composite name="MedialTrackerBarrel"/>
       <composite name="MedialTrackerEndcapP"/>
+    </detector>
+    <detector id="TOFSubAssembly_ID"
+      name="TOFSubAssembly"
+      type="DD4hep_SubdetectorAssembly"
+      vis="TOFSubAssemblyVis">
       <composite name="BarrelTOF"/>
     </detector>
     <detector id="TrackerSubAssembly_2_ID"
