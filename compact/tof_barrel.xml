@@ -17,8 +17,6 @@
     <comment>
       Layer_rOffset is used to add inside space so the _rmin value is the nominal sensor radius.
     </comment>
-    <constant name="TrackerMainDiagonal_tan"                value="Eta1_1_tan"/>
-
     <constant name="BarrelTOFLayer_rOffset"     value="0.5*cm"/>
 
     <constant name="BarrelTOF_rmin1"       value="52.0*cm"/>
