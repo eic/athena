@@ -64,9 +64,9 @@
         <module_component name="DriftKapton" thickness="LGADDriftKapton_thickness" material="Kapton" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="DriftCuElectrode" thickness="LGADDriftCuElectrode_thickness" material="Copper" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="GasGap" thickness="LGADGasGap_thickness" material="Ar90IsoButane" sensitive="True" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
-        <module_component name="Mesh" thickness="LGADMesh_thickness" material="LGADGAS_InoxForMesh" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="Mesh" thickness="LGADMesh_thickness" material="MMGAS_InoxForMesh" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="Gas" thickness="LGADGas_thickness" material="Ar90IsoButane" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
-        <module_component name="ResistiveStrips" thickness="LGADResistiveStrip_thickness" material="LGADGAS_ResistivePaste" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
+        <module_component name="ResistiveStrips" thickness="LGADResistiveStrip_thickness" material="MMGAS_ResistivePaste" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="KaptonStrips" thickness="LGADKaptonStrip_thickness" material="Kapton" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="CuStrips" thickness="LGADCuStrip_thickness" material="Copper" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
         <module_component name="PCB" thickness="LGADPCB_thickness" material="Fr4" width="TOFBarrelMod_width" length="TOFBarrelMod_length"/>
