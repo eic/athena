@@ -44,7 +44,6 @@
     <constant name="TOFBarrelLayer_rmax"       value="TOFBarrelLayer_rmin + TOFBarrelLayer_thickness" />
 
     <constant name="TOFBarrelEnvelope_rmin"   value="TOFBarrelLayer_rmin" />
-    <constant name="TOFBarrelEnvelope_rmax"   value="TOFBarrelLayer2_rmax" />
     <constant name="TOFBarrelEnvelope_length" value="TOFBarrelLayer_length" />
   </define>
   <detectors>
