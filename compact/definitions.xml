@@ -153,9 +153,9 @@ The unused IDs below are saved for future use.
     </documentation>
     <constant name="BarrelDIRC_ID" value="90"/>
     <constant name="BarrelTRD_ID"  value="91"/>
-    <constant name="BarrelTOF_ID"  value="92"/>
     <constant name="TOFSubAssembly_ID" value="93"/>
-
+    <constant name="BarrelTOF_ID"  value="94"/>
+    
     <documentation> 
       #### (100-109) Electromagnetic Calorimeter
 
