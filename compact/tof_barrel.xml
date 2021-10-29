@@ -50,11 +50,6 @@
         Tracker Barrel Modules
       </comment>
       <module name="BarrelTOF_Module1" vis="TOFVis">
-        <frame  material="CarbonFiber_25percent" vis="TOFVis"
-          width="BarrelTOFSpaceFrame_width"
-          height="BarrelTOFSpaceFrame_height"
-          length="BarrelTOF_length1"
-          thickness="0.1*mm" />
         <module_component name="silicon" material="Silicon" sensitive="true"
           width="BarrelTOFSpaceFrame_width" length="BarrelTOF_length1-0.1*mm" thickness="BarrelTOFSensor_thickness" >
         </module_component>

@@ -38,7 +38,7 @@
     <detector id="TOFSubAssembly_ID"
       name="TOFSubAssembly"
       type="DD4hep_SubdetectorAssembly"
-      vis="TOFSubAssemblyVis">
+      vis="TrackerSubAssemblyVis">
       <composite name="BarrelTOF"/>
     </detector>
     <detector id="TrackerSubAssembly_2_ID"
