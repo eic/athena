@@ -60,13 +60,13 @@
       <position x="0*cm" y="0*cm" z="0*cm" />
       <composite name="OuterTrackerEndcapP"/>
       <composite name="GEMEndcapP"/>
-    </detector>
+    </detector-->
     <detector id="TOFSubAssembly_ID"
       name="TOFSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
       <composite name="BarrelTOF"/>
-    </detector-->
+    </detector>
 
   </detectors>
 
@@ -83,7 +83,7 @@
 
   <include ref="vertex_tracker_3layers.xml"/>
   <!--include ref="central_tracker_hybrid_v2.xml"/-->
-  <!--include ref="tof.xml"/-->
+  <include ref="tof.xml"/>
 
 </lccdd>
 
