@@ -8,9 +8,9 @@
       --------------------------
     </comment>
 
-    <constant name="BarrelTOF_rmin_design"       value="50.0*cm"/>
-    <constant name="BarrelTOF_rmin_actual"       value="52.5*cm"/>
-    <constant name="BarrelTOF_scale"             value="BarrelTOF_rmin_actual / BarrelTOF_rmin_design"/>
+    <constant name="BarrelTOF_radius_design"     value="50.0*cm"/>
+    <constant name="BarrelTOF_scale"             value="1.05"/>
+    <constant name="BarrelTOF_radius_actual"     value="BarrelTOF_scale * BarrelTOF_radius_design"/>
     
     <constant name="BarrelTOF_Sensor_thickness"  value="0.3*mm"/>
     <constant name="BarrelTOF_Module_thickness"  value="1.1/100*9.37*cm"/>
@@ -21,16 +21,16 @@
     </comment>
 
     <constant name="BarrelTOF_Module_tiltangle"  value="18.0*degree"/>
-    <constant name="BarrelTOF_Module_width"      value="32.0*mm"/>
+    <constant name="BarrelTOF_Module_width"      value="BarrelTOF_scale * 32.0 * mm"/>
     <constant name="BarrelTOF_Module_nphi"       value="108"/>
     <constant name="BarrelTOF_Module_nz"         value="1"/>
 
-    <constant name="BarrelTOF_rmin"       value="BarrelTOF_rmin_actual"/>
-    <constant name="BarrelTOF_rmax"       value="BarrelTOF_rmin + BarrelTOF_Module_width * tan(BarrelTOF_Module_tiltangle)"/>
-    <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmax - BarrelTOF_rmin"/>
-    <constant name="BarrelTOF_length1"    value="2 * BarrelTOF_rmin / TrackerMainDiagonal_tan * 0.995"/>
-    <constant name="BarrelTOF_length2"    value="2 * BarrelTOF_rmax / TrackerMainDiagonal_tan * 0.995"/>
-    <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
+    <constant name="BarrelTOF_rmin"              value="BarrelTOF_radius_actual"/>
+    <constant name="BarrelTOF_rmax"              value="BarrelTOF_rmin + BarrelTOF_Module_width * tan(BarrelTOF_Module_tiltangle)"/>
+    <constant name="BarrelTOF_thickness"         value="BarrelTOF_rmax - BarrelTOF_rmin"/>
+    <constant name="BarrelTOF_length1"           value="2 * BarrelTOF_rmin / TrackerMainDiagonal_tan * 0.995"/>
+    <constant name="BarrelTOF_length2"           value="2 * BarrelTOF_rmax / TrackerMainDiagonal_tan * 0.995"/>
+    <constant name="BarrelTOF_length"            value="BarrelTOF_length2"/>
 
   </define>
 
