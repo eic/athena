@@ -99,7 +99,8 @@
       Central tracking detectors
       --------------------------
   </comment>
-  <include ref="compact/tracking_config_canyonlands.xml"/>
+  <!--include ref="compact/tracking_config_canyonlands.xml"/-->
+  <include ref="compact/tracking_config_canyonlands_tof.xml"/>
 
   <comment>
       PID detectors
