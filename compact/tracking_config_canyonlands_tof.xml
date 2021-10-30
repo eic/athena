@@ -82,7 +82,7 @@
   </plugins>
 
   <include ref="vertex_tracker_3layers.xml"/>
-  <!--include ref="central_tracker_hybrid_v2.xml"/-->
+  <include ref="central_tracker_hybrid_v2.xml"/>
   <include ref="tof.xml"/>
 
 </lccdd>
