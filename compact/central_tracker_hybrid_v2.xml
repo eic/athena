@@ -685,7 +685,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       </layer>
     </detector>
   </detectors>
-  <documentation>
+  <!--documentation>
     ## Outer barrel tracker (MMGAS)
   </documentation>
   <define>
@@ -770,7 +770,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       </layer>
     </detector>
   </detectors>
-  <!--documentation>
+  <documentation>
     ## Outer silicon tracker disks (3P, 2N)
   </documentation>
   <define>

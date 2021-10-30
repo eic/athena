@@ -35,14 +35,14 @@
       <composite name="MedialTrackerBarrel"/>
       <composite name="MedialTrackerEndcapP"/>
     </detector>
-    <detector id="TrackerSubAssembly_2_ID"
+    <!--detector id="TrackerSubAssembly_2_ID"
       name="OuterTrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
-      <!--composite name="OuterTrackerCompositeEndcapN"/-->
+      <composite name="OuterTrackerCompositeEndcapN"/>
       <composite name="OuterTrackerBarrel"/>
-      <!--composite name="OuterTrackerCompositeEndcapP"/-->
-    </detector>
+      <composite name="OuterTrackerCompositeEndcapP"/>
+    </detector-->
     <!--detector id="TrackerCompositeEndcapN_0_ID"
       name="OuterTrackerCompositeEndcapN"
       type="athena_CompositeTracker"
