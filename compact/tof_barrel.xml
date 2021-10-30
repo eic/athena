@@ -21,7 +21,7 @@
     </comment>
 
     <constant name="BarrelTOF_Module_tiltangle"  value="18.0*degree"/>
-    <constant name="BarrelTOF_Module_width"      value="32.0*mm * BarrelTOF_scale"/>
+    <constant name="BarrelTOF_Module_width"      value="32.0*mm"/>
     <constant name="BarrelTOF_Module_nphi"       value="108"/>
     <constant name="BarrelTOF_Module_nz"         value="1"/>
 
