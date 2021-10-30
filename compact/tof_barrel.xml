@@ -18,6 +18,12 @@
 
     <constant name="BarrelTOF_scale"               value="1.05"/>
     <constant name="BarrelTOF_radius"              value="BarrelTOF_scale * BarrelTOF_radius_design"/>
+    <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale*BarrelTOF_Sensor_width_design"/>
+    <constant name="BarrelTOF_Module_width"        value="BarrelTOF_scale*BarrelTOF_Module_width_design"/>
+    <constant name="BarrelTOF_Module_tiltangle"    value="18.0*degree"/>
+    <constant name="BarrelTOF_Module_nphi"         value="108"/>
+    <constant name="BarrelTOF_Module_nz"           value="1"/>
+
     <constant name="BarrelTOF_rmin"                value="BarrelTOF_radius"/>
     <constant name="BarrelTOF_rmax"                value="BarrelTOF_rmin+BarrelTOF_Module_width*tan(BarrelTOF_Module_tiltangle)"/>
     <constant name="BarrelTOF_thickness"           value="BarrelTOF_rmax-BarrelTOF_rmin"/>
@@ -26,11 +32,6 @@
     <constant name="BarrelTOF_length2"             value="2 * BarrelTOF_rmax / TrackerMainDiagonal_tan * 0.995"/>
     <constant name="BarrelTOF_length"              value="BarrelTOF_length2"/>
 
-    <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale*BarrelTOF_Sensor_width_design"/>
-    <constant name="BarrelTOF_Module_width"        value="BarrelTOF_scale*BarrelTOF_Module_width_design"/>
-    <constant name="BarrelTOF_Module_tiltangle"    value="18.0*degree"/>
-    <constant name="BarrelTOF_Module_nphi"         value="108"/>
-    <constant name="BarrelTOF_Module_nz"           value="1"/>
   </define>
 
   <display>
