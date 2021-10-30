@@ -8,17 +8,17 @@
       --------------------------
     </comment>
 
-    <constant name="BarrelTOFSpaceFrame_width"   value="40.0*mm"/>
+    <constant name="BarrelTOFSpaceFrame_width"   value="32.0*mm"/>
     <constant name="BarrelTOFSensor_thickness"   value="0.3*mm"/>
-    <constant name="BarrelTOFModule_thickness"   value="2.00/100*9.37*cm"/>
+    <constant name="BarrelTOFModule_thickness"   value="1.1/100*9.37*cm"/>
     <constant name="BarrelTOFService_thickness"  value="BarrelTOFModule_thickness-BarrelTOFSensor_thickness"/>
 
     <comment>
       Layer_rOffset is used to add inside space so the _rmin value is the nominal sensor radius.
     </comment>
-    <constant name="BarrelTOFLayer_rOffset"     value="0.5*cm"/>
+    <constant name="BarrelTOFLayer_rOffset"     value="0.0*cm"/>
 
-    <constant name="BarrelTOF_rmin1"       value="52.0*cm"/>
+    <constant name="BarrelTOF_rmin1"       value="50.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
     <constant name="BarrelTOF_length1"     value="2 * BarrelTOF_rmin1 / TrackerMainDiagonal_tan * 0.995"/>
     <constant name="BarrelTOF_length2"     value="2 * BarrelTOF_rmin2 / TrackerMainDiagonal_tan * 0.995"/>
@@ -27,7 +27,7 @@
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
 
     <comment> TODO: These should be computed </comment>
-    <constant name="BarrelTOF_NModules" value="80"/>
+    <constant name="BarrelTOF_NModules" value="108"/>
 
   </define>
 
