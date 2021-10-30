@@ -9,7 +9,6 @@
     </comment>
 
     <constant name="BarrelTOFSpaceFrame_width"   value="40.0*mm"/>
-    <constant name="BarrelTOFSpaceFrame_height"  value="sqrt(3.0)*32.0*mm/2.0"/>
     <constant name="BarrelTOFSensor_thickness"   value="0.3*mm"/>
     <constant name="BarrelTOFModule_thickness"   value="2.00/100*9.37*cm"/>
     <constant name="BarrelTOFService_thickness"  value="BarrelTOFModule_thickness-BarrelTOFSensor_thickness"/>
@@ -21,7 +20,7 @@
 
     <constant name="BarrelTOF_rmin1"       value="52.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
-    <constant name="BarrelTOF_length1"     value="134.0*cm"/>
+    <constant name="BarrelTOF_length1"     value="InnerTrackerEndcapMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin"/>
     <constant name="BarrelTOF_length2"     value="140.0*cm"/>
 
     <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
@@ -39,7 +38,7 @@
     <detector
       id="BarrelTOF_ID"
       name="BarrelTOF"
-      type="athena_TrackerBarrel"
+      type="athena_TOFBarrel"
       readout="BarrelTOFHits"
       insideTrackingVolume="true">
       <dimensions
