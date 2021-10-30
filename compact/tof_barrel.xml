@@ -43,8 +43,8 @@
       readout="BarrelTOFHits"
       insideTrackingVolume="true">
       <dimensions
-        rmin="BarrelTOF_rmin1-BarrelTOFLayer_rOffset"
-        rmax="BarrelTOF_rmin2-BarrelTOFLayer_rOffset + BarrelTOF_thickness"
+        rmin="BarrelTOF_rmin1-BarrelTOFLayer_rOffset-1*mm"
+        rmax="BarrelTOF_rmin2-BarrelTOFLayer_rOffset+BarrelTOF_thickness+3*mm"
         length="BarrelTOF_length"/>
       <comment>
         Tracker Barrel Modules
@@ -58,8 +58,8 @@
       </module>
       <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope
-          inner_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset - 1*mm"
-          outer_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset + BarrelTOF_thickness + 3*mm"
+          inner_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset"
+          outer_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset+BarrelTOF_thickness"
           z_length="BarrelTOF_length"/>
         <rphi_layout phi_tilt="BarrelTOFModule_TiltAngle" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin1" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
