@@ -17,14 +17,14 @@
     <comment>
       Layer_rOffset is used to add inside space so the _rmin value is the nominal sensor radius.
     </comment>
-    <constant name="BarrelTOFLayer_rOffset"     value="0.0*cm"/>
+    <constant name="BarrelTOFLayer_rOffset"     value="0.5*cm"/>
 
-    <constant name="BarrelTOF_rmin1"       value="52.5*cm"/>
-    <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width * tan(BarrelTOFModule_TiltAngle)"/>
-    <constant name="BarrelTOF_length1"     value="2 * BarrelTOF_rmin1 / TrackerMainDiagonal_tan * 0.995"/>
-    <constant name="BarrelTOF_length2"     value="2 * BarrelTOF_rmin2 / TrackerMainDiagonal_tan * 0.995"/>
+    <constant name="BarrelTOF_rmin"       value="52.5*cm"/>
+    <constant name="BarrelTOF_rmax"       value="BarrelTOF_rmin + BarrelTOFSpaceFrame_width * tan(BarrelTOFModule_TiltAngle)"/>
+    <constant name="BarrelTOF_length1"     value="2 * BarrelTOF_rmin / TrackerMainDiagonal_tan * 0.995"/>
+    <constant name="BarrelTOF_length2"     value="2 * BarrelTOF_rmax / TrackerMainDiagonal_tan * 0.995"/>
 
-    <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
+    <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmax - BarrelTOF_rmin"/>
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
 
     <comment> TODO: These should be computed </comment>
@@ -43,8 +43,8 @@
       readout="BarrelTOFHits"
       insideTrackingVolume="true">
       <dimensions
-        rmin="BarrelTOF_rmin1-BarrelTOFLayer_rOffset-1*mm"
-        rmax="BarrelTOF_rmin2-BarrelTOFLayer_rOffset+BarrelTOF_thickness+3*mm"
+        rmin="BarrelTOF_rmin-BarrelTOFLayer_rOffset-1*mm"
+        rmax="BarrelTOF_rmax-BarrelTOFLayer_rOffset+3*mm"
         length="BarrelTOF_length"/>
       <comment>
         Tracker Barrel Modules
@@ -58,10 +58,10 @@
       </module>
       <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope
-          inner_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset"
-          outer_r="BarrelTOF_rmin1 - BarrelTOFLayer_rOffset+BarrelTOF_thickness"
+          inner_r="BarrelTOF_rmin-BarrelTOFLayer_rOffset-0.5*mm"
+          outer_r="BarrelTOF_rmax-BarrelTOFLayer_rOffset+2*mm"
           z_length="BarrelTOF_length"/>
-        <rphi_layout phi_tilt="BarrelTOFModule_TiltAngle" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin1" dr="0.0 * mm"/>
+        <rphi_layout phi_tilt="BarrelTOFModule_TiltAngle" nphi="BarrelTOF_NModules" phi0="0.0" rc="BarrelTOF_rmin" dr="0.0 * mm"/>
         <z_layout dr="0.0 * mm" z0="0.0 * mm" nz="1"/>
       </layer>
     </detector>
