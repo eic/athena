@@ -20,8 +20,8 @@
 
     <constant name="BarrelTOF_rmin1"       value="52.0*cm"/>
     <constant name="BarrelTOF_rmin2"       value="BarrelTOF_rmin1 + BarrelTOFSpaceFrame_width"/>
-    <constant name="BarrelTOF_length1"     value="InnerTrackerEndcapMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin"/>
-    <constant name="BarrelTOF_length2"     value="140.0*cm"/>
+    <constant name="BarrelTOF_length1"     value="2 * BarrelTOF_rmin1 / TrackerMainDiagonal_tan * 0.995"/>
+    <constant name="BarrelTOF_length2"     value="2 * BarrelTOF_rmin2 / TrackerMainDiagonal_tan * 0.995"/>
 
     <constant name="BarrelTOF_thickness"  value="BarrelTOF_rmin2 - BarrelTOF_rmin1"/>
     <constant name="BarrelTOF_length"     value="BarrelTOF_length2"/>
