@@ -481,7 +481,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
   <documentation>
     ## Medial barrel tracker (MMGAS)
   </documentation>
-  <!--define>
+  <define>
     <comment> Global MMGAS variables </comment>
     <constant 
       name="MMTrackerBarrelMod_thickness"    
@@ -685,7 +685,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       </layer>
     </detector>
   </detectors>
-  <documentation>
+  <!--documentation>
     ## Outer barrel tracker (MMGAS)
   </documentation>
   <define>
@@ -1404,11 +1404,11 @@ total X0 0.24% per disk layer （4 sectors per disk):
       <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
-    <!--readout name="MPGDTrackerBarrelHits">
+    <readout name="MPGDTrackerBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.150*mm*sqrt(12)" grid_size_y="0.150*mm*sqrt(12)" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
     </readout>
-    <readout name="GEMTrackerEndcapHits">
+    <!--readout name="GEMTrackerEndcapHits">
       <segmentation type="CartesianGridXZ" grid_size_x="0.050*mm*sqrt(12)" grid_size_z="0.250*mm*sqrt(12)" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout-->
