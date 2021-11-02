@@ -28,7 +28,9 @@
     <vis name="TOFVis" ref="AnlTeal" showDaughters="true" visible="true"/>
     <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
     <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
-    <vis name="TOFServiceVis" ref="AnlGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCSkinVis" ref="Black" showDaughters="true" visible="true"/>
+    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCHoneycombVis" ref="AnlGray" showDaughters="true" visible="true"/>
 
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
