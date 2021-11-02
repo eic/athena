@@ -55,8 +55,8 @@
         Tracker Barrel Modules
       </comment>
       <module name="BarrelTOF_Module1" vis="TOFVis">
-        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" xstart="BarrelTOF_Sensor_position" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
-        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" xstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" vis="TOFServiceVis"  />
+        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" zstart="BarrelTOF_Sensor_position" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
+        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" zstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" vis="TOFServiceVis"  />
       </module>
       <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope

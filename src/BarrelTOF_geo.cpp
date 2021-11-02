@@ -169,7 +169,7 @@ static Ref_t create_BarrelTOF(Detector& description, xml_h e, SensitiveDetector 
       xml_comp_t x_comp = ci;
       xml_comp_t x_pos  = x_comp.position(false);
       xml_comp_t x_rot  = x_comp.rotation(false);
-      double     xstart = getAttrOrDefault(x_comp, _U(xstart), 0.0 * mm);
+      double     xstart = getAttrOrDefault(x_comp, _U(zstart), 0.0 * mm);
       string     c_nam  = _toString(ncomponents, "component%d");
       Box        c_box(x_comp.width() / 2, x_comp.length() / 2, x_comp.thickness() / 2);
       Volume     c_vol(c_nam, c_box, description.material(x_comp.materialStr()));
