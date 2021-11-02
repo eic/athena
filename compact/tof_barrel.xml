@@ -43,7 +43,7 @@
     <constant name="BarrelTOF_rmin"                value="BarrelTOF_radius"/>
     <constant name="BarrelTOF_rmax"                value="BarrelTOF_rmin+BarrelTOF_Module_width*tan(BarrelTOF_Module_tiltangle)"/>
     <constant name="BarrelTOF_thickness"           value="BarrelTOF_rmax-BarrelTOF_rmin"/>
-    <constant name="BarrelTOF_rOffset"             value="10.0*mm"/>
+    <constant name="BarrelTOF_rOffset"             value="15.0*mm"/>
     <constant name="BarrelTOF_length1"             value="2 * BarrelTOF_rmin / TrackerMainDiagonal_tan * 0.995"/>
     <constant name="BarrelTOF_length2"             value="2 * BarrelTOF_rmax / TrackerMainDiagonal_tan * 0.995"/>
     <constant name="BarrelTOF_length"              value="BarrelTOF_length2"/>
