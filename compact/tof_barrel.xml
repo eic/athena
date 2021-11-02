@@ -14,11 +14,14 @@
 
     <constant name="BarrelTOF_radius_design"       value="50.0*cm"/>
     <constant name="BarrelTOF_Sensor_width_design" value="32.0*mm"/>
-    <constant name="BarrelTOF_Module_width_design" value="48.0*mm"/>
+    <constant name="BarrelTOF_Module_width_design" value="56.0*mm"/>
+    <constant name="BarrelTOF_Sensor_position_design"  value="24.0*mm"/>
+    <constant name="BarrelTOF_Service_position_design" value="0.0*mm"/>
 
     <constant name="BarrelTOF_scale"               value="1.05"/>
     <constant name="BarrelTOF_radius"              value="BarrelTOF_scale * BarrelTOF_radius_design"/>
-    <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale*BarrelTOF_Sensor_width_design"/>
+    <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale * BarrelTOF_Sensor_width_design"/>
+    <constant name="BarrelTOF_Service_position"    value="BarrelTOF_scale * BarrelTOF_Service_position_design"/>
     <constant name="BarrelTOF_Module_width"        value="BarrelTOF_scale*BarrelTOF_Module_width_design"/>
     <constant name="BarrelTOF_Module_tiltangle"    value="18.0*degree"/>
     <constant name="BarrelTOF_Module_nphi"         value="108"/>
@@ -52,8 +55,8 @@
         Tracker Barrel Modules
       </comment>
       <module name="BarrelTOF_Module1" vis="TOFVis">
-        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
-        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" vis="TOFServiceVis"  />
+        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" xshift="BarrelTOF_Sensor_position" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
+        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" xshift="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" vis="TOFServiceVis"  />
       </module>
       <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope
