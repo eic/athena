@@ -40,6 +40,8 @@
     <constant name="BarrelTOF_Sensor_position"     value="BarrelTOF_scale * BarrelTOF_Sensor_position_design"/>
     <constant name="BarrelTOF_CFoam_position"      value="BarrelTOF_scale * BarrelTOF_CFoam_position_design"/>
     <constant name="BarrelTOF_CHoneycomb_position" value="BarrelTOF_scale * BarrelTOF_CHoneycomb_position_design"/>
+    <constant name="BarrelTOF_CoolingTube_position" value="BarrelTOF_scale * BarrelTOF_CoolingTube_position_design"/>
+    <constant name="BarrelTOF_Coolant_position"    value="BarrelTOF_scale * BarrelTOF_Coolant_position_design"/>
     <constant name="BarrelTOF_Service_position"    value="BarrelTOF_scale * BarrelTOF_Service_position_design"/>
     <constant name="BarrelTOF_Module_width"        value="BarrelTOF_scale*BarrelTOF_Module_width_design"/>
     <constant name="BarrelTOF_Module_tiltangle"    value="18.0*degree"/>
