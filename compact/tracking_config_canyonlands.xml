@@ -92,7 +92,7 @@
   <plugins>
     <plugin name="FileLoader">
       <arg value="file:calibrations/materials-map.cbor"/>
-      <arg value="url:https://eicweb.phy.anl.gov/EIC/detectors/athena/uploads/4190e898ce4026cb6575359c57edc1e5/material-maps.cbor"/>
+      <arg value="url:https://eicweb.phy.anl.gov/EIC/detectors/athena/uploads/979a4ed2d01a023b70237e39670bd31b/material-maps.cbor"/>
     </plugin>
   </plugins>
 
