@@ -20,6 +20,8 @@
     <vis name="VertexModuleVis"  ref="TrackerLayerVis" visible="true"  showDaughters="false" />
 
     <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
+    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
+    <vis name="TOFServiceVis" ref="AnlGold" showDaughters="true" visible="true"/>
 
     <comment>
       ECal Vis

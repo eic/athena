@@ -14,7 +14,7 @@
 
     <constant name="BarrelTOF_radius_design"       value="50.0*cm"/>
     <constant name="BarrelTOF_Sensor_width_design" value="32.0*mm"/>
-    <constant name="BarrelTOF_Module_width_design" value="32.0*mm"/>
+    <constant name="BarrelTOF_Module_width_design" value="48.0*mm"/>
 
     <constant name="BarrelTOF_scale"               value="1.05"/>
     <constant name="BarrelTOF_radius"              value="BarrelTOF_scale * BarrelTOF_radius_design"/>
@@ -52,8 +52,8 @@
         Tracker Barrel Modules
       </comment>
       <module name="BarrelTOF_Module1" vis="TOFVis">
-        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" />
-        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" />
+        <module_component name="silicon" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
+        <module_component name="service" material="Silicon" sensitive="false" width="BarrelTOF_Module_width" length="BarrelTOF_length1" thickness="BarrelTOF_Service_thickness" vis="TOFServiceVis"  />
       </module>
       <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
         <barrel_envelope

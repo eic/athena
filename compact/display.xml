@@ -26,6 +26,8 @@
     <vis name="VertexModuleVis"  ref="TrackerLayerVis" visible="true"  showDaughters="false" />
 
     <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
+    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
+    <vis name="TOFServiceVis" ref="AnlGold" showDaughters="true" visible="true"/>
 
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
