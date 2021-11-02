@@ -21,6 +21,7 @@
     <constant name="BarrelTOF_scale"               value="1.05"/>
     <constant name="BarrelTOF_radius"              value="BarrelTOF_scale * BarrelTOF_radius_design"/>
     <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale * BarrelTOF_Sensor_width_design"/>
+    <constant name="BarrelTOF_Sensor_position"     value="BarrelTOF_scale * BarrelTOF_Sensor_position_design"/>
     <constant name="BarrelTOF_Service_position"    value="BarrelTOF_scale * BarrelTOF_Service_position_design"/>
     <constant name="BarrelTOF_Module_width"        value="BarrelTOF_scale*BarrelTOF_Module_width_design"/>
     <constant name="BarrelTOF_Module_tiltangle"    value="18.0*degree"/>
