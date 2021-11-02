@@ -25,13 +25,6 @@
     <vis name="VertexLayerVis"   ref="AnlGray"         visible="true"  showDaughters="true" />
     <vis name="VertexModuleVis"  ref="TrackerLayerVis" visible="true"  showDaughters="false" />
 
-    <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
-    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
-    <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
-    <vis name="TOFCSkinVis" ref="Black" showDaughters="true" visible="true"/>
-    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
-    <vis name="TOFCHoneycombVis" ref="AnlGray" showDaughters="true" visible="true"/>
-
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
     <vis name="FFTrackerShieldingVis" ref="AnlGray"           visible="true"  showDaughters="false" />
@@ -102,6 +95,13 @@
     <vis name="DIRCSupportVis"  ref="AnlTeal" showDaughters="true" visible="true"/>
     <vis name="DIRCFrameVis"    ref="AnlOrange"     showDaughters="true" visible="true"/>
     <vis name="DIRCBarVis"      ref="AnlTeal"       showDaughters="true" visible="true"/>
+
+    <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
+    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
+    <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
+    <vis name="TOFCSkinVis" ref="AnlGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCHoneycombVis" ref="AnlGray" showDaughters="true" visible="true"/>
 
     <comment>
       Beam line with magnets

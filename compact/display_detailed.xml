@@ -19,13 +19,6 @@
     <vis name="VertexLayerVis"   ref="AnlTeal"         visible="true"  showDaughters="true" />
     <vis name="VertexModuleVis"  ref="TrackerLayerVis" visible="true"  showDaughters="false" />
 
-    <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
-    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
-    <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
-    <vis name="TOFCSkinVis" ref="Black" showDaughters="true" visible="true"/>
-    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
-    <vis name="TOFCHoneycombVis" ref="AnlGray" showDaughters="true" visible="true"/>
-
     <comment>
       ECal Vis
     </comment>
@@ -65,6 +58,13 @@
       PID Detectors
     </comment>
     <vis name="RICHVis"      ref="AnlViolet"     showDaughters="true"/>
+
+    <vis name="TOFVis" ref="AnlGreen" showDaughters="true" />
+    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
+    <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
+    <vis name="TOFCSkinVis" ref="AnlGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCHoneycombVis" ref="AnlGray" showDaughters="true" visible="true"/>
 
     <comment>
       Beam line
