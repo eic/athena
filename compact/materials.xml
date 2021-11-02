@@ -141,6 +141,13 @@
     <fraction n="0.023" ref="H"/>
     <fraction n="0.033" ref="Cl"/>
   </material>
+  <material name="NOVEC7200">
+    <D type="density" value="1.44" unit="g/cm3"/>
+    <fraction n="0.061" ref="O"/>
+    <fraction n="0.019" ref="H"/>
+    <fraction n="0.272" ref="C"/>
+    <fraction n="0.648" ref="F"/>
+  </material>
   <documentation level="3">
     #### Carbon fiber
       a level 3 doc

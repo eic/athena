@@ -8,21 +8,28 @@
       --------------------------
     </comment>
 
-    <constant name="BarrelTOF_Sensor_thickness"       value="0.3*mm"/>
+    <constant name="BarrelTOF_Sensor_thickness"       value="0.1*mm"/>
     <constant name="BarrelTOF_Hybrid_thickness"       value="2*0.008125*cm"/>
     <constant name="BarrelTOF_CFSkin_thickness"       value="2*0.0075*cm"/>
-    <constant name="BarrelTOF_CFoam_thickness"        value="2*0.28315*cm"/>
-    <constant name="BarrelTOF_CHoneycomb_thickness"   value="2*0.28315*cm"/>
-    <constant name="BarrelTOF_Module_thickness"    value="BarrelTOF_Sensor_thickness+2*BarrelTOF_Hybrid_thickness+2*BarrelTOF_CFSkin_thickness+BarrelTOF_CFoam_thickness"/>
+    <constant name="BarrelTOF_CFoam_thickness"        value="2*0.29*cm"/>
+    <constant name="BarrelTOF_CHoneycomb_thickness"   value="2*0.29*cm"/>
+    <constant name="BarrelTOF_CoolingTube_thickness"  value="0.11*cm"/>
+    <constant name="BarrelTOF_Coolant_thickness"      value="0.16*cm"/>
+    <constant name="BarrelTOF_Module_thickness"    value="BarrelTOF_Sensor_thickness+2*BarrelTOF_Hybrid_thickness+2*BarrelTOF_CFSkin_thickness+BarrelTOF_CFoam_thickness+BarrelTOF_CoolingTube_thickness+BarrelTOF_Coolant_thickness"/>
 
     <constant name="BarrelTOF_radius_design"           value="50.0*cm"/>
-    <constant name="BarrelTOF_Sensor_width_design"     value="32.0*mm"/>
     <constant name="BarrelTOF_Module_width_design"     value="56.0*mm"/>
+    <constant name="BarrelTOF_Sensor_width_design"     value="32.0*mm"/>
     <constant name="BarrelTOF_CFoam_width_design"      value="BarrelTOF_Sensor_width_design-5.0*mm"/>
     <constant name="BarrelTOF_CHoneycomb_width_design" value="BarrelTOF_Module_width_design-BarrelTOF_CFoam_width_design"/>
+    <constant name="BarrelTOF_CoolingTube_width_design" value="0.671*cm"/>
+    <constant name="BarrelTOF_Coolant_width_design"     value="0.652*cm"/>
+
     <constant name="BarrelTOF_Sensor_position_design"  value="0.5*(BarrelTOF_Sensor_width_design-BarrelTOF_Module_width_design)"/>
     <constant name="BarrelTOF_CFoam_position_design"   value="0.5*(BarrelTOF_CFoam_width_design-BarrelTOF_Module_width_design)"/>
     <constant name="BarrelTOF_CHoneycomb_position_design"  value="0.5*(BarrelTOF_Module_width_design-BarrelTOF_CHoneycomb_width_design)"/>
+    <constant name="BarrelTOF_CoolingTube_position_design"  value="0.5*(BarrelTOF_Module_width_design-BarrelTOF_CHoneycomb_width_design)"/>
+    <constant name="BarrelTOF_Coolant_position_design"  value="0.5*(BarrelTOF_Module_width_design-BarrelTOF_CHoneycomb_width_design)"/>
     <constant name="BarrelTOF_Service_position_design" value="0.0*mm"/>
 
     <constant name="BarrelTOF_scale"               value="1.05"/>
@@ -70,7 +77,8 @@
         <module_component name="sensor" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" zstart="BarrelTOF_Sensor_position" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" />
         <module_component name="hybridtop" material="Kapton" sensitive="false" width="BarrelTOF_Module_width" zstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_Hybrid_thickness" vis="TOFHybridVis" />
         <module_component name="cfskintop" material="CFRPMix2" sensitive="false" width="BarrelTOF_Module_width" zstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_CFSkin_thickness" vis="TOFCSkinVis" />
-        <!--module_component name="cfoam" material="CarbonFoam" sensitive="false" width="BarrelTOF_Module_width" zstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_CFoam_thickness" vis="TOFCFoamVis" /-->
+        <module_component name="coolingtube" material="Aluminum" sensitive="false" width="BarrelTOF_CoolingTube_width" zstart="BarrelTOF_CoolingTube_position" length="BarrelTOF_length1" thickness="BarrelTOF_CoolingTube_thickness" vis="TOFCoolingTubeVis" />
+        <module_component name="coolant" material="NOVEC7200" sensitive="false" width="BarrelTOF_Coolant_width" zstart="BarrelTOF_Coolant_position" length="BarrelTOF_length1" thickness="BarrelTOF_Coolant_thickness" vis="TOFCoolantVis" />
         <module_component name="cfoam" material="CarbonFoam" sensitive="false" width="BarrelTOF_CFoam_width" zstart="BarrelTOF_CFoam_position" dz="-1*BarrelTOF_CFoam_thickness" length="BarrelTOF_length1" thickness="BarrelTOF_CFoam_thickness" vis="TOFCFoamVis" />
         <module_component name="choneycomb" material="CFRPMix" sensitive="false" width="BarrelTOF_CHoneycomb_width" zstart="BarrelTOF_CHoneycomb_position" length="BarrelTOF_length1" thickness="BarrelTOF_CHoneycomb_thickness" vis="TOFCHoneycombVis" />
         <module_component name="cfskinbottom" material="CFRPMix2" sensitive="false" width="BarrelTOF_Module_width" zstart="BarrelTOF_Service_position" length="BarrelTOF_length1" thickness="BarrelTOF_CFSkin_thickness" vis="TOFCSkinVis" />
