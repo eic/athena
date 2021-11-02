@@ -15,7 +15,7 @@
     <constant name="BarrelTOF_radius_design"       value="50.0*cm"/>
     <constant name="BarrelTOF_Sensor_width_design" value="32.0*mm"/>
     <constant name="BarrelTOF_Module_width_design" value="56.0*mm"/>
-    <constant name="BarrelTOF_Sensor_position_design"  value="BarrelTOF_Sensor_width_design-BarrelTOF_Module_width_design"/>
+    <constant name="BarrelTOF_Sensor_position_design"  value="0.5*(BarrelTOF_Sensor_width_design-BarrelTOF_Module_width_design)"/>
     <constant name="BarrelTOF_Service_position_design" value="0.0*mm"/>
 
     <constant name="BarrelTOF_scale"               value="1.05"/>
