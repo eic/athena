@@ -102,8 +102,8 @@
     <vis name="TOFCoolingTube" ref="AnlRed" showDaughters="true" visible="true"/>
     <vis name="TOFCoolant" ref="AnlGreen" showDaughters="true" visible="true"/>BarrelTOF_CoolingTube_position
     <vis name="TOFCSkinVis" ref="AnlGray" showDaughters="true" visible="true"/>
-    <vis name="TOFCFoamVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
-    <vis name="TOFCHoneycombVis" ref="AnlLightGray" showDaughters="true" visible="true"/>
+    <vis name="TOFCFoamVis" ref="AnlGreen" showDaughters="true" visible="true"/>
+    <vis name="TOFCHoneycombVis" ref="AnlGreen" showDaughters="true" visible="true"/>
 
     <comment>
       Beam line with magnets
