@@ -29,6 +29,8 @@
     <constant name="BarrelTOF_scale"               value="1.05"/>
     <constant name="BarrelTOF_radius"              value="BarrelTOF_scale * BarrelTOF_radius_design"/>
     <constant name="BarrelTOF_Sensor_width"        value="BarrelTOF_scale * BarrelTOF_Sensor_width_design"/>
+    <constant name="BarrelTOF_CFoam_width"         value="BarrelTOF_scale * BarrelTOF_CFoam_width_design"/>
+    <constant name="BarrelTOF_CHoneycomb_width"    value="BarrelTOF_scale * BarrelTOF_CHoneycomb_width_design"/>
     <constant name="BarrelTOF_Sensor_position"     value="BarrelTOF_scale * BarrelTOF_Sensor_position_design"/>
     <constant name="BarrelTOF_CFoam_position"      value="BarrelTOF_scale * BarrelTOF_CFoam_position_design"/>
     <constant name="BarrelTOF_CHoneycomb_position" value="BarrelTOF_scale * BarrelTOF_CHoneycomb_position_design"/>
