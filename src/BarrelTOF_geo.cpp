@@ -175,14 +175,14 @@ static Ref_t create_BarrelTOF(Detector& description, xml_h e, SensitiveDetector 
       Volume     c_vol(c_nam, c_box, description.material(x_comp.materialStr()));
 
       if (x_pos && x_rot) {
-        Position c_pos(x_pos.x(0)+xstart, x_pos.y(0), x_pos.z(0)+dz);
+        Position c_pos(x_pos.x(0)+xstart, x_pos.y(0), x_pos.z(0));
         RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
         pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
       } else if (x_rot) {
         Position c_pos(0, 0, thickness_sum + x_comp.thickness() / 2.0);
         pv = m_vol.placeVolume(c_vol, Transform3D(RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)),c_pos));
       } else if (x_pos) {
-        pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0)+xstart, x_pos.y(0), x_pos.z(0)+dz));
+        pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0)+xstart, x_pos.y(0), x_pos.z(0)));
       } else {
         pv = m_vol.placeVolume(c_vol, Position(0+xstart,0,thickness_sum+x_comp.thickness()/2.0));
       }
