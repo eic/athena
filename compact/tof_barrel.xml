@@ -68,7 +68,7 @@
       id="BarrelTOF_ID"
       name="BarrelTOF"
       type="athena_TOFBarrel"
-      readout="BarrelTOFHits"
+      readout="TOFBarrelHits"
       insideTrackingVolume="true">
       <dimensions
         rmin="BarrelTOF_rmin-BarrelTOF_rOffset"
@@ -100,7 +100,7 @@
   </detectors>
 
   <readouts>
-    <readout name="BarrelTOFHits">
+    <readout name="TOFBarrelHits">
       <segmentation type="CartesianGridXY" grid_size_x="0.05*mm" grid_size_y="BarrelTOF_length1/48" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
     </readout>

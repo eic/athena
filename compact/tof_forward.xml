@@ -40,7 +40,7 @@
         id="ForwardTOF_ID"
         name="ForwardTOF"
         type="athena_TrapEndcapTracker"
-        readout="ForwardTOFHits"
+        readout="TOFForwardHits"
         vis="TOFVis"
         reflect="false">
         <module name="Module1" vis="TOFVis">
@@ -79,7 +79,7 @@
   </detectors>
 
   <readouts>
-    <readout name="ForwardTOFHits">
+    <readout name="TOFForwardHits">
       <segmentation type="CartesianGridXZ" grid_size_x="0.08*mm" grid_size_z="0.08*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
