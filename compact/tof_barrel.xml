@@ -13,8 +13,8 @@
     <constant name="BarrelTOF_CFSkin_thickness"       value="2*0.0075*cm"/>
     <constant name="BarrelTOF_CFoam_thickness"        value="2*0.29*cm"/>
     <constant name="BarrelTOF_CHoneycomb_thickness"   value="2*0.29*cm"/>
-    <constant name="BarrelTOF_CoolingTube_thickness"  value="0.1*cm"/>
-    <constant name="BarrelTOF_Coolant_thickness"      value="0.1*cm"/>
+    <constant name="BarrelTOF_CoolingTube_thickness"  value="0.08*cm"/>
+    <constant name="BarrelTOF_Coolant_thickness"      value="0.08*cm"/>
     <constant name="BarrelTOF_Module_thickness"    value="BarrelTOF_Sensor_thickness+2*BarrelTOF_Hybrid_thickness+2*BarrelTOF_CFSkin_thickness+BarrelTOF_CFoam_thickness+BarrelTOF_CoolingTube_thickness+BarrelTOF_Coolant_thickness"/>
 
     <constant name="BarrelTOF_radius_design"           value="50.0*cm"/>
