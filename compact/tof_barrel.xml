@@ -7,7 +7,7 @@
       Barrel TOF Parameters
       --------------------------
     </comment>
-    <constant name="TrackerMainDiagonal_tan"                value="Eta1_1_tan"/>
+    <constant name="TrackerMainDiagonal_tan"          value="Eta1_1_tan"/>
 
     <constant name="BarrelTOF_Sensor_thickness"       value="0.3*mm"/>
     <constant name="BarrelTOF_Hybrid_thickness"       value="2*0.008125*cm"/>
