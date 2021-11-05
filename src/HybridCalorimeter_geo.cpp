@@ -34,10 +34,23 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     int detID = detElem.id();
     DetElement det(detName, detID);
     sens.setType("calorimeter");
+    xml_det_t x_det = handle;
 
-    auto glass_material = desc.material("SciGlass");
-    auto crystal_material = desc.material("PbWO4");
-    auto air_material = desc.material("Air");
+    if(!x_det.hasChild("inner")){
+      //error
+    }
+    if(!x_det.hasChild("outer")){
+      //error
+    }
+    xml_comp_t x_inner_cal(x_det.child(_U(inner)));
+    xml_comp_t x_outer_cal(x_det.child(_U(outer)));
+
+    auto       inner_cal_mat_name = x_inner_cal.materialStr();
+    auto       outer_cal_mat_name = x_outer_cal.materialStr();
+
+    auto glass_material   = desc.material(inner_cal_mat_name);
+    auto crystal_material = desc.material(outer_cal_mat_name);
+    auto air_material     = desc.material("Air");
 
     double ROut = desc.constantAsDouble("EcalEndcapN_rmax");
     double RIn = desc.constantAsDouble("EcalEndcapN_rmin");
