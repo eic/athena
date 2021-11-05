@@ -88,10 +88,10 @@
       Beamline elements
       -----------------
   </comment>
-  <include ref="ip6/forward_ion_beamline.xml"/>
+  <!--<include ref="ip6/forward_ion_beamline.xml"/>-->
   <include ref="ip6/beampipe_hadron_B0.xml" />
-  <include ref="ip6/beampipe.xml" />
-  <include ref="ip6/inner_vacuum_FF_magnets.xml"/>
+  <!-- <include ref="ip6/beampipe.xml" /> -->
+  <!--<include ref="ip6/inner_vacuum_FF_magnets.xml"/>-->
 
 
 
@@ -113,13 +113,13 @@
   ### PID detectors
   </documentation>
   <!--include ref="compact/pid_config_acadia.xml" /-->
-  <include ref="compact/pid_config_canyonlands.xml" />
+  <!--<include ref="compact/pid_config_canyonlands.xml" />-->
 
   <documentation level="10">
   ## Central calorimetry
   </documentation>
-  <include ref="compact/ecal.xml"/>
-  <include ref="compact/hcal.xml"/>
+  <!--<include ref="compact/ecal.xml"/>-->
+  <!--<include ref="compact/hcal.xml"/>-->
 
   <documentation level="11">
   ## Far foward detectors
