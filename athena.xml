@@ -88,10 +88,10 @@
       Beamline elements
       -----------------
   </comment>
-  <!--<include ref="ip6/forward_ion_beamline.xml"/>-->
-  <!--<include ref="ip6/beampipe_hadron_B0.xml" />-->
-  <!-- <include ref="ip6/beampipe.xml" /> -->
-  <!--<include ref="ip6/inner_vacuum_FF_magnets.xml"/>-->
+  <include ref="ip6/forward_ion_beamline.xml"/>
+  <include ref="ip6/beampipe_hadron_B0.xml" />
+  <!--<include ref="ip6/beampipe.xml" /> -->
+  <include ref="ip6/inner_vacuum_FF_magnets.xml"/>
 
 
 
@@ -100,14 +100,14 @@
 
       Note: When changing magnet, also select dimensions in definitions.xml.
   </documentation>
-  <include ref="compact/solenoid.xml"/>
+  <!--<include ref="compact/solenoid.xml"/>-->
 
   <documentation level="10">
     ## Central tracking detectors
   </documentation>
 
   <!--include ref="compact/tracking_config_acadia.xml"/-->
-  <include ref="compact/tracking_config_canyonlands.xml"/>
+  <!--<include ref="compact/tracking_config_canyonlands.xml"/>-->
 
   <documentation level="10">
   ### PID detectors
@@ -126,7 +126,7 @@
   </documentation>
   <include ref="ip6/B0_tracker.xml"/>
   <include ref="ip6/B0_preshower.xml"/>
-  <!--<include ref="ip6/far_forward_offM_tracker.xml"/>-->
+  <include ref="ip6/far_forward_offM_tracker.xml"/>
   <include ref="ip6/far_forward_detectors.xml"/>
   <include ref="ip6/roman_pots_eRD24_design.xml"/>
 
