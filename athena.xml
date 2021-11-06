@@ -114,7 +114,7 @@
   ### PID detectors
   </documentation>
   <!--include ref="compact/pid_config_acadia.xml" /-->
-  <include ref="compact/pid_config_canyonlands.xml" />
+  <!--include ref="compact/pid_config_canyonlands.xml" /-->
 
   <documentation level="10">
   ## Central calorimetry
