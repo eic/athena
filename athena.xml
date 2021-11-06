@@ -119,8 +119,8 @@
   <documentation level="10">
   ## Central calorimetry
   </documentation>
-  <include ref="compact/ecal.xml"/>
-  <include ref="compact/hcal.xml"/>
+  <!--include ref="compact/ecal.xml"/-->
+  <!--include ref="compact/hcal.xml"/-->
 
   <documentation level="11">
   ## Far foward detectors
