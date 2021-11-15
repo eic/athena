@@ -40,7 +40,7 @@
   name="ERICH"
   type="athena_ERICH"
   readout="ERICHHits"
-  gas="C4F10_ERICH"
+  gas="AirOptical"
   material="Aluminum"
   vis_vessel="DRICH_vessel_vis"
   vis_gas="DRICH_gas_vis"
@@ -98,7 +98,7 @@
     thickness="ERICH_aerogel_thickness"
     />
   <filter
-    material="Acrylic_DRICH"
+    material="AirOptical"
     vis="DRICH_filter_vis"
     thickness="0.3*mm"
     />
@@ -134,7 +134,7 @@
   vis="ERICH_sensor_vis"
   side="ERICH_sensor_active_size"
   thickness="ERICH_sensor_thickness"
-  gap="0.5*(ERICH_sensor_full_size-ERICH_sensor_active_size) + 0.5*mm"
+  gap="0.5*(ERICH_sensor_full_size-ERICH_sensor_active_size) + 0.1*mm"
   />
 
 

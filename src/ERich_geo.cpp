@@ -3,6 +3,8 @@
 //  Author: C. Dilks
 //----------------------------------
 
+#include <TFile.h>
+
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/OpticalSurfaces.h"
 #include "DD4hep/Printout.h"
@@ -13,6 +15,12 @@
 #include "TMath.h"
 #include "TString.h"
 #include <XML/Helper.h>
+
+#include <IRT/ParametricSurface.h>
+#include <CherenkovRadiator.h>
+#include <OpticalBoundary.h>
+#include <CherenkovDetectorCollection.h>
+#include <CherenkovPhotonDetector.h>
 
 using namespace dd4hep;
 using namespace dd4hep::rec;
@@ -27,6 +35,13 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   DetElement            det(detName, detID);
   xml::Component        dims    = detElem.dimensions();
   OpticalSurfaceManager surfMgr = desc.surfaceManager();
+
+  //@@@ Create output file and a geometry object pointer; 
+  std::string str = detName; std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+  auto fout = new TFile((str + "-config.root").c_str(), "RECREATE");
+  auto geometry = new CherenkovDetectorCollection();
+  // Yes, a single detector per .root file in this environment;
+  auto detector = geometry->AddNewDetector(detName.c_str());
 
   // attributes -----------------------------------------------------------
   // - vessel
@@ -134,6 +149,38 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   vesselVol.setVisAttributes(vesselVis);
   gasvolVol.setVisAttributes(gasvolVis);
 
+  // Used in several places;
+  TVector3 nx(1,0,0), ny(0,1,0);
+
+  // Get access to the readout structure decoder; may want to simply call desc.readout("DRICHHits");
+  const auto &rdspecs = desc.readouts();
+  if (rdspecs.size() != 1) {
+    printout(FATAL,"DRich_geo","Expect a single readout structure in XML file"); 
+    return det;
+  } //if
+  // Do not mess up with casting of (*desc.readouts().begin()).second; just call desc.readout();
+  const auto decoder = desc.readout((*rdspecs.begin()).first.c_str()).idSpec().decoder();
+  const auto &mvalue = (*decoder)["module"];
+  uint64_t msmask = mvalue.mask();
+  detector->SetReadoutCellMask(msmask);
+  unsigned moffset = mvalue.offset();
+
+  {
+    // FIXME: Z-location does not really matter here, right?; but Z-axis orientation does;
+    auto boundary = new FlatSurface(TVector3(0,0,vesselZmin), nx, ny);
+
+    // FIXME: have no connection to GEANT G4LogicalVolume pointers; however all is needed 
+    // is to make them unique so that std::map works internally; resort to using integers, 
+    // who cares; material pointer can seemingly be '0', and the effective refractive index 
+    // for all radiators will be assigned at the end by hand; FIXME: should assign it on 
+    // per-photon basis, at birth, like standalone GEANT code does;
+    geometry->SetContainerVolume(detector, "GasVolume", 0, (G4LogicalVolume*)(0x0), 0, boundary);
+  }
+
+  // How about PlacedVolume::transformation2mars(), guys?; FIXME: make it simple for now, 
+  // assuming no rotations involved; [cm];
+  double vesselOffset = (vesselZmin + vesselZmax)/2;
+
   // reference positions
   // - the vessel is created such that the center of the cylindrical tank volume
   //   coincides with the origin; this is called the "origin position" of the vessel
@@ -147,6 +194,16 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // sensitive detector type
   sens.setType("photoncounter");
 
+  // place gas volume
+  PlacedVolume gasvolPV = vesselVol.placeVolume(gasvolVol, Position(0, 0, 0));
+  DetElement   gasvolDE(det, "gasvol_de", 0);
+  gasvolDE.setPlacement(gasvolPV);
+
+  // place mother volume (vessel)
+  Volume       motherVol = desc.pickMotherVolume(det);
+  PlacedVolume vesselPV  = motherVol.placeVolume(vesselVol, Position(0, 0, vesselZmin) - originFront);
+  vesselPV.addPhysVolID("system", detID);
+  det.setPlacement(vesselPV);
 
   // BUILD RADIATOR //////////////////////////////////////
 
@@ -185,8 +242,17 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   aerogelDE.setPlacement(aerogelPV);
   // SkinSurface aerogelSkin(desc, aerogelDE, "mirror_optical_surface", aerogelSurf, aerogelVol);
   // aerogelSkin.isValid();
+  {
+    auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+aerogelPV.position().z()), nx, ny);
+
+    // This call will create a pair of flat refractive surfaces internally; FIXME: should make
+    // a small gas gap at the upstream end of the gas volume;
+    geometry->AddFlatRadiator(detector, "Aerogel", 0, (G4LogicalVolume*)(0x1), 
+			      0, surface, aerogelThickness/mm);
+  } 
 
   // filter placement and surface properties
+#if 1//_OFF_
   if (!debug_optics) {
     auto filterPV = gasvolVol.placeVolume(
         filterVol,
@@ -199,7 +265,14 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     filterDE.setPlacement(filterPV);
     // SkinSurface filterSkin(desc, filterDE, "mirror_optical_surface", filterSurf, filterVol);
     // filterSkin.isValid();
-  };
+
+    {
+      // FIXME: create a small air gap in the geometry as well;
+      auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+filterPV.position().z()-airGap), nx, ny);
+      geometry->AddFlatRadiator(detector, "Filter", 0, (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
+    } 
+  }
+#endif
 
 
   // BUILD SENSORS ///////////////////////
@@ -221,6 +294,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   int    imod    = 0;           // module number
   double tBoxMax = vesselRmax1; // sensors will be tiled in tBox, within annular limits
 
+  // [0,0]: have neither access to G4VSolid nor to G4Material; IRT code does not care; fine;
+  auto pd = new CherenkovPhotonDetector(0, 0);
+  // FIXME: '0' stands for the unknown (and irrelevant) G4LogicalVolume;
+  geometry->AddPhotonDetector(detector, 0, pd);
+
   // SENSOR MODULE LOOP ------------------------
   /* cartesian tiling loop
    * - start at (x=0,y=0), to center the grid
@@ -241,25 +319,38 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           if (std::hypot(sx, sy) < sensorPlaneRmin || std::hypot(sx, sy) > sensorPlaneRmax)
             continue;
 
-          // placement (note: transformations are in reverse order)
-          auto sensorPV = gasvolVol.placeVolume(
-              sensorVol, Transform3D(Translation3D(sensorPlanePos.x(), sensorPlanePos.y(),
-                                                   sensorPlanePos.z()) // move to reference position
-                                     * Translation3D(sx, sy, 0.)       // move to grid position
-                                     ));
+	  {
+	    // placement (note: transformations are in reverse order)
+	    auto sensorPV = gasvolVol.placeVolume(
+		  sensorVol, Transform3D(Translation3D(sensorPlanePos.x(), sensorPlanePos.y(),
+		       sensorPlanePos.z()) // move to reference position
+			 * Translation3D(sx, sy, 0.)       // move to grid position
+					 ));
 
-          // generate LUT for module number -> sensor position, for readout mapping tests
-          // printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
+	    // Assume that photosensors can have different 3D surface parameterizations;
+	    auto surface = new FlatSurface((1/mm)*TVector3(0.0, 0, vesselOffset+sensorPV.position().z()), nx, ny);
 
-          // properties
-          sensorPV.addPhysVolID("module", imod);
-          DetElement sensorDE(det, Form("sensor_de_%d", imod), imod);
-          sensorDE.setPlacement(sensorPV);
-          if (!debug_optics) {
-            SkinSurface sensorSkin(desc, sensorDE, "sensor_optical_surface", sensorSurf,
-                                   sensorVol); // TODO: 3rd arg needs `imod`?
-            sensorSkin.isValid();
-          };
+	    uint64_t imodsec = (uint64_t(imod) << moffset) & msmask;
+	    detector->CreatePhotonDetectorInstance(0, pd, imodsec, surface);
+
+	    // Yes, since there are no mirrors in this detector, just close the gas radiator volume by hand (once), 
+	    // assuming that all the sensors will be sitting at roughly the same location along the beam line anyway;
+	    if (!imod) detector->GetRadiator("GasVolume")->m_Borders[0].second = 
+			 dynamic_cast<ParametricSurface*>(surface);
+
+	    // generate LUT for module number -> sensor position, for readout mapping tests
+	    // printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
+	    
+	    // properties
+	    sensorPV.addPhysVolID("module", imod);
+	    DetElement sensorDE(det, Form("sensor_de_%d", imod), imodsec);
+	    sensorDE.setPlacement(sensorPV);
+	    if (!debug_optics) {
+	      SkinSurface sensorSkin(desc, sensorDE, "sensor_optical_surface", sensorSurf,
+				     sensorVol); // TODO: 3rd arg needs `imod`?
+	      sensorSkin.isValid();
+	    };
+	  }
 
           // increment sensor module number
           imod++;
@@ -268,6 +359,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     };
   };
   // END SENSOR MODULE LOOP ------------------------
+
   //
   // Add service material if desired
   if (detElem.child("sensors").hasChild("services")) {
@@ -298,16 +390,23 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
                                                     sensorPlanePos.z() - sensorThickness - total_thickness)));
   }
 
-  // place gas volume
-  PlacedVolume gasvolPV = vesselVol.placeVolume(gasvolVol, Position(0, 0, 0));
-  DetElement   gasvolDE(det, "gasvol_de", 0);
-  gasvolDE.setPlacement(gasvolPV);
+  //@@@ Write the geometry out as a custom TObject class instance;
+  {
+    // FIXME: import from the geometry database; FIXME: crappy style in general;
+    const char *name[] = {"GasVolume", "Aerogel", "Filter"};
+    //double         n[] = {     1.0013,    1.0200,   1.5017};
+    //double         n[] = {     1.0013,    1.0200};//,   1.0000};
+    double         n[] = {     1.0000,    1.0195,   1.0000};
+    
+    for(unsigned ir=0; ir<sizeof(n)/sizeof(n[0]); ir++) {
+      auto radiator = detector->GetRadiator(name[ir]);
+      
+      if (radiator) radiator->SetReferenceRefractiveIndex(n[ir]);
+    } //for ir
 
-  // place mother volume (vessel)
-  Volume       motherVol = desc.pickMotherVolume(det);
-  PlacedVolume vesselPV  = motherVol.placeVolume(vesselVol, Position(0, 0, vesselZmin) - originFront);
-  vesselPV.addPhysVolID("system", detID);
-  det.setPlacement(vesselPV);
+    geometry->Write();
+    fout->Close();
+  }
 
   return det;
 };
