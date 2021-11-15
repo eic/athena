@@ -348,10 +348,25 @@
       4.0*eV 1.030
       5.1*eV 1.030
       "/>
+    <matrix name="RINDEX__Aerogel1020" coldim="2" values="
+      1.0*eV 1.020
+      4.0*eV 1.020
+      5.1*eV 1.020
+      "/>
     <matrix name="ABSLENGTH__Aerogel" coldim="2" values="
       1.0*eV 4.0*cm
       4.0*eV 4.0*cm
       5.1*eV 4.0*cm
+      "/>
+    <matrix name="ABSLENGTH__Aerogel1020" coldim="2" values="
+      1.0*eV 4.0*cm
+      4.0*eV 4.0*cm
+      5.1*eV 4.0*cm
+      "/>
+    <matrix name="RAYLEIGH__Aerogel1020" coldim="2" values="
+      1.0*eV 3.0*cm
+      4.0*eV 3.0*cm
+      5.1*eV 3.0*cm
       "/>
     <matrix name="RINDEX__Acrylic" coldim="2" values="
       1240*eV/1100  1.49
@@ -885,6 +900,13 @@
       <fraction n="0.1"   ref="C"/>
       <property name="RINDEX" ref="RINDEX__Aerogel"/>
       <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel"/>
+    </material>
+    <material name="AerogelOptical1020">
+      <D value="0.2" unit="g / cm3"/>
+      <fraction n="0.625" ref="SiliconOxide"/>
+      <fraction n="0.374" ref="SiliconOxide"/>
+      <fraction n="0.1"   ref="C"/>
+      <property name="RINDEX" ref="RINDEX__Aerogel1020"/>
     </material>
     <material name="AcrylicOptical">
       <D type="density" value="1.18" unit="g/cm3"/>

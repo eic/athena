@@ -15,6 +15,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 find_package(DD4hep REQUIRED COMPONENTS DDCore DDG4)
 find_package(Acts REQUIRED COMPONENTS Core PluginIdentification PluginTGeo PluginDD4hep )
 find_package(fmt REQUIRED)
+find_package(IRT REQUIRED)
+include_directories( ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/IRT )
 
 #-----------------------------------------------------------------------------------
 set(a_lib_name athena)
@@ -47,7 +49,7 @@ dd4hep_add_plugin(${a_lib_name} SOURCES
   USES ActsCore ActsPluginDD4hep
   )
 target_link_libraries(${a_lib_name}
-  PUBLIC DD4hep::DDCore  DD4hep::DDRec fmt::fmt
+  PUBLIC DD4hep::DDCore  DD4hep::DDRec fmt::fmt IRT
   )
 
 #-----------------------------------------------------------------------------------

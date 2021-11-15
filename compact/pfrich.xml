@@ -48,7 +48,7 @@
   name="PFRICH"
   type="athena_PFRICH"
   readout="PFRICHHits"
-  gas="C4F10_PFRICH"
+  gas="AirOptical"
   material="Aluminum"
   vis_vessel="DRICH_vessel_vis"
   vis_gas="DRICH_gas_vis"
@@ -106,7 +106,7 @@
     thickness="PFRICH_aerogel_thickness"
     />
   <filter
-    material="Acrylic_DRICH"
+    material="AirOptical"
     vis="DRICH_filter_vis"
     thickness="0.3*mm"
     />
@@ -142,7 +142,7 @@
   vis="PFRICH_sensor_vis"
   side="PFRICH_sensor_active_size"
   thickness="PFRICH_sensor_thickness"
-  gap="0.5*(PFRICH_sensor_full_size-PFRICH_sensor_active_size) + 0.5*mm"
+  gap="0.5*(PFRICH_sensor_full_size-PFRICH_sensor_active_size) + 0.1*mm"
   />
 
 
