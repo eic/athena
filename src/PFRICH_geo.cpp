@@ -252,7 +252,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   } 
 
   // filter placement and surface properties
-#if 1//_OFF_
   if (!debug_optics) {
     auto filterPV = gasvolVol.placeVolume(
         filterVol,
@@ -272,7 +271,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       geometry->AddFlatRadiator(detector, "Filter", 0, (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
     } 
   }
-#endif
 
 
   // BUILD SENSORS ///////////////////////
@@ -393,10 +391,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   //@@@ Write the geometry out as a custom TObject class instance;
   {
     // FIXME: import from the geometry database; FIXME: crappy style in general;
+    // in general these values can (and should) be tweaked in the juggler .py options file;
     const char *name[] = {"GasVolume", "Aerogel", "Filter"};
     //double         n[] = {     1.0013,    1.0200,   1.5017};
     //double         n[] = {     1.0013,    1.0200};//,   1.0000};
-    double         n[] = {     1.0000,    1.0195,   1.0000};
+    double         n[] = {     1.0013,    1.0190,   1.5017};
     
     for(unsigned ir=0; ir<sizeof(n)/sizeof(n[0]); ir++) {
       auto radiator = detector->GetRadiator(name[ir]);

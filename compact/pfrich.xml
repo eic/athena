@@ -48,7 +48,7 @@
   name="PFRICH"
   type="athena_PFRICH"
   readout="PFRICHHits"
-  gas="AirOptical"
+  gas="C4F10_PFRICH"
   material="Aluminum"
   vis_vessel="DRICH_vessel_vis"
   vis_gas="DRICH_gas_vis"
@@ -106,7 +106,7 @@
     thickness="PFRICH_aerogel_thickness"
     />
   <filter
-    material="AirOptical"
+    material="Acrylic_DRICH"
     vis="DRICH_filter_vis"
     thickness="0.3*mm"
     />
@@ -137,8 +137,8 @@
     sensor placement algorithm will try to place as many as it can in the specified region
 </documentation>
 <module
-  material="Silicon"
-  surface="SensorSurface_DRICH"
+  material="AirOptical"
+  surface="SensorSurface_PFRICH"
   vis="PFRICH_sensor_vis"
   side="PFRICH_sensor_active_size"
   thickness="PFRICH_sensor_thickness"
