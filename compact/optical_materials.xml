@@ -1097,6 +1097,13 @@
         7*eV  1.92
         "/>
     </opticalsurface>
+    <opticalsurface name="SensorSurface_ERICH" model="glisur" finish="polished" type="dielectric_dielectric">
+      <property name="EFFICIENCY" coldim="2" values="
+        1*eV  1
+        4*eV  1
+        7*eV  1
+        "/>
+    </opticalsurface>
     <!-- END dRICh surface definitions -->
 
   </surfaces>

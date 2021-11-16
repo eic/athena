@@ -40,7 +40,7 @@
   name="ERICH"
   type="athena_ERICH"
   readout="ERICHHits"
-  gas="AirOptical"
+  gas="C4F10_ERICH"
   material="Aluminum"
   vis_vessel="DRICH_vessel_vis"
   vis_gas="DRICH_gas_vis"
@@ -98,7 +98,7 @@
     thickness="ERICH_aerogel_thickness"
     />
   <filter
-    material="AirOptical"
+    material="Acrylic_DRICH"
     vis="DRICH_filter_vis"
     thickness="0.3*mm"
     />
@@ -129,8 +129,8 @@
     sensor placement algorithm will try to place as many as it can in the specified region
 </documentation>
 <module
-  material="Silicon"
-  surface="SensorSurface_DRICH"
+  material="AirOptical"
+  surface="SensorSurface_ERICH"
   vis="ERICH_sensor_vis"
   side="ERICH_sensor_active_size"
   thickness="ERICH_sensor_thickness"
