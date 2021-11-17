@@ -167,7 +167,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
   {
     // FIXME: Z-location does not really matter here, right?; but Z-axis orientation does;
-    auto boundary = new FlatSurface(TVector3(0,0,vesselZmin), nx, ny);
+    auto boundary = new FlatSurface(/*(1/mm)**/TVector3(0,0,vesselZmin), nx, ny);
 
     // FIXME: have no connection to GEANT G4LogicalVolume pointers; however all is needed 
     // is to make them unique so that std::map works internally; resort to using integers, 
