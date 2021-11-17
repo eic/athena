@@ -104,7 +104,7 @@
   rmin="DRICH_rmin0 + DRICH_wall_thickness + 0.2*cm"
   rmax="DRICH_rmax0 - DRICH_wall_thickness - 0.2*cm"
   phiw="60*degree"
-  frontplane="DRICH_window_thickness + 0.5*DRICH_aerogel_thickness"
+  frontplane="DRICH_window_thickness + 0.5*DRICH_aerogel_thickness - 1*mm"
   pitch="0*degree"
   >
   <aerogel
@@ -114,7 +114,7 @@
     />
   <filter
     material="Acrylic_DRICH"
-    vis="DRICH_filter_vis"
+    vis="DRICH_aerogel_vis"
     thickness="0.3*mm"
     />
 </radiator>

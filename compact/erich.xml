@@ -86,7 +86,7 @@
   - `pitch`: controls the angle of the radiator (0=vertical)
 </documentation>
 <radiator
-  frontplane="-ERICH_window_thickness"
+  frontplane="-ERICH_window_thickness + 1*mm"
   rmin="ERICH_rmin0 + ERICH_wall_thickness + 0.2*cm"
   rmax="(ERICH_rmax/ERICH_zmax)*ERICH_zmin + 8.0*cm"
   phiw="60*degree"
@@ -99,7 +99,7 @@
     />
   <filter
     material="Acrylic_DRICH"
-    vis="DRICH_filter_vis"
+    vis="DRICH_aerogel_vis"
     thickness="0.3*mm"
     />
 </radiator>

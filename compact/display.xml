@@ -120,7 +120,7 @@
     <vis name="ci_HCALVis"  r= "0.6"  g="0"  b="0.6" alpha="1.0" showDaughters="true" visible="true"/>
 
     <vis name="DRICH_vessel_vis"  ref="AnlGray" showDaughters="true" visible="true" />
-    <vis name="DRICH_gas_vis"     ref="AnlGreen" alpha="0.5" showDaughters="true" visible="true" />
+    <vis name="DRICH_gas_vis"     ref="AnlLight_Gray" alpha="0.2" showDaughters="false" visible="true" />
     <vis name="DRICH_aerogel_vis" ref="AnlTeal" showDaughters="true" visible="true" />
     <vis name="DRICH_filter_vis"  alpha="1.0" r="1.0" g="1.0" b="0.0" showDaughters="true" visible="true" />
     <vis name="DRICH_mirror_vis"  ref="AnlGray" showDaughters="true" visible="true" />
