@@ -178,8 +178,8 @@
     spherical patch below
 </documentation>
 <module
-  material="Silicon"
-  surface="SensorSurface_DRICH"
+  material="AirOptical"
+  surface="SensorSurface_ERICH"
   vis="DRICH_sensor_vis"
   side="DRICH_sensor_size"
   thickness="DRICH_sensor_thickness"

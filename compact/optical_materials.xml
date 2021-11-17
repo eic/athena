@@ -1035,7 +1035,7 @@
     </opticalsurface>
 
     <!-- BEGIN dRICh surface definitions -->
-    <opticalsurface name="MirrorSurface_DRICH" model="unified" finish="polishedfrontpainted" type="dielectric_dielectric">
+    <opticalsurface name="MirrorSurface_DRICH_OLD" model="unified" finish="polishedfrontpainted" type="dielectric_dielectric">
       <property name="REFLECTIVITY" coldim="2" values="
         2.04358*eV  0.867812
         2.0664*eV   0.865156
@@ -1102,6 +1102,13 @@
         1*eV  1
         4*eV  1
         7*eV  1
+        "/>
+    </opticalsurface>
+    <opticalsurface name="MirrorSurface_DRICH" model="unified" finish="polished" type="dielectric_metal">
+      <property name="REFLECTIVITY" coldim="2" values="
+        1*eV  0.9
+        4*eV  0.9
+        7*eV  0.9
         "/>
     </opticalsurface>
     <!-- END dRICh surface definitions -->
