@@ -166,6 +166,7 @@
   <!-- optimal single mirror config -->
   <!--mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="30.0*cm"  focus_tune_z="-40.0*cm"  /-->
   <!-- optimal dual mirror config (divergent splice) -->
+  <!-- TODO: recent rebase (11/18) probably caused this to no longer be an optimal configuration at all !! -->
   <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="80.0*cm"  focus_tune_z="-80.0*cm"  />
   <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="60.0*cm"  focus_tune_z="0.0*cm"    />
   <!-- alternative dual mirror config (divergent splice) -->
