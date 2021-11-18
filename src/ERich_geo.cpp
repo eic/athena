@@ -174,7 +174,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // who cares; material pointer can seemingly be '0', and the effective refractive index 
     // for all radiators will be assigned at the end by hand; FIXME: should assign it on 
     // per-photon basis, at birth, like standalone GEANT code does;
-    geometry->SetContainerVolume(detector, "GasVolume", 0, (G4LogicalVolume*)(0x0), 0, boundary);
+    auto radiator = geometry->SetContainerVolume(detector, "GasVolume", 0, 
+						 (G4LogicalVolume*)(0x0), 0, boundary);
+    radiator->SetAlternativeMaterialName(gasvolMat.ptr()->GetName());
   }
 
   // How about PlacedVolume::transformation2mars(), guys?; FIXME: make it simple for now, 
@@ -247,8 +249,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
     // This call will create a pair of flat refractive surfaces internally; FIXME: should make
     // a small gas gap at the upstream end of the gas volume;
-    geometry->AddFlatRadiator(detector, "Aerogel", 0, (G4LogicalVolume*)(0x1), 
-			      0, surface, aerogelThickness/mm);
+    auto radiator = geometry->AddFlatRadiator(detector, "Aerogel", 0, (G4LogicalVolume*)(0x1), 
+					      0, surface, aerogelThickness/mm);
+    radiator->SetAlternativeMaterialName(aerogelMat.ptr()->GetName());
   } 
 
   // filter placement and surface properties
@@ -268,7 +271,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     {
       // FIXME: create a small air gap in the geometry as well;
       auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+filterPV.position().z()-airGap), nx, ny);
-      geometry->AddFlatRadiator(detector, "Filter", 0, (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
+      auto radiator = geometry->AddFlatRadiator(detector, "Filter", 0, (G4LogicalVolume*)(0x2), 0, 
+						surface, filterThickness/mm);
+      radiator->SetAlternativeMaterialName(filterMat.ptr()->GetName());
     } 
   }
 

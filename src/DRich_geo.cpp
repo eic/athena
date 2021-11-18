@@ -131,6 +131,8 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     gasvolVis = vesselVis = desc.invisible();
   };
 
+  unsigned nmax = 6;
+
 
   // BUILD VESSEL ====================================================================
   /* - `vessel`: aluminum enclosure, the mother volume of the dRICh
@@ -240,9 +242,14 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // who cares; material pointer can seemingly be '0', and effective refractive index 
     // for all radiators will be assigned at the end by hand; FIXME: should assign it on 
     // per-photon basis, at birth, like standalone GEANT code does;
-    for(int isec=0; isec<nSectors; isec++) 
-      geometry->SetContainerVolume(detector, "GasVolume", isec, (G4LogicalVolume*)(0x0), 0, boundary);
-  }
+    for(int isec=0; isec<nmax/*nSectors*/; isec++) {
+      auto radiator = 
+	geometry->SetContainerVolume(detector, "GasVolume", isec, (G4LogicalVolume*)(0x0), 0, boundary);
+      // Well, do not want to intrduce yet another parameter -> a separate call here and in all 
+      // other places;
+      radiator->SetAlternativeMaterialName(gasvolMat.ptr()->GetName());
+    } //for isec
+  } 
 
   // How about PlacedVolume::transformation2mars(), guys?; FIXME: make it simple for now, 
   // assuming no rotations involved; [cm];
@@ -335,8 +342,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     
     // This call will create a pair of flat refractive surfaces internally; FIXME: should make
     // a small gas gap at the upstream end of the gas volume;
-    for(int isec=0; isec<nSectors; isec++) 
-      geometry->AddFlatRadiator(detector, "Aerogel", isec, (G4LogicalVolume*)(0x1), 0, surface, aerogelThickness/mm);
+    for(int isec=0; isec<nmax/*nSectors*/; isec++) {
+      auto radiator = geometry->AddFlatRadiator(detector, "Aerogel", isec, 
+						(G4LogicalVolume*)(0x1), 0, surface, aerogelThickness/mm);
+      radiator->SetAlternativeMaterialName(aerogelMat.ptr()->GetName());
+    } //for isec
   } 
 
   // filter placement and surface properties
@@ -356,14 +366,17 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       // FIXME: create a small air gap in the geometry as well;
       printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + filterPV.position().z()));
       auto surface = new FlatSurface((1/mm)*TVector3(0,0,gasvolume2master.z() + filterPV.position().z()), nx, ny);
-      for(int isec=0; isec<nSectors; isec++) 
-	geometry->AddFlatRadiator(detector, "Filter", isec, (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
+      for(int isec=0; isec<nmax/*nSectors*/; isec++) {
+	auto radiator = geometry->AddFlatRadiator(detector, "Filter", isec, 
+						  (G4LogicalVolume*)(0x2), 0, surface, filterThickness/mm);
+	radiator->SetAlternativeMaterialName(filterMat.ptr()->GetName());
+      } //for isec
     } 
   };
 
 
   // SECTOR LOOP //////////////////////////////////
-  for(int isec=0; isec<nSectors; isec++) {
+  for(int isec=0; isec<nmax/*nSectors*/; isec++) {
 
     // debugging filters, limiting the number of sectors
     if( (debug_mirror||debug_sensors||debug_optics) && isec!=0) continue;
@@ -677,7 +690,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // FIXME: ERICH_geo.cpp cut'n'paste; C2F6, aerogel, acrylic in this sequence; 
     const char *name[] = {"GasVolume", "Aerogel", "Filter"};
     //double         n[] = {     1.0000,    1.0170};//,   1.5017};
-    double         n[] = {    1.00080,    1.0190,   1.0000};//,   1.5017};
+    double         n[] = {    1.00080,    1.0190,   1.5017};
     //double         n[] = {     1.0000,    1.0200,   1.5017};
     //double n[] = {1.00080, 1.0170, 1.5017};
     
