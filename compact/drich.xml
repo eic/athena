@@ -164,14 +164,14 @@
   debug="DRICH_debug_mirror"
   >
   <!-- optimal single mirror config -->
-  <!--mirror  backplane="DRICH_window_thickness+5.0*cm"  focus_tune_x="40.0*cm"  focus_tune_z="-30.0*cm"  /-->
+  <!--mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="30.0*cm"  focus_tune_z="-40.0*cm"  /-->
   <!-- optimal dual mirror config (divergent splice) -->
-  <mirror  backplane="DRICH_window_thickness+5.0*cm"  focus_tune_x="80.0*cm"  focus_tune_z="-80.0*cm"  />
-  <mirror  backplane="DRICH_window_thickness+5.0*cm"  focus_tune_x="60.0*cm"  focus_tune_z="0.0*cm"    />
+  <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="80.0*cm"  focus_tune_z="-80.0*cm"  />
+  <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="60.0*cm"  focus_tune_z="0.0*cm"    />
   <!-- alternative dual mirror config (divergent splice) -->
   <!--
-  <mirror  backplane="DRICH_window_thickness+5.0*cm"  focus_tune_x="80.0*cm"  focus_tune_z="-80.0*cm"  />
-  <mirror  backplane="DRICH_window_thickness+5.0*cm"  focus_tune_x="70.0*cm"  focus_tune_z="-40.0*cm"  />
+  <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="80.0*cm"  focus_tune_z="-80.0*cm"  />
+  <mirror  backplane="DRICH_window_thickness+1.0*cm"  focus_tune_x="70.0*cm"  focus_tune_z="-40.0*cm"  />
   -->
 </mirrors>
 
