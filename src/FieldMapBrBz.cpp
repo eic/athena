@@ -189,8 +189,8 @@ static Ref_t create_field_map_brbz(Detector & /*lcdd*/, xml::Handle_t handle)
 
     if( !fs::exists(fs::path(field_map_file))  ) {
       auto ret = std::system(("mkdir -p fieldmaps && "
-                             "wget " +
-                             field_map_url + " -O " + field_map_file).c_str());
+                             "curl --retry 5 -f " +
+                             field_map_url + " -o " + field_map_file).c_str());
 
       if (!fs::exists(fs::path(field_map_file))) {
         std::cerr << "ERROR: file, " << field_map_file << ", does not exist\n";

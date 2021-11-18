@@ -132,6 +132,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
   // snout solids
   double boreDelta = vesselRmin1 - vesselRmin0;
+  double snoutDelta = vesselRmax1 - vesselRmax0;
   Cone vesselSnout(
       snoutLength/2.0,
       vesselRmin0,
@@ -219,6 +220,59 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   sens.setType("photoncounter");
 
 
+  // BUILD RADIATOR ====================================================================
+
+  // attributes
+  double airGap = 0.01*mm; // air gap between aerogel and filter (FIXME? actually it's currently a gas gap)
+
+  // solid and volume: create aerogel and filter
+  Cone aerogelSolid(
+      aerogelThickness/2,
+      radiatorRmin,
+      radiatorRmax,
+      radiatorRmin + boreDelta  * aerogelThickness / vesselLength,
+      radiatorRmax + snoutDelta * aerogelThickness / snoutLength
+      );
+  Cone filterSolid(
+      filterThickness/2,
+      radiatorRmin + boreDelta  * (aerogelThickness + airGap) / vesselLength,
+      radiatorRmax + snoutDelta * (aerogelThickness + airGap) / snoutLength,
+      radiatorRmin + boreDelta  * (aerogelThickness + airGap + filterThickness) / vesselLength,
+      radiatorRmax + snoutDelta * (aerogelThickness + airGap + filterThickness) / snoutLength
+      );
+
+  Volume aerogelVol( detName+"_aerogel", aerogelSolid, aerogelMat );
+  Volume filterVol(  detName+"_filter",  filterSolid,  filterMat );
+  aerogelVol.setVisAttributes(aerogelVis);
+  filterVol.setVisAttributes(filterVis);
+
+  // aerogel placement and surface properties
+  // TODO [low-priority]: define skin properties for aerogel and filter
+  auto radiatorPos = Position(0., 0., radiatorFrontplane) + originFront;
+  auto aerogelPV = gasvolVol.placeVolume(aerogelVol,
+        Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
+      * RotationY(radiatorPitch) // change polar angle to specified pitch // FIXME: probably broken (not yet in use anyway)
+      );
+  DetElement aerogelDE(det, "aerogel_de", 0);
+  aerogelDE.setPlacement(aerogelPV);
+  //SkinSurface aerogelSkin(desc, aerogelDE, "mirror_optical_surface", aerogelSurf, aerogelVol);
+  //aerogelSkin.isValid();
+
+  // filter placement and surface properties
+  if(!debug_optics) {
+    auto filterPV = gasvolVol.placeVolume(filterVol,
+          Translation3D(0., 0., airGap) // add an air gap
+        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
+        * RotationY(radiatorPitch) // change polar angle
+        * Translation3D(0., 0., (aerogelThickness+filterThickness)/2.) // move to aerogel backplane
+        );
+    DetElement filterDE(det, "filter_de", 0);
+    filterDE.setPlacement(filterPV);
+    //SkinSurface filterSkin(desc, filterDE, "mirror_optical_surface", filterSurf, filterVol);
+    //filterSkin.isValid();
+  };
+
+
   // SECTOR LOOP //////////////////////////////////
   for(int isec=0; isec<nSectors; isec++) {
 
@@ -229,43 +283,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     double sectorRotation = isec * 360/nSectors * degree;
     std::string secName = "sec" + std::to_string(isec);
 
-
-    // BUILD RADIATOR ====================================================================
-
-    // solid and volume: create aerogel and filter sectors
-    Tube aerogelSolid(radiatorRmin, radiatorRmax, aerogelThickness/2, -radiatorPhiw/2.0, radiatorPhiw/2.0);
-    Tube filterSolid( radiatorRmin, radiatorRmax, filterThickness/2,  -radiatorPhiw/2.0, radiatorPhiw/2.0);
-    Volume aerogelVol( detName+"_aerogel_"+secName, aerogelSolid, aerogelMat );
-    Volume filterVol(  detName+"_filter_"+secName,  filterSolid,  filterMat );
-    aerogelVol.setVisAttributes(aerogelVis);
-    filterVol.setVisAttributes(filterVis);
-
-    // aerogel placement and surface properties
-    // TODO [low-priority]: define skin properties for aerogel and filter
-    auto radiatorPos = Position(0., 0., radiatorFrontplane) + originFront;
-    auto aerogelPV = gasvolVol.placeVolume(aerogelVol,
-          RotationZ(sectorRotation) // rotate about beam axis to sector
-        * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
-        * RotationY(radiatorPitch) // change polar angle to specified pitch
-        );
-    DetElement aerogelDE(det, Form("aerogel_de%d", isec), isec);
-    aerogelDE.setPlacement(aerogelPV);
-    //SkinSurface aerogelSkin(desc, aerogelDE, Form("mirror_optical_surface%d", isec), aerogelSurf, aerogelVol);
-    //aerogelSkin.isValid();
-
-    // filter placement and surface properties
-    if(!debug_optics) {
-      auto filterPV = gasvolVol.placeVolume(filterVol,
-            RotationZ(sectorRotation) // rotate about beam axis to sector
-          * Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
-          * RotationY(radiatorPitch) // change polar angle
-          * Translation3D(0., 0., (aerogelThickness+filterThickness)/2.) // move to aerogel backplane
-          );
-      DetElement filterDE(det, Form("filter_de%d", isec), isec);
-      filterDE.setPlacement(filterPV);
-      //SkinSurface filterSkin(desc, filterDE, Form("mirror_optical_surface%d", isec), filterSurf, filterVol);
-      //filterSkin.isValid();
-    };
 
 
     // BUILD SENSORS ====================================================================
@@ -370,7 +387,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
           // properties
           sensorPV.addPhysVolID("sector", isec).addPhysVolID("module", imod);
-          DetElement sensorDE(det, Form("sensor_de%d_%d", isec, imod), 10000*isec+imod);
+          DetElement sensorDE(det, Form("sensor_de%d_%d", isec, imod), (imod<<3)|isec ); // id must match IRTAlgorithm usage
           sensorDE.setPlacement(sensorPV);
           if(!debug_optics) {
             SkinSurface sensorSkin(desc, sensorDE, Form("sensor_optical_surface%d", isec), sensorSurf, sensorVol);
@@ -446,17 +463,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     double xF = xS + focusTuneX;
     FocusMirror(zF,xF,B);
 
-    /*
-    // print some calculated parameters, viz. mirror attributes
-    //printf("(zC,xC) = ( %.2f, %.2f )\n",zC,xC);
-    //printf("zS = %f\n",zS);
-    //printf("xS = %f\n",xS);
-    //printf("B = %f\n",B);
-    printf("zM = %f\n",zM);
-    printf("xM = %f\n",xM);
-    printf("rM = %f\n",rM);
-    */
-
     // re-define mirror attributes to be w.r.t vessel front plane
     double mirrorCenterZ = zM - vesselZmin;
     double mirrorCenterX = xM;
@@ -480,6 +486,18 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
         -40*degree,
         40*degree
         );
+
+    /* CAUTION: if any of the relative placements or boolean operations below
+     * are changed, you MUST make sure this does not break access to the sphere
+     * primitive and positioning in Juggler `IRTAlgorithm`; cross check the
+     * mirror sphere attributes carefully!
+     */
+    /*
+    // PRINT MIRROR ATTRIBUTES (before any sector z-rotation)
+    printf("zM = %f\n",zM); // sphere centerZ, w.r.t. IP
+    printf("xM = %f\n",xM); // sphere centerX, w.r.t. IP
+    printf("rM = %f\n",rM); // sphere radius
+    */
 
     // mirror placement transformation (note: transformations are in reverse order)
     auto mirrorPos = Position(mirrorCenterX, 0., mirrorCenterZ) + originFront;

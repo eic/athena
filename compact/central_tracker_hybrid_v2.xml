@@ -285,14 +285,14 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="InnerTrackerEndcapMod1_zmin"  value="InnerTrackerEndcap_zmin" />
     <constant name="InnerTrackerEndcapMod1_rmin"  value="InnerTrackerEndcap_rmin" />
     <constant name="InnerTrackerEndcapMod1_rmax"  value="min(InnerTrackerEndcapMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
-    <constant name="InnerTrackerEndcapMod1_x1"    value="2 * InnerTrackerEndcapMod1_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="InnerTrackerEndcapMod1_x1"    value="2 * InnerTrackerEndcapMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod1_x2"    value="2 * InnerTrackerEndcapMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod1_y"     value="InnerTrackerEndcapMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - InnerTrackerEndcapMod1_rmin" />
 
     <constant name="InnerTrackerEndcapMod2_zmin"  value="InnerTrackerEndcapMod1_zmin + 1 * InnerTrackerEndcap_offset" />
     <constant name="InnerTrackerEndcapMod2_rmin"  value="InnerTrackerEndcap_rmin" />
     <constant name="InnerTrackerEndcapMod2_rmax"  value="min(InnerTrackerEndcapMod2_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
-    <constant name="InnerTrackerEndcapMod2_x1"    value="2 * InnerTrackerEndcapMod2_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="InnerTrackerEndcapMod2_x1"    value="2 * InnerTrackerEndcapMod2_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod2_x2"    value="2 * InnerTrackerEndcapMod2_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod2_y"     value="InnerTrackerEndcapMod2_rmax * cos(SiTrackerEndcapMod_angle/2) - InnerTrackerEndcapMod2_rmin" />
 
@@ -580,7 +580,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="MedialTrackerEndcapPMod1_zmin"  value="MedialTrackerEndcap_zmin" />
     <constant name="MedialTrackerEndcapPMod1_rmin"  value="MedialTrackerEndcapP_rmin" />
     <constant name="MedialTrackerEndcapPMod1_rmax"  value="min(MedialTrackerEndcapPMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
-    <constant name="MedialTrackerEndcapPMod1_x1"    value="2 * MedialTrackerEndcapPMod1_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="MedialTrackerEndcapPMod1_x1"    value="2 * MedialTrackerEndcapPMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapPMod1_x2"    value="2 * MedialTrackerEndcapPMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapPMod1_y"     value="MedialTrackerEndcapPMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - MedialTrackerEndcapPMod1_rmin" />
 
@@ -591,7 +591,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="MedialTrackerEndcapNMod1_zmin"  value="MedialTrackerEndcap_zmin" />
     <constant name="MedialTrackerEndcapNMod1_rmin"  value="MedialTrackerEndcapN_rmin" />
     <constant name="MedialTrackerEndcapNMod1_rmax"  value="min(MedialTrackerEndcapNMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
-    <constant name="MedialTrackerEndcapNMod1_x1"    value="2 * MedialTrackerEndcapNMod1_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="MedialTrackerEndcapNMod1_x1"    value="2 * MedialTrackerEndcapNMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapNMod1_x2"    value="2 * MedialTrackerEndcapNMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapNMod1_y"     value="MedialTrackerEndcapNMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - MedialTrackerEndcapNMod1_rmin" />
 
@@ -778,7 +778,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="OuterTrackerEndcapPMod1_zmin" value="OuterTrackerEndcapP_zmin" />
     <constant name="OuterTrackerEndcapPMod1_rmin" value="OuterTrackerEndcapPMod1_zmin * CentralTrackingRegionP_tan * 0.99" />
     <constant name="OuterTrackerEndcapPMod1_rmax"  value="SiTrackerCyl_rmin" />
-    <constant name="OuterTrackerEndcapPMod1_x1"    value="2 * OuterTrackerEndcapPMod1_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="OuterTrackerEndcapPMod1_x1"    value="2 * OuterTrackerEndcapPMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod1_x2"    value="2 * OuterTrackerEndcapPMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod1_y"     value="OuterTrackerEndcapPMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - OuterTrackerEndcapPMod1_rmin" />
     <constant name="OuterTrackerEndcapPLayer1_rmin"  value="OuterTrackerEndcapPMod1_rmin - 1*um" />
@@ -788,7 +788,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="OuterTrackerEndcapPMod2_zmin" value="OuterTrackerEndcapP_zmin + 1 * OuterTrackerEndcapP_offset" />
     <constant name="OuterTrackerEndcapPMod2_rmin" value="OuterTrackerEndcapPMod2_zmin * CentralTrackingRegionP_tan * 0.99" />
     <constant name="OuterTrackerEndcapPMod2_rmax"  value="SiTrackerCyl_rmin" />
-    <constant name="OuterTrackerEndcapPMod2_x1"    value="2 * OuterTrackerEndcapPMod2_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="OuterTrackerEndcapPMod2_x1"    value="2 * OuterTrackerEndcapPMod2_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod2_x2"    value="2 * OuterTrackerEndcapPMod2_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod2_y"     value="OuterTrackerEndcapPMod2_rmax * cos(SiTrackerEndcapMod_angle/2) - OuterTrackerEndcapPMod2_rmin" />
     <constant name="OuterTrackerEndcapPLayer2_rmin"  value="OuterTrackerEndcapPMod2_rmin - 1*um" />
@@ -798,7 +798,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="OuterTrackerEndcapPMod3_zmin" value="OuterTrackerEndcapP_zmin + 2 * OuterTrackerEndcapP_offset" />
     <constant name="OuterTrackerEndcapPMod3_rmin" value="OuterTrackerEndcapPMod3_zmin * CentralTrackingRegionP_tan * 1.00" />
     <constant name="OuterTrackerEndcapPMod3_rmax"  value="SiTrackerCyl_rmin" />
-    <constant name="OuterTrackerEndcapPMod3_x1"    value="2 * OuterTrackerEndcapPMod3_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="OuterTrackerEndcapPMod3_x1"    value="2 * OuterTrackerEndcapPMod3_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod3_x2"    value="2 * OuterTrackerEndcapPMod3_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapPMod3_y"     value="OuterTrackerEndcapPMod3_rmax * cos(SiTrackerEndcapMod_angle/2) - OuterTrackerEndcapPMod3_rmin" />
     <constant name="OuterTrackerEndcapPLayer3_rmin"  value="OuterTrackerEndcapPMod3_rmin - 1*um" />
@@ -816,7 +816,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="OuterTrackerEndcapNMod1_zmin" value="OuterTrackerEndcapN_zmin" />
     <constant name="OuterTrackerEndcapNMod1_rmin" value="OuterTrackerEndcapNMod1_zmin * CentralTrackingRegionN_tan * 1.00" />
     <constant name="OuterTrackerEndcapNMod1_rmax"  value="SiTrackerCyl_rmin" />
-    <constant name="OuterTrackerEndcapNMod1_x1"    value="2 * OuterTrackerEndcapNMod1_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="OuterTrackerEndcapNMod1_x1"    value="2 * OuterTrackerEndcapNMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapNMod1_x2"    value="2 * OuterTrackerEndcapNMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapNMod1_y"     value="OuterTrackerEndcapNMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - OuterTrackerEndcapNMod1_rmin" />
     <constant name="OuterTrackerEndcapNLayer1_rmin"  value="OuterTrackerEndcapNMod1_rmin - 1*um" />
@@ -826,7 +826,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="OuterTrackerEndcapNMod2_zmin" value="OuterTrackerEndcapN_zmin + 1 * OuterTrackerEndcapN_offset" />
     <constant name="OuterTrackerEndcapNMod2_rmin" value="OuterTrackerEndcapNMod2_zmin * CentralTrackingRegionN_tan * 1.00" />
     <constant name="OuterTrackerEndcapNMod2_rmax"  value="SiTrackerCyl_rmin" />
-    <constant name="OuterTrackerEndcapNMod2_x1"    value="2 * OuterTrackerEndcapNMod2_rmin * sin(SiTrackerEndcapMod_angle/2)" />
+    <constant name="OuterTrackerEndcapNMod2_x1"    value="2 * OuterTrackerEndcapNMod2_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapNMod2_x2"    value="2 * OuterTrackerEndcapNMod2_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="OuterTrackerEndcapNMod2_y"     value="OuterTrackerEndcapNMod2_rmax * cos(SiTrackerEndcapMod_angle/2) - OuterTrackerEndcapNMod2_rmin" />
     <constant name="OuterTrackerEndcapNLayer2_rmin"  value="OuterTrackerEndcapNMod2_rmin - 1*um" />
@@ -996,14 +996,14 @@ total X0 0.24% per disk layer （4 sectors per disk):
 
     <comment> Parameters for the "ring" GEMS around the silicon tracker, which are all identical </comment>
     <constant name="GEMEndcapRingMod_rmin"          value="SiTrackerSupportCyl_rmax + GEMFrameBotEdge_width" />
-    <constant name="GEMEndcapRingMod_rmax"          value="CentralTrackingRegion_rmax - GEMFrameTopEdge_width * 1.3" />
-    <constant name="GEMEndcapRingMod_x1"            value="2 * GEMEndcapRingMod_rmin * sin(GEMEndcapMod_angle/2)" />
+    <constant name="GEMEndcapRingMod_rmax"          value="min(min(GEMEndcapPDisk1_zmin, GEMEndcapN_zmin) * TrackerMainDiagonal_tan * 0.995, CentralTrackingRegion_rmax) - GEMFrameTopEdge_width" />
+    <constant name="GEMEndcapRingMod_x1"            value="2 * GEMEndcapRingMod_rmin * tan(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingMod_x2"            value="2 * GEMEndcapRingMod_rmax * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingMod_y"             value="GEMEndcapRingMod_rmax * cos(GEMEndcapMod_angle/2) - GEMEndcapRingMod_rmin" />
     <constant name="GEMEndcapRingModBotFrame_rmin"  value="SiTrackerSupportCyl_rmax" />
     <constant name="GEMEndcapRingModBotFrame_y"     value="GEMFrameBotEdge_width" />
     <constant name="GEMEndcapRingModBotFrame_rmax"  value="(GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y)/cos(GEMEndcapMod_angle/2)" />
-    <constant name="GEMEndcapRingModBotFrame_x1"    value="2 * GEMEndcapRingModBotFrame_rmin * sin(GEMEndcapMod_angle/2)" />
+    <constant name="GEMEndcapRingModBotFrame_x1"    value="2 * GEMEndcapRingModBotFrame_rmin * tan(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingModBotFrame_x2"    value="2 * GEMEndcapRingModBotFrame_rmax * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingModTopFrame_rmin"  value="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y" />
     <constant name="GEMEndcapRingModTopFrame_y"     value="GEMFrameTopEdge_width" />
@@ -1096,40 +1096,6 @@ total X0 0.24% per disk layer （4 sectors per disk):
         <trd x1="GEMSpoke_width/2" x2="GEMSpoke_width/2" z="GEMEndcapRingModSpoke_length/2"/>
         <module_component thickness="GEMSpoke_thickness" material="Mylar" vis="TrackerSupportVis"/>
       </module>
-      <module name="LargeModule" vis="TrackerGEMModuleVis">
-        <trd x1="GEMEndcapLargeMod_x1/2" x2="GEMEndcapLargeMod_x2/2" z="GEMEndcapLargeMod_y/2" />
-        <comment> going from back to front </comment>
-        <module_component name="exit_window"      thickness="GEMMylar_thickness"        material="Mylar" vis="TrackerServiceVis" />
-        <module_component name="exit_region"      thickness="GEMGas_thickness"          material="Ar10CO2"/>
-        <module_component name="readout_cu"       thickness="GEMCuElectrode_thickness"  material="Copper"/>
-        <module_component name="readout_foil"     thickness="GEMKapton_thickness"       material="Kapton"/>
-        <module_component name="induction_region" thickness="GEMGas_thickness"          material="Ar10CO2"/>
-        <module_component name="gem_foil_3_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
-        <module_component name="gem_foil_3"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
-        <module_component name="transfer_region2" thickness="GEMGas_thickness"                          material="Ar10CO2"/>
-        <module_component name="gem_foil_2_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
-        <module_component name="gem_foil_2"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
-        <module_component name="transfer_region1" thickness="GEMGas_thickness"                          material="Ar10CO2"/>
-        <module_component name="gem_foil_1_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
-        <module_component name="gem_foil_1"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
-        <module_component name="drift_region"     thickness="GEMDriftRegion_thickness"                  material="Ar10CO2" sensitive="true"/>
-        <module_component name="cathode_cu"       thickness="GEMCuElectrode_thickness"  material="Copper"/>
-        <module_component name="cathode_foil"     thickness="GEMKapton_thickness"       material="Kapton"/>
-        <module_component name="entrance_region"  thickness="GEMGas_thickness"          material="Ar10CO2"/>
-        <module_component name="entrance_window"  thickness="GEMMylar_thickness"        material="Mylar" vis="TrackerMPGDVis" />
-      </module>
-      <module name="LargeBotFrame" vis="TrackerSupportVis">
-        <trd x1="GEMEndcapLargeModBotFrame_x1/2" x2="GEMEndcapLargeModBotFrame_x2/2" z="GEMEndcapLargeModBotFrame_y/2" />
-        <module_component name="frame" thickness="GEMFrame_thickness" material="CarbonFiber" vis="TrackerSupportVis" />
-      </module>
-      <module name="LargeTopFrame" vis="TrackerSupportVis">
-        <trd x1="GEMEndcapLargeModTopFrame_x1/2" x2="GEMEndcapLargeModTopFrame_x2/2" z="GEMEndcapLargeModTopFrame_y/2" />
-        <module_component name="frame" thickness="GEMFrame_thickness" material="CarbonFiber" vis="TrackerSupportVis" />
-      </module>
-      <module name="LargeSpoke" vis="TrackerSupportVis">
-        <trd x1="GEMSpoke_width/2" x2="GEMSpoke_width/2" z="GEMEndcapLargeModSpoke_length/2"/>
-        <module_component thickness="GEMSpoke_thickness" material="Mylar" vis="TrackerSupportVis"/>
-      </module>
       <layer id="1">
         <envelope vis="TrackerLayerVis"
           rmin="GEMEndcapRingLayer_rmin"
@@ -1138,29 +1104,32 @@ total X0 0.24% per disk layer （4 sectors per disk):
           zstart="GEMEndcapPLayer1_zmin" />
         <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
         <ring 
-          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingModule" />
         <ring 
-          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingModule" />
+        <ring 
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingBotFrame" />
         <ring 
-          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingBotFrame" />
+        <ring 
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingTopFrame" />
         <ring 
-          r="GEMEndcapRingModSpoke_r"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="0"
-          phi0="GEMEndcapMod_angle/2"
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingTopFrame" />
+        <ring 
+          r="GEMEndcapRingModSpoke_r" zstart="0" dz="0"
+          nmodules="GEMEndcapMod_count/2" phi0="3*GEMEndcapMod_angle/2"
           module="RingSpoke" />
       </layer>
       <layer id="2">
@@ -1171,63 +1140,33 @@ total X0 0.24% per disk layer （4 sectors per disk):
           zstart="GEMEndcapPLayer2_zmin" />
         <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
         <ring 
-          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingModule" />
         <ring 
-          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingModule" />
+        <ring 
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingBotFrame" />
         <ring 
-          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingBotFrame" />
+        <ring 
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingTopFrame" />
         <ring 
-          r="GEMEndcapRingModSpoke_r"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="0"
-          phi0="GEMEndcapMod_angle/2"
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingTopFrame" />
+        <ring 
+          r="GEMEndcapRingModSpoke_r" zstart="0" dz="0"
+          nmodules="GEMEndcapMod_count/2" phi0="3*GEMEndcapMod_angle/2"
           module="RingSpoke" />
-      </layer>
-      <layer id="3">
-        <envelope vis="TrackerLayerVis"
-          rmin="GEMEndcapLargeLayer_rmin"
-          rmax="GEMEndcapLargeLayer_rmax"
-          length="GEMEndcapLayer_thickness"
-          zstart="GEMEndcapPLayer3_zmin" />
-        <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
-        <ring 
-          r="GEMEndcapLargeMod_rmin + GEMEndcapLargeMod_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
-          module="LargeModule" />
-        <ring 
-          r="GEMEndcapLargeModBotFrame_rmin + GEMEndcapLargeModBotFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
-          module="LargeBotFrame" />
-        <ring 
-          r="GEMEndcapLargeModTopFrame_rmin + GEMEndcapLargeModTopFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
-          module="LargeTopFrame" />
-        <ring 
-          r="GEMEndcapLargeModSpoke_r"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="0"
-          phi0="GEMEndcapMod_angle/2"
-          module="LargeSpoke" />
       </layer>
     </detector>
     <detector
@@ -1313,29 +1252,32 @@ total X0 0.24% per disk layer （4 sectors per disk):
           zstart="GEMEndcapNLayer1_zmin" />
         <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
         <ring 
-          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingModule" />
         <ring 
-          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingModule" />
+        <ring 
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingBotFrame" />
         <ring 
-          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingBotFrame" />
+        <ring 
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingTopFrame" />
         <ring 
-          r="GEMEndcapRingModSpoke_r"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="0"
-          phi0="GEMEndcapMod_angle/2"
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingTopFrame" />
+        <ring 
+          r="GEMEndcapRingModSpoke_r" zstart="0" dz="0"
+          nmodules="GEMEndcapMod_count/2" phi0="3*GEMEndcapMod_angle/2"
           module="RingSpoke" />
       </layer>
       <layer id="2">
@@ -1346,30 +1288,108 @@ total X0 0.24% per disk layer （4 sectors per disk):
           zstart="GEMEndcapNLayer2_zmin" />
         <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
         <ring 
-          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingModule" />
         <ring 
-          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2"
-          zstart="0"
-          nmodules="GEMEndcapMod_count"
-          dz="GEMEndcapMod_dz"
+          r="GEMEndcapRingMod_rmin + GEMEndcapRingMod_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingModule" />
+        <ring 
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
           module="RingBotFrame" />
         <ring 
-          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2"
+          r="GEMEndcapRingModBotFrame_rmin + GEMEndcapRingModBotFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingBotFrame" />
+        <ring 
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="GEMEndcapMod_angle" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingTopFrame" />
+        <ring 
+          r="GEMEndcapRingModTopFrame_rmin + GEMEndcapRingModTopFrame_y/2" zstart="0" dz="GEMEndcapMod_dz"
+          phi0="0*degree" dphi="GEMEndcapMod_angle" nmodules="GEMEndcapMod_count/2"
+          module="RingTopFrame" />
+        <ring 
+          r="GEMEndcapRingModSpoke_r" zstart="0" dz="0"
+          nmodules="GEMEndcapMod_count/2" phi0="3*GEMEndcapMod_angle/2"
+          module="RingSpoke" />
+      </layer>
+    </detector>
+    <detector
+      id="TrackerEndcapP_4_ID"
+      name="ForwardGEM"
+      type="athena_TrapEndcapTracker"
+      readout="GEMTrackerEndcapHits"
+      vis="TrackerVis"
+      reflect="false">
+      <module name="LargeModule" vis="TrackerGEMModuleVis">
+        <trd x1="GEMEndcapLargeMod_x1/2" x2="GEMEndcapLargeMod_x2/2" z="GEMEndcapLargeMod_y/2" />
+        <comment> going from back to front </comment>
+        <module_component name="exit_window"      thickness="GEMMylar_thickness"        material="Mylar" vis="TrackerServiceVis" />
+        <module_component name="exit_region"      thickness="GEMGas_thickness"          material="Ar10CO2"/>
+        <module_component name="readout_cu"       thickness="GEMCuElectrode_thickness"  material="Copper"/>
+        <module_component name="readout_foil"     thickness="GEMKapton_thickness"       material="Kapton"/>
+        <module_component name="induction_region" thickness="GEMGas_thickness"          material="Ar10CO2"/>
+        <module_component name="gem_foil_3_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
+        <module_component name="gem_foil_3"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
+        <module_component name="transfer_region2" thickness="GEMGas_thickness"                          material="Ar10CO2"/>
+        <module_component name="gem_foil_2_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
+        <module_component name="gem_foil_2"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
+        <module_component name="transfer_region1" thickness="GEMGas_thickness"                          material="Ar10CO2"/>
+        <module_component name="gem_foil_1_cu"    thickness="GEMCuElectrode_thickness * GEMAreaFactor"  material="Copper"/>
+        <module_component name="gem_foil_1"       thickness="GEMKapton_thickness * GEMAreaFactor"       material="Kapton"/>
+        <module_component name="drift_region"     thickness="GEMDriftRegion_thickness"                  material="Ar10CO2" sensitive="true"/>
+        <module_component name="cathode_cu"       thickness="GEMCuElectrode_thickness"  material="Copper"/>
+        <module_component name="cathode_foil"     thickness="GEMKapton_thickness"       material="Kapton"/>
+        <module_component name="entrance_region"  thickness="GEMGas_thickness"          material="Ar10CO2"/>
+        <module_component name="entrance_window"  thickness="GEMMylar_thickness"        material="Mylar" vis="TrackerMPGDVis" />
+      </module>
+      <module name="LargeBotFrame" vis="TrackerSupportVis">
+        <trd x1="GEMEndcapLargeModBotFrame_x1/2" x2="GEMEndcapLargeModBotFrame_x2/2" z="GEMEndcapLargeModBotFrame_y/2" />
+        <module_component name="frame" thickness="GEMFrame_thickness" material="CarbonFiber" vis="TrackerSupportVis" />
+      </module>
+      <module name="LargeTopFrame" vis="TrackerSupportVis">
+        <trd x1="GEMEndcapLargeModTopFrame_x1/2" x2="GEMEndcapLargeModTopFrame_x2/2" z="GEMEndcapLargeModTopFrame_y/2" />
+        <module_component name="frame" thickness="GEMFrame_thickness" material="CarbonFiber" vis="TrackerSupportVis" />
+      </module>
+      <module name="LargeSpoke" vis="TrackerSupportVis">
+        <trd x1="GEMSpoke_width/2" x2="GEMSpoke_width/2" z="GEMEndcapLargeModSpoke_length/2"/>
+        <module_component thickness="GEMSpoke_thickness" material="Mylar" vis="TrackerSupportVis"/>
+      </module>
+      <layer id="1">
+        <envelope vis="TrackerLayerVis"
+          rmin="GEMEndcapLargeLayer_rmin"
+          rmax="GEMEndcapLargeLayer_rmax"
+          length="GEMEndcapLayer_thickness"
+          zstart="GEMEndcapPLayer3_zmin" />
+        <layer_material surface="representing" binning="binPhi,binR" bins0="20*GEMEndcapMod_count" bins1="256"/>
+        <ring 
+          r="GEMEndcapLargeMod_rmin + GEMEndcapLargeMod_y/2"
           zstart="0"
           nmodules="GEMEndcapMod_count"
           dz="GEMEndcapMod_dz"
-          module="RingTopFrame" />
+          module="LargeModule" />
         <ring 
-          r="GEMEndcapRingModSpoke_r"
+          r="GEMEndcapLargeModBotFrame_rmin + GEMEndcapLargeModBotFrame_y/2"
+          zstart="0"
+          nmodules="GEMEndcapMod_count"
+          dz="GEMEndcapMod_dz"
+          module="LargeBotFrame" />
+        <ring 
+          r="GEMEndcapLargeModTopFrame_rmin + GEMEndcapLargeModTopFrame_y/2"
+          zstart="0"
+          nmodules="GEMEndcapMod_count"
+          dz="GEMEndcapMod_dz"
+          module="LargeTopFrame" />
+        <ring 
+          r="GEMEndcapLargeModSpoke_r"
           zstart="0"
           nmodules="GEMEndcapMod_count"
           dz="0"
           phi0="GEMEndcapMod_angle/2"
-          module="RingSpoke" />
+          module="LargeSpoke" />
       </layer>
     </detector>
   </detectors>

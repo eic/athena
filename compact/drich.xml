@@ -94,13 +94,14 @@
   filter; the filter is applied to the back of the aerogel, so that it separates
   the aerogel and gas radiators
 - dimensions:
+  - `frontplane`: front of the aerogel, w.r.t. front plane of the vessel envelope
+  - `rmin` and `rmax`: inner and outer radius (at the front plane; radial bounds are conical)
   - `phiw`: azimuthal width of wedge
   - `thickness`: radiator thickness, defined separately for aerogel and filter
-  - `frontplane`: front of the aerogel, w.r.t. front plane of the vessel envelope
   - `pitch`: controls the angle of the radiator (0=vertical)
 </documentation>
 <radiator
-  rmin="DRICH_rmin0 + DRICH_wall_thickness + 2.0*cm"
+  rmin="DRICH_rmin0 + DRICH_wall_thickness + 0.2*cm"
   rmax="DRICH_rmax0 - DRICH_wall_thickness - 0.2*cm"
   phiw="60*degree"
   frontplane="DRICH_window_thickness + 0.5*DRICH_aerogel_thickness"
@@ -142,16 +143,15 @@
   material="Acrylic_DRICH"
   surface="MirrorSurface_DRICH"
   vis="DRICH_mirror_vis"
-  backplane="DRICH_window_thickness + 5.0*cm"
+  backplane="DRICH_window_thickness + 1.0*cm"
   rmin="DRICH_rmin1 + DRICH_wall_thickness - 1.0*cm"
-  rmax="DRICH_rmax2 - DRICH_wall_thickness - 5.0*cm"
+  rmax="DRICH_rmax2 - DRICH_wall_thickness - 1.0*cm"
   phiw="59.5*degree"
   thickness="0.2*cm"
-  focus_tune_x="40.0*cm"
-  focus_tune_z="-30.0*cm"
+  focus_tune_x="30.0*cm"
+  focus_tune_z="-40.0*cm"
   debug="DRICH_debug_mirror"
   />
-
 
 <!-- /detectors/detector/sensors -->
 <documentation level="10">
@@ -205,14 +205,14 @@
     - `zmin`: z-plane cut
 </documentation>
 <sphere
-  centerz="-80.0 * cm"
+  centerz="-55.0 * cm"
   centerx="DRICH_rmax2 - 35.0*cm"
-  radius="100.0 * cm"
+  radius="85.0 * cm"
   debug="DRICH_debug_sensors"
   />
 <sphericalpatch
   phiw="18*degree"
-  rmin="DRICH_rmax1 + 0.0*cm"
+  rmin="DRICH_rmax1 + 5.0*cm"
   rmax="DRICH_rmax2 - 5.0*cm"
   zmin="DRICH_SnoutLength + 5.0*cm"
   />

@@ -427,8 +427,8 @@
       4.85156*eV  6.0*m
       6.19921*eV  6.0*m
       "/>
-    <!-- dRICh aerogel -->
-    <matrix name="RINDEX__Aerogel_DRICH" coldim="2" values="
+    <!-- dRICh aerogel, for density=0.11 g/cm3 (OLD versions are for 0.1g/cm3) -->
+    <matrix name="RINDEX__Aerogel_DRICH_OLD" coldim="2" values="
       1.87855*eV  1.01638
       1.96673*eV  1.01642
       2.0549*eV   1.01647
@@ -480,7 +480,59 @@
       6.11103*eV  1.02147
       6.19921*eV  1.02167
       "/>
-    <matrix name="ABSLENGTH__Aerogel_DRICH" coldim="2" values="
+    <matrix name="RINDEX__Aerogel_DRICH" coldim="2" values="
+      1.87855*eV  1.01852
+      1.96673*eV  1.01856
+      2.05490*eV  1.01861
+      2.14308*eV  1.01866
+      2.23126*eV  1.01871
+      2.31943*eV  1.01876
+      2.40761*eV  1.01881
+      2.49579*eV  1.01887
+      2.58396*eV  1.01893
+      2.67214*eV  1.01899
+      2.76032*eV  1.01905
+      2.84849*eV  1.01912
+      2.93667*eV  1.01919
+      3.02485*eV  1.01926
+      3.11302*eV  1.01933
+      3.20120*eV  1.01941
+      3.28938*eV  1.01948
+      3.37755*eV  1.01956
+      3.46573*eV  1.01965
+      3.55391*eV  1.01973
+      3.64208*eV  1.01982
+      3.73026*eV  1.01991
+      3.81844*eV  1.02001
+      3.90661*eV  1.02010
+      3.99479*eV  1.02020
+      4.08297*eV  1.02030
+      4.17114*eV  1.02041
+      4.25932*eV  1.02052
+      4.34750*eV  1.02063
+      4.43567*eV  1.02074
+      4.52385*eV  1.02086
+      4.61203*eV  1.02098
+      4.70020*eV  1.02111
+      4.78838*eV  1.02123
+      4.87656*eV  1.02136
+      4.96473*eV  1.02150
+      5.05291*eV  1.02164
+      5.14109*eV  1.02178
+      5.22927*eV  1.02193
+      5.31744*eV  1.02208
+      5.40562*eV  1.02223
+      5.49380*eV  1.02239
+      5.58197*eV  1.02255
+      5.67015*eV  1.02271
+      5.75833*eV  1.02288
+      5.84650*eV  1.02306
+      5.93468*eV  1.02324
+      6.02286*eV  1.02342
+      6.11103*eV  1.02361
+      6.19921*eV  1.02381
+      "/>
+    <matrix name="ABSLENGTH__Aerogel_DRICH_OLD" coldim="2" values="
       1.87855*eV  154*mm
       1.96673*eV  156.17*mm
       2.0549*eV   158.154*mm
@@ -532,7 +584,59 @@
       6.11103*eV  7.29168*mm
       6.19921*eV  6.69064*mm
       "/>
-    <matrix name="RAYLEIGH__Aerogel_DRICH" coldim="2" values="
+    <matrix name="ABSLENGTH__Aerogel_DRICH" coldim="2" values="
+      1.87855*eV  140.000*mm
+      1.96673*eV  141.973*mm
+      2.05490*eV  143.776*mm
+      2.14308*eV  145.431*mm
+      2.23126*eV  146.955*mm
+      2.31943*eV  148.364*mm
+      2.40761*eV  149.669*mm
+      2.49579*eV  150.882*mm
+      2.58396*eV  152.012*mm
+      2.67214*eV  153.067*mm
+      2.76032*eV  154.055*mm
+      2.84849*eV  154.982*mm
+      2.93667*eV  155.854*mm
+      3.02485*eV  156.674*mm
+      3.11302*eV  157.448*mm
+      3.20120*eV  158.180*mm
+      3.28938*eV  158.872*mm
+      3.37755*eV  159.528*mm
+      3.46573*eV  160.150*mm
+      3.55391*eV  160.742*mm
+      3.64208*eV  147.916*mm
+      3.73026*eV  128.139*mm
+      3.81844*eV  111.378*mm
+      3.90661*eV   97.121*mm
+      3.99479*eV   84.948*mm
+      4.08297*eV   74.518*mm
+      4.17114*eV   65.552*mm
+      4.25932*eV   57.819*mm
+      4.34750*eV   51.130*mm
+      4.43567*eV   45.327*mm
+      4.52385*eV   40.278*mm
+      4.61203*eV   35.873*mm
+      4.70020*eV   32.019*mm
+      4.78838*eV   28.641*mm
+      4.87656*eV   25.670*mm
+      4.96473*eV   23.054*mm
+      5.05291*eV   20.742*mm
+      5.14109*eV   18.698*mm
+      5.22927*eV   16.884*mm
+      5.31744*eV   15.272*mm
+      5.40562*eV   13.837*mm
+      5.49380*eV   12.557*mm
+      5.58197*eV   11.413*mm
+      5.67015*eV   10.389*mm
+      5.75833*eV    9.470*mm
+      5.84650*eV    8.645*mm
+      5.93468*eV    7.902*mm
+      6.02286*eV    7.233*mm
+      6.11103*eV    6.629*mm
+      6.19921*eV    6.082*mm
+      "/>
+    <matrix name="RAYLEIGH__Aerogel_DRICH_OLD" coldim="2" values="
       1.87855*eV  309.218*mm
       1.96673*eV  257.383*mm
       2.0549*eV   215.968*mm
@@ -583,6 +687,58 @@
       6.02286*eV  2.92644*mm
       6.11103*eV  2.76144*mm
       6.19921*eV  2.607*mm
+      "/>
+    <matrix name="RAYLEIGH__Aerogel_DRICH" coldim="2" values="
+      1.87855*eV  281.107*mm
+      1.96673*eV  233.984*mm
+      2.05490*eV  196.334*mm
+      2.14308*eV  165.962*mm
+      2.23126*eV  141.242*mm
+      2.31943*eV  120.958*mm
+      2.40761*eV  104.188*mm
+      2.49579*eV   90.226*mm
+      2.58396*eV   78.527*mm
+      2.67214*eV   68.663*mm
+      2.76032*eV   60.301*mm
+      2.84849*eV   53.174*mm
+      2.93667*eV   47.070*mm
+      3.02485*eV   41.816*mm
+      3.11302*eV   37.277*mm
+      3.20120*eV   33.336*mm
+      3.28938*eV   29.903*mm
+      3.37755*eV   26.900*mm
+      3.46573*eV   24.265*mm
+      3.55391*eV   21.946*mm
+      3.64208*eV   19.896*mm
+      3.73026*eV   18.080*mm
+      3.81844*eV   16.468*mm
+      3.90661*eV   15.030*mm
+      3.99479*eV   13.746*mm
+      4.08297*eV   12.596*mm
+      4.17114*eV   11.564*mm
+      4.25932*eV   10.637*mm
+      4.34750*eV    9.799*mm
+      4.43567*eV    9.043*mm
+      4.52385*eV    8.358*mm
+      4.61203*eV    7.738*mm
+      4.70020*eV    7.172*mm
+      4.78838*eV    6.659*mm
+      4.87656*eV    6.191*mm
+      4.96473*eV    5.762*mm
+      5.05291*eV    5.370*mm
+      5.14109*eV    5.011*mm
+      5.22927*eV    4.681*mm
+      5.31744*eV    4.379*mm
+      5.40562*eV    4.100*mm
+      5.49380*eV    3.844*mm
+      5.58197*eV    3.606*mm
+      5.67015*eV    3.386*mm
+      5.75833*eV    3.184*mm
+      5.84650*eV    2.996*mm
+      5.93468*eV    2.822*mm
+      6.02286*eV    2.660*mm
+      6.11103*eV    2.510*mm
+      6.19921*eV    2.370*mm
       "/>
     <!-- dRICh acrylic -->
     <matrix name="RINDEX__Acrylic_DRICH" coldim="2" values="
@@ -753,11 +909,20 @@
       <property name="RINDEX"    ref="RINDEX__C4F10_ERICH"/>
       <property name="ABSLENGTH" ref="ABSLENGTH__C4F10_ERICH"/>
     </material>
-    <material name="Aerogel_DRICH">
-      <D type="density" value="0.1" unit="g/cm3"/>
+    <material name="Aerogel_DRICH_OLD">
+      <D type="density" value="0.100" unit="g/cm3"/>
       <comment> n_air = [dens(Si02)-dens(aerogel)] / [dens(Si02)-dens(Air) ] </comment>
       <fraction n="    (2.32-0.1) / (2.32-0.0012)" ref="Air"/>
       <fraction n="1 - (2.32-0.1) / (2.32-0.0012)" ref="SiliconDioxide"/>
+      <property name="RINDEX"    ref="RINDEX__Aerogel_DRICH_OLD"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel_DRICH_OLD"/>
+      <property name="RAYLEIGH"  ref="RAYLEIGH__Aerogel_DRICH_OLD"/>
+    </material>
+    <material name="Aerogel_DRICH">
+      <D type="density" value="0.110" unit="g/cm3"/>
+      <comment> n_air = [dens(Si02)-dens(aerogel)] / [dens(Si02)-dens(Air) ] </comment>
+      <fraction n="    (2.32-0.11) / (2.32-0.0012)" ref="Air"/>
+      <fraction n="1 - (2.32-0.11) / (2.32-0.0012)" ref="SiliconDioxide"/>
       <property name="RINDEX"    ref="RINDEX__Aerogel_DRICH"/>
       <property name="ABSLENGTH" ref="ABSLENGTH__Aerogel_DRICH"/>
       <property name="RAYLEIGH"  ref="RAYLEIGH__Aerogel_DRICH"/>

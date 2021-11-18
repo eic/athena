@@ -38,7 +38,7 @@ long load_file(
   if (!fs::exists(fs::path(file))) {
     std::string parent_path = fs::path(file).parent_path();
     auto ret = std::system(("mkdir -p " + parent_path + " && "
-                            "wget " + url + " -O " + file).c_str());
+                            "curl --retry 5 -f " + url + " -o " + file).c_str());
     if (!fs::exists(fs::path(file))) {
       std::cerr << "ERROR: file, " << file << ", does not exist\n";
       std::quick_exit(1);

@@ -311,6 +311,13 @@ Examples:
     <constant name="Eta3_9_tan"       value="tan(2*atan(exp(-3.9)))" />
     <constant name="Eta4_0_tan"       value="tan(2*atan(exp(-4.0)))" />
     <constant name="Eta4_1_tan"       value="tan(2*atan(exp(-4.1)))" />
+    <constant name="Eta4_2_tan"       value="tan(2*atan(exp(-4.2)))" />
+    <constant name="Eta4_3_tan"       value="tan(2*atan(exp(-4.3)))" />
+    <constant name="Eta4_4_tan"       value="tan(2*atan(exp(-4.4)))" />
+    <constant name="Eta4_5_tan"       value="tan(2*atan(exp(-4.5)))" />
+    <constant name="Eta4_6_tan"       value="tan(2*atan(exp(-4.6)))" />
+    <constant name="Eta4_7_tan"       value="tan(2*atan(exp(-4.7)))" />
+    <constant name="Eta4_8_tan"       value="tan(2*atan(exp(-4.8)))" />
 
     <comment>Solenoid option</comment>
 
@@ -381,11 +388,11 @@ Examples:
     <constant name="ForwardPIDRegion_zmin"        value="CentralTrackingRegionP_zmax" />
     <constant name="ForwardPIDRegion_length"      value="140.0*cm" />
     <comment> tangent of the opening angle at the front and back of the RICH </comment>
-    <constant name="ForwardPIDRegion_tan1"        value="CentralTrackingRegionP_tan * 1.00" />
-    <constant name="ForwardPIDRegion_tan2"        value="Eta3_6_tan * 1.01" />
+    <constant name="ForwardPIDRegion_tan1"        value="CentralTrackingRegionP_tan * 0.88" />
+    <constant name="ForwardPIDRegion_tan2"        value="Eta3_6_tan * 0.89" />
 
     <constant name="BackwardPIDRegion_zmin"       value="CentralTrackingRegionN_zmax" />
-    <constant name="BackwardPIDRegion_tan"        value="CentralTrackingRegionN_tan" />
+    <constant name="BackwardPIDRegion_tan"        value="CentralTrackingRegionN_tan * 0.92" />
     <constant name="BackwardPIDRegion_length"     value="60.0*cm" />
     <constant name="BackwardPIDRegion_rmax"       value="CentralTrackingRegion_rmax" />
 
@@ -429,7 +436,12 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
 
     <constant name="EcalEndcapN_zmin"               value="BackwardPIDRegion_zmin + BackwardInnerEndcapRegion_length"/>
     <constant name="EcalEndcapN_length"             value="60*cm" />
-    <constant name="EcalEndcapN_rmin"               value="max((EcalEndcapN_zmin + EcalEndcapN_length) * tan(abs(CrossingAngle)) + 15.5 * mm, 5*cm)" />
+    <comment>
+      rmin1: rmin round electron pipe (ignoring the hadron pipe)
+      rmin2: rmin around both beam pipes
+    </comment>
+    <constant name="EcalEndcapN_rmin1"               value="Eta4_6_tan * EcalEndcapN_zmin" />
+    <constant name="EcalEndcapN_rmin2"               value="Eta4_1_tan * EcalEndcapN_zmin" />
     <constant name="EcalEndcapN_rmax"               value="CentralTrackingRegion_rmax" />
 
     <constant name="EcalBarrelRegion_thickness"     value="45.0*cm"/>

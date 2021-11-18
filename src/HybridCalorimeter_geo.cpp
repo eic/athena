@@ -40,7 +40,9 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     auto air_material = desc.material("Air");
 
     double ROut = desc.constantAsDouble("EcalEndcapN_rmax");
-    double RIn = desc.constantAsDouble("EcalEndcapN_rmin");
+    double RIn_el = desc.constantAsDouble("EcalEndcapN_rmin1");
+    double ionCutout_dphi = desc.constantAsDouble("EcalEndcapNIonCutout_dphi");
+    double RIn = desc.constantAsDouble("EcalEndcapN_rmin2");
     double SizeZ = desc.constantAsDouble("EcalEndcapN_thickness");
     double thickness = desc.constantAsDouble("EcalEndcapN_thickness");
     double trans_radius = desc.constantAsDouble("EcalEndcapNCrystal_rmax");
@@ -57,23 +59,35 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     double Crystal_z0 = desc.constantAsDouble("CrystalModule_z0");
 
     // RIn and ROut will define outer tube embedding the calorimeter
-    // centers_rin/out define the maximum radius of module centers
+    // centers_rmin/out define the maximum radius of module centers
     // so that modules are not overlapping with mother tube volume
-    double hypotenuse = sqrt(0.5 * glass_distance * glass_distance);
-    double centers_rin = RIn + hypotenuse + 1*mm;
-    double centers_rout = ROut - hypotenuse - 1*mm;
+    const double glassHypotenuse = std::hypot(glass_distance, glass_distance)/2;
+    const double crystalHypotenuse = glassHypotenuse/2;
+    // Offset these values a bit so we don't miss edge-blocks
+    const double glassCenters_rmax  = ROut - glassHypotenuse + 1 * mm;
+    const double crystalCenters_rmin = RIn + crystalHypotenuse - 1 * mm;
+    // Also limits of the inner crystal blocks fill
+    const double cutout_tan = tan(ionCutout_dphi/2);
+    const double cutout_rmin = RIn_el + crystalHypotenuse - 1 * mm;
 
-    const double Crystal_offset = -0.5*(Crystal_thickness - thickness);
+    // Offset to align the modules at the zmin of the endcap,
+    const double Crystal_offset = -0.5 * (Crystal_thickness - thickness);
     const double Glass_offset = -0.5*(Glass_thickness - thickness);
 
     // envelope
-
-    // Assembly assembly(detName);
-
-    Tube outer_tube(RIn, ROut, SizeZ / 2.0, 0., 360.0 * deg);
-    Volume ecal_vol("negative_ecal", outer_tube, air_material);
+    // consists of an glass tube of the full thickness, and a crystal inner tube
+    // for the crystal that allows us to get closet to the beampipe without
+    // overlaps, and a partial electron tube that allows us to get closer to the
+    // electron beampipe in the region where there is no ion beampipe
+    Tube glass_tube(min(RIn + glassHypotenuse*2, trans_radius), ROut, SizeZ / 2.0, 0., 360.0 * deg);
+    Tube crystal_tube(RIn, min(RIn + glassHypotenuse*2, trans_radius), Crystal_thickness/ 2.0, 0., 360.0 * deg);
+    Tube electron_tube(RIn_el, RIn, Crystal_thickness / 2., ionCutout_dphi / 2., 360.0 * deg - ionCutout_dphi / 2);
+    UnionSolid outer_envelope(glass_tube, crystal_tube, Position(0,0,Crystal_offset));
+    UnionSolid envelope(outer_envelope, electron_tube, Position(0,0,Crystal_offset));
+    Volume ecal_vol("negative_ecal", envelope, air_material);
     ecal_vol.setVisAttributes(desc.visAttributes("HybridEcalOuterVis"));
 
+    // TODO why 1cm and not something else?
     double Glass_OuterR = ROut - 1 * cm ;
     double Glass_InnerR = trans_radius;
 
@@ -91,9 +105,11 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
     // GLASS
     double diameter = 2 * Glass_OuterR;
 
-    // How many towers do we have per row/columnt?
-    // Add a gap + diameter as if we have N towers, we have N-1 gaps;
-    int towersInRow = std::ceil((diameter + Glass_Gap) /  (Glass_Width + Glass_Gap));
+    // Can we fit an even or odd amount of glass blocks within our rmax?
+    // This determines the transition points between crystal and glass as we need the
+    // outer crystal arangement to be in multiples of 2 (aligned with glass)
+    const int towersInRow = std::ceil((diameter + Glass_Gap) /  (Glass_Width + Glass_Gap));
+    const bool align_even = (towersInRow % 2);
 
     // Is it odd or even number of towersInRow
     double leftTowerPos, topTowerPos;
@@ -114,109 +130,39 @@ static Ref_t create_detector(Detector& desc, xml::Handle_t handle, SensitiveDete
 
     int moduleIndex = 0;
 
-//    fmt::print("\nCE EMCAL GLASS SQUARE START\n");
-//    fmt::print("Glass_thickness = {} cm;\n", Glass_thickness / cm);
-//    fmt::print("Glass_Width     = {} cm;\n", Glass_Width / cm);
-//    fmt::print("Glass_Gap       = {} cm;\n", Glass_Gap / cm);
-//    fmt::print("Glass_InnerR    = {} cm;\n", Glass_InnerR / cm);
-//    fmt::print("Glass_OuterR    = {} cm;\n", Glass_OuterR / cm);
-//    fmt::print("Glass_PosZ      = {} cm;\n", glass_shift_z / cm);
-//    fmt::print("Towers in Row/Col   = {} cm;\n", glass_shift_z / cm);
-//    fmt::print("Top left tower pos  = {:<10} {:<10} cm;\n", -leftTowerPos / cm, topTowerPos / cm);
-// fmt::print("#Towers info:\n");
-// fmt::print("#{:<5} {:<6} {:<3} {:<3} {:>10} {:>10}   {}\n", "idx",  "code", "col", "row", "x", "y", "name");
-
-
-    // We first do a "dry run", not really placing modules,
-    // but figuring out the ID scheme, number of modules, etc.
-    int glassModuleCount = 0;
-    int crystalModuleCount = 0;
-    int firstCrystRow = 1000000;   // The first row, where crystals are started
-    int firstCrystCol = 1000000;   // The fist column, where crystals are started
-    for(int rowIndex=0; rowIndex < towersInRow; rowIndex++) {
-      for(int colIndex=0; colIndex < towersInRow; colIndex++) {
-        double glass_x = leftTowerPos + colIndex * glass_distance;
-        double glass_y = topTowerPos + rowIndex * glass_distance;
-        double r = sqrt(glass_x * glass_x + glass_y * glass_y);
-
-        if (r < centers_rout && r > centers_rin) {
-          // we are placing something
-          if(r<trans_radius) {
-            // 4 crystal modules will be placed
-            crystalModuleCount+=4;
-
-            // Finding the first col and row where crystals start
-            // is the same algorithm as finding a minimum in array
-            if(colIndex<firstCrystCol) {
-              firstCrystCol = colIndex;
-            }
-            if(rowIndex<firstCrystRow) {
-              firstCrystRow = rowIndex;
-            }
-          }
-          else
-          {
-            // glass module will be places
-            glassModuleCount++;
-          }
-        }
-      }
-    }
-    // fmt::print("#Towers info:\n");
-    // fmt::print("#{:<5} {:<6} {:<3} {:<3} {:>10} {:>10}   {}\n", "idx",  "code", "col", "row", "x", "y", "name");
     int glass_module_index = 0;
     int cryst_module_index = 0;
     for(int rowIndex=0; rowIndex < towersInRow; rowIndex++) {
       for(int colIndex=0; colIndex < towersInRow; colIndex++) {
-        double glass_x = leftTowerPos + colIndex * (Glass_Width + Glass_Gap);
-        double glass_y = topTowerPos + rowIndex * (Glass_Width + Glass_Gap);
-        double r = sqrt(glass_x * glass_x + glass_y * glass_y);
-
-        if (r < centers_rout && r > centers_rin) {
-          int code = 1000 * rowIndex + colIndex;
-          std::string name = fmt::format("ce_EMCAL_glass_phys_{}", code);
-
-          if(r<trans_radius) {
-
-            // first crystal module
-            double crystal_x = glass_x - crystal_distance / 2;
-            double crystal_y = glass_y - crystal_distance / 2;
-            auto   placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
-            placement.addPhysVolID("sector", 1);
-            placement.addPhysVolID("module", cryst_module_index++);
-
-            // second crystal module
-            crystal_x = glass_x + crystal_distance / 2;
-            crystal_y = glass_y - crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
-            placement.addPhysVolID("sector", 1);
-            placement.addPhysVolID("module", cryst_module_index++);
-
-            // third crystal module
-            crystal_x = glass_x - crystal_distance / 2;
-            crystal_y = glass_y + crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
-            placement.addPhysVolID("sector", 1);
-            placement.addPhysVolID("module", cryst_module_index++);
-
-            // forth crystal module
-            crystal_x = glass_x + crystal_distance / 2;
-            crystal_y = glass_y + crystal_distance / 2;
-            placement = ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
-            placement.addPhysVolID("sector", 1);
-            placement.addPhysVolID("module", cryst_module_index++);
+        const double glass_x = leftTowerPos + colIndex * (Glass_Width + Glass_Gap);
+        const double glass_y = topTowerPos + rowIndex * (Glass_Width + Glass_Gap);
+        const double r = std::hypot(glass_x, glass_y);
+        // crystal if within the transition radius (as defined by the equivalent glass
+        // block)
+        if (r < trans_radius) {
+          for (const auto dx : {-1, 1}) {
+            for (const auto& dy : {-1, 1}) {
+              const double crystal_x = glass_x + dx * crystal_distance / 2;
+              const double crystal_y = glass_y + dy * crystal_distance / 2;
+              const double crystal_r = std::hypot(crystal_x, crystal_y);
+              // check if crystal in the main crystal ring?
+              const bool mainRing = (crystal_r > crystalCenters_rmin);
+              const bool innerRing = !mainRing && crystal_r > cutout_rmin;
+              const bool ionCutout = crystal_x > 0 && fabs(crystal_y / crystal_x) < cutout_tan;
+              if (mainRing || (innerRing && !ionCutout)) {
+                auto placement =
+                    ecal_vol.placeVolume(crystal_module, Position(crystal_x, crystal_y, Crystal_z0 + Crystal_offset));
+                placement.addPhysVolID("sector", 1);
+                placement.addPhysVolID("module", cryst_module_index++);
+              }
+            }
           }
-          else
-          {
-            // glass module
-            auto placement = ecal_vol.placeVolume(glass_module, Position(glass_x, glass_y, Glass_z0 + Glass_offset));
-            placement.addPhysVolID("sector", 2);
-            placement.addPhysVolID("module", glass_module_index++);
-          }
-
-
-          // fmt::print(" {:<5} {:<6} {:<3} {:<3} {:>10.4f} {:>10.4f}   {}\n", towerIndex, code, colIndex, rowIndex, x / cm, y / cm, name);
-          //glass_module_index++;
+        // Glass block if within the rmax
+        } else if (r < glassCenters_rmax) {
+          // glass module
+          auto placement = ecal_vol.placeVolume(glass_module, Position(glass_x, glass_y, Glass_z0 + Glass_offset));
+          placement.addPhysVolID("sector", 2);
+          placement.addPhysVolID("module", glass_module_index++);
         }
       }
     }

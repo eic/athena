@@ -13,10 +13,11 @@
 <constant name="ERICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
 <!-- additional parameters -->
 <constant name="ERICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
-<constant name="ERICH_sensor_active_size" value="2*24.0*mm"/> <!-- sensor side length (effective area) -->
-<constant name="ERICH_sensor_full_size"   value="2*25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<constant name="ERICH_sensor_active_size" value="24.0*mm"/> <!-- sensor side length (effective area) -->
+<constant name="ERICH_sensor_full_size"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
 <constant name="ERICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
-<constant name="ERICH_num_px"             value="2*8"/> <!-- number of pixels along one side of the sensor -->
+<constant name="ERICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
+<constant name="ERICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
 <!-- debugging switches -->
 <comment>
 - `ERICH_debug_optics`:  1 = all components become vacuum; test opticalphotons from IP
@@ -55,7 +56,6 @@
   - `length`: overall z-length of the full vessel
   - `rmin0` and `rmin1`: bore radius at front plane and back plane, respectively
   - `rmax0` and `rmax1`: outer radius of vessel, at front plane and back plane, respectively
-  - `nsectors`: number of azimuthal sectors
   - `wall_thickness`: thickness of radial walls
   - `window_thickness`: thickness of entrance and exit disks
 </documentation>
@@ -67,7 +67,6 @@
   rmin1="ERICH_rmin1"
   rmax0="ERICH_rmax"
   rmax1="ERICH_rmax"
-  nsectors="6"
   wall_thickness="ERICH_wall_thickness"
   window_thickness="ERICH_window_thickness"
   />
@@ -81,14 +80,14 @@
   the aerogel and gas radiators
 - dimensions:
   - `frontplane`: front of the aerogel, w.r.t. front plane of the vessel envelope
-  - `rmin` and `rmax`: inner and outer radius
+  - `rmin` and `rmax`: inner and outer radius (at the front plane; radial bounds are conical)
   - `phiw`: azimuthal width of wedge
   - `thickness`: radiator thickness, defined separately for aerogel and filter
   - `pitch`: controls the angle of the radiator (0=vertical)
 </documentation>
 <radiator
   frontplane="-ERICH_window_thickness"
-  rmin="ERICH_rmin0 + ERICH_wall_thickness + 0.5*cm"
+  rmin="ERICH_rmin0 + ERICH_wall_thickness + 0.2*cm"
   rmax="(ERICH_rmax/ERICH_zmax)*ERICH_zmin + 8.0*cm"
   phiw="60*degree"
   pitch="0*degree"
@@ -132,7 +131,7 @@
 <module
   material="Silicon"
   surface="SensorSurface_DRICH"
-  vis="DRICH_sensor_vis"
+  vis="ERICH_sensor_vis"
   side="ERICH_sensor_active_size"
   thickness="ERICH_sensor_thickness"
   gap="0.5*(ERICH_sensor_full_size-ERICH_sensor_active_size) + 0.5*mm"
@@ -144,20 +143,26 @@
 ##### Sensor plane
 - sensors will be placed on a plane
   - plane dimensions:
-    - `frontplane`: z-position of the sensor plane active surface (e.g., photocathode), w.r.t aerogel backplane;
-      absolute value of this number is the distance between aerogel/filter boundary and sensor surface
+    - `sensordist`: distance between sensor plane active surface (e.g., photocathode) and aerogel backplane
     - `rmin`: minimum radial position of a sensor's centroid
     - `rmax`: maximum radial position of a sensor's centroid
 </documentation>
 <plane
-  frontplane="-40*cm"
+  sensordist="ERICH_sensor_dist"
   rmin="ERICH_rmin1 + 2*cm"
   rmax="ERICH_rmax  - 4*cm"
   />
 
 <services>
-  <comment> SJJ: random standin for readout + electronics + cooling @FIXME </comment>
-  <component name="aluminum" thickness="10*mm" vis="RICHServiceVis" material="Aluminum"/>
+  <comment> 
+    Material should be equivallent with 3x0.5cm Al, spread over the entire available distance.
+    This was confirmed by Silvia.
+  </comment>
+  <component name="aluminum" thickness="5*mm" vis="RICHServiceVis" material="Aluminum"/>
+  <component name="air" thickness="40*mm" vis="InvisibleNoDaughters" material="Air"/>
+  <component name="aluminum" thickness="5*mm" vis="RICHServiceVis" material="Aluminum"/>
+  <component name="air" thickness="40*mm" vis="InvisibleNoDaughters" material="Air"/>
+  <component name="aluminum" thickness="5*mm" vis="RICHServiceVis" material="Aluminum"/>
 </services>
 
 </sensors>

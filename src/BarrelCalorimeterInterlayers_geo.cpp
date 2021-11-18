@@ -284,11 +284,13 @@ void buildSupport(Detector& desc, Volume &mod_vol, xml_comp_t x_support,
   double beam_pos_z      = -beam_thickness / 2.;
   double beam_center_z   = support_thickness / 2. + beam_pos_z;
 
-  Box        beam_vert_s(beam_thickness / 2. , trd_y, cross_thickness / 2.);
+  // Box        beam_vert_s(beam_thickness / 2., trd_y, cross_thickness / 2.);
+  Box        beam_vert_s(beam_thickness / 2., trd_y, beam_space_z / 2.);
   Box        beam_hori_s(beam_width / 2., trd_y, beam_thickness / 2.);
-  UnionSolid T_beam_s(beam_hori_s, beam_vert_s, Position(0., 0., beam_space_z / 2.));
-  UnionSolid H_beam_s(T_beam_s, beam_hori_s, Position(0., 0., support_thickness - beam_thickness));
-  Volume H_beam_vol("H_beam", H_beam_s, desc.material(x_support.materialStr()));
+  // UnionSolid T_beam_s(beam_hori_s, beam_vert_s, Position(0., 0., beam_space_z / 2.));
+  // UnionSolid H_beam_s(T_beam_s, beam_hori_s, Position(0., 0., support_thickness - beam_thickness));
+  UnionSolid T_beam_s(beam_hori_s, beam_vert_s, Position(0., 0., support_thickness / 2.));
+  Volume H_beam_vol("H_beam", T_beam_s, desc.material(x_support.materialStr()));
   H_beam_vol.setVisAttributes(desc, x_support.visStr());
   // place H beams first
   double beam_start_x = - (n_beams - 1) * (beam_width + beam_gap) / 2.;

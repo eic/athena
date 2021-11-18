@@ -34,6 +34,8 @@
     <constant name="GlassModule_wrap" value="2*CrystalModule_wrap"/>
     <constant name="GlassModule_z0" value="0.0*cm"/>
 
+    <constant name="EcalEndcapNIonCutout_dphi" value="30*degree"/>
+
     <constant name="EcalEndcapN_thickness" value="GlassModule_length"/>
     <constant name="EcalEndcapN_z0" value="-EcalEndcapN_zmin - EcalEndcapN_thickness/2"/>
     <constant name="EcalEndcapNCrystal_rmax" value="40*cm"/>
