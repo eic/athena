@@ -105,19 +105,17 @@
     <vis name="FFMagnetVis"         ref="AnlGreen"            showDaughters="true" visible="true"/>
     <vis name="FFMagnetCoilVis"     ref="AnlRed"              showDaughters="true" visible="true"/>
 
-    <vis name="cb_SolenoidVis"          alpha="0.4"  r= "0.1"  g="0.0"  b="0.1"  showDaughters="true" visible="true"/>
-    <vis name="ffi_ZDC_ECAL_Vis"        alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
-    <vis name="ffi_ZDC_ECAL_module_Vis" alpha="1.0"  r= "0.1"  g="1.0"  b="0.9"  showDaughters="true" visible="true"/>
-    <vis name="ffi_ZDC_HCAL_Vis"        alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
-    <vis name="cb_CTDVis"               alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
-    <vis name="cb_CTD_Si_layerVis"      alpha="1.0"  r= "0.9"  g="1.0"  b="0.1"  showDaughters="true" visible="true"/>
-    <vis name="ce_GEMVis"               alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
-    <vis name="cb_GEM_layerVis"         alpha="0.8"  r= "0.8"  g="0.4"  b="0.3"  showDaughters="true" visible="true"/>
-    <vis name="cb_VTX_BarrelVis"        alpha="0.1"  r= "0.1"  g="0.0"  b="1.0"  showDaughters="true" visible="true"/>
-    <vis name="cb_VTX_Barrel_layerVis"  alpha="2.0"  r= "0.0"  g="0.2"  b="0.8"  showDaughters="true" visible="true"/>
+    <comment>
+      ZDC visualization
+    </comment>
 
-    <vis name="ci_GEMVis"  r= "0.8"  g="0.4"  b="0.3" alpha="0.8" showDaughters="true" visible="true"/>
-    <vis name="ci_HCALVis"  r= "0.6"  g="0"  b="0.6" alpha="1.0" showDaughters="true" visible="true"/>
+    <vis name="ffi_ZDC_ECAL_Vis"        ref="AnlGreen" showDaughters="true"  visible="true"/>
+    <vis name="ffi_ZDC_ECAL_module_Vis" ref="AnlRed"   showDaughters="false" visible="true"/>
+    <vis name="ffi_ZDC_HCAL_Vis"        ref="AnlBlue"  showDaughters="true"  visible="true"/>
+
+    <comment>
+      PID visualization
+    </comment>
 
     <vis name="DRICH_vessel_vis"  ref="AnlGray" showDaughters="true" visible="true" />
     <vis name="DRICH_gas_vis"     ref="AnlGreen" alpha="0.5" showDaughters="true" visible="true" />
