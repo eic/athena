@@ -155,7 +155,7 @@ if finished:
     print('Simulation finished')
 else:
     print('Simulation failed')
-    exit(1)
+#    exit(1)
 
 # move the prim files (which can be quite large)
 # to the local pipeline storage path
