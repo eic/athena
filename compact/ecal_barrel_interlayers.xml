@@ -12,7 +12,7 @@
       To change the number of imaging layers from, e.g., 9 to 6,
       change EcalBarrelImagingLayers_nMax variable
     </comment>
-    <constant name="EcalBarrelImagingLayers_nMax"  value="9"/>
+    <constant name="EcalBarrelImagingLayers_nMax"  value="6"/>
 
     <constant name="EcalBarrel_Support_thickness"    value="5*cm"/>
     <constant name="EcalBarrel_SiliconThickness"     value="500*um"/>
@@ -46,8 +46,7 @@
       + EcalBarrel_CarbonThickness"/>
     <constant name="EcalBarrel_ScFiLayerThickness"
       value="EcalBarrel_RadiatorThickness
-      + EcalBarrel_CarbonThickness
-      + EcalBarrel_LayerSpacing"/>
+      + EcalBarrel_CarbonThickness"/>
 
     <constant name="EcalBarrelImagingLayers_num"
         value="min(EcalBarrelImagingLayers_nMax,
@@ -56,8 +55,8 @@
                       EcalBarrel_SpaceBetween)))"/>
     <comment>
       Adjusting size of the ScFi back chunk to match number of imiaging layers
-      and 20 radiation lengths in total 
-    </comment>               
+      and 20 radiation lengths in total
+    </comment>
     <constant name="EcalBarrel_FiberChunkLayers_num" value = "20-EcalBarrelImagingLayers_num+1"/>
 
     <constant name="EcalBarrel_ImagingPartThickness"
@@ -109,14 +108,9 @@
         <slice material="Kapton" thickness="EcalBarrel_KaptonThickness"       vis="EcalBarrelSliceVis"/>
         <slice material="Epoxy" thickness="EcalBarrel_EpoxyThickness"         vis="EcalBarrelSliceVis"/>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness"  vis="EcalBarrelSliceVis"/>
+        <slice material="Air" thickness="EcalBarrel_LayerSpacing" vis="EcalBarrelSliceVis"/>
       </layer>
     </detector>
-
-    <comment>
-      ---------------------------------------
-      Pb/ScFi Layers of Barrel EM Calorimeter
-      ---------------------------------------
-    </comment>
     <detector
       id="ECalBarrel2_ID"
       name="EcalBarrelScFi"
@@ -134,35 +128,19 @@
         </support>
       </staves>
       <layer repeat="EcalBarrelImagingLayers_num-1" vis="EcalBarrelLayerVis"
-       space_between="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween"
-       space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween/2.">
-        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis">
-          <fiber material="PlasticScint"
-            sensitive="yes"
-            radius="EcalBarrel_FiberRadius"
-            spacing_x="EcalBarrel_FiberXSpacing"
-            spacing_z="EcalBarrel_FiberZSpacing"
-            vis="EcalBarrelFiberLayerVis">
-          </fiber>
-        </slice>
+       space_between="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween"
+       space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween/2.">
+        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis"/>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
-        <slice material="Air" thickness="EcalBarrel_LayerSpacing " vis="EcalBarrelSliceVis"/>
       </layer>
       <layer repeat="EcalBarrel_FiberChunkLayers_num" vis="EcalBarrelLayerVis"
-          space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_SpaceBetween">
+          space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween">
         <slice material="Lead"
           thickness="EcalBarrel_ScFiPartThickness/EcalBarrel_FiberChunkLayers_num"
           vis="EcalBarrelFiberLayerVis">
-          <fiber material="PlasticScint"
-            sensitive="yes"
-            radius="EcalBarrel_FiberRadius"
-            spacing_x="EcalBarrel_FiberXSpacing"
-            spacing_z="EcalBarrel_FiberZSpacing"
-            vis="EcalBarrelFiberLayerVis">
-          </fiber>
         </slice>
       </layer>
-    </detector>
+   </detector>
   </detectors>
 
   <readouts>
