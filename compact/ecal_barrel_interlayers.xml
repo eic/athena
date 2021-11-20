@@ -128,9 +128,17 @@
         </support>
       </staves>
       <layer repeat="EcalBarrelImagingLayers_num-1" vis="EcalBarrelLayerVis"
-       space_between="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween"
-       space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween/2.">
-        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis"/>
+        space_between="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween"
+        space_before="EcalBarrel_ImagingLayerThickness + EcalBarrel_LayerSpacing + EcalBarrel_SpaceBetween/2.">
+        <slice material="Lead" thickness="EcalBarrel_RadiatorThickness" vis="EcalBarrelFiberLayerVis">
+          <fiber material="PlasticScint"
+            sensitive="yes"
+            radius="EcalBarrel_FiberRadius"
+            spacing_x="EcalBarrel_FiberXSpacing"
+            spacing_z="EcalBarrel_FiberZSpacing"
+            vis="EcalBarrelFiberLayerVis">
+          </fiber>
+        </slice>
         <slice material="CarbonFiber" thickness="EcalBarrel_CarbonThickness" vis="EcalBarrelSliceVis"/>
       </layer>
       <layer repeat="EcalBarrel_FiberChunkLayers_num" vis="EcalBarrelLayerVis"
@@ -138,6 +146,13 @@
         <slice material="Lead"
           thickness="EcalBarrel_ScFiPartThickness/EcalBarrel_FiberChunkLayers_num"
           vis="EcalBarrelFiberLayerVis">
+          <fiber material="PlasticScint"
+            sensitive="yes"
+            radius="EcalBarrel_FiberRadius"
+            spacing_x="EcalBarrel_FiberXSpacing"
+            spacing_z="EcalBarrel_FiberZSpacing"
+            vis="EcalBarrelFiberLayerVis">
+          </fiber>
         </slice>
       </layer>
    </detector>
