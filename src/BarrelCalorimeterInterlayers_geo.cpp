@@ -277,25 +277,22 @@ void buildSupport(Detector& desc, Volume &mod_vol, xml_comp_t x_support,
   double beam_width       = 2. * trd_x1_support / (n_beams + 1); // quick hack to make some gap between T beams
   double beam_gap         = getAttrOrDefault(x_support, _Unicode(beam_gap), 3.*cm);
 
-  // build H-shape beam
+  // build T-shape beam
   double beam_space_x    = beam_width + beam_gap;
   double beam_space_z    = support_thickness - beam_thickness;
-  double cross_thickness = support_thickness - 2.*beam_thickness;
-  double beam_pos_z      = -beam_thickness / 2.;
-  double beam_center_z   = support_thickness / 2. + beam_pos_z;
+  double cross_thickness = support_thickness - beam_thickness;
+  double beam_pos_z      = beam_thickness / 2.;
+  double beam_center_z   = support_thickness / 2. - beam_pos_z;
 
-  // Box        beam_vert_s(beam_thickness / 2., trd_y, cross_thickness / 2.);
-  Box        beam_vert_s(beam_thickness / 2., trd_y, beam_space_z / 2.);
+  Box        beam_vert_s(beam_thickness / 2., trd_y, cross_thickness / 2.);
   Box        beam_hori_s(beam_width / 2., trd_y, beam_thickness / 2.);
-  // UnionSolid T_beam_s(beam_hori_s, beam_vert_s, Position(0., 0., beam_space_z / 2.));
-  // UnionSolid H_beam_s(T_beam_s, beam_hori_s, Position(0., 0., support_thickness - beam_thickness));
   UnionSolid T_beam_s(beam_hori_s, beam_vert_s, Position(0., 0., support_thickness / 2.));
   Volume H_beam_vol("H_beam", T_beam_s, desc.material(x_support.materialStr()));
   H_beam_vol.setVisAttributes(desc, x_support.visStr());
   // place H beams first
   double beam_start_x = - (n_beams - 1) * (beam_width + beam_gap) / 2.;
   for (int i = 0; i < n_beams; ++i) {
-    Position beam_pos(beam_start_x + i * (beam_width + beam_gap), 0., - support_thickness / 2. - beam_pos_z);
+    Position beam_pos(beam_start_x + i * (beam_width + beam_gap), 0., - support_thickness / 2. + beam_pos_z);
     env_vol.placeVolume(H_beam_vol, beam_pos);
   }
 
@@ -305,10 +302,10 @@ void buildSupport(Detector& desc, Volume &mod_vol, xml_comp_t x_support,
   Volume cross_vol("cross_center_beam", cross_s, desc.material(x_support.materialStr()));
   cross_vol.setVisAttributes(desc, x_support.visStr());
   for (int i = 0; i < n_beams - 1; ++i) {
-    env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), 0., 0.));
+    env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), 0., beam_pos_z));
     for (int j = 1; j < n_cross_supports; j++) {
-      env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), -j * grid_size, 0.));
-      env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), j * grid_size, 0.));
+      env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), -j * grid_size, beam_pos_z));
+      env_vol.placeVolume(cross_vol, Position(beam_start_x + beam_space_x * (i + 0.5), j * grid_size, beam_pos_z));
     }
   }
 
@@ -317,20 +314,20 @@ void buildSupport(Detector& desc, Volume &mod_vol, xml_comp_t x_support,
   double    cross_edge_x = trd_x1_support + beam_start_x - beam_thickness / 2.;
   double    cross_trd_x1 = cross_edge_x + std::tan(hphi) * beam_thickness;
   double    cross_trd_x2 = cross_trd_x1 + 2.* std::tan(hphi) * cross_thickness;
-  double    edge_pos_x   = beam_start_x - beam_thickness / 2. - cross_trd_x1 / 2.;
+  double    edge_pos_x   = beam_start_x - cross_trd_x1 / 2. - beam_thickness / 2;
   Trapezoid cross_s2_trd (cross_trd_x1 / 2., cross_trd_x2 / 2.,
                           beam_thickness / 2., beam_thickness / 2., cross_thickness / 2.);
-  Box       cross_s2_box ((cross_trd_x2 - cross_trd_x1)/2., beam_thickness / 2., cross_thickness / 2.);
-  SubtractionSolid cross_s2(cross_s2_trd, cross_s2_box, Position((cross_trd_x1 + cross_trd_x2) / 4., 0., 0.));
+  Box       cross_s2_box ((cross_trd_x2 - cross_trd_x1)/4., beam_thickness / 2., cross_thickness / 2.);
+  SubtractionSolid cross_s2(cross_s2_trd, cross_s2_box, Position((cross_trd_x2 + cross_trd_x1)/4., 0., 0.));
   Volume cross_vol2("cross_edge_beam", cross_s2, desc.material(x_support.materialStr()));
   cross_vol2.setVisAttributes(desc, x_support.visStr());
-  env_vol.placeVolume(cross_vol2, Position(edge_pos_x, 0., 0.));
-  env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, 0., 0.) * RotationZ(M_PI)));
+  env_vol.placeVolume(cross_vol2, Position(edge_pos_x, 0., beam_pos_z));
+  env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, 0., beam_pos_z) * RotationZ(M_PI)));
   for (int j = 1; j < n_cross_supports; j++) {
-    env_vol.placeVolume(cross_vol2, Position(edge_pos_x, -j * grid_size, 0.));
-    env_vol.placeVolume(cross_vol2, Position(edge_pos_x, j * grid_size, 0.));
-    env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, -j * grid_size, 0.) * RotationZ(M_PI)));
-    env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, j * grid_size, 0.) * RotationZ(M_PI)));
+    env_vol.placeVolume(cross_vol2, Position(edge_pos_x, -j * grid_size, beam_pos_z));
+    env_vol.placeVolume(cross_vol2, Position(edge_pos_x, j * grid_size, beam_pos_z));
+    env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, -j * grid_size, beam_pos_z) * RotationZ(M_PI)));
+    env_vol.placeVolume(cross_vol2, Transform3D(Translation3D(-edge_pos_x, j * grid_size, beam_pos_z) * RotationZ(M_PI)));
   }
 
   mod_vol.placeVolume(env_vol, Position(0.0, 0.0, l_pos_z + support_thickness/2.));
