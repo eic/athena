@@ -16,7 +16,7 @@
     <!--constant name="ForwardTOF_zmin"         value="ForwardTracking_zmin"/-->
     <constant name="ForwardTOF_zgap_dRHIC"      value="10.0*cm"/>
     <constant name="ForwardTOF_zmin"            value="ForwardPIDRegion_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
-    <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/ForwardTOF_nLayers"/>
+    <constant name="ForwardTOF_dz"              value="(ForwardTOF_length)/ForwardTOF_nLayers"/>
     <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
