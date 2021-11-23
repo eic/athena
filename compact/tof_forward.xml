@@ -12,7 +12,7 @@
     <constant name="ForwardTOFService_thickness" value="5.00/100*9.37*cm-ForwardTOFSensor_thickness"/>
     <constant name="ForwardTOF_nLayers"          value="2"/>
 
-    <constant name="ForwardTOF_length"          value="2.8*cm"/>
+    <constant name="ForwardTOF_length"          value="2.4*cm"/>
     <!--constant name="ForwardTOF_zmin"         value="ForwardTracking_zmin"/-->
     <constant name="ForwardTOF_zgap_dRHIC"      value="10.0*cm"/>
     <constant name="ForwardTOF_zmin"            value="ForwardPIDRegion_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
@@ -20,8 +20,8 @@
     <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="ForwardTOF_rmin1"           value="9.5*cm"/>
-    <constant name="ForwardTOF_rmin2"           value="9.5*cm"/>
+    <constant name="ForwardTOF_rmin1"           value="10*cm"/>
+    <constant name="ForwardTOF_rmin2"           value="10*cm"/>
     <!--constant name="ForwardTOF_rmax1"           value="200*cm"/>
     <constant name="ForwardTOF_rmax2"           value="200*cm"/-->
     <constant name="ForwardTOF_rmax1"           value="CentralTrackingRegion_rmax"/>
