@@ -12,7 +12,7 @@
     <constant name="ForwardTOFService_thickness" value="5.00/100*9.37*cm-ForwardTOFSensor_thickness"/>
     <constant name="ForwardTOF_nLayers"          value="2"/>
 
-    <constant name="ForwardTOF_length"          value="1.0*cm"/>
+    <constant name="ForwardTOF_length"          value="2.0*cm"/>
     <!--constant name="ForwardTOF_zmin"         value="ForwardTracking_zmin"/-->
     <constant name="ForwardTOF_zgap_dRHIC"      value="10.0*cm"/>
     <constant name="ForwardTOF_zmin"            value="ForwardPIDRegion_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
