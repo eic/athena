@@ -17,10 +17,10 @@
     <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="BackwardTOF_rmin1"          value="10*cm"/>
-    <constant name="BackwardTOF_rmin2"          value="10*cm"/>
-    <constant name="BackwardTOF_rmax1"          value="BackwardPID_rmax"/>
-    <constant name="BackwardTOF_rmax2"          value="BackwardPID_rmax"/>
+    <constant name="BackwardTOF_rmin1"          value="9*cm"/>
+    <constant name="BackwardTOF_rmin2"          value="9*cm"/>
+    <constant name="BackwardTOF_rmax1"          value="CentralTrackingRegion_rmax"/>
+    <constant name="BackwardTOF_rmax2"          value="CentralTrackingRegion_rmax"/>
     <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
     <constant name="BackwardTOFMod1_x1"         value="2.0*BackwardTOF_rmin1*sin(BackwardTOFModOpeningAngle/2.0)"/>
     <constant name="BackwardTOFMod1_x2"         value="2.0*BackwardTOF_rmax1*sin(BackwardTOFModOpeningAngle/2.0)"/>
