@@ -20,8 +20,8 @@
     <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="ForwardTOF_rmin1"           value="10*cm"/>
-    <constant name="ForwardTOF_rmin2"           value="10*cm"/>
+    <constant name="ForwardTOF_rmin1"           value="10.5*cm"/>
+    <constant name="ForwardTOF_rmin2"           value="10.5*cm"/>
     <!--constant name="ForwardTOF_rmax1"           value="200*cm"/>
     <constant name="ForwardTOF_rmax2"           value="200*cm"/-->
     <constant name="ForwardTOF_rmax1"           value="CentralTrackingRegion_rmax"/>
