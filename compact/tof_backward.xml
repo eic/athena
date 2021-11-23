@@ -11,14 +11,14 @@
     <constant name="BackwardTOFService_thickness" value="5.00/100*9.37*cm-BackwardTOFSensor_thickness"/>
     <constant name="BackwardTOF_nLayers"          value="2"/>
 
-    <constant name="BackwardTOF_length"         value="2.5*cm"/>
+    <constant name="BackwardTOF_length"         value="2.8*cm"/>
     <constant name="BackwardTOF_zmin"           value="BackwardPIDRegion_zmin+BackwardPIDRegion_length"/>
     <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/BackwardTOF_nLayers"/>
     <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="BackwardTOF_rmin1"          value="9*cm"/>
-    <constant name="BackwardTOF_rmin2"          value="9*cm"/>
+    <constant name="BackwardTOF_rmin1"          value="9.5*cm"/>
+    <constant name="BackwardTOF_rmin2"          value="9.5*cm"/>
     <constant name="BackwardTOF_rmax1"          value="CentralTrackingRegion_rmax"/>
     <constant name="BackwardTOF_rmax2"          value="CentralTrackingRegion_rmax"/>
     <constant name="BackwardTOFModOpeningAngle" value="30.0*degree"/>
