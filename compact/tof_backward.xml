@@ -40,13 +40,13 @@
         reflect="true">
         <module name="Module1" vis="TOFVis">
           <trd x1="BackwardTOFMod1_x1/2.0" x2="BackwardTOFMod1_x2/2.0" z="BackwardTOFMod1_y/2"/>
-          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
+          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true" vis="TOFSensorVis"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon" vis="TOFVis"/>
         </module>
         <module name="Module2" vis="TOFVis">
           <trd x1="BackwardTOFMod2_x1/2.0" x2="BackwardTOFMod2_x2/2.0" z="BackwardTOFMod2_y/2"/>
-          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="BackwardTOFService_thickness" material="Silicon"/>
+          <module_component thickness="BackwardTOFSensor_thickness" material="Silicon" sensitive="true" vis="TOFSensorVis"/>
+          <module_component thickness="BackwardTOFService_thickness" material="Silicon" vis="TOFVis"/>
         </module>
         <layer id="1">
           <envelope  vis="TOFVis"

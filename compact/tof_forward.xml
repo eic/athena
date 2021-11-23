@@ -45,13 +45,13 @@
         reflect="false">
         <module name="Module1" vis="TOFVis">
           <trd x1="ForwardTOFMod1_x1/2.0" x2="ForwardTOFMod1_x2/2.0" z="ForwardTOFMod1_y/2"/>
-          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
+          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true" vis="TOFSensorVis"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon" vis="TOFVis"/>
         </module>
         <module name="Module2" vis="TOFVis">
           <trd x1="ForwardTOFMod2_x1/2.0" x2="ForwardTOFMod2_x2/2.0" z="ForwardTOFMod2_y/2"/>
-          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true"/>
-          <module_component thickness="ForwardTOFService_thickness" material="Silicon"/>
+          <module_component thickness="ForwardTOFSensor_thickness" material="Silicon" sensitive="true" vis="TOFSensorVis"/>
+          <module_component thickness="ForwardTOFService_thickness" material="Silicon" vis="TOFVis"/>
         </module>
         <layer id="1">
           <envelope  vis="TOFVis"
