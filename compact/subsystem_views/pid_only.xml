@@ -102,6 +102,9 @@
       -------------
   </comment>
   <include ref="compact/pid_config_canyonlands.xml"/>
+  <include ref="compact/tof_barrel.xml"/>
+  <include ref="compact/tof_forward.xml"/>
+  <include ref="compact/tof_backward.xml"/>
 
 
   <comment>
