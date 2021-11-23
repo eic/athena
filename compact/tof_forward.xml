@@ -14,18 +14,18 @@
 
     <constant name="ForwardTOF_length"          value="10*cm"/>
     <!--constant name="ForwardTOF_zmin"         value="ForwardTracking_zmin"/-->
-    <constant name="ForwardTOF_zgap_dRHIC"      value="50.0*mm"/>
-    <constant name="ForwardTOF_zmin"            value="ForwardPID_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
+    <constant name="ForwardTOF_zgap_dRHIC"      value="10.0*mm"/>
+    <constant name="ForwardTOF_zmin"            value="ForwardPIDRegion_zmin-ForwardTOF_length-ForwardTOF_zgap_dRHIC"/>
     <constant name="ForwardTOF_dz"              value="(ForwardTOF_length-0.4*cm)/ForwardTOF_nLayers"/>
     <constant name="ForwardTOF_thickness"       value="ForwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces.
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
-    <constant name="ForwardTOF_rmin1"           value="19*cm"/>
-    <constant name="ForwardTOF_rmin2"           value="19*cm"/>
+    <constant name="ForwardTOF_rmin1"           value="9*cm"/>
+    <constant name="ForwardTOF_rmin2"           value="9*cm"/>
     <!--constant name="ForwardTOF_rmax1"           value="200*cm"/>
     <constant name="ForwardTOF_rmax2"           value="200*cm"/-->
-    <constant name="ForwardTOF_rmax1"           value="BackwardPID_rmax"/>
-    <constant name="ForwardTOF_rmax2"           value="BackwardPID_rmax"/>
+    <constant name="ForwardTOF_rmax1"           value="CentralTrackingRegion_rmax"/>
+    <constant name="ForwardTOF_rmax2"           value="CentralTrackingRegion_rmax"/>
     <constant name="ForwardTOFModOpeningAngle"  value="30.0*degree"/>
     <constant name="ForwardTOFMod1_x1"          value="2.0*ForwardTOF_rmin1*sin(ForwardTOFModOpeningAngle/2.0)"/>
     <constant name="ForwardTOFMod1_x2"          value="2.0*ForwardTOF_rmax1*sin(ForwardTOFModOpeningAngle/2.0)"/>
@@ -80,7 +80,7 @@
 
   <readouts>
     <readout name="TOFForwardHits">
-      <segmentation type="CartesianGridXZ" grid_size_x="0.08*mm" grid_size_z="0.08*mm" />
+      <segmentation type="CartesianGridXZ" grid_size_x="0.05*mm" grid_size_z="0.05*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
   </readouts>

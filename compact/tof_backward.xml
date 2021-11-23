@@ -12,7 +12,7 @@
     <constant name="BackwardTOF_nLayers"          value="2"/>
 
     <constant name="BackwardTOF_length"         value="10*cm"/>
-    <constant name="BackwardTOF_zmin"           value="BackwardTracking_zmin"/>
+    <constant name="BackwardTOF_zmin"           value="BackwardPIDRegion_zmin+BackwardPIDRegion_length"/>
     <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/BackwardTOF_nLayers"/>
     <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
@@ -75,7 +75,7 @@
   
   <readouts>
     <readout name="TOFBackwardHits">
-      <segmentation type="CartesianGridXZ" grid_size_x="0.08*mm" grid_size_z="0.08*mm" />
+      <segmentation type="CartesianGridXZ" grid_size_x="0.05*mm" grid_size_z="0.05*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
   </readouts>
