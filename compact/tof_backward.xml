@@ -13,7 +13,7 @@
 
     <constant name="BackwardTOF_length"         value="2.4*cm"/>
     <constant name="BackwardTOF_zmin"           value="BackwardPIDRegion_zmin+BackwardPIDRegion_length"/>
-    <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.4*cm)/BackwardTOF_nLayers"/>
+    <constant name="BackwardTOF_dz"             value="(BackwardTOF_length-0.3*cm)/BackwardTOF_nLayers"/>
     <constant name="BackwardTOF_thickness"      value="BackwardTOF_dz - 1.0*mm"/>
     <comment> Note, the -1.0*mm is so the layers do not touch surfaces. 
       This is a limitation of ACTS geometry which will likely go away in the future.</comment>
