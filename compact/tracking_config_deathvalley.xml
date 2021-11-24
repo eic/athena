@@ -36,12 +36,6 @@
       <composite name="MedialTrackerEndcapP"/>
     </detector>
     <detector id="TrackerSubAssembly_2_ID"
-      name="TOFSubAssembly"
-      type="DD4hep_SubdetectorAssembly"
-      vis="TrackerSubAssemblyVis">
-      <composite name="BarrelTOF"/>
-    </detector>
-    <detector id="TrackerSubAssembly_3_ID"
       name="OuterTrackerSubAssembly"
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
@@ -104,7 +98,6 @@
 
   <include ref="vertex_tracker_3layers.xml"/>
   <include ref="central_tracker_hybrid_v2.xml"/>
-  <include ref="tof.xml"/>
 
 </lccdd>
 

@@ -25,14 +25,20 @@
     <vis name="VertexSupportVis"      ref="VertexSupportLayerVis" visible="true"  showDaughters="true" />
     <vis name="VertexModuleVis"       ref="TrackerLayerVis" visible="true"  showDaughters="true" />
 
-    <vis name="TOFVis" ref="AnlTeal" showDaughters="true" visible="true"/>
-    <vis name="TOFSensorVis" ref="AnlBlue" showDaughters="true" visible="true"/>
-    <vis name="TOFHybridVis" ref="AnlGold" showDaughters="true" visible="true"/>
-    <vis name="TOFCoolingTube" ref="AnlRed" showDaughters="true" visible="true"/>
-    <vis name="TOFCoolant" ref="AnlGreen" showDaughters="true" visible="true"/>
-    <vis name="TOFCSkinVis" ref="AnlGray" showDaughters="true" visible="true"/>
-    <vis name="TOFCFoamVis" ref="AnlGreen" showDaughters="true" visible="true"/>
-    <vis name="TOFCHoneycombVis" ref="AnlGreen" showDaughters="true" visible="true"/>
+    <vis name="TOFVis"            ref="AnlTeal"             visible="true"  showDaughters="true"/>
+    <vis name="TOFLayerVis"       ref="TOFVis"              visible="true"  showdaughters="true"/>
+    <vis name="TOFModuleVis"      ref="TOFVis"              visible="true"  showdaughters="true"/>
+    <vis name="TOFSupportVis"     ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFSensorVis"      ref="TOFVis"              visible="true"  showDaughters="true"/>
+    <comment> By default don't display the barrel module details in geoviewer </comment>
+    <vis name="TOFBarrelModuleVis" ref="TOFVis"             visible="true"  showdaughters="false"/>
+    <comment> extra detailed vizualizations for the barrel </comment>
+    <vis name="TOFHybridVis"      ref="AnlGold"             visible="true"  showDaughters="true"/>
+    <vis name="TOFCoolingTube"    ref="AnlRed"              visible="true"  showDaughters="true"/>
+    <vis name="TOFCoolant"        ref="AnlGreen"            visible="true"  showDaughters="true"/>
+    <vis name="TOFCSkinVis"       ref="AnlGray"             visible="true"  showDaughters="true"/>
+    <vis name="TOFCFoamVis"       ref="AnlGreen"            visible="true"  showDaughters="true"/>
+    <vis name="TOFCHoneycombVis"  ref="AnlGreen"            visible="true"  showDaughters="true"/>
 
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />

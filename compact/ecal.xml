@@ -11,11 +11,8 @@
   <!--include ref="ecal_forward_scfi.xml"/-->
   <include ref="ecal_forward_homogenous.xml"/>
 
-  <!--<include ref="ecal_backward_crystal_glass.xml"/>-->
   <include ref="ecal_backward_hybrid.xml"/>
 
-  <!-- <include ref="ecal_barrel.xml"/> -->
-  <!-- <include ref="ecal_barrel_hybrid.xml"/> -->
   <include ref="ecal_barrel_interlayers.xml"/>
 
 </lccdd>

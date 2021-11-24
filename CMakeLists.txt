@@ -28,7 +28,6 @@ dd4hep_add_plugin(${a_lib_name} SOURCES
   src/BarrelCalorimeter_geo.cpp
   src/BarrelCalorimeterInterlayers_geo.cpp
   src/BarrelTrackerWithFrame_geo.cpp
-  src/BarrelTOF_geo.cpp
   src/CompositeTracker_geo.cpp
   src/CylinderTrackerBarrel_geo.cpp
   src/DIRC_geo.cpp

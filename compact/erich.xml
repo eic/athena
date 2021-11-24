@@ -3,11 +3,11 @@
 
 <define>
 <!-- vessel geometry -->
-<constant name="ERICH_Length"             value="BackwardPIDRegion_length"/>  <!-- vessel z-length -->
-<constant name="ERICH_zmin"               value="-BackwardPIDRegion_zmin"/> <!-- vessel front -->
+<constant name="ERICH_Length"             value="BackwardRICHRegion_length"/>  <!-- vessel z-length -->
+<constant name="ERICH_zmin"               value="-BackwardRICHRegion_zmin"/> <!-- vessel front -->
 <constant name="ERICH_zmax"               value="ERICH_zmin - ERICH_Length"/>  <!-- vessel back -->
-<constant name="ERICH_rmin0"              value="BackwardPIDRegion_tan * BackwardPIDRegion_zmin"/>  <!-- bore radius at vessel frontplane -->
-<constant name="ERICH_rmin1"              value="BackwardPIDRegion_tan * (BackwardPIDRegion_zmin + BackwardPIDRegion_length)"/>  <!-- bore radius at vessel backplane -->
+<constant name="ERICH_rmin0"              value="BackwardPIDRegion_tan * BackwardRICHRegion_zmin"/>  <!-- bore radius at vessel frontplane -->
+<constant name="ERICH_rmin1"              value="BackwardPIDRegion_tan * (BackwardRICHRegion_zmin + BackwardRICHRegion_length)"/>  <!-- bore radius at vessel backplane -->
 <constant name="ERICH_rmax"               value="BackwardPIDRegion_rmax - 2*cm"/>  <!-- vessel backplane radius -->
 <constant name="ERICH_wall_thickness"     value="0.5*cm"/>  <!-- thickness of radial walls -->
 <constant name="ERICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->

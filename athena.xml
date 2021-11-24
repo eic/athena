@@ -108,18 +108,19 @@
 
   <!--include ref="compact/tracking_config_acadia.xml"/-->
   <!--include ref="compact/tracking_config_canyonlands.xml"/-->
-  <include ref="compact/tracking_config_canyonlands_tof.xml"/>
+  <include ref="compact/tracking_config_canyonlands.xml"/>
 
   <documentation level="10">
   ### PID detectors
   </documentation>
   <!--include ref="compact/pid_config_acadia.xml" /-->
-  <include ref="compact/pid_config_canyonlands.xml" />
+  <!--include ref="compact/pid_config_canyonlands.xml" /-->
+  <include ref="compact/pid_config_deathvalley.xml" />
 
   <documentation level="10">
   ## Central calorimetry
   </documentation>
-  <include ref="compact/ecal_tof.xml"/>
+  <include ref="compact/ecal.xml"/>
   <include ref="compact/hcal.xml"/>
 
   <documentation level="11">

@@ -341,3 +341,4 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
 DECLARE_DETELEMENT(BarrelTrackerWithFrame, create_BarrelTrackerWithFrame)
 DECLARE_DETELEMENT(athena_TrackerBarrel,   create_BarrelTrackerWithFrame)
 DECLARE_DETELEMENT(athena_VertexBarrel,    create_BarrelTrackerWithFrame)
+DECLARE_DETELEMENT(athena_TOFBarrel,       create_BarrelTrackerWithFrame)

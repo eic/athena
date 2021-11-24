@@ -119,6 +119,7 @@ dump_geometry:
       sed -i -e '/<detectors>/,/<\/detectors>/d' ${DETECTOR_PATH}/compact/tracking_config*.xml
       mv ${DETECTOR_PATH}/compact/display_geoviewer.xml ${DETECTOR_PATH}/compact/display.xml
       for xml in ${DETECTOR_PATH}/compact/subsystem_views/*.xml; do
+        echo $xml
         geo_name=`basename $xml .xml`_geo.root
         cp $xml ${DETECTOR_PATH}/geo.xml
         dd_web_display --output geo/${geo_name} ${DETECTOR_PATH}/geo.xml

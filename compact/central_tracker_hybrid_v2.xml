@@ -19,9 +19,6 @@
 
   </comment>
   <define>
-    <comment> Main diagonal direction for barrel/endcap transitions </comment>
-    <constant name="TrackerMainDiagonal_tan"                value="Eta1_1_tan"/>
-
     <comment> Inner tracker setup </comment>
     <constant name="InnerTrackerBarrel_rmin"                value="13.38*cm"/>
     <constant name="InnerTrackerBarrel_offset"              value="4.62*cm"/>
@@ -147,11 +144,11 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="InnerTrackerBarrelCone_z"            value="(InnerTrackerBarrelCone_zmax + InnerTrackerBarrelCone_zmin)/2" />
     <constant name="InnerTrackerBarrelCone_thickness"    value="SiTrackerSupportConeCF_thickness + SiTrackerServiceConeAl_thickness" />
     <comment> Shorten Module (with non-zero thickness!) to avoid overlaps with support cone</comment>
-    <constant name="InnerTrackerBarrelMod1_length"       value="2 * InnerTrackerBarrelMod1_rmin / TrackerMainDiagonal_tan - 0.5*cm - 2. * InnerTrackerBarrelCone_thickness" /> 
-    <constant name="InnerTrackerBarrelMod2_length"       value="2 * InnerTrackerBarrelMod2_rmin / TrackerMainDiagonal_tan - 0.5*cm - 2. * InnerTrackerBarrelCone_thickness" /> 
-    <constant name="InnerTrackerBarrelServiceCone_rmin1" value="InnerTrackerBarrelCone_zmin * TrackerMainDiagonal_tan" />
+    <constant name="InnerTrackerBarrelMod1_length"       value="2 * InnerTrackerBarrelMod1_rmin / CentralTrackingBarrel_tan - 0.5*cm - 2. * InnerTrackerBarrelCone_thickness" /> 
+    <constant name="InnerTrackerBarrelMod2_length"       value="2 * InnerTrackerBarrelMod2_rmin / CentralTrackingBarrel_tan - 0.5*cm - 2. * InnerTrackerBarrelCone_thickness" /> 
+    <constant name="InnerTrackerBarrelServiceCone_rmin1" value="InnerTrackerBarrelCone_zmin * CentralTrackingBarrel_tan" />
     <constant name="InnerTrackerBarrelServiceCone_rmax1" value="InnerTrackerBarrelServiceCone_rmin1 + SiTrackerServiceConeAl_thickness" />
-    <constant name="InnerTrackerBarrelServiceCone_rmin2" value="InnerTrackerBarrelCone_zmax * TrackerMainDiagonal_tan" />
+    <constant name="InnerTrackerBarrelServiceCone_rmin2" value="InnerTrackerBarrelCone_zmax * CentralTrackingBarrel_tan" />
     <constant name="InnerTrackerBarrelServiceCone_rmax2" value="InnerTrackerBarrelServiceCone_rmin2 + SiTrackerServiceConeAl_thickness" />
     <constant name="InnerTrackerBarrelSupportCone_rmin1" value="InnerTrackerBarrelServiceCone_rmax1" />
     <constant name="InnerTrackerBarrelSupportCone_rmax1" value="InnerTrackerBarrelSupportCone_rmin1 + SiTrackerSupportConeCF_thickness" />
@@ -284,14 +281,14 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <comment> Inner Si endcap setup </comment>
     <constant name="InnerTrackerEndcapMod1_zmin"  value="InnerTrackerEndcap_zmin" />
     <constant name="InnerTrackerEndcapMod1_rmin"  value="InnerTrackerEndcap_rmin" />
-    <constant name="InnerTrackerEndcapMod1_rmax"  value="min(InnerTrackerEndcapMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
+    <constant name="InnerTrackerEndcapMod1_rmax"  value="min(InnerTrackerEndcapMod1_zmin * CentralTrackingBarrel_tan * 0.995, SiTrackerCyl_rmin)" />
     <constant name="InnerTrackerEndcapMod1_x1"    value="2 * InnerTrackerEndcapMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod1_x2"    value="2 * InnerTrackerEndcapMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod1_y"     value="InnerTrackerEndcapMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - InnerTrackerEndcapMod1_rmin" />
 
     <constant name="InnerTrackerEndcapMod2_zmin"  value="InnerTrackerEndcapMod1_zmin + 1 * InnerTrackerEndcap_offset" />
     <constant name="InnerTrackerEndcapMod2_rmin"  value="InnerTrackerEndcap_rmin" />
-    <constant name="InnerTrackerEndcapMod2_rmax"  value="min(InnerTrackerEndcapMod2_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
+    <constant name="InnerTrackerEndcapMod2_rmax"  value="min(InnerTrackerEndcapMod2_zmin * CentralTrackingBarrel_tan * 0.995, SiTrackerCyl_rmin)" />
     <constant name="InnerTrackerEndcapMod2_x1"    value="2 * InnerTrackerEndcapMod2_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod2_x2"    value="2 * InnerTrackerEndcapMod2_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="InnerTrackerEndcapMod2_y"     value="InnerTrackerEndcapMod2_rmax * cos(SiTrackerEndcapMod_angle/2) - InnerTrackerEndcapMod2_rmin" />
@@ -304,11 +301,11 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="InnerTrackerEndcapLayer2_zmin"        value="InnerTrackerEndcapMod2_zmin - SiTrackerEndcapLayer_thickness/2" />
 
     <constant name="InnerTrackerEndcapCone_zmin"          value="InnerTrackerBarrelCone_zmax" />
-    <constant name="InnerTrackerEndcapServiceCone_rmin1"  value="InnerTrackerEndcapCone_zmin * TrackerMainDiagonal_tan" />
+    <constant name="InnerTrackerEndcapServiceCone_rmin1"  value="InnerTrackerEndcapCone_zmin * CentralTrackingBarrel_tan" />
     <constant name="InnerTrackerEndcapServiceCone_rmax1"  value="InnerTrackerEndcapServiceCone_rmin1 + SiTrackerServiceConeAl_thickness" />
     <constant name="InnerTrackerEndcapServiceCone_rmin2"  value="SiTrackerServiceCyl_rmin" />
     <constant name="InnerTrackerEndcapServiceCone_rmax2"  value="SiTrackerServiceCyl_rmax" />
-    <constant name="InnerTrackerEndcapCone_zmax"          value="InnerTrackerEndcapServiceCone_rmin2 / TrackerMainDiagonal_tan" />
+    <constant name="InnerTrackerEndcapCone_zmax"          value="InnerTrackerEndcapServiceCone_rmin2 / CentralTrackingBarrel_tan" />
     <constant name="InnerTrackerEndcapCone_z"             value="(InnerTrackerEndcapCone_zmax + InnerTrackerEndcapCone_zmin)/2" />
     <constant name="InnerTrackerEndcapCone_length"        value="InnerTrackerEndcapCone_zmax - InnerTrackerEndcapCone_zmin" />
     <constant name="InnerTrackerEndcapSupportCone_rmin1"  value="InnerTrackerEndcapServiceCone_rmax1" />
@@ -317,7 +314,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="InnerTrackerEndcapSupportCone_rmax2"  value="SiTrackerSupportCyl_rmax" />
 
     <comment> The tracker endcap ends at the same place as the medial tracker barrel that sits around it </comment>
-    <constant name="InnerTrackerEndcap_zmax"              value="MedialTrackerBarrel_rmin / TrackerMainDiagonal_tan" />
+    <constant name="InnerTrackerEndcap_zmax"              value="MedialTrackerBarrel_rmin / CentralTrackingBarrel_tan" />
     <constant name="InnerTrackerEndcapCyl_zmin"           value="InnerTrackerEndcapCone_zmax" />
     <constant name="InnerTrackerEndcapCyl_zmax"           value="InnerTrackerEndcap_zmax" />
     <constant name="InnerTrackerEndcapCyl_z"              value="(InnerTrackerEndcapCyl_zmin + InnerTrackerEndcapCyl_zmax)/2" />
@@ -579,7 +576,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <comment> Medial Si endcap setup </comment>
     <constant name="MedialTrackerEndcapPMod1_zmin"  value="MedialTrackerEndcap_zmin" />
     <constant name="MedialTrackerEndcapPMod1_rmin"  value="MedialTrackerEndcapP_rmin" />
-    <constant name="MedialTrackerEndcapPMod1_rmax"  value="min(MedialTrackerEndcapPMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
+    <constant name="MedialTrackerEndcapPMod1_rmax"  value="min(MedialTrackerEndcapPMod1_zmin * CentralTrackingBarrel_tan * 0.995, SiTrackerCyl_rmin)" />
     <constant name="MedialTrackerEndcapPMod1_x1"    value="2 * MedialTrackerEndcapPMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapPMod1_x2"    value="2 * MedialTrackerEndcapPMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapPMod1_y"     value="MedialTrackerEndcapPMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - MedialTrackerEndcapPMod1_rmin" />
@@ -590,7 +587,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
 
     <constant name="MedialTrackerEndcapNMod1_zmin"  value="MedialTrackerEndcap_zmin" />
     <constant name="MedialTrackerEndcapNMod1_rmin"  value="MedialTrackerEndcapN_rmin" />
-    <constant name="MedialTrackerEndcapNMod1_rmax"  value="min(MedialTrackerEndcapNMod1_zmin * TrackerMainDiagonal_tan * 0.995, SiTrackerCyl_rmin)" />
+    <constant name="MedialTrackerEndcapNMod1_rmax"  value="min(MedialTrackerEndcapNMod1_zmin * CentralTrackingBarrel_tan * 0.995, SiTrackerCyl_rmin)" />
     <constant name="MedialTrackerEndcapNMod1_x1"    value="2 * MedialTrackerEndcapNMod1_rmin * tan(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapNMod1_x2"    value="2 * MedialTrackerEndcapNMod1_rmax * sin(SiTrackerEndcapMod_angle/2)" />
     <constant name="MedialTrackerEndcapNMod1_y"     value="MedialTrackerEndcapNMod1_rmax * cos(SiTrackerEndcapMod_angle/2) - MedialTrackerEndcapNMod1_rmin" />
@@ -600,7 +597,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="MedialTrackerEndcapNLayer1_zmin"  value="MedialTrackerEndcapNMod1_zmin - SiTrackerEndcapLayer_thickness/2" />
 
     <comment> The tracker endcap ends at the same place as the outer tracker barrel that sits around it </comment>
-    <constant name="MedialTrackerEndcap_zmax"              value="OuterTrackerBarrel_rmin / TrackerMainDiagonal_tan" />
+    <constant name="MedialTrackerEndcap_zmax"              value="OuterTrackerBarrel_rmin / CentralTrackingBarrel_tan" />
     <constant name="MedialTrackerEndcapCyl_zmin"           value="InnerTrackerEndcap_zmax" />
     <constant name="MedialTrackerEndcapCyl_zmax"           value="MedialTrackerEndcap_zmax" />
     <constant name="MedialTrackerEndcapCyl_z"              value="(MedialTrackerEndcapCyl_zmin + MedialTrackerEndcapCyl_zmax)/2" />
@@ -996,7 +993,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
 
     <comment> Parameters for the "ring" GEMS around the silicon tracker, which are all identical </comment>
     <constant name="GEMEndcapRingMod_rmin"          value="SiTrackerSupportCyl_rmax + GEMFrameBotEdge_width" />
-    <constant name="GEMEndcapRingMod_rmax"          value="min(min(GEMEndcapPDisk1_zmin, GEMEndcapN_zmin) * TrackerMainDiagonal_tan * 0.995, CentralTrackingRegion_rmax) - GEMFrameTopEdge_width" />
+    <constant name="GEMEndcapRingMod_rmax"          value="min(min(GEMEndcapPDisk1_zmin, GEMEndcapN_zmin) * CentralTrackingBarrel_tan * 0.995, CentralTrackingRegion_rmax) - GEMFrameTopEdge_width" />
     <constant name="GEMEndcapRingMod_x1"            value="2 * GEMEndcapRingMod_rmin * tan(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingMod_x2"            value="2 * GEMEndcapRingMod_rmax * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapRingMod_y"             value="GEMEndcapRingMod_rmax * cos(GEMEndcapMod_angle/2) - GEMEndcapRingMod_rmin" />
@@ -1039,7 +1036,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
     <constant name="GEMEndcapLargeModBotFrame_x2"    value="2 * GEMEndcapLargeModBotFrame_rmax * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapLargeMod_rmin"          value="GEMEndcapPMod3_zmin * ForwardTrackingRegion_tan + GEMFrameBotEdge_width" />
     <comment> Ensure there's always the length of the service gap in space available above the large GEM (top frame can extend into this at the corners). </comment>
-    <constant name="GEMEndcapLargeMod_rmax"          value="min(GEMEndcapPMod3_zmin * TrackerMainDiagonal_tan, Solenoid_rmax-ForwardServiceGap_length)" />
+    <constant name="GEMEndcapLargeMod_rmax"          value="min(GEMEndcapPMod3_zmin * CentralTrackingBarrel_tan, Solenoid_rmax-ForwardServiceGap_length)" />
     <constant name="GEMEndcapLargeMod_x1"            value="2 * GEMEndcapLargeMod_rmin * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapLargeMod_x2"            value="2 * GEMEndcapLargeMod_rmax * sin(GEMEndcapMod_angle/2)" />
     <constant name="GEMEndcapLargeMod_y"             value="GEMEndcapLargeMod_rmax * cos(GEMEndcapMod_angle/2) - GEMEndcapLargeMod_rmin" />

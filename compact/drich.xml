@@ -3,10 +3,10 @@
 
 <define>
 <!-- vessel (=snout+tank) geometry -->
-<constant name="DRICH_zmin"               value="ForwardPIDRegion_zmin"/> <!-- vessel front -->
-<constant name="DRICH_Length"             value="ForwardPIDRegion_length"/>  <!-- overall vessel length (including snout) -->
-<constant name="DRICH_rmin0"              value="ForwardPIDRegion_zmin * ForwardPIDRegion_tan1"/>  <!-- bore radius at dRICh vessel frontplane -->
-<constant name="DRICH_rmin1"              value="(ForwardPIDRegion_zmin + ForwardPIDRegion_length) * ForwardPIDRegion_tan2"/>  <!-- bore radius at dRICh vessel backplane -->
+<constant name="DRICH_zmin"               value="ForwardRICHRegion_zmin"/> <!-- vessel front -->
+<constant name="DRICH_Length"             value="ForwardRICHRegion_length"/>  <!-- overall vessel length (including snout) -->
+<constant name="DRICH_rmin0"              value="ForwardRICHRegion_zmin * ForwardRICHRegion_tan1"/>  <!-- bore radius at dRICh vessel frontplane -->
+<constant name="DRICH_rmin1"              value="(ForwardRICHRegion_zmin + ForwardRICHRegion_length) * ForwardRICHRegion_tan2"/>  <!-- bore radius at dRICh vessel backplane -->
 <constant name="DRICH_wall_thickness"     value="0.5*cm"/>  <!-- thickness of radial walls -->
 <constant name="DRICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
 <!-- tank geometry: cylinder, holding the majority of detector components -->
