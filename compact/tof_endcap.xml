@@ -8,11 +8,11 @@
     </comment>
     <comment> Forward/backward TOF position </comment>
     <constant name="ForwardTOF_length"           value="min(ForwardTOFRegion_length, 2.*cm)"/>
-    <constant name="ForwardTOF_zmin"             value="ForwardTOFRegion_zmin + ForwardTOFRegion_length/2"/>
+    <constant name="ForwardTOF_zmin"             value="ForwardTOFRegion_zmin + ForwardTOFRegion_length - ForwardTOF_length - 1*cm"/>
     <constant name="ForwardTOF_nlayers"          value="2"/>
     <constant name="ForwardTOFMod_offset"        value="1.5*cm"/>
     <constant name="BackwardTOF_length"          value="min(BackwardTOFRegion_length, 2.*cm)"/>
-    <constant name="BackwardTOF_zmin"            value="BackwardTOFRegion_zmin + BackwardTOF_length/4"/>
+    <constant name="BackwardTOF_zmin"            value="BackwardTOFRegion_zmin"/>
     <constant name="BackwardTOF_nlayers"         value="2"/>
     <constant name="BackwardTOFMod_offset"       value="1.5*cm"/>
     
