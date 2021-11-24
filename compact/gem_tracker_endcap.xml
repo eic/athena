@@ -1,6 +1,6 @@
 <lccdd>
 
-  <comment> Endcap Tracker  </comment>        
+  <comment> Endcap Tracker for Acadia  </comment>        
 
   <define>
     <constant name="GEMTrackerEndcapP_thickness"      value="min(10.0*cm,ForwardTrackingRegion_length)" />

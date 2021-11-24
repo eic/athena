@@ -115,11 +115,6 @@ dump_geometry:
     - print_env.sh
     ## DEBUG
     - mkdir -p geo
-    ## disable fibers in SciFi endcap ECAL for better performance
-    ## not needed, as we have no fibers in the current setup
-    #- sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
-    ## finally: remove tracking subassemblies as they lower the display priority
-    ##          of some tracking detectors
     - |
       sed -i -e '/<detectors>/,/<\/detectors>/d' ${DETECTOR_PATH}/compact/tracking_config*.xml
       mv ${DETECTOR_PATH}/compact/display_geoviewer.xml ${DETECTOR_PATH}/compact/display.xml
@@ -142,11 +137,13 @@ dump_geometry:
     ## print some useful output
     - |
       echo "Geometry viewer at:"
-      echo "https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/detector_geo_full.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom75;ROTY290;ROTZ350;trz0;trr0;ctrl;all&"
+      echo "https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/detector_geo_full.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom75;ROTY290;ROTZ350;trz0;trr0;ctrl;all"
+      echo " - Central detector view at: "
+      echo "https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/detector_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom120;ROTY320;ROTZ340;trz0;trr0;ctrl;all"
       for xml in ${DETECTOR_PATH}/compact/subsystem_views/*.xml; do
         geo_name=`basename $xml .xml`_geo.root
         echo " - Subsystem view for `basename $xml .xml` at:"
-        echo "   https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/${geo_name}?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom75;ROTY290;ROTZ350;trz0;trr0;ctrl;all&"
+        echo "   https://eic.phy.anl.gov/geoviewer/index.htm?file=https://eicweb.phy.anl.gov/EIC/detectors/athena/-/jobs/${CI_JOB_ID}/artifacts/raw/geo/${geo_name}?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom75;ROTY320;ROTZ340;trz0;trr0;ctrl;all"
       done
 
 detector_documentation:
@@ -199,6 +196,7 @@ overlap_check_tgeo:
   script:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
+    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward_ZDC_Ecal_WSciFi.xml
     - checkOverlaps -c ${DETECTOR_PATH}/athena.xml  | tee doc/overlap_check_tgeo.out 
     - echo "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
@@ -210,6 +208,7 @@ overlap_check_geant4:full_fast:
   script:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
+    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward_ZDC_Ecal_WSciFi.xml
     ## reduce the number of fibers in Hadron EMCal for overlap check
     ## not needed, as we are running with a different setup now
     #- sed -i 's/radius="EcalEndcapP_FiberRadius"/radius="EcalEndcapP_FiberRadius*10"/' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml

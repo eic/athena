@@ -11,7 +11,7 @@
 //
 //==========================================================================
 //
-// Modified for TOPSiDE detector
+// Modified for ATHENA detector
 //
 //==========================================================================
 #include "DD4hep/DetFactoryHelper.h"
@@ -129,3 +129,4 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
 // clang-format off
 DECLARE_DETELEMENT(athena_PolyhedraEndcapCalorimeter2, create_detector)
+DECLARE_DETELEMENT(athena_PolyhedraEndcapCalorimeter, create_detector)

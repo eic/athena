@@ -21,7 +21,7 @@ using namespace dd4hep;
 using namespace dd4hep::detail;
 
 typedef ROOT::Math::XYPoint Point;
-// fiber placement helpers, defined in BarrelCalorimeterHybrid_geo
+// fiber placement helpers, defined below
 vector<vector<Point>> fiberPositions(double radius, double x_spacing, double z_spacing,
                                      double x, double z, double phi, double spacing_tol = 1e-2);
 std::pair<int, int> getNdivisions(double x, double z, double dx, double dz);
@@ -331,6 +331,117 @@ void buildSupport(Detector& desc, Volume &mod_vol, xml_comp_t x_support,
   }
 
   mod_vol.placeVolume(env_vol, Position(0.0, 0.0, l_pos_z + support_thickness/2.));
+}
+
+// Fill fiber lattice into trapezoid starting from position (0,0) in x-z coordinate system
+vector<vector<Point>> fiberPositions(double radius, double x_spacing, double z_spacing, double x, double z, double phi,
+                                     double spacing_tol)
+{
+  // z_spacing - distance between fiber layers in z
+  // x_spacing - distance between fiber centers in x
+  // x - half-length of the shorter (bottom) base of the trapezoid
+  // z - height of the trapezoid
+  // phi - angle between z and trapezoid arm
+
+  vector<vector<Point>> positions;
+  int z_layers = floor((z / 2 - radius - spacing_tol) / z_spacing); // number of layers that fit in z/2
+
+  double z_pos = 0.;
+  double x_pos = 0.;
+
+  for (int l = -z_layers; l < z_layers + 1; l++) {
+    vector<Point> xline;
+    z_pos                = l * z_spacing;
+    double x_max         = x + (z / 2. + z_pos) * tan(phi) - spacing_tol; // calculate max x at particular z_pos
+    (l % 2 == 0) ? x_pos = 0. : x_pos = x_spacing / 2;                    // account for spacing/2 shift
+
+    while (x_pos < (x_max - radius)) {
+      xline.push_back(Point(x_pos, z_pos));
+      if (x_pos != 0.)
+        xline.push_back(Point(-x_pos, z_pos)); // using symmetry around x=0
+      x_pos += x_spacing;
+    }
+    // Sort fiber IDs for a better organization
+    sort(xline.begin(), xline.end(), [](const Point& p1, const Point& p2) { return p1.x() < p2.x(); });
+    positions.emplace_back(std::move(xline));
+  }
+  return positions;
+}
+
+// Calculate number of divisions for the readout grid for the fiber layers
+std::pair<int, int> getNdivisions(double x, double z, double dx, double dz)
+{
+  // x and z defined as in vector<Point> fiberPositions
+  // dx, dz - size of the grid in x and z we want to get close to with the polygons
+  // See also descripltion when the function is called
+
+  double SiPMsize = 13.0 * mm;
+  double grid_min = SiPMsize + 3.0 * mm;
+
+  if (dz < grid_min) {
+    dz = grid_min;
+  }
+
+  if (dx < grid_min) {
+    dx = grid_min;
+  }
+
+  int nfit_cells_z = floor(z / dz);
+  int n_cells_z    = nfit_cells_z;
+
+  if (nfit_cells_z == 0)
+    n_cells_z++;
+
+  int nfit_cells_x = floor((2 * x) / dx);
+  int n_cells_x    = nfit_cells_x;
+
+  if (nfit_cells_x == 0)
+    n_cells_x++;
+
+  return std::make_pair(n_cells_x, n_cells_z);
+}
+
+// Calculate dimensions of the polygonal grid in the cartesian coordinate system x-z
+vector<tuple<int, Point, Point, Point, Point>> gridPoints(int div_x, int div_z, double x, double z, double phi)
+{
+  // x, z and phi defined as in vector<Point> fiberPositions
+  // div_x, div_z - number of divisions in x and z
+  double dz = z / div_z;
+
+  std::vector<std::tuple<int, Point, Point, Point, Point>> points;
+
+  for (int iz = 0; iz < div_z + 1; iz++) {
+    for (int ix = 0; ix < div_x + 1; ix++) {
+      double A_z = -z / 2 + iz * dz;
+      double B_z = -z / 2 + (iz + 1) * dz;
+
+      double len_x_for_z        = 2 * (x + iz * dz * tan(phi));
+      double len_x_for_z_plus_1 = 2 * (x + (iz + 1) * dz * tan(phi));
+
+      double dx_for_z        = len_x_for_z / div_x;
+      double dx_for_z_plus_1 = len_x_for_z_plus_1 / div_x;
+
+      double A_x = -len_x_for_z / 2. + ix * dx_for_z;
+      double B_x = -len_x_for_z_plus_1 / 2. + ix * dx_for_z_plus_1;
+
+      double C_z = B_z;
+      double D_z = A_z;
+      double C_x = B_x + dx_for_z_plus_1;
+      double D_x = A_x + dx_for_z;
+
+      int id = ix + div_x * iz;
+
+      auto A = Point(A_x, A_z);
+      auto B = Point(B_x, B_z);
+      auto C = Point(C_x, C_z);
+      auto D = Point(D_x, D_z);
+
+      // vertex points filled in the clock-wise direction
+      points.push_back(make_tuple(id, A, B, C, D));
+    }
+  }
+
+  return points;
 }
 
 DECLARE_DETELEMENT(athena_EcalBarrelInterlayers, create_detector)

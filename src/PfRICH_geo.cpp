@@ -313,4 +313,5 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 };
 
 // clang-format off
+DECLARE_DETELEMENT(athena_PfRICH, createDetector)
 DECLARE_DETELEMENT(athena_ERICH, createDetector)
