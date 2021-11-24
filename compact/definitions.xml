@@ -404,7 +404,7 @@ Examples:
     <constant name="ForwardRICHRegion_tan2"        value="Eta3_6_tan * 0.89" />
 
     <constant name="BackwardPIDRegion_zmin"       value="CentralTrackingRegionN_zmax" />
-    <constant name="BackwardPIDRegion_length"     value="60.0*cm" />
+    <constant name="BackwardPIDRegion_length"     value="62.0*cm" />
     <constant name="BackwardPIDRegion_rmax"       value="CentralTrackingRegion_rmax" />
     <constant name="BackwardPIDRegion_tan"        value="CentralTrackingRegionN_tan * 0.92" />
 
