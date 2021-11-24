@@ -5,6 +5,4 @@
 <include ref="drich.xml"/>
 <include ref="erich.xml"/>
 
-<include ref="tof_endcap.xml"/>
-
 </lccdd>

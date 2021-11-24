@@ -100,7 +100,7 @@
       --------------------------
   </comment>
   <!--include ref="compact/tracking_config_canyonlands.xml"/-->
-  <include ref="compact/tracking_config_canyonlands_tof.xml"/>
+  <include ref="compact/tracking_config_deathvalley.xml"/>
 
   <comment>
       PID detectors
