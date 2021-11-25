@@ -31,9 +31,7 @@
     <vis name="TOFModuleVis"      ref="TOFVis"              visible="true"  showdaughters="true"/>
     <vis name="TOFSupportVis"     ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
     <vis name="TOFSensorVis"      ref="TOFVis"              visible="true"  showDaughters="true"/>
-    <comment> display the barrel module details in geoviewer </comment>
     <vis name="TOFBarrelModuleVis" ref="TOFVis"             visible="true"  showdaughters="true"/>
-    <comment> extra detailed vizualizations for the barrel </comment>
     <vis name="TOFHybridVis"      ref="AnlGold"             visible="true"  showDaughters="true"/>
     <vis name="TOFCoolingTube"    ref="AnlRed"              visible="true"  showDaughters="true"/>
     <vis name="TOFCoolant"        ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>

@@ -32,7 +32,7 @@
       type="DD4hep_SubdetectorAssembly"
       vis="TrackerSubAssemblyVis">
       <composite name="MedialTrackerEndcapN"/>
-      <composite name="MedialTrackerBarrel"/>
+      <composite name="MedialTrackerCompositeBarrel"/>
       <composite name="MedialTrackerEndcapP"/>
     </detector>
     <detector id="TrackerSubAssembly_2_ID"
@@ -56,6 +56,15 @@
       vis="TrackerSubAssemblyVis">
       <composite name="ForwardGEM"/>
       <composite name="BackwardNullTracker"/>
+    </detector>
+    <detector id="TrackerCompositeBarrel_0_ID"
+      name="MedialTrackerCompositeBarrel"
+      type="athena_CompositeTracker"
+      actsType="barrel"
+      vis="TrackerSubAssemblyVis">
+      <position x="0*cm" y="0*cm" z="0*um" />
+      <composite name="MedialTrackerBarrel"/>
+      <composite name="BarrelTOF"/>
     </detector>
     <detector id="TrackerCompositeEndcapN_0_ID"
       name="OuterTrackerCompositeEndcapN"
