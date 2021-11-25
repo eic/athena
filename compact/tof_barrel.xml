@@ -76,7 +76,7 @@
       <comment>
         Tracker Barrel Modules
       </comment>
-      <module name="BarrelTOF_Module1" vis="TOFVis">
+      <module name="BarrelTOF_Module1" vis="TOFBarrelModuleVis">
         <module_component name="sensor" material="Silicon" sensitive="true" width="BarrelTOF_Sensor_width" length="BarrelTOF_length1" thickness="BarrelTOF_Sensor_thickness" vis="TOFSensorVis" >
           <position x="BarrelTOF_Sensor_position" y="0" z="0" />
         </module_component>
@@ -105,7 +105,7 @@
           <position x="BarrelTOF_Service_position" y="0" z="0" />
         </module_component>
       </module>
-      <layer module="BarrelTOF_Module1" id="1" vis="TOFVis">
+      <layer module="BarrelTOF_Module1" id="1" vis="TOFLayerVis">
         <barrel_envelope
           inner_r="BarrelTOF_rmin-BarrelTOF_rOffset"
           outer_r="BarrelTOF_rmax+BarrelTOF_rOffset"

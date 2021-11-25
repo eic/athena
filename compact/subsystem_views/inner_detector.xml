@@ -60,8 +60,7 @@
   <display>
   <include ref="compact/colors.xml" />
   <!--include ref="compact/colors2.xml"/-->
-  <include ref="compact/display.xml" />
-  <!--include ref="compact/display_detailed.xml"/-->
+  <include ref="compact/display.xml"/>
   </display>
 
   <documentation level="0">

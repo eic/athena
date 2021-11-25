@@ -59,7 +59,7 @@
 
   <display>
   <include ref="compact/colors.xml" />
-  <include ref="compact/display.xml" />
+  <include ref="compact/display_detailed.xml" />
   </display>
 
   <documentation level="0">
