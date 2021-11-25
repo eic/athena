@@ -14,7 +14,7 @@ The Athena Detector at IP6 for Electron-Ion Collider experiment.
     - [DIRC](https://eic.phy.anl.gov/geoviewer/index.htm?nobrowser&file=https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/geo/dirc_only_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom120;ROTY320;ROTZ340;trz0;trr0;ctrl;all)
   - [Tracking](https://eic.phy.anl.gov/geoviewer/index.htm?nobrowser&file=https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/geo/tracking_only_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom75;ROTY320;ROTZ340;trz0;trr0;ctrl;all)
     - [Vertex detector](https://eic.phy.anl.gov/geoviewer/index.htm?nobrowser&file=https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/geo/vertex_only_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom120;ROTY320;ROTZ340;trz0;trr0;ctrl;all)
-  - [Far-forward](https://eic.phy.anl.gov/geoviewer/index.htm?nobrowser&file=https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/geo/ip6_only_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom40;ROTY290;ROTZ350;trz0;trr0;ctrl;all)
+  - [Far-forward](https://eic.phy.anl.gov/geoviewer/index.htm?nobrowser&file=https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/geo/ip6_geo.root?job=dump_geometry&item=default;1&opt=clipx;clipy;transp30;zoom40;ROTY290;ROTZ350;trz0;trr0;ctrl;all)
 
 <a href="https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/images/view01.pdf?job=report">
 <img src="https://eicweb.phy.anl.gov/api/v4/projects/473/jobs/artifacts/master/raw/images/view01.png?job=report" width="400px" />

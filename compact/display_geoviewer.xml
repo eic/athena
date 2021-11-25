@@ -35,10 +35,10 @@
     <comment> extra detailed vizualizations for the barrel </comment>
     <vis name="TOFHybridVis"      ref="AnlGold"             visible="true"  showDaughters="true"/>
     <vis name="TOFCoolingTube"    ref="AnlRed"              visible="true"  showDaughters="true"/>
-    <vis name="TOFCoolant"        ref="AnlGreen"            visible="true"  showDaughters="true"/>
-    <vis name="TOFCSkinVis"       ref="AnlGray"             visible="true"  showDaughters="true"/>
-    <vis name="TOFCFoamVis"       ref="AnlGreen"            visible="true"  showDaughters="true"/>
-    <vis name="TOFCHoneycombVis"  ref="AnlGreen"            visible="true"  showDaughters="true"/>
+    <vis name="TOFCoolant"        ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFCSkinVis"       ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFCFoamVis"       ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFCHoneycombVis"  ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>
 
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
@@ -130,7 +130,7 @@
     </comment>
 
     <vis name="DRICH_vessel_vis"  ref="AnlGray" showDaughters="true" visible="true" />
-    <vis name="DRICH_gas_vis"     ref="AnlLightGray" alpha="0.2" showDaughters="false" visible="true" />
+    <vis name="DRICH_gas_vis"     ref="AnlLightGray" alpha="0.2" showDaughters="true" visible="true" />
     <vis name="DRICH_aerogel_vis" ref="AnlTeal" showDaughters="true" visible="true" />
     <vis name="DRICH_filter_vis"  alpha="1.0" r="1.0" g="1.0" b="0.0" showDaughters="true" visible="true" />
     <vis name="DRICH_mirror_vis"  ref="AnlGray" showDaughters="true" visible="true" />
