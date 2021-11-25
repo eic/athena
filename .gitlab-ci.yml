@@ -124,6 +124,8 @@ dump_geometry:
         cp $xml ${DETECTOR_PATH}/geo.xml
         dd_web_display --output geo/${geo_name} ${DETECTOR_PATH}/geo.xml
       done
+    ## Lower-resolution display of the pfRICH sensors for global views
+    - sed -i 's/_default"/_lores"/' ${DETECTOR_PATH}/erich.xml
     ## full geo with downstream beamline
     - dd_web_display --output geo/detector_geo_full.root ${DETECTOR_PATH}/athena.xml
     ## only central detector geo

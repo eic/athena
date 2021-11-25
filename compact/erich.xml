@@ -13,8 +13,16 @@
 <constant name="ERICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
 <!-- additional parameters -->
 <constant name="ERICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
-<constant name="ERICH_sensor_active_size" value="24.0*mm"/> <!-- sensor side length (effective area) -->
-<constant name="ERICH_sensor_full_size"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<constant name="ERICH_sensor_active_size_default" value="24.0*mm"/> <!-- sensor side length (effective area) -->
+<constant name="ERICH_sensor_full_size_default"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<!-- lores values are used for global vizualizations _only_ -->
+<constant name="ERICH_sensor_active_size_lores" value="ERICH_sensor_active_size_default * 2"/>
+<constant name="ERICH_sensor_full_size_lores" value="ERICH_sensor_full_size_default * 2"/>
+<!-- actual values used by the parametrization -->
+<constant name="ERICH_sensor_active_size" value="ERICH_sensor_active_size_default"/>
+<constant name="ERICH_sensor_full_size" value="ERICH_sensor_full_size_default"/>
+
+
 <constant name="ERICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
 <constant name="ERICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
 <constant name="ERICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
