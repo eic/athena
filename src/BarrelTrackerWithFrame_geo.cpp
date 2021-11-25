@@ -166,24 +166,26 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
     double thickness_so_far = 0.0;
     double thickness_sum = -total_thickness/2.0;
     for (xml_coll_t ci(x_mod, _U(module_component)); ci; ++ci, ++ncomponents) {
-      xml_comp_t x_comp = ci;
-      xml_comp_t x_pos  = x_comp.position(false);
-      xml_comp_t x_rot  = x_comp.rotation(false);
-      string     c_nam  = _toString(ncomponents, "component%d");
-      Box        c_box(x_comp.width() / 2, x_comp.length() / 2, x_comp.thickness() / 2);
-      Volume     c_vol(c_nam, c_box, description.material(x_comp.materialStr()));
+      xml_comp_t   x_comp = ci;
+      xml_comp_t   x_pos  = x_comp.position(false);
+      xml_comp_t   x_rot  = x_comp.rotation(false);
+      const string c_nam  = _toString(ncomponents, "component%d");
+      Box          c_box(x_comp.width() / 2, x_comp.length() / 2, x_comp.thickness() / 2);
+      Volume       c_vol(c_nam, c_box, description.material(x_comp.materialStr()));
 
+      // Utility variable for the relative z-offset based off the previous components
+      const double zoff = thickness_sum+x_comp.thickness() / 2.0;
       if (x_pos && x_rot) {
-        Position c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0));
+        Position c_pos(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff);
         RotationZYX c_rot(x_rot.z(0), x_rot.y(0), x_rot.x(0));
         pv = m_vol.placeVolume(c_vol, Transform3D(c_rot, c_pos));
       } else if (x_rot) {
-        Position c_pos(0, 0, thickness_sum + x_comp.thickness() / 2.0);
-        pv = m_vol.placeVolume(c_vol, Transform3D(RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)),c_pos));
+        Position c_pos(0, 0, zoff);
+        pv = m_vol.placeVolume(c_vol, Transform3D(RotationZYX(x_rot.z(0), x_rot.y(0), x_rot.x(0)), c_pos));
       } else if (x_pos) {
-        pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0)));
+        pv = m_vol.placeVolume(c_vol, Position(x_pos.x(0), x_pos.y(0), x_pos.z(0) + zoff));
       } else {
-        pv = m_vol.placeVolume(c_vol, Position(0,0,thickness_sum+x_comp.thickness()/2.0));
+        pv = m_vol.placeVolume(c_vol, Position(0, 0, zoff));
       }
       c_vol.setRegion(description, x_comp.regionStr());
       c_vol.setLimitSet(description, x_comp.limitsStr());
@@ -217,6 +219,11 @@ static Ref_t create_BarrelTrackerWithFrame(Detector& description, xml_h e, Sensi
       }
       thickness_sum += x_comp.thickness();
       thickness_so_far += x_comp.thickness();
+      // apply relative offsets in z-position used to stack components side-by-side
+      if (x_pos) {
+        thickness_sum += x_pos.z(0);
+        thickness_so_far += x_pos.z(0);
+      }
     }
   }
 
