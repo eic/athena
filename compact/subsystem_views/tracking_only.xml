@@ -102,11 +102,9 @@
   <!--include ref="compact/tracking_config_canyonlands.xml"/-->
   <include ref="compact/tracking_config_deathvalley.xml"/>
 
-  <comment>
       PID detectors
       -------------
   <include ref="compact/tof_barrel.xml"/>
-  </comment>
 
   <fields>
     <field name="B0PF_Magnet" type="MultipoleMagnet">
