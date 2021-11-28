@@ -31,12 +31,12 @@
     <vis name="TOFSupportVis"     ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
     <vis name="TOFSensorVis"      ref="TOFVis"              visible="true"  showDaughters="true"/>
     <vis name="TOFBarrelModuleVis" ref="TOFVis"             visible="true"  showdaughters="true"/>
-    <vis name="TOFHybridVis"      ref="AnlGold"             visible="true"  showDaughters="true"/>
-    <vis name="TOFCoolingTube"    ref="AnlRed"              visible="true"  showDaughters="true"/>
-    <vis name="TOFCoolant"        ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFHybridVis"      ref="AnlGold"             visible="false"  showDaughters="true"/>
+    <vis name="TOFCoolingTube"    ref="AnlRed"              visible="false"  showDaughters="true"/>
+    <vis name="TOFCoolant"        ref="TrackerServiceVis"   visible="false"  showDaughters="true"/>
     <vis name="TOFCSkinVis"       ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
     <vis name="TOFCFoamVis"       ref="TrackerSupportVis"   visible="true"  showDaughters="true"/>
-    <vis name="TOFCHoneycombVis"  ref="TrackerServiceVis"   visible="true"  showDaughters="true"/>
+    <vis name="TOFCHoneycombVis"  ref="TrackerServiceVis"   visible="false"  showDaughters="true"/>
 
     <vis name="FFTrackerVis"        ref="AnlRed" />
     <vis name="FFTrackerSupportVis" ref="AnlBlue"             visible="true"  showDaughters="false" />
@@ -133,7 +133,7 @@
     <vis name="DRICH_filter_vis"  alpha="1.0" r="1.0" g="1.0" b="0.0" showDaughters="true" visible="true" />
     <vis name="DRICH_mirror_vis"  ref="AnlGray" showDaughters="true" visible="true" />
     <vis name="DRICH_sensor_vis"  ref="AnlGreen" showDaughters="true" visible="true" />
-    <vis name="ERICH_sensor_vis"  ref="AnlGreen" showDaughters="true" visible="true" /> <!-- invisible, to speedup graphics -->
+    <vis name="ERICH_sensor_vis"  ref="AnlGreen" showDaughters="true" visible="false" /> <!-- invisible, to speedup graphics -->
 
     <vis name="MRICH_aerogel_vis" ref="AnlTeal" showDaughters="true" visible="true" />
     <vis name="MRICH_frame_vis" ref="AnlGold" showDaughters="true" visible="true" />
