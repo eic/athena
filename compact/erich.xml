@@ -16,8 +16,8 @@
 <constant name="ERICH_sensor_active_size_default" value="24.0*mm"/> <!-- sensor side length (effective area) -->
 <constant name="ERICH_sensor_full_size_default"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
 <!-- lores values are used for global vizualizations _only_ -->
-<constant name="ERICH_sensor_active_size_lores" value="ERICH_sensor_active_size_default * 6"/>
-<constant name="ERICH_sensor_full_size_lores" value="ERICH_sensor_full_size_default * 6"/>
+<constant name="ERICH_sensor_active_size_lores" value="ERICH_sensor_active_size_default * 20"/>
+<constant name="ERICH_sensor_full_size_lores" value="ERICH_sensor_full_size_default * 20"/>
 <!-- actual values used by the parametrization -->
 <constant name="ERICH_sensor_active_size" value="ERICH_sensor_active_size_default"/>
 <constant name="ERICH_sensor_full_size" value="ERICH_sensor_full_size_default"/>
