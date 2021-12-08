@@ -13,11 +13,13 @@
 <constant name="ERICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
 <!-- additional parameters -->
 <constant name="ERICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
-<constant name="ERICH_sensor_active_size" value="24.0*mm"/> <!-- sensor side length (effective area) -->
-<constant name="ERICH_sensor_full_size"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
-<constant name="ERICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
+<!--constant name="ERICH_sensor_active_size" value="24.0*mm"/--> <!-- sensor side length (effective area) -->
+<constant name="ERICH_sensor_size"        value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<constant name="ERICH_sensor_thickness"   value="0.5*mm"/> <!-- sensor thickness -->
 <constant name="ERICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
 <constant name="ERICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
+<constant name="ERICH_sensor_pixel_pitch" value="3.2*mm"/> <!-- center-to-center distance between SiPMs in a 8x8 panel -->
+<constant name="ERICH_sensor_pixel_size"  value="3.0*mm"/> <!-- a single SiPM pixel size -->
 <!-- debugging switches -->
 <comment>
 - `ERICH_debug_optics`:  1 = all components become vacuum; test opticalphotons from IP
@@ -117,8 +119,7 @@
 <documentation level="10">
 ##### Sensor module
 - based on Hamamatsu S13361-3050AE-08
-  - effective area: 24.0 x 24.0 mm
-  - enclosure size: 25.8 x 25.8 mm
+  - sensor assembly size: 25.8 x 25.8 mm
   - pixel size: 3x3 mm (8x8 matrix)
   - thickness: 1.5 mm
 - dimensions:
@@ -132,9 +133,9 @@
   material="AirOptical"
   surface="SensorSurface_ERICH"
   vis="ERICH_sensor_vis"
-  side="ERICH_sensor_active_size"
+  side="ERICH_sensor_size"
   thickness="ERICH_sensor_thickness"
-  gap="0.5*(ERICH_sensor_full_size-ERICH_sensor_active_size) + 0.1*mm"
+  gap="0.2*mm"
   />
 
 
@@ -184,15 +185,17 @@
   | x pixel   | 20     | 16     |
   | y pixel   | 36     | 16     |
 
+- offset assignment needs to be validated; presently IRTAlgorithm Juggler plugin
+  does digitization on its own
 </documentation>
 <readouts>
   <readout name="ERICHHits">
     <segmentation
       type="CartesianGridXY"
-      grid_size_x="ERICH_sensor_active_size/(ERICH_num_px-1)"
-      grid_size_y="ERICH_sensor_active_size/(ERICH_num_px-1)"
-      offset_x="-ERICH_sensor_active_size/2.0"
-      offset_y="-ERICH_sensor_active_size/2.0"
+      grid_size_x="ERICH_sensor_pixel_pitch"
+      grid_size_y="ERICH_sensor_pixel_pitch"      
+      offset_x="-ERICH_sensor_pixel_pitch*ERICH_num_px/2.0"
+      offset_y="-ERICH_sensor_pixel_pitch*ERICH_num_px/2.0"
       />
     <id>system:8,module:12,x:20:16,y:16</id>
   </readout>
