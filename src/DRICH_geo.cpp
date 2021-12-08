@@ -285,7 +285,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   Volume motherVol = desc.pickMotherVolume(det);
   // FIXME: usage of this translation assumes gasvolume2vessel translation is (0,0,0);
   auto gasvolume2master = Position(0, 0, vesselZmin) - originFront;
-  printf("@@@ %7.1f %7.1f %7.1f\n", gasvolume2master.x()/mm, gasvolume2master.y()/mm, gasvolume2master.z()/mm);
+  //printf("@@@ %7.1f %7.1f %7.1f\n", gasvolume2master.x()/mm, gasvolume2master.y()/mm, gasvolume2master.z()/mm);
   PlacedVolume vesselPV = motherVol.placeVolume(vesselVol, gasvolume2master);
   vesselPV.addPhysVolID("system", detID);
   det.setPlacement(vesselPV);
@@ -325,7 +325,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // aerogel placement and surface properties
   // TODO [low-priority]: define skin properties for aerogel and filter
   auto radiatorPos = Position(0., 0., radiatorFrontplane) + originFront;
-  printf("@@@ %f\n", (1/mm)*radiatorPos.z());
+  //printf("@@@ %f\n", (1/mm)*radiatorPos.z());
   auto aerogelPV = gasvolVol.placeVolume(aerogelVol,
         Translation3D(radiatorPos.x(), radiatorPos.y(), radiatorPos.z()) // re-center to originFront
       * RotationY(radiatorPitch) // change polar angle to specified pitch // FIXME: probably broken (not yet in use anyway)
@@ -335,7 +335,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   //SkinSurface aerogelSkin(desc, aerogelDE, "mirror_optical_surface", aerogelSurf, aerogelVol);
   //aerogelSkin.isValid();
   {
-    printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + aerogelPV.position().z()));//+aerogelThickness/2));
+    //printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + aerogelPV.position().z()));//+aerogelThickness/2));
     //auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+aerogelPV.position().z()+aerogelThickness/2), nx, ny);
     auto surface = new FlatSurface((1/mm)*TVector3(0,0,gasvolume2master.z() + aerogelPV.position().z()), nx, ny);
     //printf("@M@  aerogel %7.2f\n", (vesselOffset+aerogelPV.position().z()+aerogelThickness/2)/mm);
@@ -364,7 +364,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
     {
       // FIXME: create a small air gap in the geometry as well;
-      printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + filterPV.position().z()));
+      //printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + filterPV.position().z()));
       auto surface = new FlatSurface((1/mm)*TVector3(0,0,gasvolume2master.z() + filterPV.position().z()), nx, ny);
       for(int isec=0; isec<nmax/*nSectors*/; isec++) {
 	auto radiator = geometry->AddFlatRadiator(detector, "Filter", isec, 
@@ -504,7 +504,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	//localToGlobal.LocalToMaster(l, g);
 	double xx, yy, zz;
 	translation.GetComponents(xx, yy, zz);
-	printf("@@@ %10.5f %10.5f %10.5f\n", xx/mm, yy/mm, zz/mm);
+	//printf("@@@ %10.5f %10.5f %10.5f\n", xx/mm, yy/mm, zz/mm);
 
 	auto surface = new SphericalSurface((1/mm)*TVector3(
 							    xx+gasvolume2master.x(), 

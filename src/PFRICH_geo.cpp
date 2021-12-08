@@ -331,7 +331,17 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 					 ));
 
 	    // Assume that photosensors can have different 3D surface parameterizations;
-	    auto surface = new FlatSurface((1/mm)*TVector3(0.0, 0, vesselOffset+sensorPV.position().z()), nx, ny);
+	    //+auto surface = new FlatSurface((1/mm)*TVector3(0.0, 0, vesselOffset+sensorPV.position().z()), nx, ny);
+	    // FIXME: unify with dRICH;
+	    double xxl[3] = {0.0, 0.0, 0.0}, bff[3], xxg[3], nxl[3] = {1.0, 0.0, 0.0}, nyl[3] = {0.0, 1.0, 0.0}, nxg[3], nyg[3];
+	    sensorPV.ptr()->LocalToMaster(xxl, bff);
+	    vesselPV.ptr()->LocalToMaster(bff, xxg);
+	    //printf("@G@ %10.5f %10.5f %10.5f\n", xxg[0]/mm, xxg[1]/mm, xxg[2]/mm);
+
+	    // Assume vessel transformation is a pure translation;
+	    sensorPV.ptr()->LocalToMasterVect(nxl, nxg);
+	    sensorPV.ptr()->LocalToMasterVect(nyl, nyg);
+	    auto surface = new FlatSurface((1/mm)*TVector3(xxg), TVector3(nxg), TVector3(nyg));
 
 	    uint64_t imodsec = (uint64_t(imod) << moffset) & msmask;
 	    detector->CreatePhotonDetectorInstance(0, pd, imodsec, surface);

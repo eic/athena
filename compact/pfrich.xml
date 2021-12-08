@@ -11,24 +11,24 @@
 <constant name="PFRICH_rmax"               value="BackwardPIDRegion_rmax - 2*cm"/>  <!-- vessel backplane radius -->
 <constant name="PFRICH_wall_thickness"     value="0.5*cm"/>  <!-- thickness of radial walls -->
 <constant name="PFRICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
-<!-- additional parameters -->
 <constant name="PFRICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
-<constant name="PFRICH_sensor_active_size_default" value="24.0*mm"/> <!-- sensor side length (effective area) -->
-<constant name="PFRICH_sensor_full_size_default"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
-<!-- lores values are used for global vizualizations _only_ -->
-<constant name="PFRICH_sensor_active_size_lores" value="PFRICH_sensor_active_size_default * 4"/>
-<constant name="PFRICH_sensor_full_size_lores"   value="PFRICH_sensor_full_size_default * 4"/>
-<!-- actual values used by the parametrization -->
-<constant name="PFRICH_sensor_active_size" value="PFRICH_sensor_active_size_default"/>
-<constant name="PFRICH_sensor_full_size"   value="PFRICH_sensor_full_size_default"/>
-
-
-<constant name="PFRICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
+<!-- real sensor size -->
+<constant name="PFRICH_sensor_size_default"      value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<constant name="PFRICH_sensor_thickness_default" value="0.5*mm"/>  <!-- sensor thickness -->
+<!-- lores sensor size, used for global vizualizations _only_ -->
+<constant name="PFRICH_sensor_size_lores"        value="PFRICH_sensor_size_default * 4"/>
+<constant name="PFRICH_sensor_thickness_lores"   value="PFRICH_sensor_thickness_default * 4"/>
+<!-- actual sensor size, used by the parametrization -->
+<constant name="PFRICH_sensor_size"              value="PFRICH_sensor_size_default"/>
+<constant name="PFRICH_sensor_thickness"         value="PFRICH_sensor_thickness_default"/>
+<!-- additional parameters -->
 <constant name="PFRICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
 <constant name="PFRICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
+<constant name="PFRICH_sensor_pixel_pitch" value="3.2*mm"/> <!-- center-to-center distance between SiPMs in a 8x8 panel -->
+<constant name="PFRICH_sensor_pixel_size"  value="3.0*mm"/> <!-- a single SiPM pixel size -->
 <!-- debugging switches -->
 <comment>
-- `PFRICH_debug_optics`:  1 = all components become vacuum; test opticalphotons from IP
+- `PFRICH_debug_optics`: 1 = all components become vacuum; test opticalphotons from IP
                          2 = all components become vacuum, except for `gasvol`, test charged particles from IP
                          0 = off
 </comment>
@@ -125,8 +125,7 @@
 <documentation level="10">
 ##### Sensor module
 - based on Hamamatsu S13361-3050AE-08
-  - effective area: 24.0 x 24.0 mm
-  - enclosure size: 25.8 x 25.8 mm
+  - sensor assembly size: 25.8 x 25.8 mm
   - pixel size: 3x3 mm (8x8 matrix)
   - thickness: 1.5 mm
 - dimensions:
@@ -140,9 +139,9 @@
   material="AirOptical"
   surface="SensorSurface_PFRICH"
   vis="PFRICH_sensor_vis"
-  side="PFRICH_sensor_active_size"
+  side="PFRICH_sensor_size"
   thickness="PFRICH_sensor_thickness"
-  gap="0.5*(PFRICH_sensor_full_size-PFRICH_sensor_active_size) + 0.1*mm"
+  gap="0.2*mm"
   />
 
 
@@ -192,15 +191,17 @@
   | x pixel   | 20     | 16     |
   | y pixel   | 36     | 16     |
 
+- offset assignment needs to be validated; presently IRTAlgorithm Juggler plugin
+  does digitization on its own
 </documentation>
 <readouts>
   <readout name="PFRICHHits">
     <segmentation
       type="CartesianGridXY"
-      grid_size_x="PFRICH_sensor_active_size/(PFRICH_num_px-1)"
-      grid_size_y="PFRICH_sensor_active_size/(PFRICH_num_px-1)"
-      offset_x="-PFRICH_sensor_active_size/2.0"
-      offset_y="-PFRICH_sensor_active_size/2.0"
+      grid_size_x="PFRICH_sensor_pixel_pitch"
+      grid_size_y="PFRICH_sensor_pixel_pitch"      
+      offset_x="-PFRICH_sensor_pixel_pitch*PFRICH_num_px/2.0"
+      offset_y="-PFRICH_sensor_pixel_pitch*PFRICH_num_px/2.0"
       />
     <id>system:8,module:12,x:20:16,y:16</id>
   </readout>
