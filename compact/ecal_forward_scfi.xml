@@ -1,6 +1,6 @@
 <lccdd>
   <define>
-    <constant name="EcalEndcapP_FiberRadius" value="0.235*cm"/>
+    <constant name="EcalEndcapP_FiberRadius" value="0.235*mm"/>
     <constant name="EcalEndcapP_FiberOffset" value="0.5*mm"/>
     <constant name="EcalEndcapP_FiberSpaceX" value="0.265*mm"/>
     <constant name="EcalEndcapP_FiberSpaceY" value="0.425*mm"/>
@@ -33,8 +33,8 @@
       readout="EcalEndcapPHits">
       <position x="0" y="0" z="EcalEndcapP_zmin + EcalEndcapP_length/2."/>
       <dimensions rmin="EcalEndcapP_rmin" rmax="EcalEndcapP_rmax" length="EcalEndcapP_length"/>
-      <module sizex="25*mm" sizey="25*mm" sizez="170*mm" material="TungstenDens24" vis="EcalEndcapBlockVis">
-        <fiber material="Polystyrene"
+      <module sizex="25*mm" sizey="25*mm" sizez="170*mm" material="Polystyrene" vis="EcalEndcapBlockVis">
+        <fiber material="TungstenDens24"
           radius="EcalEndcapP_FiberRadius"
           offset="EcalEndcapP_FiberOffset"
           spacex="EcalEndcapP_FiberSpaceX"

@@ -21,12 +21,12 @@
         "capacityBitsADC": 14,
         "pedestalMean": 100,
         "pedestalSigma": 0.7,
-        "thresholdValue": 2
+        "thresholdValue": 1
     },
     "hcal_pos_endcap": {
         "readout": "tile",
-        "dynamicRange": "3.6*GeV",
-        "capacityBitsADC": 10,
+        "dynamicRange": "3*GeV",
+        "capacityBitsADC": 14,
         "pedestalMean": 20,
         "pedestalSigma": 0.8,
         "thresholdValue": 3

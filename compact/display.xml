@@ -63,7 +63,7 @@
     <vis name="EcalBarrelSliceVis"      ref="AnlGray"   showDaughters="false" visible="true"/>
     <vis name="EcalBarrelFiberLayerVis" ref="AnlGold"   showDaughters="false" visible="true" />
 
-    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="true" visible="false"/>
+    <vis name="EcalEndcapVis"           ref="AnlGold"   showDaughters="false" visible="true"/>
     <vis name="EcalEndcapLayerVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
     <vis name="EcalEndcapBlockVis"      ref="AnlGold"   showDaughters="false" visible="true"/>
 
@@ -84,8 +84,8 @@
     <vis name="HcalBarrelLayerVis"    ref="AnlBlue"   showDaughters="false" visible="true"/>
     <vis name="HcalEndcapVis"         ref="AnlBlue"   showDaughters="false" visible="true"/>
     <vis name="HcalEndcapLayerVis"    ref="AnlBlue"   showDaughters="false" visible="true"/>
-    <vis name="HcalSensorVis"         ref="AnlBlue"   showDaughters="false" visible="false"/>
-    <vis name="HcalAbsorberVis"       ref="AnlGray"   showDaughters="false" visible="false"/>
+    <vis name="HcalSensorVis"         ref="AnlBlue"   showDaughters="false" visible="true"/>
+    <vis name="HcalAbsorberVis"       ref="AnlGray"   showDaughters="false" visible="true"/>
 
     <comment>
       Passive steel for flux return
@@ -145,8 +145,6 @@
     <vis name="MRICH_mirror_vis"  ref="AnlGray" showDaughters="true" visible="true" />
 
     <vis name="RICHServiceVis"  ref="AnlGray" showDaughters="true" visible="true" />
-
-  </display>
 
     <comment>
       Deprecated colors.

@@ -111,6 +111,7 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
     Box modShape(sx/2., sy/2., sz/2.);
     auto modMat = desc.material(mod_x.attr<std::string>(_Unicode(material)));
     Volume modVol("module_vol", modShape, modMat);
+    modVol.setSensitiveDetector(sens);
     if (mod_x.hasAttr(_Unicode(vis))) {
         modVol.setVisAttributes(desc.visAttributes(mod_x.attr<std::string>(_Unicode(vis))));
     }
@@ -122,9 +123,6 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
       auto fsy      = fiber_x.attr<double>(_Unicode(spacey));
       auto foff     = dd4hep::getAttrOrDefault<double>(fiber_x, _Unicode(offset), 0.5*mm);
       auto fiberMat = desc.material(fiber_x.attr<std::string>(_Unicode(material)));
-      Tube fiberShape(0., fr, sz/2.);
-      Volume fiberVol("fiber_vol", fiberShape, fiberMat);
-      fiberVol.setSensitiveDetector(sens);
 
       // Fibers are placed in a honeycomb with the radius = sqrt(3)/2. * hexagon side length
       // So each fiber is fully contained in a regular hexagon, which are placed as
@@ -152,26 +150,57 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
 
       // std::cout << sx << ", " << sy << ", " << fr << ", " << nx << ", " << ny << std::endl;
 
+      Box fiberOuterShape(fdistx/2., fdisty/2., sz/2.);
+      Tube fiberInnerShape(0., fr, sz/2.);
+      SubtractionSolid fiberShape(fiberOuterShape, fiberInnerShape);
+      Volume fiberVol("fiber_vol", fiberShape, fiberMat);
+
+      double y0 = foff + fside;
+      double yb = y0 - fdisty/2.;
+      double yt = sy - yb - fdisty * std::floor((sy - yb*2.) / fdisty);
+      Box modBottomShape(sx/2., yb/2., sz/2.);
+      Box modTopShape(sx/2., yt/2., sz/2.);
+      Volume modBottomVol("modBottom_vol", modBottomShape, fiberMat);
+      Volume modTopVol("modTop_vol", modTopShape, fiberMat);
+
+      double x0[2] = {foff + fside, foff + fside + fdistx/2.};
+      double xl[2], xr[2];
+      Box modLeftShape[2], modRightShape[2];
+      Volume modLeftVol[2], modRightVol[2];
+      for (int ieo = 0; ieo < 2; ++ieo) {
+          xl[ieo] = x0[ieo] - fdistx/2.;
+          xr[ieo] = sx - xl[ieo] - fdistx * std::floor((sx - xl[ieo]*2.) / fdistx);
+          modLeftShape[ieo] = Box(xl[ieo]/2., fdisty/2., sz/2.);
+          modRightShape[ieo] = Box(xr[ieo]/2., fdisty/2., sz/2.);
+          modLeftVol[ieo] = Volume(Form("modLeft%d_vol",ieo), modLeftShape[ieo], fiberMat);
+          modRightVol[ieo] = Volume(Form("modRight%d_vol",ieo), modRightShape[ieo], fiberMat);
+      }
+
       // place the fibers
-      double y0 = (foff + fside);
-      int nfibers = 0;
+      int nfibers = 0, nleft = 0, nright = 0;
+      modVol.placeVolume(modBottomVol, 0, Position{0, -sy/2.+yb/2., 0});
       for (int iy = 0; iy < ny; ++iy) {
           double y = y0 + fdisty * iy;
           // about to touch the boundary
-          if ((sy - y) < y0) { break; }
-          double x0 = (iy % 2) ? (foff + fside) : (foff + fside + fdistx / 2.);
+          if (sy - y < y0) {
+              modVol.placeVolume(modTopVol, 0, Position{0, sy/2.-yt/2., 0});
+              //std::cout << "Top Y remaining: " << sy - y + fdisty/2. - yt << std::endl;
+              break;
+          }
+          int ieo = iy % 2;
+          modVol.placeVolume(modLeftVol[ieo], nleft++, Position{-sx/2.+xl[ieo]/2., -sy/2.+y, 0});
           for (int ix = 0; ix < nx; ++ix) {
-              double x = x0 + fdistx * ix;
+              double x = x0[ieo] + fdistx * ix;
               // about to touch the boundary
-              if ((sx - x) < x0) { break; }
-              auto fiberPV = modVol.placeVolume(fiberVol, nfibers++, Position{x - sx/2., y - sy/2., 0});
-              //std::cout << "(" << ix << ", " << iy << ", " << x - sx/2. << ", " << y - sy/2. << ", " << fr << "),\n";
-              fiberPV.addPhysVolID("fiber_x", ix + 1).addPhysVolID("fiber_y", iy + 1);
+              if (sx - x < x0[ieo]) {
+                  modVol.placeVolume(modRightVol[ieo], nright++, Position{sx/2.-xr[ieo]/2., -sy/2.+y, 0});
+                  //std::cout << "Right X remaining: " << sx - x + fdistx/2. - xr[ieo] << std::endl;
+                  break;
+              }
+              modVol.placeVolume(fiberVol, nfibers++, Position{-sx/2.+x, -sy/2.+y, 0});
+              //std::cout << "(" << ix << ", " << iy << ", " << -sx/2.+x << ", " << -sy/2.+y << ", " << fr << "),\n";
           }
       }
-    // if no fibers we make the module itself sensitive
-    } else {
-      modVol.setSensitiveDetector(sens);
     }
 
 
