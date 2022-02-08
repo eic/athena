@@ -1,9 +1,11 @@
 <lccdd>
   <define>
     <constant name="EcalEndcapP_FiberRadius" value="0.235*mm"/>
-    <constant name="EcalEndcapP_FiberOffset" value="0.5*mm"/>
-    <constant name="EcalEndcapP_FiberSpaceX" value="0.265*mm"/>
-    <constant name="EcalEndcapP_FiberSpaceY" value="0.425*mm"/>
+    <constant name="EcalEndcapP_FiberOffsetX" value="0.23966*mm"/>
+    <constant name="EcalEndcapP_FiberOffsetY" value="0.460*mm"/>
+    <constant name="EcalEndcapP_FiberSpaceX" value="0.95865*mm"/>
+    <constant name="EcalEndcapP_FiberSpaceY" value="0.820*mm"/>
+    <constant name="EcalEndcapP_ModuleGlue" value="0.1*mm"/>
   </define>
 
 
@@ -33,21 +35,24 @@
       readout="EcalEndcapPHits">
       <position x="0" y="0" z="EcalEndcapP_zmin + EcalEndcapP_length/2."/>
       <dimensions rmin="EcalEndcapP_rmin" rmax="EcalEndcapP_rmax" length="EcalEndcapP_length"/>
-      <module sizex="25*mm" sizey="25*mm" sizez="170*mm" material="TungstenDens24" vis="EcalEndcapBlockVis">
-        <fiber material="Polystyrene"
+      <block sizex="100.*mm" sizey="98.897*mm"/>
+      <module sizex="49.85*mm" sizey="49.30*mm" sizez="170*mm" material="TungstenDens22" vis="EcalEndcapBlockVis">
+        <fiber material="PlasticScint126"
           radius="EcalEndcapP_FiberRadius"
-          offset="EcalEndcapP_FiberOffset"
+          offsetx="EcalEndcapP_FiberOffsetX"
+          offsety="EcalEndcapP_FiberOffsetY"
           spacex="EcalEndcapP_FiberSpaceX"
           spacey="EcalEndcapP_FiberSpaceY"/>
       </module>
+      <glue width="EcalEndcapP_ModuleGlue" material="PlasticScint126"/>
     </detector>
   </detectors>
 
   <!--  Definition of the readout segmentation/definition  -->
   <readouts>
     <readout name="EcalEndcapPHits">
-      <segmentation type="NoSegmentation"/>
-      <id>system:8,ring:8,module:20,fiber_x:8,fiber_y:8</id>
+      <segmentation type="CartesianGridXY" grid_size_x="24.925*mm" grid_size_y="24.65*mm"/>
+      <id>system:8,block:12,module:8,fiber_x:2,fiber_y:2,x:48:-8,y:-8</id>
     </readout>
   </readouts>
 
