@@ -1,5 +1,6 @@
 #include <DD4hep/DetFactoryHelper.h>
 #include <DD4hep/FieldTypes.h>
+#include <DD4hep/Printout.h>
 #include <XML/Utilities.h>
 
 #include <cstdlib>
@@ -11,6 +12,8 @@
 #include <string>
 #include <tuple>
 namespace fs = std::filesystem;
+
+#include "FileLoaderHelper.h"
 
 using namespace dd4hep;
 
@@ -185,19 +188,15 @@ static Ref_t create_field_map_brbz(Detector & /*lcdd*/, xml::Handle_t handle)
     std::string field_map_file = x_par.attr<std::string>(_Unicode(field_map));
     std::string field_map_url = x_par.attr<std::string>(_Unicode(url));
 
+    EnsureFileFromURLExists(field_map_url,field_map_file);
+
     double field_map_scale = x_par.attr<double>(_Unicode(scale));
 
     if( !fs::exists(fs::path(field_map_file))  ) {
-      auto ret = std::system(("mkdir -p fieldmaps && "
-                             "curl --retry 5 -f " +
-                             field_map_url + " -o " + field_map_file).c_str());
-
-      if (!fs::exists(fs::path(field_map_file))) {
-        std::cerr << "ERROR: file, " << field_map_file << ", does not exist\n";
+        printout(ERROR, "FieldMapBrBz", "file " + field_map_file + " does not exist");
+        printout(ERROR, "FieldMapBrBz", "use a FileLoader plugin before the field element");
         std::quick_exit(1);
-      }
     }
-
 
     auto map = new FieldMapBrBz(field_type);
     map->Configure(r_dim.rmin(), r_dim.rmax(), r_dim.step(), z_dim.zmin(), z_dim.zmax(), z_dim.step());
