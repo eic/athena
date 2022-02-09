@@ -118,7 +118,7 @@ std::tuple<Volume, Position> build_module(const Detector &desc, const xml::Compo
   if (mod_xml.hasAttr(_Unicode(vis)))
     modVol.setVisAttributes(desc.visAttributes(mod_xml.attr<std::string>(_Unicode(vis))));
 
-  Tube fiberCladShape(0.97*fr, fr, sz/2.);
+  Tube fiberCladShape(0.94*fr, fr, sz/2.);
   Volume fiberCladVol("fiberClad_vol", fiberCladShape, fiberMat);
 
   // place the top layer
