@@ -632,7 +632,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
           //if(isec==0) printf("%d %f %f\n",imod,sensorPV.position().x(),sensorPV.position().y());
 
 	  {
-	    // nx[] and ny[] orientation should be the same as in eRICH, right?;
+	    // nx[] and ny[] orientation should be the same as in pfRICH, right?;
 	    double xxl[3] = {0.0, 0.0, 0.0}, bff[3], xxg[3], nxl[3] = {1.0, 0.0, 0.0}, nyl[3] = {0.0, 1.0, 0.0}, nxg[3], nyg[3];
 	    sensorPV.ptr()->LocalToMaster(xxl, bff);
 	    vesselPV.ptr()->LocalToMaster(bff, xxg);
@@ -685,9 +685,9 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   }; // END SECTOR LOOP //////////////////////////
 
 
-  //@@@ Write the geometry out as a custom TObject class instance; FIXME: unify eRICH & dRICH;
+  //@@@ Write the geometry out as a custom TObject class instance; FIXME: unify pfRICH & dRICH;
   {
-    // FIXME: ERICH_geo.cpp cut'n'paste; C2F6, aerogel, acrylic in this sequence; 
+    // FIXME: PFRICH_geo.cpp cut'n'paste; C2F6, aerogel, acrylic in this sequence; 
     const char *name[] = {"GasVolume", "Aerogel", "Filter"};
     //double         n[] = {     1.0000,    1.0170};//,   1.5017};
     double         n[] = {    1.00080,    1.0190,   1.5017};
