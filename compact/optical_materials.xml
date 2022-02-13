@@ -373,7 +373,7 @@
       1240*eV/210  10*mm
       1240*eV/200  0*mm
       "/>
-    <!-- BEGIN dRICh and eRICh material properties
+    <!-- BEGIN dRICh and pfRICh material properties
          - dumped from fun4all implementation
          - see https://github.com/cisbani/dRICh/blob/main/share/source/g4dRIChOptics.hh
          -->
@@ -402,8 +402,8 @@
       4.85156*eV  10.0*m
       6.19921*eV  10.0*m
       "/>
-    <!-- eRICh gas -->
-    <matrix name="RINDEX__C4F10_ERICH" coldim="2" values="
+    <!-- pfRICh gas -->
+    <matrix name="RINDEX__C4F10_PFRICH" coldim="2" values="
       1.7712*eV   1.0013
       1.92389*eV  1.0013
       2.10539*eV  1.00131
@@ -415,7 +415,7 @@
       4.85156*eV  1.0014
       6.19921*eV  1.00149
       "/>
-    <matrix name="ABSLENGTH__C4F10_ERICH" coldim="2" values="
+    <matrix name="ABSLENGTH__C4F10_PFRICH" coldim="2" values="
       1.7712*eV   6.0*m
       1.92389*eV  6.0*m
       2.10539*eV  6.0*m
@@ -894,7 +894,7 @@
       <property name="RINDEX" ref="RINDEX__Acrylic"/>
       <property name="ABSLENGTH" ref="ABSLENGTH__Acrylic"/>
     </material>
-    <!-- BEGIN dRICh and eRICh material definitions -->
+    <!-- BEGIN dRICh and pfRICh material definitions -->
     <material name="C2F6_DRICH">
       <D type="density" value="0.005734" unit="g/cm3"/>
       <composite n="2" ref="C"/>
@@ -902,12 +902,12 @@
       <property name="RINDEX"    ref="RINDEX__C2F6_DRICH"/>
       <property name="ABSLENGTH" ref="ABSLENGTH__C2F6_DRICH"/>
     </material>
-    <material name="C4F10_ERICH">
+    <material name="C4F10_PFRICH">
       <D type="density" value="0.009935" unit="g/cm3"/>
       <composite n="4" ref="C"/>
       <composite n="10" ref="F"/>
-      <property name="RINDEX"    ref="RINDEX__C4F10_ERICH"/>
-      <property name="ABSLENGTH" ref="ABSLENGTH__C4F10_ERICH"/>
+      <property name="RINDEX"    ref="RINDEX__C4F10_PFRICH"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH__C4F10_PFRICH"/>
     </material>
     <material name="Aerogel_DRICH_OLD">
       <D type="density" value="0.100" unit="g/cm3"/>

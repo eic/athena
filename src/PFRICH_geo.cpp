@@ -1,5 +1,5 @@
 //----------------------------------
-//  eRICH: Electron endcap RICH
+//  pfRICH: Proximity Focusing RICH
 //  Author: C. Dilks
 //----------------------------------
 
@@ -79,7 +79,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // if debugging optics, override some settings
   bool debug_optics = debug_optics_mode > 0;
   if (debug_optics) {
-    printout(WARNING, "ERich_geo", "DEBUGGING ERICH OPTICS");
+    printout(WARNING, "PFRICH_geo", "DEBUGGING PFRICH OPTICS");
     switch (debug_optics_mode) {
     case 1:
       vesselMat = aerogelMat = filterMat = sensorMat = gasvolMat = desc.material("VacuumOptical");
@@ -88,7 +88,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       vesselMat = aerogelMat = filterMat = sensorMat = desc.material("VacuumOptical");
       break;
     default:
-      printout(FATAL, "ERich_geo", "UNKNOWN debug_optics_mode");
+      printout(FATAL, "PFRICH_geo", "UNKNOWN debug_optics_mode");
       return det;
     };
     aerogelVis = sensorVis;
@@ -96,7 +96,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   };
 
   // BUILD VESSEL //////////////////////////////////////
-  /* - `vessel`: aluminum enclosure, the mother volume of the eRICh
+  /* - `vessel`: aluminum enclosure, the mother volume of the pfRICH
    * - `gasvol`: gas volume, which fills `vessel`; all other volumes defined below
    *   are children of `gasvol`
    */
@@ -313,5 +313,4 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 };
 
 // clang-format off
-DECLARE_DETELEMENT(athena_PfRICH, createDetector)
-DECLARE_DETELEMENT(athena_ERICH, createDetector)
+DECLARE_DETELEMENT(athena_PFRICH, createDetector)

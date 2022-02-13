@@ -7,9 +7,15 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
+import os
 import glob
 
-base_url = "https://eicweb.phy.anl.gov/api/v4/projects/390/jobs/artifacts/master/raw"
+if "CI_PROJECT_ID" in os.environ:
+    CI_PROJECT_ID = str(os.environ["CI_PROJECT_ID"])
+else:
+    CI_PROJECT_ID = "473"
+
+base_url = f"https://eicweb.phy.anl.gov/api/v4/projects/{CI_PROJECT_ID}/jobs/artifacts/master/raw"
 
 #images = ["images/view2a.png","images/view2b.png", "images/view1.png"]
 images = glob.glob("images/*.png")

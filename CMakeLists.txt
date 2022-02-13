@@ -10,13 +10,11 @@ PROJECT(athena
   )
 
 set(CMAKE_CXX_STANDARD 17)
-find_package( DD4hep REQUIRED COMPONENTS DDCore DDG4)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
+find_package(DD4hep REQUIRED COMPONENTS DDCore DDG4)
 find_package(Acts REQUIRED COMPONENTS Core PluginIdentification PluginTGeo PluginDD4hep )
-
-find_package(fmt)
-#find_library(FMT_LIBRARY fmt)
-
+find_package(fmt REQUIRED)
 
 #-----------------------------------------------------------------------------------
 set(a_lib_name athena)
@@ -32,7 +30,7 @@ dd4hep_add_plugin(${a_lib_name} SOURCES
   src/CylinderTrackerBarrel_geo.cpp
   src/DIRC_geo.cpp
   src/DRICH_geo.cpp
-  src/PfRICH_geo.cpp
+  src/PFRICH_geo.cpp
   src/FileLoader.cpp
   src/FieldMapBrBz.cpp
   src/GaseousRICH_geo.cpp

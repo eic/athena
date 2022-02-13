@@ -3,6 +3,6 @@
 <include ref="fake_dirc.xml"/>
 <!--include ref="dirc.xml"/-->
 <include ref="drich.xml"/>
-<include ref="erich.xml"/>
+<include ref="pfrich.xml"/>
 
 </lccdd>

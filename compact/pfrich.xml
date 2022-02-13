@@ -3,36 +3,36 @@
 
 <define>
 <!-- vessel geometry -->
-<constant name="ERICH_Length"             value="BackwardRICHRegion_length"/>  <!-- vessel z-length -->
-<constant name="ERICH_zmin"               value="-BackwardRICHRegion_zmin"/> <!-- vessel front -->
-<constant name="ERICH_zmax"               value="ERICH_zmin - ERICH_Length"/>  <!-- vessel back -->
-<constant name="ERICH_rmin0"              value="BackwardPIDRegion_tan * BackwardRICHRegion_zmin"/>  <!-- bore radius at vessel frontplane -->
-<constant name="ERICH_rmin1"              value="BackwardPIDRegion_tan * (BackwardRICHRegion_zmin + BackwardRICHRegion_length)"/>  <!-- bore radius at vessel backplane -->
-<constant name="ERICH_rmax"               value="BackwardPIDRegion_rmax - 2*cm"/>  <!-- vessel backplane radius -->
-<constant name="ERICH_wall_thickness"     value="0.5*cm"/>  <!-- thickness of radial walls -->
-<constant name="ERICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
+<constant name="PFRICH_Length"             value="BackwardRICHRegion_length"/>  <!-- vessel z-length -->
+<constant name="PFRICH_zmin"               value="-BackwardRICHRegion_zmin"/> <!-- vessel front -->
+<constant name="PFRICH_zmax"               value="PFRICH_zmin - PFRICH_Length"/>  <!-- vessel back -->
+<constant name="PFRICH_rmin0"              value="BackwardPIDRegion_tan * BackwardRICHRegion_zmin"/>  <!-- bore radius at vessel frontplane -->
+<constant name="PFRICH_rmin1"              value="BackwardPIDRegion_tan * (BackwardRICHRegion_zmin + BackwardRICHRegion_length)"/>  <!-- bore radius at vessel backplane -->
+<constant name="PFRICH_rmax"               value="BackwardPIDRegion_rmax - 2*cm"/>  <!-- vessel backplane radius -->
+<constant name="PFRICH_wall_thickness"     value="0.5*cm"/>  <!-- thickness of radial walls -->
+<constant name="PFRICH_window_thickness"   value="0.1*cm"/>  <!-- thickness of entrance and exit walls -->
 <!-- additional parameters -->
-<constant name="ERICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
-<constant name="ERICH_sensor_active_size_default" value="24.0*mm"/> <!-- sensor side length (effective area) -->
-<constant name="ERICH_sensor_full_size_default"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
+<constant name="PFRICH_aerogel_thickness"  value="3.0*cm"/>  <!-- aerogel thickness -->
+<constant name="PFRICH_sensor_active_size_default" value="24.0*mm"/> <!-- sensor side length (effective area) -->
+<constant name="PFRICH_sensor_full_size_default"   value="25.8*mm"/> <!-- sensor side length (full size, with enclosure) -->
 <!-- lores values are used for global vizualizations _only_ -->
-<constant name="ERICH_sensor_active_size_lores" value="ERICH_sensor_active_size_default * 4"/>
-<constant name="ERICH_sensor_full_size_lores" value="ERICH_sensor_full_size_default * 4"/>
+<constant name="PFRICH_sensor_active_size_lores" value="PFRICH_sensor_active_size_default * 4"/>
+<constant name="PFRICH_sensor_full_size_lores"   value="PFRICH_sensor_full_size_default * 4"/>
 <!-- actual values used by the parametrization -->
-<constant name="ERICH_sensor_active_size" value="ERICH_sensor_active_size_default"/>
-<constant name="ERICH_sensor_full_size" value="ERICH_sensor_full_size_default"/>
+<constant name="PFRICH_sensor_active_size" value="PFRICH_sensor_active_size_default"/>
+<constant name="PFRICH_sensor_full_size"   value="PFRICH_sensor_full_size_default"/>
 
 
-<constant name="ERICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
-<constant name="ERICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
-<constant name="ERICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
+<constant name="PFRICH_sensor_thickness"   value="1.5*mm"/> <!-- sensor thickness -->
+<constant name="PFRICH_sensor_dist"        value="40*cm"/> <!-- distance between aerogel exit plane and sensor entrance plane -->
+<constant name="PFRICH_num_px"             value="8"/> <!-- number of pixels along one side of the sensor -->
 <!-- debugging switches -->
 <comment>
-- `ERICH_debug_optics`:  1 = all components become vacuum; test opticalphotons from IP
+- `PFRICH_debug_optics`:  1 = all components become vacuum; test opticalphotons from IP
                          2 = all components become vacuum, except for `gasvol`, test charged particles from IP
                          0 = off
 </comment>
-<constant name="ERICH_debug_optics"  value="0"/>
+<constant name="PFRICH_debug_optics"  value="0"/>
 </define>
 
 
@@ -41,18 +41,18 @@
 
 <!-- /detectors/detector -->
 <documentation level="10">
-### eRICH: Electron Endcap RICH (name TBD)
+### pfRICH: Proximity Focusing RICH
 </documentation>
 <detector
   id="BackwardRICH_ID"
-  name="ERICH"
-  type="athena_ERICH"
-  readout="ERICHHits"
-  gas="C4F10_ERICH"
+  name="PFRICH"
+  type="athena_PFRICH"
+  readout="PFRICHHits"
+  gas="C4F10_PFRICH"
   material="Aluminum"
   vis_vessel="DRICH_vessel_vis"
   vis_gas="DRICH_gas_vis"
-  debug_optics="ERICH_debug_optics"
+  debug_optics="PFRICH_debug_optics"
   >
 
 
@@ -68,15 +68,15 @@
   - `window_thickness`: thickness of entrance and exit disks
 </documentation>
 <dimensions
-  zmin="ERICH_zmin"
-  zmax="ERICH_zmax"
-  length="ERICH_Length"
-  rmin0="ERICH_rmin0"
-  rmin1="ERICH_rmin1"
-  rmax0="ERICH_rmax"
-  rmax1="ERICH_rmax"
-  wall_thickness="ERICH_wall_thickness"
-  window_thickness="ERICH_window_thickness"
+  zmin="PFRICH_zmin"
+  zmax="PFRICH_zmax"
+  length="PFRICH_Length"
+  rmin0="PFRICH_rmin0"
+  rmin1="PFRICH_rmin1"
+  rmax0="PFRICH_rmax"
+  rmax1="PFRICH_rmax"
+  wall_thickness="PFRICH_wall_thickness"
+  window_thickness="PFRICH_window_thickness"
   />
 
 
@@ -94,16 +94,16 @@
   - `pitch`: controls the angle of the radiator (0=vertical)
 </documentation>
 <radiator
-  frontplane="-ERICH_window_thickness"
-  rmin="ERICH_rmin0 + ERICH_wall_thickness + 0.2*cm"
-  rmax="(ERICH_rmax/ERICH_zmax)*ERICH_zmin + 8.0*cm"
+  frontplane="-PFRICH_window_thickness"
+  rmin="PFRICH_rmin0 + PFRICH_wall_thickness + 0.2*cm"
+  rmax="(PFRICH_rmax/PFRICH_zmax)*PFRICH_zmin + 8.0*cm"
   phiw="60*degree"
   pitch="0*degree"
   >
   <aerogel
     material="Aerogel_DRICH"
     vis="DRICH_aerogel_vis"
-    thickness="ERICH_aerogel_thickness"
+    thickness="PFRICH_aerogel_thickness"
     />
   <filter
     material="Acrylic_DRICH"
@@ -139,10 +139,10 @@
 <module
   material="Silicon"
   surface="SensorSurface_DRICH"
-  vis="ERICH_sensor_vis"
-  side="ERICH_sensor_active_size"
-  thickness="ERICH_sensor_thickness"
-  gap="0.5*(ERICH_sensor_full_size-ERICH_sensor_active_size) + 0.5*mm"
+  vis="PFRICH_sensor_vis"
+  side="PFRICH_sensor_active_size"
+  thickness="PFRICH_sensor_thickness"
+  gap="0.5*(PFRICH_sensor_full_size-PFRICH_sensor_active_size) + 0.5*mm"
   />
 
 
@@ -156,9 +156,9 @@
     - `rmax`: maximum radial position of a sensor's centroid
 </documentation>
 <plane
-  sensordist="ERICH_sensor_dist"
-  rmin="ERICH_rmin1 + 2*cm"
-  rmax="ERICH_rmax  - 4*cm"
+  sensordist="PFRICH_sensor_dist"
+  rmin="PFRICH_rmin1 + 2*cm"
+  rmax="PFRICH_rmax  - 4*cm"
   />
 
 <services>
@@ -187,20 +187,20 @@
 
   | indicator | offset | length |
   |-----------|--------|--------|
-  | eRICH ID  | 0      | 8      |
+  | pfRICH ID | 0      | 8      |
   | sensor    | 8      | 12     |
   | x pixel   | 20     | 16     |
   | y pixel   | 36     | 16     |
 
 </documentation>
 <readouts>
-  <readout name="ERICHHits">
+  <readout name="PFRICHHits">
     <segmentation
       type="CartesianGridXY"
-      grid_size_x="ERICH_sensor_active_size/(ERICH_num_px-1)"
-      grid_size_y="ERICH_sensor_active_size/(ERICH_num_px-1)"
-      offset_x="-ERICH_sensor_active_size/2.0"
-      offset_y="-ERICH_sensor_active_size/2.0"
+      grid_size_x="PFRICH_sensor_active_size/(PFRICH_num_px-1)"
+      grid_size_y="PFRICH_sensor_active_size/(PFRICH_num_px-1)"
+      offset_x="-PFRICH_sensor_active_size/2.0"
+      offset_y="-PFRICH_sensor_active_size/2.0"
       />
     <id>system:8,module:12,x:20:16,y:16</id>
   </readout>

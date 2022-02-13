@@ -63,9 +63,9 @@
   </display>
 
   <documentation level="10">
-    ## pfRICH only
+    ## TOF only
   </documentation>
   <include ref="ip6/beampipe.xml" />
-  <include ref="compact/pfrich.xml" />
+  <include ref="compact/tof_barrel.xml" />
 
 </lccdd>
