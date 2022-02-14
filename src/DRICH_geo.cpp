@@ -121,11 +121,11 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // if debugging optics, override some settings
   bool debug_optics = debug_optics_mode > 0;
   if(debug_optics) {
-    printout(WARNING,"DRich_geo","DEBUGGING DRICH OPTICS");
+    printout(WARNING,"DRICH_geo","DEBUGGING DRICH OPTICS");
     switch(debug_optics_mode) {
       case 1: vesselMat = aerogelMat = filterMat = sensorMat = gasvolMat = desc.material("VacuumOptical"); break;
       case 2: vesselMat = aerogelMat = filterMat = sensorMat = desc.material("VacuumOptical"); break;
-      default: printout(FATAL,"DRich_geo","UNKNOWN debug_optics_mode"); return det;
+      default: printout(FATAL,"DRICH_geo","UNKNOWN debug_optics_mode"); return det;
     };
     aerogelVis = sensorVis = mirrorVis;
     gasvolVis = vesselVis = desc.invisible();
@@ -219,14 +219,8 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // Used in several places;
   TVector3 nx(1,0,0), ny(0,-1,0);
 
-  // Get access to the readout structure decoder; may want to simply call desc.readout("DRICHHits");
-  const auto &rdspecs = desc.readouts();
-  if (rdspecs.size() != 1) {
-    printout(FATAL,"DRich_geo","Expect a single readout structure in XML file"); 
-    return det;
-  } //if
-  // Do not mess up with casting of (*desc.readouts().begin()).second; just call desc.readout();
-  const auto decoder = desc.readout((*rdspecs.begin()).first.c_str()).idSpec().decoder();
+  // Get access to the readout structure decoder
+  const auto decoder = desc.readout("DRICHHits").idSpec().decoder();
   const auto &mvalue = (*decoder)["module"], &svalue = (*decoder)["sector"];
   uint64_t msmask = mvalue.mask() | svalue.mask();
   detector->SetReadoutCellMask(msmask);

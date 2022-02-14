@@ -152,14 +152,8 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // Used in several places;
   TVector3 nx(1,0,0), ny(0,1,0);
 
-  // Get access to the readout structure decoder; may want to simply call desc.readout("DRICHHits");
-  const auto &rdspecs = desc.readouts();
-  if (rdspecs.size() != 1) {
-    printout(FATAL,"DRich_geo","Expect a single readout structure in XML file"); 
-    return det;
-  } //if
-  // Do not mess up with casting of (*desc.readouts().begin()).second; just call desc.readout();
-  const auto decoder = desc.readout((*rdspecs.begin()).first.c_str()).idSpec().decoder();
+  // Get access to the readout structure decoder
+  const auto decoder = desc.readout("PFRICHHits").idSpec().decoder();
   const auto &mvalue = (*decoder)["module"];
   uint64_t msmask = mvalue.mask();
   detector->SetReadoutCellMask(msmask);
