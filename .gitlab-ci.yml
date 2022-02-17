@@ -241,7 +241,7 @@ convert_to_gdml:
     - mkdir -p geo
     - python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
 
-convert_to_gdml:
+test_drich:
   stage: test
   needs: 
     - ["common:detector"]
