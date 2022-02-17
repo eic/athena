@@ -29,7 +29,7 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
   string         det_name = x_det.nameStr();
   DetElement     sdet(det_name, x_det.id());
   Assembly       assembly(det_name);
-  sens.setType("photoncounter");
+  sens.setType("tracker");
   OpticalSurfaceManager surfMgr = description.surfaceManager();
 
   bool projective = getAttrOrDefault(x_det, _Unicode(projective), false);
@@ -437,7 +437,7 @@ static Ref_t createDetector(Detector& description, xml::Handle_t e, SensitiveDet
 //    modVol.placeVolume(mVol, Position(0., 0., -0.1*mm));
 //
 //    modVol.setVisAttributes(description.visAttributes(mods.visStr()));
-//    sens.setType("photoncounter");
+//    sens.setType("tracker");
 //    modVol.setSensitiveDetector(sens);
 //
 //    // place modules in the sectors (disk)

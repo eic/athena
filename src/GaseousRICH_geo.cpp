@@ -75,7 +75,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     envVol.setVisAttributes(desc.visAttributes(detElem.visStr()));
 
     // sensitive detector type
-    sens.setType("photoncounter");
+    sens.setType("tracker");
 
     // @TODO: place a radiator
     // build_radiator(desc, envVol, detElement.child(_Unicode(radiator)), snout_front);

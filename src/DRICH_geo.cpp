@@ -268,7 +268,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
 
   // sensitive detector type
-  sens.setType("photoncounter");
+  sens.setType("tracker");
 
   // place gas volume
   PlacedVolume gasvolPV = vesselVol.placeVolume(gasvolVol,Position(0, 0, 0));
