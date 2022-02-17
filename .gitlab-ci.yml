@@ -26,6 +26,7 @@ default:
       - doc
       - juggler.env
       - geo
+      - test.png
     reports:
       dotenv: juggler.env
 
@@ -180,6 +181,7 @@ report:
     - dump_constants
     - dump_geometry
     - convert_to_gdml
+    - test_drich
   script:
     - pip3 install jinja2 &&  ls -lrth
     - ./bin/make_images > doc/dawn_views.md
@@ -238,6 +240,13 @@ convert_to_gdml:
   script:
     - mkdir -p geo
     - python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
+
+convert_to_gdml:
+  stage: test
+  needs: 
+    - ["common:detector"]
+  script:
+    - ./testBug.sh
 
 tracking_geometry_debug:
   stage: test
