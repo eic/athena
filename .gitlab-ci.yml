@@ -246,6 +246,8 @@ test_drich:
   needs: 
     - ["common:detector"]
   script:
+    - git clone https://eicweb.phy.anl.gov/EIC/detectors/ip6.git beamgeo
+    - ln -sv beamgeo/ip6 ./
     - ./testBug.sh
 
 tracking_geometry_debug:
