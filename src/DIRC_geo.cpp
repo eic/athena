@@ -3,6 +3,7 @@
 #include "DD4hep/Printout.h"
 #include "DDRec/DetectorData.h"
 #include "DDRec/Surface.h"
+#include "fmt/core.h"
 #include <XML/Helper.h>
 
 //////////////////////////////////
@@ -30,6 +31,14 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   double    det_rin   = dirc_dim.rmin();
   double    det_rout  = dirc_dim.rmax();
   double    SizeZ = dirc_dim.length();
+  int       verbose = desc.constant<int>("DIRC_verbose");
+
+  // >oO debug output
+  if(verbose) {
+      fmt::print("DIRC: dimensions rin={}[cm] rout={}[cm] len={}[cm]\n", det_rin/cm, det_rout/cm, SizeZ/cm);
+  }
+
+
 
   // DEBUG
   // double mirror_r1 = x_det.attr<double>(_Unicode(r1));
@@ -39,15 +48,16 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
 
   Material Vacuum = desc.material("Vacuum");
   Material air = desc.material("AirOptical");
-  Material quartz = desc.material("Quartz");
-  Material epotek = desc.material("Epotek");
-  Material nlak33a = desc.material("Nlak33a");
+  Material quartz = desc.material("QuartzOptical");
+  Material epotek = desc.material("EpotekOptical");
+  Material nlak33a = desc.material("Nlak33aOptical");
   auto& bar_material = quartz;
+
   auto mirror_material = desc.material("Aluminum");  // mirror material
 
   Tube     det_geo(det_rin, det_rout, SizeZ / 2., 0., 360.0 * deg);
-  //Volume   det_volume("DIRC", det_geo, Vacuum);
-  Assembly   det_volume("DIRC");
+  Volume   det_volume("DIRC", det_geo, air);
+  //Assembly   det_volume("DIRC");
   det_volume.setVisAttributes(desc.visAttributes(xml_det.visStr()));
 
   DetElement   det(det_name, det_id);
@@ -284,7 +294,8 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
 
   Position  fPrismShift(prism_shift_x, 0, prism_shift_z);
   dirc_module.placeVolume(lPrizm, Transform3D(xRot, fPrismShift));
-  dirc_module.placeVolume(lFd, Position(0.5 * fFd[1] - 0.5 * fPrizm[3] - evshiftx, 0, evshiftz));
+
+  //dirc_module.placeVolume(lFd, Position(0.5 * fFd[1] - 0.5 * fPrizm[3] - evshiftx, 0, evshiftz));
 
   double dphi = 2 * M_PI / (double)fNBoxes;
   for (int i = 0; i < fNBoxes; i++) {
