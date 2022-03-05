@@ -504,6 +504,10 @@ Service gaps in FW direction (before endcapP ECAL) and BW direction (before endc
     <constant name="HcalBarrel_rmax"      value="HcalBarrel_rmin + HcalBarrel_thickness"/>
     <constant name="HcalBarrelForward_zmax" value="HcalEndcapP_zmin - ForwardServiceGap_length - EcalEndcapP_length"/>
     <constant name="HcalBarrelBackward_zmax" value="HcalEndcapN_zmin - BackwardServiceGap_length"/>
+    
+    <constant name="HcalEndcapP_rmax"      value="HcalBarrel_rmin + 100.0"/>
+    <constant name="HcalEndcapN_rmax"      value="HcalBarrel_rmin + 100.0"/>
+    
 
     <comment> 
       These are used by ddsim, the region where we store all secondaries 
