@@ -8,8 +8,9 @@
     <documentation>
       #### Material Thickness 
     </documentation>
-    <constant name="HcalBarrelSteelThickness"        value="2.0 * cm"/>
+    <constant name="HcalBarrelSteelThickness"        value="4.0 * cm"/>
     <constant name="HcalBarrelPolystyreneThickness"  value="0.5 * cm"/>
+    <constant name="HcalBarrelAirGapHalfThickness"		 value="0.75 * cm"/> #### half of thickness
     <constant name="HcalEndcapNSteelThickness"       value="HcalBarrelSteelThickness"/>
     <constant name="HcalEndcapNPolystyreneThickness" value="HcalBarrelPolystyreneThickness"/>
     <constant name="HcalEndcapPSteelThickness"       value="HcalBarrelSteelThickness"/>
@@ -19,7 +20,7 @@
       - Hcal Barrel Layers and computed Thickness
     </documentation>
     <constant name="HcalBarrelSingleLayerThickness"
-             value="HcalBarrelSteelThickness + HcalBarrelPolystyreneThickness"/>
+             value="HcalBarrelSteelThickness + HcalBarrelPolystyreneThickness + 2.0*HcalBarrelAirGapHalfThickness"/>
     <constant name="HcalBarrelLayer_NRepeat" value="floor(HcalBarrelAvailThickness / HcalBarrelSingleLayerThickness)"/>
     <constant name="HcalBarrelThickness" value="HcalBarrelLayer_NRepeat * HcalBarrelSingleLayerThickness"/>
 
@@ -70,7 +71,9 @@
       <staves vis="HcalBarrelStaveVis"/>
       <layer repeat="HcalBarrelLayer_NRepeat" vis="HcalBarrelLayerVis">
         <slice material="Steel235" thickness="HcalBarrelSteelThickness" vis="HcalAbsorberVis"/>
+        <slice material="Air" thickness="HcalBarrelAirGapHalfThickness" vis="HcalAirVis"/>
         <slice material="Polystyrene" thickness="HcalBarrelPolystyreneThickness" vis="HcalSensorVis" sensitive="yes" limits="cal_limits"/>
+        <slice material="Air" thickness="HcalBarrelAirGapHalfThickness" vis="HcalAirVis"/>
       </layer>
     </detector>
 
