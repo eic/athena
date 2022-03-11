@@ -82,9 +82,9 @@
 
 /gps/position 0 0 0 cm
 
-/gps/direction 0 0 1
+/gps/direction 0 1 0
 /gps/ang/type iso
-/gps/ang/mintheta  170 degree
-/gps/ang/maxtheta  190 degree
+#/gps/ang/mintheta  170 degree
+#/gps/ang/maxtheta  190 degree
 
 /run/beamOn 3
