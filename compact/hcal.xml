@@ -140,10 +140,10 @@
     <readout name="HcalBarrelHits">
       <!--<segmentation type="CartesianGridXY" grid_size_x="100 * mm" grid_size_y="100 * mm"/>
       <id>system:8,barrel:3,module:4,layer:8,slice:5,x:32:-16,y:-16</id>-->
-      <!--<segmentation type="GridPhiEta" grid_size_eta="0.05" phi_bins="125"/>
-      <id>system:8,barrel:3,module:4,layer:8,slice:5,eta:32:-16,phi:-16</id>-->
-      <segmentation type="GridRPhiEta" grid_size_r="0.5 * cm" grid_size_eta="0.05" phi_bins="125"/>
-      <id>system:8,barrel:3,module:4,layer:8,slice:5,r:30:-10,eta:-10,phi:-10</id>
+      <segmentation type="GridPhiEta" grid_size_eta="0.05" phi_bins="125"/>
+      <id>system:8,barrel:3,module:4,layer:8,slice:5,eta:32:-16,phi:-16</id>
+      <!--<segmentation type="GridRPhiEta" grid_size_r="0.5 * cm" grid_size_eta="0.05" phi_bins="125"/>
+      <id>system:8,barrel:3,module:4,layer:8,slice:5,r:30:-10,eta:-10,phi:-10</id>-->
     </readout>
     <readout name="HcalEndcapPHits">
       <segmentation type="CartesianGridXY" grid_size_x="100 * mm" grid_size_y="100 * mm"/>

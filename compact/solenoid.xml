@@ -329,7 +329,7 @@
     <field type="FieldMapBrBz" name="GlobalSolenoid" field_type="magnetic"
            field_map="fieldmaps/EIC_v.2.0.3_Magnetic_Field_Map_2021_09_28_radial_coords_cm_T.Bmap.txt"
            url="https://eicweb.phy.anl.gov/EIC/detectors/athena/uploads/fd64db33e1c99547ab1840d8847fd1c1/EIC_v.2.0.3_Magnetic_Field_Map_2021_09_28_radial_coords_cm_T.Bmap.txt"
-           scale="-1.0">
+           scale="0.0">
       <dimensions>
         <transverse step="2.0*cm" rmin="0*cm" rmax="998*cm" />
         <longitudinal step="2.0*cm" zmin="-800*cm" zmax="798*cm" />
