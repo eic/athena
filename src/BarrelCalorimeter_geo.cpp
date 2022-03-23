@@ -21,6 +21,10 @@ using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
 
+// geometry helpers
+void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &mother, DetElement &slice, int det_id, xml_comp_t x_fiber,
+                 const std::tuple<double, double, double> &dimensions, double s_pos);
+
 static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector sens)  {
   static double tolerance = 0e0;
   Layering      layering (e);
@@ -163,6 +167,15 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
           Volume     s_vol(s_name,s_box,description.material(x_slice.materialStr()));
           DetElement slice(layer,s_name,det_id);
 
+          //double layer_glob_rad = layering.totalThickness() + support_thickness + inner_r+l_pos_z+l_thickness/2.0+s_pos_z+s_thick/2.0;
+          double layer_glob_rad = inner_r+layering.totalThickness()/2.0 + support_thickness/2.0+l_pos_z+l_thickness/2.0+s_pos_z+s_thick/2.0;
+
+          // build fibers
+          if (x_slice.hasChild(_Unicode(fiber))) {
+              buildFibers(description, sens, s_vol, slice, det_id, x_slice.child(_Unicode(fiber)), {l_dim_x-tolerance,stave_z-tolerance,s_thick / 2.0-tolerance}, layer_glob_rad);
+          }
+
+
           if ( x_slice.isSensitive() ) {
             s_vol.setSensitiveDetector(sens);
           }
@@ -222,6 +235,88 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   // Set envelope volume attributes.
   envelope.setAttributes(description,x_det.regionStr(),x_det.limitsStr(),x_det.visStr());
   return sdet;
+}
+
+
+
+void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElement &slice, int det_id, xml_comp_t x_fiber,
+                 const std::tuple<double, double, double> &dimensions, double s_pos)
+{
+  auto [s_dim_x, s_dim_y, s_dim_z] = dimensions;
+  double f_radius = s_pos;
+  double f_spacing_eta = getAttrOrDefault(x_fiber, _Unicode(spacing_eta), 5*cm);
+  double f_spacing_phi = getAttrOrDefault(x_fiber, _Unicode(spacing_phi), 5*cm);
+  int f_nbins_eta = getAttrOrDefault(x_fiber, _Unicode(nbins_eta), 20);
+  int f_nbins_phi = getAttrOrDefault(x_fiber, _Unicode(nbins_phi), 10);
+  std::string f_id_fiber = getAttrOrDefault(x_fiber, _Unicode(identifier_fiber), "fiber");
+
+  double f_trd_x1 = s_dim_x;
+  double f_trd_x2 = s_dim_x;
+  double f_trd_y1 = s_dim_y;
+  double f_trd_y2 = f_trd_y1;
+  double f_trd_z  = s_dim_z/2;
+
+  int f_num = 1;
+
+  double eta = -f_spacing_eta*f_nbins_eta/2+f_spacing_eta;
+
+  for (int i = 0; i < f_nbins_eta; ++i) {
+
+	double phi = -f_spacing_phi*f_nbins_phi/2+f_spacing_phi;
+
+	eta += f_spacing_eta;
+
+	for (int j = 0; j < f_nbins_phi; ++j) {
+
+		phi += f_spacing_phi;
+		double eta_max = eta+f_spacing_eta;
+		double eta_min = eta-f_spacing_eta;
+		double phi_max = phi+f_spacing_phi;
+		double phi_min = phi-f_spacing_phi;
+
+		double vert[15];
+
+		vert[0] = -f_spacing_phi;
+		vert[1] = -f_spacing_eta;
+		vert[2] = -f_spacing_phi;
+		vert[3] = f_spacing_eta;
+		vert[4] = f_spacing_phi;
+		vert[5] = f_spacing_eta;
+		vert[6] = f_spacing_phi;
+		vert[7] = -f_spacing_eta;
+
+		vert[8] = -f_spacing_phi;
+		vert[9] = -f_spacing_eta;
+		vert[10] = -1.2*f_spacing_phi;
+		vert[11] = 1.2*f_spacing_eta;
+		vert[12] = 1.2*f_spacing_phi;
+		vert[13] = 1.2*f_spacing_eta;
+		vert[14] = f_spacing_phi;
+		vert[15] = -f_spacing_eta;
+
+
+        string     f_name  = Form("tower%d", f_num);
+
+		EightPointSolid f_shape(f_trd_z, vert);
+
+		//Trapezoid  f_shape(f_trd_x1, f_trd_x2, f_trd_y1, f_trd_y2, f_trd_z);
+		Volume     f_vol(f_name, f_shape, desc.material(x_fiber.materialStr()));
+		DetElement tower(slice, f_name, det_id);
+
+        if ( x_fiber.isSensitive() ) {
+        	f_vol.setSensitiveDetector(sens);
+        }
+        f_vol.setAttributes(desc, x_fiber.regionStr(), x_fiber.limitsStr(), x_fiber.visStr());
+
+        // Slice placement.
+        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(eta, phi, s_dim_z/2));
+        tower_phv.addPhysVolID("tower", f_num);
+        tower.setPlacement(tower_phv);
+
+		f_num++;
+	}
+  }
+
 }
 
 DECLARE_DETELEMENT(athena_EcalBarrel,create_detector)
