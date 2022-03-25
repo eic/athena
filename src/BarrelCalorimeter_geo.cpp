@@ -244,10 +244,10 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
 {
   auto [s_dim_x, s_dim_y, s_dim_z] = dimensions;
   double f_radius = s_pos;
-  double f_spacing_eta = getAttrOrDefault(x_fiber, _Unicode(spacing_eta), 5*cm);
-  double f_spacing_phi = getAttrOrDefault(x_fiber, _Unicode(spacing_phi), 5*cm);
+  double f_spacing_eta = getAttrOrDefault(x_fiber, _Unicode(spacing_eta), 0.05);
+  double f_spacing_phi = getAttrOrDefault(x_fiber, _Unicode(spacing_phi), 0.05);
   int f_nbins_eta = getAttrOrDefault(x_fiber, _Unicode(nbins_eta), 20);
-  int f_nbins_phi = getAttrOrDefault(x_fiber, _Unicode(nbins_phi), 10);
+  int f_nbins_phi = getAttrOrDefault(x_fiber, _Unicode(nbins_phi), 2);
   std::string f_id_fiber = getAttrOrDefault(x_fiber, _Unicode(identifier_fiber), "fiber");
 
   double f_trd_x1 = s_dim_x;
@@ -258,6 +258,207 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
 
   int f_num = 1;
 
+  double eta_lo = 0.0;
+  double eta_hi = f_spacing_eta;
+
+  double radius_lo = f_radius-s_dim_z;
+
+  // positive eta
+
+  for (int i = 0; i < f_nbins_eta/2; ++i) {
+
+	double phi_lo = -f_spacing_phi;
+	double phi_hi = phi_lo + f_spacing_phi;
+
+	double theta_lo = M_PI/2.0-2.0*atan(exp(-eta_lo));
+	double theta_hi = M_PI/2.0-2.0*atan(exp(-eta_hi));
+
+	for (int j = 0; j < f_nbins_phi; ++j) {
+
+		double xmin = radius_lo*tan(phi_lo);
+		double xmax = radius_lo*tan(phi_hi);
+		double ymin = radius_lo*tan(theta_lo);
+		double ymax = radius_lo*tan(theta_hi);
+
+
+		double dx = xmax-xmin; // phi
+		double dy = ymax-ymin; // eta
+		double xcent = (xmax+xmin)/2.0;
+		double ycent = (ymax+ymin)/2.0;
+/*
+		cout<<"radius_lo = "<<radius_lo<<endl;
+
+		cout<<"phi_lo = "<<phi_lo<<endl;
+		cout<<"phi_hi = "<<phi_hi<<endl;
+		cout<<"eta_lo = "<<eta_lo<<endl;
+		cout<<"eta_hi = "<<eta_hi<<endl;
+		cout<<"theta_lo = "<<theta_lo<<endl;
+		cout<<"theta_hi = "<<theta_hi<<endl;
+
+		cout<<"exp(-eta_lo) = "<<exp(-eta_lo)<<endl;
+		cout<<"exp(-eta_hi) = "<<exp(-eta_hi)<<endl;
+
+		cout<<"tan(theta_lo) = "<<tan(theta_lo)<<endl;
+		cout<<"tan(theta_hi) = "<<tan(theta_hi)<<endl;
+
+		cout<<"xmin = "<<xmin<<endl;
+		cout<<"xmax = "<<xmax<<endl;
+		cout<<"ymin = "<<ymin<<endl;
+		cout<<"ymax = "<<ymax<<endl;
+		cout<<"xcent = "<<xcent<<endl;
+		cout<<"ycent = "<<ycent<<endl;*/
+		/*
+		double vert[15];
+
+		vert[0] = -dx;
+		vert[1] = -dy;
+		vert[2] = -dx;
+		vert[3] = dy;
+		vert[4] = dx;
+		vert[5] = dy;
+		vert[6] = dx;
+		vert[7] = -dy;
+
+		vert[8] = -dx;
+		vert[9] = -dy;
+		vert[10] = -dx;
+		vert[11] = dy;
+		vert[12] = dx;
+		vert[13] = dy;
+		vert[14] = dx;
+		vert[15] = -dy;*/
+
+
+        string     f_name  = Form("tile%d", f_num);
+
+		//EightPointSolid f_shape(f_trd_z, vert);
+
+
+        Box        f_shape(dx/2.0,dy/2.0,s_dim_z/2.0);
+		//Trapezoid  f_shape(f_trd_x1, f_trd_x2, f_trd_y1, f_trd_y2, f_trd_z);
+		Volume     f_vol(f_name, f_shape, desc.material(x_fiber.materialStr()));
+		DetElement tower(slice, f_name, det_id);
+
+        if ( x_fiber.isSensitive() ) {
+        	f_vol.setSensitiveDetector(sens);
+        }
+        f_vol.setAttributes(desc, x_fiber.regionStr(), x_fiber.limitsStr(), x_fiber.visStr());
+
+        // Slice placement.
+        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, ycent, s_dim_z/2));
+        tower_phv.addPhysVolID("tile", f_num);
+        tower.setPlacement(tower_phv);
+
+		f_num++;
+
+		phi_lo += f_spacing_phi;
+		phi_hi += f_spacing_phi;
+	}
+
+	eta_lo += f_spacing_eta;
+	eta_hi += f_spacing_eta;
+  }
+
+  // negative eta
+
+  eta_lo = 0.0;
+  eta_hi = f_spacing_eta;
+
+  for (int i = 0; i < f_nbins_eta/2; ++i) {
+
+	double phi_lo = -f_spacing_phi;
+	double phi_hi = phi_lo + f_spacing_phi;
+
+	double theta_lo = M_PI/2.0-2.0*atan(exp(-eta_lo));
+	double theta_hi = M_PI/2.0-2.0*atan(exp(-eta_hi));
+
+	for (int j = 0; j < f_nbins_phi; ++j) {
+
+		double xmin = radius_lo*tan(phi_lo);
+		double xmax = radius_lo*tan(phi_hi);
+		double ymin = radius_lo*tan(theta_lo);
+		double ymax = radius_lo*tan(theta_hi);
+
+
+		double dx = xmax-xmin; // phi
+		double dy = ymax-ymin; // eta
+		double xcent = (xmax+xmin)/2.0;
+		double ycent = (ymax+ymin)/2.0;
+/*
+		cout<<"radius_lo = "<<radius_lo<<endl;
+
+		cout<<"phi_lo = "<<phi_lo<<endl;
+		cout<<"phi_hi = "<<phi_hi<<endl;
+		cout<<"eta_lo = "<<eta_lo<<endl;
+		cout<<"eta_hi = "<<eta_hi<<endl;
+		cout<<"theta_lo = "<<theta_lo<<endl;
+		cout<<"theta_hi = "<<theta_hi<<endl;
+
+		cout<<"exp(-eta_lo) = "<<exp(-eta_lo)<<endl;
+		cout<<"exp(-eta_hi) = "<<exp(-eta_hi)<<endl;
+
+		cout<<"tan(theta_lo) = "<<tan(theta_lo)<<endl;
+		cout<<"tan(theta_hi) = "<<tan(theta_hi)<<endl;
+
+		cout<<"xmin = "<<xmin<<endl;
+		cout<<"xmax = "<<xmax<<endl;
+		cout<<"ymin = "<<ymin<<endl;
+		cout<<"ymax = "<<ymax<<endl;
+		cout<<"xcent = "<<xcent<<endl;
+		cout<<"ycent = "<<ycent<<endl;*/
+		/*
+		double vert[15];
+
+		vert[0] = -dx;
+		vert[1] = -dy;
+		vert[2] = -dx;
+		vert[3] = dy;
+		vert[4] = dx;
+		vert[5] = dy;
+		vert[6] = dx;
+		vert[7] = -dy;
+
+		vert[8] = -dx;
+		vert[9] = -dy;
+		vert[10] = -dx;
+		vert[11] = dy;
+		vert[12] = dx;
+		vert[13] = dy;
+		vert[14] = dx;
+		vert[15] = -dy;*/
+
+
+        string     f_name  = Form("tile%d", f_num);
+
+		//EightPointSolid f_shape(f_trd_z, vert);
+
+
+        Box        f_shape(dx/2.0,dy/2.0,s_dim_z/2.0);
+		//Trapezoid  f_shape(f_trd_x1, f_trd_x2, f_trd_y1, f_trd_y2, f_trd_z);
+		Volume     f_vol(f_name, f_shape, desc.material(x_fiber.materialStr()));
+		DetElement tower(slice, f_name, det_id);
+
+        if ( x_fiber.isSensitive() ) {
+        	f_vol.setSensitiveDetector(sens);
+        }
+        f_vol.setAttributes(desc, x_fiber.regionStr(), x_fiber.limitsStr(), x_fiber.visStr());
+
+        // Slice placement.
+        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, -ycent, s_dim_z/2));
+        tower_phv.addPhysVolID("tile", f_num);
+        tower.setPlacement(tower_phv);
+
+		f_num++;
+
+		phi_lo += f_spacing_phi;
+		phi_hi += f_spacing_phi;
+	}
+
+	eta_lo += f_spacing_eta;
+	eta_hi += f_spacing_eta;
+  }
+
+  /*
   double eta = -f_spacing_eta*f_nbins_eta/2+f_spacing_eta;
 
   for (int i = 0; i < f_nbins_eta; ++i) {
@@ -315,7 +516,7 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
 
 		f_num++;
 	}
-  }
+  }*/
 
 }
 
