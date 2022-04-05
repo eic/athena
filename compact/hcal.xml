@@ -72,7 +72,7 @@
       <layer repeat="HcalBarrelLayer_NRepeat" vis="HcalBarrelLayerVis">
         <slice material="Steel235" thickness="HcalBarrelSteelThickness" vis="HcalAbsorberVis"/>
         <slice material="Air" thickness="HcalBarrelAirGapHalfThickness" vis="HcalAirVis"/>
-        <slice material="Polystyrene" thickness="HcalBarrelPolystyreneThickness" vis="HcalSensorVis" sensitive="yes" limits="cal_limits">
+        <slice material="Polystyrene" thickness="HcalBarrelPolystyreneThickness" vis="HcalSensorVis" sensitive="no" limits="cal_limits">
           <fiber material="Polystyrene"
             sensitive="yes"
             spacing_eta="0.05"
@@ -154,7 +154,7 @@
       <!--<segmentation type="GridRPhiEta" grid_size_r="0.5 * cm" grid_size_eta="0.05" phi_bins="125"/>
       <id>system:8,barrel:3,module:4,layer:8,slice:5,r:30:-10,eta:-10,phi:-10</id>-->
       <segmentation type="NoSegmentation"/>
-      <id>system:8,barrel:3,module:4,layer:8,slice:5,tower:20</id>
+      <id>system:8,barrel:3,module:8,layer:8,slice:5,tile:20</id>
     </readout>
     <readout name="HcalEndcapPHits">
       <segmentation type="CartesianGridXY" grid_size_x="100 * mm" grid_size_y="100 * mm"/>
