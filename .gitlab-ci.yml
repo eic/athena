@@ -179,7 +179,7 @@ report:
     - view_20
     - dump_constants
     - dump_geometry
-    - convert_to_gdml
+    - dump_gdml
   script:
     - pip3 install jinja2 &&  ls -lrth
     - ./bin/make_images > doc/dawn_views.md
@@ -231,13 +231,19 @@ overlap_check_geant4:inner_detector:
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
-convert_to_gdml:
+dump_gdml:
   stage: test
   needs: 
     - ["common:detector"]
   script:
     - mkdir -p geo
-    - python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
+    - |
+      python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
+      for xml in ${DETECTOR_PATH}/compact/subsystem_views/*.xml; do
+        cp $xml ${DETECTOR_PATH}/geo.xml
+        gdml_name=`basename $xml .xml`.gdml
+        python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/geo.xml --output geo/${gdml_name}
+      done
 
 tracking_geometry_debug:
   stage: test

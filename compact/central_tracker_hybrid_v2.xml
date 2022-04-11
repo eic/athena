@@ -326,7 +326,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapP_0_ID"
       name="InnerTrackerEndcapP"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits1"
       vis="TrackerVis"
       reflect="false">
       <support material="Aluminum" name="serv_cone_pos" vis="TrackerServiceVis">
@@ -402,7 +402,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapN_0_ID"
       name="InnerTrackerEndcapN"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits2"
       vis="TrackerVis"
       reflect="true">
       <support material="Aluminum" name="serv_cone_neg" vis="TrackerServiceVis">
@@ -513,7 +513,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerBarrel_1_ID"
       name="MedialTrackerBarrel"
       type="athena_TrackerBarrel"
-      readout="MPGDTrackerBarrelHits"
+      readout="MPGDTrackerBarrelHits1"
       insideTrackingVolume="true">
       <dimensions
         rmin="MedialTrackerBarrelEnvelope_rmin"
@@ -609,7 +609,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapP_1_ID"
       name="MedialTrackerEndcapP"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits3"
       vis="TrackerVis"
       reflect="false">
       <support material="Aluminum" name="serv_cyl_pos" vis="TrackerServiceVis"
@@ -647,7 +647,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapN_1_ID"
       name="MedialTrackerEndcapN"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits4"
       vis="TrackerVis"
       reflect="true">
       <support material="Aluminum" name="serv_cyl_neg" vis="TrackerServiceVis"
@@ -711,7 +711,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerBarrel_2_ID"
       name="OuterTrackerBarrel"
       type="athena_TrackerBarrel"
-      readout="MPGDTrackerBarrelHits"
+      readout="MPGDTrackerBarrelHits2"
       insideTrackingVolume="true">
       <dimensions
         rmin="OuterTrackerBarrelEnvelope_rmin"
@@ -843,7 +843,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapP_2_ID"
       name="OuterTrackerEndcapP"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits5"
       vis="TrackerVis"
       reflect="false">
       <support material="Aluminum" name="serv_cyl_pos" vis="TrackerServiceVis"
@@ -921,7 +921,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapN_2_ID"
       name="OuterTrackerEndcapN"
       type="athena_TrapEndcapTracker"
-      readout="TrackerEndcapHits"
+      readout="TrackerEndcapHits6"
       vis="TrackerVis"
       reflect="true">
       <support material="Aluminum" name="serv_cyl_pos" vis="TrackerServiceVis"
@@ -1056,7 +1056,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapP_3_ID"
       name="GEMEndcapP"
       type="athena_TrapEndcapTracker"
-      readout="GEMTrackerEndcapHits"
+      readout="GEMTrackerEndcapHits1"
       vis="TrackerVis"
       reflect="false">
       <module name="RingModule" vis="TrackerGEMModuleVis">
@@ -1170,7 +1170,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapN_3_ID"
       name="GEMEndcapN"
       type="athena_TrapEndcapTracker"
-      readout="GEMTrackerEndcapHits"
+      readout="GEMTrackerEndcapHits2"
       vis="TrackerVis"
       reflect="true">
       <module name="RingModule" vis="TrackerGEMModuleVis">
@@ -1318,7 +1318,7 @@ total X0 0.24% per disk layer （4 sectors per disk):
       id="TrackerEndcapP_4_ID"
       name="ForwardGEM"
       type="athena_TrapEndcapTracker"
-      readout="GEMTrackerEndcapHits"
+      readout="GEMTrackerEndcapHits3"
       vis="TrackerVis"
       reflect="false">
       <module name="LargeModule" vis="TrackerGEMModuleVis">
@@ -1397,15 +1397,47 @@ total X0 0.24% per disk layer （4 sectors per disk):
       <segmentation type="CartesianGridXY" grid_size_x="0.010*mm" grid_size_y="0.010*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
     </readout>
-    <readout name="TrackerEndcapHits">
+    <readout name="TrackerEndcapHits1">
       <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
-    <readout name="MPGDTrackerBarrelHits">
+    <readout name="TrackerEndcapHits2">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="TrackerEndcapHits3">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="TrackerEndcapHits4">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="TrackerEndcapHits5">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="TrackerEndcapHits6">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.010*mm" grid_size_z="0.010*mm" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="MPGDTrackerBarrelHits1">
       <segmentation type="CartesianGridXY" grid_size_x="0.150*mm*sqrt(12)" grid_size_y="0.150*mm*sqrt(12)" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
     </readout>
-    <readout name="GEMTrackerEndcapHits">
+    <readout name="MPGDTrackerBarrelHits2">
+      <segmentation type="CartesianGridXY" grid_size_x="0.150*mm*sqrt(12)" grid_size_y="0.150*mm*sqrt(12)" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-14,y:-18</id>
+    </readout>
+    <readout name="GEMTrackerEndcapHits1">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.050*mm*sqrt(12)" grid_size_z="0.250*mm*sqrt(12)" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="GEMTrackerEndcapHits2">
+      <segmentation type="CartesianGridXZ" grid_size_x="0.050*mm*sqrt(12)" grid_size_z="0.250*mm*sqrt(12)" />
+      <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
+    </readout>
+    <readout name="GEMTrackerEndcapHits3">
       <segmentation type="CartesianGridXZ" grid_size_x="0.050*mm*sqrt(12)" grid_size_z="0.250*mm*sqrt(12)" />
       <id>system:8,layer:4,module:12,sensor:2,x:32:-16,z:-16</id>
     </readout>
