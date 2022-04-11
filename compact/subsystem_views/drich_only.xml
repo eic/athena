@@ -67,7 +67,7 @@
     ## dRICh only
   </documentation>
 
-  <include ref="ip6/beampipe.xml" />
+  <!-- <include ref="ip6/beampipe.xml" /> -->
   <include ref="compact/drich.xml" />
 
 </lccdd>
