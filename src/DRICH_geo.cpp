@@ -25,11 +25,13 @@
 using namespace dd4hep;
 using namespace dd4hep::rec;
 
+#ifdef WITH_IRT // TODO: get rid of this preprocessor macro after IRT package is integrated in athena CI
 #include <ParametricSurface.h>
 #include <CherenkovRadiator.h>
 #include <OpticalBoundary.h>
 #include <CherenkovDetectorCollection.h>
 #include <CherenkovPhotonDetector.h>
+#endif
 
 // create the detector
 static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetector sens) {
@@ -43,10 +45,12 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
   //@@@ Create output file and a geometry object pointer; 
   std::string str = detName; std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+#ifdef WITH_IRT
   auto fout = new TFile((str + "-config.root").c_str(), "RECREATE");
   auto geometry = new CherenkovDetectorCollection();
   // Yes, a single detector per .root file in this environment;
   auto detector = geometry->AddNewDetector(detName.c_str());
+#endif
 
   // attributes -----------------------------------------------------------
   // - vessel
@@ -217,15 +221,18 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   gasvolVol.setVisAttributes(gasvolVis);
 
   // Used in several places;
+#ifdef WITH_IRT
   TVector3 nx(1,0,0), ny(0,-1,0);
+#endif
 
   // Get access to the readout structure decoder
   const auto decoder = desc.readout("DRICHHits").idSpec().decoder();
   const auto &mvalue = (*decoder)["module"], &svalue = (*decoder)["sector"];
   uint64_t msmask = mvalue.mask() | svalue.mask();
-  detector->SetReadoutCellMask(msmask);
   unsigned moffset = mvalue.offset(), soffset = svalue.offset();
 
+#ifdef WITH_IRT
+  detector->SetReadoutCellMask(msmask);
   {
     //printf("@@@ %f\n", (1/mm)*vesselZmin);
     // FIXME: Z-location does not really matter here, right?; but Z-axis orientation does;
@@ -248,6 +255,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // How about PlacedVolume::transformation2mars(), guys?; FIXME: make it simple for now, 
   // assuming no rotations involved; [cm];
   //double vesselOffset = (vesselZmin + vesselZmax)/2;
+#endif
 
 
   // reference positions
@@ -290,10 +298,12 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   // attributes
   double airGap = 0.01*mm; // air gap between aerogel and filter (FIXME? actually it's currently a gas gap)
 
+#ifdef WITH_IRT
   // [0,0]: have neither access to G4VSolid nor to G4Material; IRT code does not care; fine;
   auto pd = new CherenkovPhotonDetector(0, 0);
   // FIXME: '0' stands for the unknown (and irrelevant) G4LogicalVolume;
   geometry->AddPhotonDetector(detector, 0, pd);
+#endif
 
   // solid and volume: create aerogel and filter
   Cone aerogelSolid(
@@ -328,6 +338,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   aerogelDE.setPlacement(aerogelPV);
   //SkinSurface aerogelSkin(desc, aerogelDE, "mirror_optical_surface", aerogelSurf, aerogelVol);
   //aerogelSkin.isValid();
+#ifdef WITH_IRT
   {
     //printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + aerogelPV.position().z()));//+aerogelThickness/2));
     //auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+aerogelPV.position().z()+aerogelThickness/2), nx, ny);
@@ -342,6 +353,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
       radiator->SetAlternativeMaterialName(aerogelMat.ptr()->GetName());
     } //for isec
   } 
+#endif
 
   // filter placement and surface properties
   if(!debug_optics) {
@@ -356,6 +368,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     //SkinSurface filterSkin(desc, filterDE, "mirror_optical_surface", filterSurf, filterVol);
     //filterSkin.isValid();
 
+#ifdef WITH_IRT
     {
       // FIXME: create a small air gap in the geometry as well;
       //printf("@@@ %f\n", (1/mm)*(gasvolume2master.z() + filterPV.position().z()));
@@ -366,6 +379,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	radiator->SetAlternativeMaterialName(filterMat.ptr()->GetName());
       } //for isec
     } 
+#endif
   };
 
 
@@ -500,6 +514,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	translation.GetComponents(xx, yy, zz);
 	//printf("@@@ %10.5f %10.5f %10.5f\n", xx/mm, yy/mm, zz/mm);
 
+#ifdef WITH_IRT
 	auto surface = new SphericalSurface((1/mm)*TVector3(
 							    xx+gasvolume2master.x(), 
 							    yy+gasvolume2master.y(), 
@@ -511,6 +526,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	// Complete the radiator volume description; this is the rear side of the container gas volume;
 	detector->GetRadiator("GasVolume")->m_Borders[isec].second = surface;
 	//#endif
+#endif
       }
       auto mirrorPV2 = gasvolVol.placeVolume(mirrorVol, slice2gasvolume); // rotate about beam axis to sector
       //RotationZ(sectorRotation) // rotate about beam axis to sector
@@ -639,11 +655,15 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	      //TVector3 nx(nxg), ny(nyg);
 	      //printf("@G@ %10.5f %10.5f %10.5f\n", xxg[0]/mm, xxg[1]/mm, xxg[2]/mm);
 	      //auto surface = new FlatSurface((1/mm)*TVector3(xxg), nx, ny);
+#ifdef WITH_IRT
 	      auto surface = new FlatSurface((1/mm)*TVector3(xxg), TVector3(nxg), TVector3(nyg));
+#endif
 
 	      // This is the essential {sector,module} part of the cell index;
 	      uint64_t imodsec = ((uint64_t(imod) << moffset) | (uint64_t(isec) << soffset)) & msmask;
+#ifdef WITH_IRT
 	      detector->CreatePhotonDetectorInstance(isec, pd, imodsec, surface);
+#endif
  
 	      // properties: {isec,imod} pair will be encoded later on as 'imodsec' bit pattern;
 	      sensorPV.addPhysVolID("sector", isec).addPhysVolID("module", imod);
@@ -679,6 +699,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   }; // END SECTOR LOOP //////////////////////////
 
 
+#ifdef WITH_IRT
   //@@@ Write the geometry out as a custom TObject class instance; FIXME: unify pfRICH & dRICH;
   {
     // FIXME: PFRICH_geo.cpp cut'n'paste; C2F6, aerogel, acrylic in this sequence; 
@@ -697,6 +718,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     geometry->Write();
     fout->Close();
   }
+#endif
 
   return det;
 };
