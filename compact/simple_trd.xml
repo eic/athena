@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd>
+    <display>
+        <vis name="Invisible" showDaughters="false" visible="false"/>
+        <vis name="InvisibleWithChildren" showDaughters="true" visible="false"/>
+        <vis name="VisibleRed"  r="1.0" g="0.0" b="0.0" showDaughters="true" visible="true"/>
+        <vis name="VisibleBlue" r="0.0" g="0.0" b="1.0" showDaughters="false" visible="true"/>
+        <vis name="VisibleGreen" alpha="1.0" r="0.0" g="1.0" b="0.0" drawingStyle="solid" lineStyle="solid" showDaughters="true" visible="true"/>
+    </display>
+
+    <limits>
+	 <limitset name="SiRegionLimitSet">
+            
+               <!--limit name="track_length_max" particles="gamma" value="3.0" unit="mm" /-->
+               <!--limit name="step_length_max" particles="gamma" value="0.01" unit="mm" /-->
+                <!--limit name="step_length_max" particles="e[+-]" value="0.1" unit="mm" />
+     		 <limit name="step_length_max" particles="pi[+-]" value="0.1" unit="mm" /-->
+                 <limit name="step_length_max" particles="*" value="0.5" unit="mm" />
+    		  <limit name="ekin_min"         particles="*" value="0.01" unit="MeV" />
+    		  <limit name="track_length_max" particles="pi-" value="5.0" unit="mm" />
+    		  
+        </limitset>
+        
+       <limitset name="RadiatorLimitSet">
+		 <limit name="step_length_max" particles="*" value="0.5" unit="mm" />
+    		 <limit name="ekin_min"         particles="*" value="0.01" unit="MeV" />
+	      
+	     <cut particles="e-" value="0.1" unit="mm" />
+	     <cut particles="e+" value="1.0" unit="mm" />
+	     <cut particles="gamma" value="3.0" unit="mm" />
+        </limitset>
+    </limits>
+
+    <regions>
+        <region name="SiRegion" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+            <limitsetref name="SiRegionLimitSet"/>
+        </region>
+        <region name="RadRegion" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+            <limitsetref name="RadiatorLimitSet"/>
+        </region>
+    </regions>
+
+    <detectors>
+     
+	   <detector name="Radiator" type="DD4hep_PolyconeSupport" vis="VisibleGreen" region="RadRegion" limits="RadiatorLimitSet">
+	    <material name="radiatorMatCustom"/>
+	    <zplane rmin="180.*mm" rmax="2500*mm" z="550*cm" />
+	    <zplane rmin="180.*mm" rmax="2500*mm" z="565*cm" />
+	  </detector>
+	  
+	  <detector name="GEMModule" type="DD4hep_PolyconeSupport" vis="VisibleBlue" region="SiRegion" limits="SiRegionLimitSet"        		sensitive="true" readout="gem_trd">
+	    <material name="Xe20CO2"/>
+	    <sensitive type="tracker"/>
+	    <zplane rmin="180.*mm" rmax="2000*mm" z="565*cm" />
+	    <zplane rmin="180.*mm" rmax="2000*mm" z="568*cm" />
+	  </detector>
+	  
+     </detectors>
+    
+    <readouts>
+    	<readout name="gem_trd">
+      		<id>system:8</id>
+        </readout>
+    </readouts>
+
+    <fields>
+<!--        <field name="GlobalSolenoid" type="solenoid"-->
+<!--               inner_field="5.0*tesla"-->
+<!--               outer_field="-1.5*tesla"-->
+<!--               zmax="2*m"-->
+<!--               outer_radius="3*m">-->
+<!--        </field>-->
+    </fields>
+
+</lccdd>

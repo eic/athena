@@ -49,26 +49,6 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   map<string, std::array<double, 2>> module_thicknesses;
   PlacedVolume            pv;
 
-
-  // ACTS extension
-  {
-    Acts::ActsExtension* detWorldExt = new Acts::ActsExtension();
-    detWorldExt->addType("endcap", "detector");
-    // SJJ probably need to set the envelope here, as ACTS can't figure
-    // that out for Assembly volumes. May also need binning to properly pick up
-    // on the support material @TODO
-    //
-    // Add the volume boundary material if configured
-    for (xml_coll_t bmat(x_det, _Unicode(boundary_material)); bmat; ++bmat) {
-      xml_comp_t x_boundary_material = bmat;
-      Acts::xmlToProtoSurfaceMaterial(x_boundary_material, *detWorldExt, "boundary_material");
-    }
-    sdet.addExtension<Acts::ActsExtension>(detWorldExt);
-  }
-
-  assembly.setVisAttributes(description.invisible());
-  sens.setType("tracker");
-
   for (xml_coll_t su(x_det, _U(support)); su; ++su) {
     xml_comp_t x_support = su;
     double      support_thickness = getAttrOrDefault(x_support, _U(thickness), 2.0 * mm);
@@ -155,8 +135,8 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
         //std::cout << " adding sensitive volume" << c_name << "\n";
         sdet.check(n_sensor > 2, "SiTrackerEndcap2::fromCompact: " + c_name + " Max of 2 modules allowed!");
         pv.addPhysVolID("sensor", n_sensor);
-        sens.setType("tracker");
-        c_vol.setSensitiveDetector(sens);
+       // sens.setType("tracker");
+      //  c_vol.setSensitiveDetector(sens);
         sensitives[m_nam].push_back(pv);
         //++n_sensor;
         // -------- create a measurement plane for the tracking surface attched to the sensitive volume -----
@@ -273,7 +253,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
       }
     }
   }
-  pv = motherVol.placeVolume(assembly,Position(0,0,11.5*cm) );
+  pv = motherVol.placeVolume(assembly,Position(0,0,0) );
   pv.addPhysVolID("system", det_id);
   sdet.setPlacement(pv);
   return sdet;
@@ -281,4 +261,4 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
 //@}
 // clang-format off
-DECLARE_DETELEMENT(athena_GEMTrackerEndcap, create_detector)
+DECLARE_DETELEMENT(athena_radiator, create_detector)

@@ -279,6 +279,18 @@
     <composite n="0.036" ref="C"/>
     <composite n="0.073" ref="O"/>
   </material>
+
+ <material name="CarbonDioxide">
+    <D type="density" value="1.84205" unit="mg / cm3"/>
+    <composite n="1" ref="C"/>
+    <composite n="2" ref="O"/>
+  </material>
+
+  <material name="Xe20CO2">
+    <D type="density" value="5.0818" unit="mg / cm3"/>
+    <composite n="0.922" ref="Xenon"/>
+    <composite n="0.078" ref="CarbonDioxide"/>
+  </material>
   <material name="Mylar">
     <D type="density" value="1.39" unit="g/cm3" />
     <fraction n="0.62502108" ref="C"/>
@@ -382,4 +394,25 @@
     <fraction n="0.96" ref="W"/>
     <fraction n="0.04" ref="Polystyrene"/>
   </material>  
+  <!-- Custom materials -->
+  <material name="CH2">
+    <D type="density" value="0.91" unit="g / cm3"/>
+    <fraction n="1" ref="C"/>
+    <fraction n="2" ref="H"/>
+  </material>
+  
+  <!-- radiator material temp -->
+  <material name="radiatorMat0">
+    <D type="density" value="totDensity" unit="g / cm3"/>
+    <fraction n="fractionFoil" ref="CH2"/>
+    <fraction n="fractionGas" ref="Air"/>
+  </material>
+  
+  <!-- radiator material final -->
+  <material name="radiatorMatCustom">
+    <D type="density" value="0.083" unit="g / cm3"/>
+    <fraction n="1" ref="radiatorMat0"/>
+  </material>
+    
+  
 </materials>

@@ -9,33 +9,155 @@
     <constant name="ForwardTRD_zmin" value="BarrelTracking_length/2.0 + ForwardTracking_length + ForwardRICH_length"/>
     <constant name="ForwardTRD_rmin" value="ForwardPID_rmin1"/>
     <constant name="ForwardTRD_rmax" value="Solenoid_rmin"/>
+    <constant name="ForwardTRD_nlayers"         value="1"/>
+    <constant name="ForwardTRD_length"      value = "9*cm"/>
+    <constant name="ForwardTRDFoil_opng_angle" value="30.1*degree"/>
+    <comment>
+      ____X2____
+      \        /
+       \      /    Y (=z for the trd)
+        \_X1_/
+    </comment>
+    <constant name="ForwardTRDFoil_x1"             value="43.0 * mm"/>
+    <constant name="ForwardTRDLayer_thickness"     value="ForwardTRD_length/ForwardTRD_nlayers"/>
+    <constant name="ForwardTRDFoil_rmin"           value="ForwardTRDFoil_x1/(tan(ForwardTRDFoil_opng_angle/2.0)*2.0)"/>
+    <constant name="ForwardTRDFoil_y"              value="ForwardTRD_rmax - ForwardTRDFoil_rmin - 30.0*cm"/>
+    <constant name="ForwardTRDFoil_x2"             value="2*ForwardTRDFoil_y*tan(ForwardTRDFoil_opng_angle/2.0) +  ForwardTRDFoil_x1"/>
+    <constant name="ForwardTRDFoil_rmax"           value="(ForwardTRDFoil_y + ForwardTRDFoil_rmin)/(cos(ForwardTRDFoil_opng_angle/2.0))"/>
+    <constant name="ForwardTRDFrame_thickness"     value="13.0 * mm"/>
+    <constant name="ForwardTRDFrameBotEdge_width"  value="10.0 * mm"/>
+    <constant name="ForwardTRDFrameTopEdge_width"  value="15.0 * mm"/>
+    <constant name="ForwardTRDFrameSideEdge_width" value=" 8.0 * mm"/>
+    <comment> Account for the fact that GEMs have holes, so they are not solid volumes </comment>
+    <constant name="GEMAreaFactor" value="0.80" />
+    <comment>
+      From https://github.com/eic/EicToyModel/blob/master/source/eicroot/GemGeoParData.cxx
+    </comment>
   </define>
 
+  <display>
+    <vis name="ForwardTRDMother"  alpha="0.3" r="3/256"   g="37/256"  b="76/256"  visible="true"  showDaughters="true"  lineStyle="solid" drawingStyle="solid" />
+  </display>
+
+<limits>
+	 <limitset name="SiRegionLimitSet">
+            
+               <!--limit name="track_length_max" particles="gamma" value="3.0" unit="mm" /-->
+               <!--limit name="step_length_max" particles="gamma" value="0.01" unit="mm" /-->
+                <!--limit name="step_length_max" particles="e[+-]" value="0.1" unit="mm" />
+     		 <limit name="step_length_max" particles="pi[+-]" value="0.1" unit="mm" /-->
+                 <limit name="step_length_max" particles="*" value="0.5" unit="mm" />
+    		  <limit name="ekin_min"         particles="*" value="0.01" unit="MeV" />
+    		  <limit name="track_length_max" particles="pi-" value="5.0" unit="mm" />
+    		  
+        </limitset>
+        <limitset name="RadiatorLimitSet">
+		 <limit name="step_length_max" particles="*" value="0.5" unit="mm" />
+    		 <limit name="ekin_min"         particles="*" value="0.01" unit="MeV" />
+    		 <!--limit name="track_length_max" particles="gamma" value="5.0" unit="mm" /-->
+       <!--	 <limit name="step_length_max" particles="e[+-]" value="1.0" unit="mm" />
+     		 <limit name="step_length_max" particles="pi[+-]" value="20.0" unit="mm" />
+    		 <limit name="step_length_max" particles="*" value="5.0" unit="mm" />
+    		 
+	      <limit name="time_max"         particles="*" value="5.0" unit="ns" />
+	      <limit name="ekin_min"         particles="*" value="0.01" unit="keV" />
+	      <limit name="range_min"        particles="*" value="5.0" unit="mm" />-->
+	      
+	     <cut particles="e-" value="0.1" unit="mm" />
+	     <cut particles="e+" value="1.0" unit="mm" />
+	     <cut particles="gamma" value="3.0" unit="mm" />
+        </limitset>
+
+    </limits>
+
+    <regions>
+        <region name="SiRegion" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+            <limitsetref name="SiRegionLimitSet"/>
+        </region>
+        <region name="RadRegion" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+            <limitsetref name="RadiatorLimitSet"/>
+        </region>
+    </regions>
+    
+    
   <detectors>
-    <detector 
-      id="ForwardTRD_ID"
-      name="ForwardTRD"
-      type="ref_DiskTracker"
-      insideTrackingVolume="true"
-      reflect="false"
-      vis="AnlRed">
-      <position x="0" y="0" z="0.0"/>
-      <layer id="1" 
-        vis="AnlRed"
-        inner_z="ForwardTRD_zmin" 
-        inner_r="ForwardTRD_rmin" 
-        outer_r="ForwardTRD_rmax">
-        <slice material="Air" thickness="ForwardTRD_length/2.5" vis="AnlRed" />
+    <detector
+            id="ForwardTRD_ID"
+            name="ForwardTRD"
+            type="athena_GEMTrackerEndcap"
+            readout="ForwardTRDHits"
+            vis="AnlGreen"
+            reflect="false">
+      <module name="GEMModule1" vis="AnlTeal">
+        <trd x1="ForwardTRDFoil_x1/2.0" x2="ForwardTRDFoil_x2/2.0" z="ForwardTRDFoil_y/2"/>
+          <position x="0"  y="0" z="0" />
+          <trd x1="ForwardTRDFoil_x1/2.0 - ForwardTRDFrameSideEdge_width/cos(ForwardTRDFoil_opng_angle)
+                                              + ForwardTRDFrameBotEdge_width*tan(ForwardTRDFoil_opng_angle)"
+               x2="ForwardTRDFoil_x2/2.0 - ForwardTRDFrameSideEdge_width/cos(ForwardTRDFoil_opng_angle)
+                                              - ForwardTRDFrameTopEdge_width*tan(ForwardTRDFoil_opng_angle)"
+               z="ForwardTRDFoil_y/2    - (ForwardTRDFrameBotEdge_width +ForwardTRDFrameTopEdge_width)/2.0 ">
+          </trd>
+        <comment> Going from HV side to readout side</comment>
+        <!-- " 60.0*mm" equivalent to 30mm-->
+        <module_component thickness=" 60.0*mm"              
+        material="Xe20CO2" name="drift_region" sensitive="true" vis="AnlProcess_Blue" region="SiRegion" limits="SiRegionLimitSet"/>
+      </module>
+      <layer id="1" >
+        <envelope  vis="ForwardTRDMother"
+                   rmin="ForwardTRD_rmin"
+                   rmax="ForwardTRD_rmax"
+                   length="ForwardTRD_length"
+                   zstart="ForwardTRD_zmin" />
+        <ring vis="AnlRed" module="GEMModule1"
+              r="ForwardTRD_rmin+ForwardTRDFoil_y/2.0"
+              zstart="0"
+              nmodules="12" dz="10*mm" />
+
       </layer>
 
-      <layer id="1" 
-        vis="AnlRed"
-        inner_z="ForwardTRD_zmin+ForwardTRD_length/2.0" 
-        inner_r="ForwardTRD_rmin" 
-        outer_r="ForwardTRD_rmax">
-        <slice material="Air" thickness="ForwardTRD_length/2.5" vis="AnlRed" />
-      </layer>
     </detector>
+
+    <detector   id="2"
+            name="Radiator"
+            type="athena_radiator"
+            vis="AnlBlue"
+            reflect="false"
+            region="RadRegion" limits="RadiatorLimitSet">
+      <module name="RadModule1" vis="AnlTeal">
+        <trd x1="ForwardTRDFoil_x1/2.0" x2="ForwardTRDFoil_x2/2.0" z="ForwardTRDFoil_y/2"/>
+        <frame material="G10" thickness="ForwardTRDFrame_thickness" vis="TrackerSupportVis">
+          <trd x1="ForwardTRDFoil_x1/2.0 - ForwardTRDFrameSideEdge_width/cos(ForwardTRDFoil_opng_angle)
+                                              + ForwardTRDFrameBotEdge_width*tan(ForwardTRDFoil_opng_angle)"
+               x2="ForwardTRDFoil_x2/2.0 - ForwardTRDFrameSideEdge_width/cos(ForwardTRDFoil_opng_angle)
+                                              - ForwardTRDFrameTopEdge_width*tan(ForwardTRDFoil_opng_angle)"
+               z="ForwardTRDFoil_y/2    - (ForwardTRDFrameBotEdge_width +ForwardTRDFrameTopEdge_width)/2.0 ">
+          </trd>
+        </frame>
+        <comment> Going from HV side to readout side</comment>
+       <module_component thickness="150*mm" material="radiatorMatCustom"   name="radiatorBody" region="RadRegion" limits="RadiatorLimitSet" vis="VisibleRed"/>
+      </module>
+     <layer id="1" >
+        <envelope  vis="RadiatorMother"
+                   rmin="ForwardTRD_rmin"
+                   rmax="ForwardTRD_rmax"
+                   length="ForwardTRD_length"
+                   zstart="ForwardTRD_zmin" />
+        <ring vis="AnlRed" module="RadModule1"
+              r="ForwardTRD_rmin+ForwardTRDFoil_y/2.0"
+              zstart="0"
+              nmodules="12" dz="10*mm" />
+
+      </layer>
+
+    </detector>
+
   </detectors>
+
+  <readouts>
+    <readout name="ForwardTRDHits">
+      <segmentation type="CartesianGridXY" grid_size_x="1.0*mm" grid_size_y="1.0*mm" />
+      <id>system:8,barrel:2,layer:4,module:12,sensor:2,x:32:-16,y:-16</id>
+    </readout>
+  </readouts>
 
 </lccdd>
