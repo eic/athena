@@ -1,0 +1,27 @@
+# Particle gun
+/gps/verbose 1
+/gps/particle e-
+/gps/number 1
+
+/gps/ene/mono  6.0 GeV
+  # /gps/ene/type Gauss
+  # /gps/ene/sigma 1.0 GeV
+
+  #/gps/pos/type Volume
+  #/gps/pos/shape Cylinder
+  #/gps/pos/centre 0.0 0.0 0.0 cm
+  #/gps/pos/radius 0.01 cm
+  #/gps/pos/halfz  10 cm
+
+/gps/position 0 0 0 cm
+
+/gps/direction 0 0 1
+/gps/ang/type iso
+/gps/ang/mintheta  160 degree
+/gps/ang/maxtheta  180 degree
+
+#/tracking/verbose 1
+#/process/verbose 1
+#/particle/verbose 1
+
+/run/beamOn 200000

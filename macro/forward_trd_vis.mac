@@ -1,0 +1,94 @@
+# List available visualization options
+/vis/list
+
+  # Use visualization driver
+  # /vis/open OGL 1000x800-0+0
+  #/vis/open OGLI 600x600-0+0
+  #/vis/open OGLIX 600x600-0+0
+/vis/open OGLIQt 1000x800-0+0
+
+  # Disable auto refresh and quieten vis messages whilst scene and
+  # trajectories are established:
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+
+  # Draw geometry:
+/vis/drawVolume
+
+  # Draw smooth trajectories at end of event, showing trajectory points
+/vis/scene/add/trajectories smooth
+
+  # Draw hits at end of event:
+/vis/scene/add/hits
+
+  # Particles color theme
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/list
+/vis/modeling/trajectories/drawByParticleID-0/set e- black
+/vis/modeling/trajectories/drawByParticleID-0/set e+ gray
+/vis/modeling/trajectories/drawByParticleID-0/set kaon- magenta
+/vis/modeling/trajectories/drawByParticleID-0/set kaon+ magenta
+/vis/modeling/trajectories/drawByParticleID-0/set pion+ magenta
+/vis/modeling/trajectories/drawByParticleID-0/set pion- orange
+/vis/modeling/trajectories/drawByParticleID-0/set muon- red
+/vis/modeling/trajectories/drawByParticleID-0/set muon+ red
+/vis/modeling/trajectories/drawByParticleID-0/set pion0 blue
+/vis/modeling/trajectories/drawByParticleID-0/set gamma green
+/vis/modeling/trajectories/drawByParticleID-0/set proton blue
+/vis/modeling/trajectories/drawByParticleID-0/set neutron gray
+/vis/modeling/trajectories/drawByParticleID-0/set lambda yellow
+
+  # Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+
+  # background
+/vis/viewer/set/background 1 1 1
+
+  # Max events to accumulate
+/vis/scene/endOfEventAction accumulate 10
+
+
+  # Clipping plane
+/vis/viewer/clearCutawayPlanes
+#/vis/viewer/addCutawayPlane 0  30  0  cm  0. -500 0
+  #/vis/viewer/addCutawayPlane 0  1  0  cm  0. -0.1 0
+  #/vis/viewer/addCutawayPlane 0  1  0  cm  0. -500. 1.
+  #/vis/viewer/addCutawayPlane 0  1  0  cm  0. 100. 1.
+  # XY
+  #/vis/viewer/addCutawayPlane  1  0  0  cm   0  0  -0.001
+  #  ZY
+  #/vis/viewer/addCutawayPlane 0  1  0  cm  -0.001 0  0
+
+
+  # Specify view angle and zoom:
+/vis/viewer/set/viewpointThetaPhi -90 -45 deg
+/vis/viewer/zoom 0.2
+
+  # Particle gun
+/gps/verbose 1
+/gps/particle e-
+/gps/number 1
+
+/gps/ene/mono  6.0 GeV
+  # /gps/ene/type Gauss
+  # /gps/ene/sigma 1.0 GeV
+
+  #/gps/pos/type Volume
+  #/gps/pos/shape Cylinder
+  #/gps/pos/centre 0.0 0.0 0.0 cm
+  #/gps/pos/radius 0.01 cm
+  #/gps/pos/halfz  10 cm
+
+/gps/position 0 0 0 cm
+
+/gps/direction 0 0 1
+/gps/ang/type iso
+/gps/ang/mintheta  160 degree
+/gps/ang/maxtheta  180 degree
+
+#/tracking/verbose 1
+
+#/process/verbose 1
+#/particle/verbose 1
+/run/beamOn 10
