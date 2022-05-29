@@ -72,14 +72,15 @@
       <layer repeat="HcalBarrelLayer_NRepeat" vis="HcalBarrelLayerVis">
         <slice material="Steel235" thickness="HcalBarrelSteelThickness" vis="HcalAbsorberVis"/>
         <slice material="Air" thickness="HcalBarrelAirGapHalfThickness" vis="HcalAirVis"/>
-        <slice material="Polystyrene" thickness="HcalBarrelPolystyreneThickness" vis="HcalSensorVis" sensitive="no" limits="cal_limits">
+        <slice material="Air" thickness="HcalBarrelPolystyreneThickness" vis="HcalAirVis" sensitive="no" limits="cal_limits">
           <fiber material="Polystyrene"
             sensitive="yes"
             spacing_eta="0.05"
             spacing_phi="0.05"
             nbins_eta="40"
             nbins_phi="2"
-            vis="HcalBarrelFiberVis">
+            vis="HcalBarrelFiberVis"
+            limits="cal_limits">
           </fiber>
         </slice>
         <slice material="Air" thickness="HcalBarrelAirGapHalfThickness" vis="HcalAirVis"/>
