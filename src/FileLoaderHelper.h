@@ -102,6 +102,7 @@ EnsureFileFromURLExists(
     if (!fs::exists(hash_path)) {
       printout(ERROR, "FileLoader", "unable to run cmd " + cmd);
       printout(ERROR, "FileLoader", "check command and retry");
+      printout(ERROR, "FileLoader", "hint: allow insecure connections with -k");
       std::quick_exit(1);
     }
   }
