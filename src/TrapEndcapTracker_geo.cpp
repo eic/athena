@@ -6,6 +6,7 @@
  *
  * @{
  */
+#include <array>
 #include <map>
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Printout.h"

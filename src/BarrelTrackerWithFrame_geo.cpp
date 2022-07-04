@@ -13,6 +13,7 @@
 #include "DDRec/DetectorData.h"
 #include "XML/Layering.h"
 #include "XML/Utilities.h"
+#include <array>
 
 #if defined(USE_ACTSDD4HEP)
 #include "ActsDD4hep/ActsExtension.hpp"
