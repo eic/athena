@@ -43,15 +43,6 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   xml::Component dims = detElem.dimensions();
   OpticalSurfaceManager surfMgr = desc.surfaceManager();
 
-  //@@@ Create output file and a geometry object pointer; 
-  std::string str = detName; std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-#ifdef IRT_AUXFILE
-  auto fout = new TFile((str + "-config.root").c_str(), "RECREATE");
-  auto geometry = new CherenkovDetectorCollection();
-  // Yes, a single detector per .root file in this environment;
-  auto detector = geometry->AddNewDetector(detName.c_str());
-#endif
-
   // attributes -----------------------------------------------------------
   // - vessel
   double  vesselZmin       =  dims.attr<double>(_Unicode(zmin));
@@ -121,6 +112,21 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   int   debug_optics_mode  =  detElem.attr<int>(_Unicode(debug_optics));
   bool  debug_mirror       =  mirrorElem.attr<bool>(_Unicode(debug));
   bool  debug_sensors      =  sensorSphElem.attr<bool>(_Unicode(debug));
+#ifdef IRT_AUXFILE
+  // - IRT auxiliary file
+  auto irtAuxFileName = detElem.attr<std::string>(_Unicode(irt_filename));
+  // bool createIrtFile  = desc.constantAsLong("DRICH_create_irt_file") == 1; // not used, we always want the aux file
+#endif
+
+  //@@@ Create output file and a geometry object pointer; 
+  std::string str = detName; std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+#ifdef IRT_AUXFILE
+  auto fout = new TFile(irtAuxFileName.c_str(), "RECREATE");
+  auto geometry = new CherenkovDetectorCollection();
+  // Yes, a single detector per .root file in this environment;
+  auto detector = geometry->AddNewDetector(detName.c_str());
+#endif
+
 
   // if debugging optics, override some settings
   bool debug_optics = debug_optics_mode > 0;
