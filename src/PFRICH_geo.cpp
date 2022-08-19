@@ -16,7 +16,7 @@
 #include "TString.h"
 #include <XML/Helper.h>
 
-#ifdef WITH_IRT // TODO: get rid of this preprocessor macro after IRT package is integrated in athena CI
+#ifdef IRT_AUXFILE // TODO: get rid of this preprocessor macro after IRT package is integrated in athena CI
 #include <IRT/ParametricSurface.h>
 #include <CherenkovRadiator.h>
 #include <OpticalBoundary.h>
@@ -40,7 +40,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
   //@@@ Create output file and a geometry object pointer; 
   std::string str = detName; std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   auto fout = new TFile((str + "-config.root").c_str(), "RECREATE");
   auto geometry = new CherenkovDetectorCollection();
   // Yes, a single detector per .root file in this environment;
@@ -154,7 +154,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   gasvolVol.setVisAttributes(gasvolVis);
 
   // Used in several places;
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   TVector3 nx(1,0,0), ny(0,1,0);
 #endif
 
@@ -164,7 +164,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   uint64_t msmask = mvalue.mask();
   unsigned moffset = mvalue.offset();
 
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   detector->SetReadoutCellMask(msmask);
   {
     // FIXME: Z-location does not really matter here, right?; but Z-axis orientation does;
@@ -246,7 +246,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   aerogelDE.setPlacement(aerogelPV);
   // SkinSurface aerogelSkin(desc, aerogelDE, "mirror_optical_surface", aerogelSurf, aerogelVol);
   // aerogelSkin.isValid();
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   {
     auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+aerogelPV.position().z()), nx, ny);
 
@@ -272,7 +272,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
     // SkinSurface filterSkin(desc, filterDE, "mirror_optical_surface", filterSurf, filterVol);
     // filterSkin.isValid();
 
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
     {
       // FIXME: create a small air gap in the geometry as well;
       auto surface = new FlatSurface((1/mm)*TVector3(0,0,vesselOffset+filterPV.position().z()-airGap), nx, ny);
@@ -303,7 +303,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
   int    imod    = 0;           // module number
   double tBoxMax = vesselRmax1; // sensors will be tiled in tBox, within annular limits
 
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   // [0,0]: have neither access to G4VSolid nor to G4Material; IRT code does not care; fine;
   auto pd = new CherenkovPhotonDetector(0, 0);
   // FIXME: '0' stands for the unknown (and irrelevant) G4LogicalVolume;
@@ -349,12 +349,12 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 	    // Assume vessel transformation is a pure translation;
 	    sensorPV.ptr()->LocalToMasterVect(nxl, nxg);
 	    sensorPV.ptr()->LocalToMasterVect(nyl, nyg);
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
 	    auto surface = new FlatSurface((1/mm)*TVector3(xxg), TVector3(nxg), TVector3(nyg));
 #endif
 
 	    uint64_t imodsec = (uint64_t(imod) << moffset) & msmask;
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
 	    detector->CreatePhotonDetectorInstance(0, pd, imodsec, surface);
 
 	    // Yes, since there are no mirrors in this detector, just close the gas radiator volume by hand (once), 
@@ -415,7 +415,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
                                                     sensorPlanePos.z() - sensorThickness - total_thickness)));
   }
 
-#ifdef WITH_IRT
+#ifdef IRT_AUXFILE
   //@@@ Write the geometry out as a custom TObject class instance;
   {
     // FIXME: import from the geometry database; FIXME: crappy style in general;
