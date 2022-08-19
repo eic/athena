@@ -181,7 +181,7 @@
 </documentation>
 <module
   material="AirOptical"
-  surface="SensorSurface_PFRICH"
+  surface="SensorSurface_DRICH"
   vis="DRICH_sensor_vis"
   side="DRICH_sensor_size"
   thickness="DRICH_sensor_thickness"
