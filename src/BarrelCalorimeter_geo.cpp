@@ -172,7 +172,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
 
           // build fibers
           if (x_slice.hasChild(_Unicode(fiber))) {
-              buildFibers(description, sens, s_vol, slice, det_id, x_slice.child(_Unicode(fiber)), {l_dim_x-tolerance,stave_z-tolerance,s_thick / 2.0-tolerance}, layer_glob_rad);
+              buildFibers(description, sens, s_vol, slice, det_id, x_slice.child(_Unicode(fiber)), {l_dim_x-tolerance,stave_z-tolerance,s_thick-tolerance}, layer_glob_rad);
           }
 
 
@@ -261,7 +261,7 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
   double eta_lo = 0.0;
   double eta_hi = f_spacing_eta;
 
-  double radius_lo = f_radius-s_dim_z;
+  double radius_lo = f_radius-s_dim_z/2.0;
 
   // positive eta
 
@@ -345,7 +345,7 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
         f_vol.setAttributes(desc, x_fiber.regionStr(), x_fiber.limitsStr(), x_fiber.visStr());
 
         // Slice placement.
-        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, ycent, s_dim_z/2));
+        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, ycent, 0.0));
         tower_phv.addPhysVolID("tile", f_num);
         tower.setPlacement(tower_phv);
 
@@ -444,7 +444,7 @@ void buildFibers(Detector& desc, SensitiveDetector &sens, Volume &s_vol, DetElem
         f_vol.setAttributes(desc, x_fiber.regionStr(), x_fiber.limitsStr(), x_fiber.visStr());
 
         // Slice placement.
-        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, -ycent, s_dim_z/2));
+        PlacedVolume tower_phv = s_vol.placeVolume(f_vol, Position(xcent, -ycent, 0.0));
         tower_phv.addPhysVolID("tile", f_num);
         tower.setPlacement(tower_phv);
 
