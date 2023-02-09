@@ -48,6 +48,9 @@ The unused IDs below are saved for future use.
     <constant name="BeamPipe_ID" value="10"/>
     <constant name="BeamPipeB0_ID" value="11"/>
 
+    <constant name="Beampipe_rmax" value="2.501*25.4*mm/2.0"/>
+    <constant name="CrossingAngle" value="-0.025*rad "/>
+    <constant name="BeampipeOD"    value="2.0*Beampipe_rmax"/>
 
     <documentation> 
       #### (25-39) Silicon Vertex Tracker
