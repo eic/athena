@@ -13,10 +13,15 @@
 #include "DDRec/DetectorData.h"
 #include "XML/Layering.h"
 #include "XML/Utilities.h"
+#include <array>
 
+#if defined(USE_ACTSDD4HEP)
+#include "ActsDD4hep/ActsExtension.hpp"
+#include "ActsDD4hep/ConvertMaterial.hpp"
+#else
 #include "Acts/Plugins/DD4hep/ActsExtension.hpp"
 #include "Acts/Plugins/DD4hep/ConvertDD4hepMaterial.hpp"
-
+#endif
 
 using namespace std;
 using namespace dd4hep;

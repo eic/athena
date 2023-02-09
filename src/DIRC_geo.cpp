@@ -162,7 +162,7 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   Volume lGlue("lGlue", gGlue, desc.material(xml_glue.materialStr()));
   lGlue.setVisAttributes(desc.visAttributes(xml_glue.visStr()));
 
-  sens.setType("photoncounter");
+  sens.setType("tracker");
   lBar.setSensitiveDetector(sens);
 
   int bars_repeat_z = 4;    // TODO parametrize!
@@ -320,7 +320,7 @@ static Ref_t createDetector(Detector& desc, xml_h e, SensitiveDetector sens)
   // Box    bar_geo(bar_thicknes / 2., bar_width / 2., bar_length / 2.);
   // Volume bar_volume("cb_DIRC_bars_Logix", bar_geo, bar_material);
   // bar_volume.setVisAttributes(desc.visAttributes(xml_det.visStr()));
-  // sens.setType("photoncounter");
+  // sens.setType("tracker");
   // bar_volume.setSensitiveDetector(sens);
 
   // for (int ia = 0; ia < bar_count; ia++) {

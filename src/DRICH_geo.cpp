@@ -220,7 +220,7 @@ static Ref_t createDetector(Detector& desc, xml::Handle_t handle, SensitiveDetec
 
 
   // sensitive detector type
-  sens.setType("photoncounter");
+  sens.setType("tracker");
 
 
   // BUILD RADIATOR ====================================================================

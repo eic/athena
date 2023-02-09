@@ -158,7 +158,7 @@ detector_documentation:
     - bash bin/build_documentation | tee doc/detector.md
       #- |
       #  xmllint --format --xpath '//comment/text()' ${DETECTOR_PATH}/athena.xml | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee  doc/detector.md
-      #  xmllint --format --xpath '//comment/text()' ${DETECTOR_PATH}/ip6/ip6_defs.xml | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee -a doc/detector.md || true
+      #  xmllint --format --xpath '//comment/text()' ${DETECTOR_PATH}/ip6/definitions.xml | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee -a doc/detector.md || true
       #  for afile in ${DETECTOR_PATH}/compact/*.xml ; do
       #    xmllint --format --xpath '//comment/text()' ${afile} | sed -re 's/<\/?\w+>//g' | sed 's/^[[:space:]]*#/#/' | tee -a doc/detector.md || true
       #  done
@@ -179,7 +179,7 @@ report:
     - view_20
     - dump_constants
     - dump_geometry
-    - convert_to_gdml
+    - dump_gdml
   script:
     - pip3 install jinja2 &&  ls -lrth
     - ./bin/make_images > doc/dawn_views.md
@@ -199,7 +199,7 @@ overlap_check_tgeo:
   script:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
-    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward_ZDC_Ecal_WSciFi.xml
+    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward/ZDC_Ecal_WSciFi.xml
     - checkOverlaps -c ${DETECTOR_PATH}/athena.xml  | tee doc/overlap_check_tgeo.out 
     - echo "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_tgeo.out | grep ovlp | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
@@ -211,7 +211,7 @@ overlap_check_geant4:full_fast:
   script:
     ## disable fibers in ECAL for normal overlap check
     - sed -i '/<fiber/,+6d' ${DETECTOR_PATH}/compact/ecal_barrel_interlayers.xml
-    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward_ZDC_Ecal_WSciFi.xml
+    - sed -i '/<fiber/,+4d' ${DETECTOR_PATH}/ip6/far_forward/ZDC_Ecal_WSciFi.xml
     ## reduce the number of fibers in Hadron EMCal for overlap check
     ## not needed, as we are running with a different setup now
     #- sed -i 's/radius="EcalEndcapP_FiberRadius"/radius="EcalEndcapP_FiberRadius*10"/' ${DETECTOR_PATH}/compact/ci_ecal_scfi.xml
@@ -231,13 +231,19 @@ overlap_check_geant4:inner_detector:
     - echo "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l) overlaps..."
     - if [[ "$(cat doc/overlap_check_geant4.out | grep GeomVol1002 | wc -l)" -gt "0" ]] ; then echo "Overlaps exist!" && false ; fi
 
-convert_to_gdml:
+dump_gdml:
   stage: test
   needs: 
     - ["common:detector"]
   script:
     - mkdir -p geo
-    - python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
+    - |
+      python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/athena.xml --output geo/athena.gdml
+      for xml in ${DETECTOR_PATH}/compact/subsystem_views/*.xml; do
+        cp $xml ${DETECTOR_PATH}/geo.xml
+        gdml_name=`basename $xml .xml`.gdml
+        python scripts/convert_to_gdml.py --compact ${DETECTOR_PATH}/geo.xml --output geo/${gdml_name}
+      done
 
 tracking_geometry_debug:
   stage: test
